@@ -1,19 +1,22 @@
-#include <stdio.h>
 #pragma warning(disable:4996)
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <conio.h>
+#include <windows.h>
 
 #define MAP_WIDTH 100
 #define MAP_HEIGHT 30
 #define PANEL_WIDTH 30
 
-typedef struct {
+typedef struct 
+{
 	int x;
 	int y;
 } Position;
 
-typedef struct {
+typedef struct 
+{
 	int hp;
 	int strength;
 	int endurance;
@@ -25,29 +28,56 @@ Player player = { 10, 15, 8, 5, {1, 1} };
 char map[MAP_HEIGHT][MAP_WIDTH + PANEL_WIDTH];
 char logMessage[3][40] = { "", "", "" };
 
-void initializeMap() {
-	for (int i = 0; i < MAP_HEIGHT; i++) {
-		for (int j = 0; j < MAP_WIDTH; j++) {
-			if (i == 0 || i == MAP_HEIGHT - 1 || j == 0 || j == MAP_WIDTH - 1) {
+// 커서를 특정 위치로 이동시키는 함수
+void setCursorPosition(int x, int y)
+{
+	COORD pos = { x, y };
+	HANDLE hConsoleOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleCursorPosition(hConsoleOut, pos);
+}
+
+//커서를 지우는 함수
+void eraseCursor()
+{
+	HANDLE hConsoleOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO  curCursorInfo;
+	GetConsoleCursorInfo(hConsoleOut, &curCursorInfo);
+	curCursorInfo.bVisible = 0;
+	SetConsoleCursorInfo(hConsoleOut, &curCursorInfo);
+}
+
+void initializeMap() 
+{
+	for (int i = 0; i < MAP_HEIGHT; i++) 
+	{
+		for (int j = 0; j < MAP_WIDTH; j++) 
+		{
+			if (i == 0 || i == MAP_HEIGHT - 1 || j == 0 || j == MAP_WIDTH - 1) 
+			{
 				map[i][j] = '#';
 			}
-			else {
+			else 
+			{
 				map[i][j] = ' ';
 			}
 		}
-		for (int j = MAP_WIDTH; j < MAP_WIDTH + PANEL_WIDTH; j++) {
-			if (i == 0 || i == MAP_HEIGHT - 1) {
+		for (int j = MAP_WIDTH; j < MAP_WIDTH + PANEL_WIDTH; j++) 
+		{
+			if (i == 0 || i == MAP_HEIGHT - 1) 
+			{
 				map[i][j] = '#';
 			}
 		}
 	}
-	map[player.pos.y][player.pos.x] = 'P';
 }
 
-void displayMap() {
+void displayMap() 
+{
 	system("cls");
-	for (int i = 0; i < MAP_HEIGHT; i++) {
-		for (int j = 0; j < MAP_WIDTH + PANEL_WIDTH; j++) {
+	for (int i = 0; i < MAP_HEIGHT; i++) 
+	{
+		for (int j = 0; j < MAP_WIDTH + PANEL_WIDTH; j++) 
+		{
 			printf("%c", map[i][j]);
 		}
 
@@ -60,44 +90,85 @@ void displayMap() {
 	}
 
 	printf("=========== Log ===========\n");
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 3; i++) 
+	{
 		printf("%s\n", logMessage[i]);
 	}
 }
 
-void updateLog(const char* message) {
-	for (int i = 2; i > 0; i--) {
+void drawPlayer()
+{
+	setCursorPosition(player.pos.x, player.pos.y);
+	printf("P");
+}
+void erasePlayer()
+{
+	setCursorPosition(player.pos.x, player.pos.y);
+	printf(" ");
+}
+
+void updateLog(const char* message) 
+{
+	for (int i = 2; i > 0; i--) 
+	{
 		snprintf(logMessage[i], sizeof(logMessage[i]), "%s", logMessage[i - 1]);
 	}
 	snprintf(logMessage[0], sizeof(logMessage[0]), "%s", message);
 }
 
-void movePlayer(char direction) {
-	map[player.pos.y][player.pos.x] = ' ';
-	if (direction == 'w' && player.pos.y > 1) player.pos.y--;
-	else if (direction == 's' && player.pos.y < MAP_HEIGHT - 2) player.pos.y++;
-	else if (direction == 'a' && player.pos.x > 1) player.pos.x--;
-	else if (direction == 'd' && player.pos.x < MAP_WIDTH - 2) player.pos.x++;
+void movePlayer() 
+{
+	char input = getch();
+	if (input == 'w' && player.pos.y > 1) 
+	{
+		erasePlayer();
+		player.pos.y--;
+	}
+	else if (input == 's' && player.pos.y < MAP_HEIGHT - 2) 
+	{
+		erasePlayer();
+		player.pos.y++;
+	}
+	else if (input == 'a' && player.pos.x > 1) 
+	{
+		erasePlayer();
+		player.pos.x--;
+	}
+	else if (input == 'd' && player.pos.x < MAP_WIDTH - 2) 
+	{
+		erasePlayer();
+		player.pos.x++;
+	}
 
-	if (map[player.pos.y][player.pos.x] == 'E') {
+	/*if (map[player.pos.y][player.pos.x] == 'E')
+	{
 		updateLog("You encountered an enemy!");
 	}
-	else if (map[player.pos.y][player.pos.x] == 'P') {
+	else if (map[player.pos.y][player.pos.x] == 'I') 
+	{
 		player.hp += 5;
 		updateLog("You found a potion! HP +5");
 	}
-
-	map[player.pos.y][player.pos.x] = 'P';
+	*/
+	//map[player.pos.y][player.pos.x] = 'P';
 }
 
-int main() {
+int main() 
+{
+	system("pause");
 	initializeMap();
 	updateLog("Game started.");
+	displayMap();
 
-	while (1) {
-		displayMap();
-		char input = getch();
-		movePlayer(input);
+	map[player.pos.y][player.pos.x] = 'P';
+
+	while (1) 
+	{
+		eraseCursor();
+		drawPlayer();
+		movePlayer();
 	}
+
+	
 	return 0;
 }
