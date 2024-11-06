@@ -23,8 +23,8 @@ typedef struct
 	int mp;
 	int attack;
 	int defense;
-	int hppotion;
-	int mppotion;
+	int hppotion;//이름 변경
+	int mppotion;//추가할 구조체 변수
 	Position pos;
 } Player;
 
@@ -189,8 +189,8 @@ void displayMap()
 		if (i == 1) printf("  HP: %d", player.hp);
 		if (i == 2) printf("  attack point: %d", player.attack);
 		if (i == 3) printf("  defense point: %d", player.defense);
-		if (i == 4) printf("  HP potion: %d", player.hppotion);
-		if (i == 5) printf("  MP potion: %d", player.mppotion);
+		if (i == 4) printf("  HP potion: %d", player.hppotion);//   수정
+		if (i == 5) printf("  MP potion: %d", player.mppotion);//   추가
 
 		printf("\n");
 	}
@@ -273,7 +273,7 @@ void hppotion() {
 			player.hppotion--;
 		}
 	}
-}
+}//                                                           hp포션 함수
 
 void mppotion() {
 	if (player.mppotion == 0) {
@@ -295,7 +295,7 @@ void mppotion() {
 			player.mppotion--;
 		}
 	}
-}
+}//                                                           mp포션 함수
 
 void updateLog(const char* message)
 {
@@ -387,8 +387,8 @@ void displayBattleScreen()
 		if (i == 3) printf("  defense point: %d", player.defense);
 		if (i == 4) printf("  HP potion: %d", player.hppotion);
 		if (i == 5) printf("  MP potion: %d", player.mppotion);
-		if (i == 8) printf("  1. HP포션");
-		if (i == 9) printf("  2. MP포션");
+		if (i == 8) printf("  1. HP포션");//                            전투화면 선택지 추가
+		if (i == 9) printf("  2. MP포션");//                            전투화면 선택지 추가
 
 		printf("\n");
 	}
@@ -522,11 +522,11 @@ void battle()
 			Jap1.hp = 0; // 적 HP를 0으로 설정하여 전투 종료
 			break;
 
-		case '1':
+		case '1'://           hp포션 사용
 			hppotion();
 			break;
 
-		case '2':
+		case '2'://           mp포션 사용
 			mppotion();
 			break;
 
