@@ -20,9 +20,11 @@ typedef struct
 typedef struct
 {
 	int hp;
+	int mp;
 	int attack;
 	int defense;
 	int hppotion;
+	int mppotion;
 	Position pos;
 } Player;
 
@@ -35,7 +37,7 @@ typedef struct
 	Position pos;
 } Enemy;
 
-Player player = { 10, 10, 5, 2, {1, 1} };
+Player player = { 10, 10, 10, 5, 2, 2, {1, 1} };
 Enemy Jap1 = { "왜군 잡졸", 10, 8, 3, {7, 10} };
 
 
@@ -187,7 +189,8 @@ void displayMap()
 		if (i == 1) printf("  HP: %d", player.hp);
 		if (i == 2) printf("  attack point: %d", player.attack);
 		if (i == 3) printf("  defense point: %d", player.defense);
-		if (i == 4) printf("  healing potion: %d", player.hppotion);
+		if (i == 4) printf("  HP potion: %d", player.hppotion);
+		if (i == 5) printf("  MP potion: %d", player.mppotion);
 
 		printf("\n");
 	}
@@ -252,7 +255,7 @@ void eraseEnemy()
 
 void hppotion() {
 	if (player.hppotion == 0) {
-		updateBattleLog("당신은 현재 포션이 0개입니다!!");
+		updateBattleLog("당신은 현재 HP포션이 0개입니다!!");
 
 	}
 	else if (player.hppotion > 0) {
@@ -262,10 +265,34 @@ void hppotion() {
 		else if (player.hp <= 8) {
 			player.hp += 2;
 			updateBattleLog("hp를 2 회복하였습니다!!");
+			player.hppotion--;
 		}
 		else if (player.hp == 9) {
 			player.hp += 1;
 			updateBattleLog("hp를 1 회복하였습니다!!");
+			player.hppotion--;
+		}
+	}
+}
+
+void mppotion() {
+	if (player.mppotion == 0) {
+		updateBattleLog("당신은 현재 MP포션이 0개입니다!!");
+
+	}
+	else if (player.mppotion > 0) {
+		if (player.mp == 10) {
+			updateBattleLog("더이상 회복할 MP가 없습니다!!");
+		}
+		else if (player.mp <= 8) {
+			player.mp += 2;
+			updateBattleLog("MP를 2 회복하였습니다!!");
+			player.mppotion--;
+		}
+		else if (player.mp == 9) {
+			player.mp += 1;
+			updateBattleLog("MP를 1 회복하였습니다!!");
+			player.mppotion--;
 		}
 	}
 }
@@ -358,9 +385,10 @@ void displayBattleScreen()
 		if (i == 1) printf("  HP: %d", player.hp);
 		if (i == 2) printf("  attack point: %d", player.attack);
 		if (i == 3) printf("  defense point: %d", player.defense);
-		if (i == 4) printf("  healing potion: %d", player.hppotion);
-		if (i == 7) printf("  1. HP포션");
-		if (i == 8) printf("  2. MP포션");
+		if (i == 4) printf("  HP potion: %d", player.hppotion);
+		if (i == 5) printf("  MP potion: %d", player.mppotion);
+		if (i == 8) printf("  1. HP포션");
+		if (i == 9) printf("  2. MP포션");
 
 		printf("\n");
 	}
@@ -496,7 +524,10 @@ void battle()
 
 		case '1':
 			hppotion();
-			player.hppotion--;
+			break;
+
+		case '2':
+			mppotion();
 			break;
 
 		default:
