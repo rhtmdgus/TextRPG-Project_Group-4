@@ -23,9 +23,12 @@ typedef struct
 typedef struct
 {
 	int hp;
+	int mana;
 	int attack;
 	int defense;
-	int potion;
+	int accuracy;
+	int HPpotion;
+	int MANApotion;
 	Position pos;
 } Player;
 
@@ -50,17 +53,17 @@ typedef struct
 } Shop;
 
 
-Player player = { 10, 10, 5, 2, {1, 1} };
+Player player = { 10, 10, 10, 5, 2, 2, 2, {1, 1} };
 Enemy Jap1 = { "왜군 잡졸", 10, 8, 3, {7, 10} };
 Shop Shop1 = { "상인", 99, 99, 99, 99, 99, {20, 15} };
 
 
 char map[MAP_HEIGHT][MAP_WIDTH + PANEL_WIDTH];
+char mapSave[MAP_HEIGHT][MAP_WIDTH + PANEL_WIDTH];
 char mapBattle[MAP_HEIGHT][MAP_WIDTH + PANEL_WIDTH];
 char mapShop[MAP_HEIGHT][MAP_WIDTH + PANEL_WIDTH];
 char logMessage[3][100] = { "", "", "" };
 char battleLogMessage[5][100] = { "", "", "", "", "" };
-
 
 void start_screen() {	//시작화면
 	for (int i = 0; i < (MAP_HEIGHT - 16) / 2; i++)
@@ -228,9 +231,12 @@ void displayMap()
 		}
 
 		if (i == 1) printf("  HP: %d", player.hp);
-		if (i == 2) printf("  attack point: %d", player.attack);
-		if (i == 3) printf("  defense point: %d", player.defense);
-		if (i == 4) printf("  healing potion: %d", player.potion);
+		if (i == 2) printf("  MANA: %d", player.mana);
+		if (i == 3) printf("  attack point: %d", player.attack);
+		if (i == 4) printf("  defense point: %d", player.defense);
+		if (i == 5) printf("  accuracy point: %d", player.accuracy);
+		if (i == 6) printf("  healing potion: %d", player.HPpotion);
+		if (i == 7) printf("  mana potion: %d", player.MANApotion);
 
 		printf("\n");
 	}
@@ -391,9 +397,12 @@ void displayBattleScreen()
 		}
 
 		if (i == 1) printf("  HP: %d", player.hp);
-		if (i == 2) printf("  attack point: %d", player.attack);
-		if (i == 3) printf("  defense point: %d", player.defense);
-		if (i == 4) printf("  healing potion: %d", player.potion);
+		if (i == 2) printf("  MANA: %d", player.mana);
+		if (i == 3) printf("  attack point: %d", player.attack);
+		if (i == 4) printf("  defense point: %d", player.defense);
+		if (i == 5) printf("  accuracy point: %d", player.accuracy);
+		if (i == 6) printf("  healing potion: %d", player.HPpotion);
+		if (i == 7) printf("  mana potion: %d", player.MANApotion);
 
 		printf("\n");
 	}
@@ -449,9 +458,12 @@ void displayShopScreen()
 		}
 
 		if (i == 1) printf("  HP: %d", player.hp);
-		if (i == 2) printf("  attack point: %d", player.attack);
-		if (i == 3) printf("  defense point: %d", player.defense);
-		if (i == 4) printf("  healing potion: %d", player.potion);
+		if (i == 2) printf("  MANA: %d", player.mana);
+		if (i == 3) printf("  attack point: %d", player.attack);
+		if (i == 4) printf("  defense point: %d", player.defense);
+		if (i == 5) printf("  accuracy point: %d", player.accuracy);
+		if (i == 6) printf("  healing potion: %d", player.HPpotion);
+		if (i == 7) printf("  mana potion: %d", player.MANApotion);
 
 		printf("\n");
 	}
@@ -460,26 +472,51 @@ void displayShopScreen()
 	switch (num)
 	{
 	case '1':
+		if (Shop1.hpPotion <= 0)
+		{
+			updateLog("상품 수량이 부족합니다.");
+			break;
+		}
 		updateLog("체력 포션 1개를 구매하였습니다.");
-		player.potion += 1;
+		player.HPpotion += 1;
 		Shop1.hpPotion -= 1;
 		break;
 	case '2':
+		if (Shop1.manaPotion <= 0)
+		{
+			updateLog("상품 수량이 부족합니다.");
+			break;
+		}
 		updateLog("마나 포션 1개를 구매하였습니다.");
-		//player.manapotion += 1;
+		player.MANApotion += 1;
 		Shop1.manaPotion -= 1;
 		break;
 	case '3':
+		if (Shop1.strengthPotion <= 0)
+		{
+			updateLog("상품 수량이 부족합니다.");
+			break;
+		}
 		updateLog("힘 포션 1개를 구매하였습니다.");
 		player.attack += 1;
 		Shop1.strengthPotion -= 1;
 		break;
 	case '4':
+		if (Shop1.accuracyPotion <= 0)
+		{
+			updateLog("상품 수량이 부족합니다.");
+			break;
+		}
 		updateLog("명중 포션 1개를 구매하였습니다.");
-		//player.accuracy += 1;
+		player.accuracy += 1;
 		Shop1.accuracyPotion -= 1;
 		break;
 	case '5':
+		if (Shop1.defensePotion <= 0)
+		{
+			updateLog("상품 수량이 부족합니다.");
+			break;
+		}
 		updateLog("방어 포션 1개를 구매하였습니다.");
 		player.defense += 1;
 		Shop1.defensePotion -= 1;
@@ -567,6 +604,25 @@ void displayBattleMap()
 }
 */
 
+int Crit() {
+	// 랜덤 시드 초기화
+	srand((unsigned int)time(NULL));
+	// accuracy에 따라 치명타 확률 계산 (5%씩 증가)
+	int criticalChance = player.accuracy * 5; // accuracy가 0일 때는 0%, 1일 때는 5%...
+
+	// 확률을 0과 1 사이로 변환
+	int probability = rand() % 100;
+
+	// 치명타 발생 여부 결정
+	if (probability < criticalChance) {
+		return 1; // 치명타 발생
+	}
+	else {
+		return 0; // 치명타 미발생
+	}
+}
+
+
 // 전투 함수
 void battle()
 {
@@ -584,7 +640,11 @@ void battle()
 		case 'a':
 		case 1:
 			// 공격 로직
-			damageToEnemy = player.attack - Jap1.defense; // 이전에 선언한 변수를 사용
+			if (Crit(player.accuracy) == 1)
+				damageToEnemy = (player.attack - Jap1.defense) * 2; // 이전에 선언한 변수를 사용
+			else
+				damageToEnemy = player.attack - Jap1.defense;
+
 			if (damageToEnemy > 0) {
 				Jap1.hp -= damageToEnemy;
 				updateBattleLog("You attacked the enemy!");
@@ -604,7 +664,7 @@ void battle()
 			break;
 		case 2:
 			updateBattleLog("회복 포션 사용!");
-			player.potion -= 1;
+			player.HPpotion -= 1;
 			player.hp += 5;
 			break;
 		case 3:
@@ -774,16 +834,16 @@ int main()
 			updateLog("You encountered a shop!");
 			updateLog("Press [A] to use Shop or [R] to leave");
 			displayLog();
-
 			while (Situation == 2)
 			{
 				encountShopChoice();
 			}
 			if (useShop == 1) {
-				initializeMap(); // 맵을 다시 초기화하여 적 제거
+				player.pos.x = player.pos.x - 1;
 				displayMap();
 				drawPlayer();
 				displayLog();
+				useShop == 0;
 			}
 		}
 	}
