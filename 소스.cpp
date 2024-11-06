@@ -1,5 +1,5 @@
-#include <stdio.h>
 #pragma warning(disable:4996)
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <conio.h>
@@ -9,252 +9,595 @@
 #define MAP_HEIGHT 30
 #define PANEL_WIDTH 30
 
+int Situation = 0;
+
 typedef struct
 {
-    int x;
-    int y;
+	int x;
+	int y;
 } Position;
 
 typedef struct
 {
-    int hp;
-    int strength;
-    int endurance;
-    int intelligence;
-    Position pos;
+	int hp;
+	int attack;
+	int defense;
+	int potion;
+	Position pos;
 } Player;
 
-Player player = { 10, 15, 8, 5, {1, 1} };
+typedef struct
+{
+	char name[50];
+	int hp;
+	int attack;
+	int defense;
+	Position pos;
+} Enemy;
+
+Player player = { 10, 10, 5, 2, {1, 1} };
+Enemy Jap1 = { "¿Ö±º ÀâÁ¹", 10, 8, 3, {7, 10} };
+
+
 char map[MAP_HEIGHT][MAP_WIDTH + PANEL_WIDTH];
-char logMessage[3][40] = { "", "", "" };
+char mapBattle[MAP_HEIGHT][MAP_WIDTH + PANEL_WIDTH];
+char logMessage[3][100] = { "", "", "" };
+char battleLogMessage[5][100] = { "", "", "", "", "" };
 
-void start_screen() {
-    for (int i = 0; i < (MAP_HEIGHT - 16) / 2; i++)
-        printf("\n");
 
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("=========================================================\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("||                                                   ||\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("||                ìž„  ì§„  íˆ¬  ìŸ  ê¸°                 ||\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("||                                                   ||\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("=========================================================\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("         Text-based RPG Game Set in the Joseon Dynasty\n\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("           Press [Enter] to start your adventure!\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("=========================================================\n\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("                        |         |  |\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("                      ã…¡ã…¡ã…¡ \\/  ã…¡ã…¡ã…¡\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("                        O    /\\    O\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("                       /|\\  /  \\  /|\\\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("                      / | \\/    \\/ | \\\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("                       / \\        / \\\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("                      /   \\      /   \\\n\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("=========================================================\n");
+void start_screen() {	//½ÃÀÛÈ­¸é
+	for (int i = 0; i < (MAP_HEIGHT - 16) / 2; i++)
+		printf("\n");
 
-    getchar();  // ì‚¬ìš©ìžë¡œë¶€í„° Enter ìž…ë ¥ ëŒ€ê¸°
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("=========================================================\n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("||                                                   ||\n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("||                ÀÓ  Áø  Åõ  Àï  ±â                 ||\n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("||                                                   ||\n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("=========================================================\n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("         Text-based RPG Game Set in the Joseon Dynasty\n\n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("           Press [Enter] to start your adventure!\n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("=========================================================\n\n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("                        |         |  |\n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("                      ¤Ñ¤Ñ¤Ñ \\/  ¤Ñ¤Ñ¤Ñ\n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("                        O    /\u005C    O\n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("                       /|\\  /  \\  /|\\\n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("                      / | \\/    \\/ | \\\n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("                       / \\        / \\\n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("                      /   \\      /   \\\n\n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("=========================================================\n");
+
+	getchar();  // »ç¿ëÀÚ·ÎºÎÅÍ Enter ÀÔ·Â ´ë±â
 
 }
 
-// ì»¤ì„œë¥¼ íŠ¹ì • ìœ„ì¹˜ë¡œ ì´ë™ì‹œí‚¤ëŠ” í•¨ìˆ˜
+// Ä¿¼­¸¦ Æ¯Á¤ À§Ä¡·Î ÀÌµ¿½ÃÅ°´Â ÇÔ¼ö
 void setCursorPosition(int x, int y)
 {
-    COORD pos = { x, y };
-    HANDLE hConsoleOut = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleCursorPosition(hConsoleOut, pos);
+	COORD pos = { x, y };
+	HANDLE hConsoleOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleCursorPosition(hConsoleOut, pos);
 }
 
-//ì»¤ì„œë¥¼ ì§€ìš°ëŠ” í•¨ìˆ˜
+//Ä¿¼­¸¦ Áö¿ì´Â ÇÔ¼ö
 void eraseCursor()
 {
-    HANDLE hConsoleOut = GetStdHandle(STD_OUTPUT_HANDLE);
-    CONSOLE_CURSOR_INFO  curCursorInfo;
-    GetConsoleCursorInfo(hConsoleOut, &curCursorInfo);
-    curCursorInfo.bVisible = 0;
-    SetConsoleCursorInfo(hConsoleOut, &curCursorInfo);
+	HANDLE hConsoleOut = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO  curCursorInfo;
+	GetConsoleCursorInfo(hConsoleOut, &curCursorInfo);
+	curCursorInfo.bVisible = 0;
+	SetConsoleCursorInfo(hConsoleOut, &curCursorInfo);
 }
+
 
 void initializeMap()
 {
-    for (int i = 0; i < MAP_HEIGHT; i++)
-    {
-        for (int j = 0; j < MAP_WIDTH; j++)
-        {
-            if (i == 0 || i == MAP_HEIGHT - 1 || j == 0 || j == MAP_WIDTH - 1)
-            {
-                map[i][j] = '#';
-            }
-            else
-            {
-                map[i][j] = ' ';
-            }
-        }
-        for (int j = MAP_WIDTH; j < MAP_WIDTH + PANEL_WIDTH; j++)
-        {
-            if (i == 0 || i == MAP_HEIGHT - 1)
-            {
-                map[i][j] = '#';
-            }
-        }
-    }
-    map[10][10] = 'E';
+	for (int i = 0; i < MAP_HEIGHT; i++)
+	{
+		for (int j = 0; j < MAP_WIDTH; j++)
+		{
+
+			if (i == 0 || i == MAP_HEIGHT - 1 || j == 0 || j == MAP_WIDTH - 1)
+			{
+				map[i][j] = '#';
+			}
+			else
+			{
+				map[i][j] = ' ';
+			}
+		}
+		for (int j = MAP_WIDTH; j < MAP_WIDTH + PANEL_WIDTH; j++)
+		{
+			if (i == 0 || i == MAP_HEIGHT - 1)
+			{
+				map[i][j] = '#';
+			}
+		}
+	}
+}
+
+void initializeMapBattle()
+{
+	for (int i = 0; i < MAP_HEIGHT; i++)
+	{
+		for (int j = 0; j < MAP_WIDTH; j++)
+		{
+
+			if (i == 0 || i == MAP_HEIGHT - 1 || j == 0 || j == MAP_WIDTH - 1)
+			{
+				mapBattle[i][j] = '#';
+			}
+			else
+			{
+				mapBattle[i][j] = ' ';
+			}
+		}
+		for (int j = MAP_WIDTH; j < MAP_WIDTH + PANEL_WIDTH; j++)
+		{
+			if (i == 0 || i == MAP_HEIGHT - 1)
+			{
+				mapBattle[i][j] = '#';
+			}
+		}
+	}
 }
 
 void displayMap()
 {
-    system("cls");
-    for (int i = 0; i < MAP_HEIGHT; i++)
-    {
-        for (int j = 0; j < MAP_WIDTH + PANEL_WIDTH; j++)
-        {
-            printf("%c", map[i][j]);
-        }
+	system("cls");
+	initializeMap();
+	for (int i = 0; i < MAP_HEIGHT; i++)
+	{
+		for (int j = 0; j < MAP_WIDTH + PANEL_WIDTH; j++)
+		{
+			printf("%c", map[i][j]);
+		}
 
-        if (i == 1) printf("  HP: %d", player.hp);
-        if (i == 2) printf("  Strength: %d", player.strength);
-        if (i == 3) printf("  Endurance: %d", player.endurance);
-        if (i == 4) printf("  Intelligence: %d", player.intelligence);
+		if (i == 1) printf("  HP: %d", player.hp);
+		if (i == 2) printf("  attack point: %d", player.attack);
+		if (i == 3) printf("  defense point: %d", player.defense);
+		if (i == 4) printf("  healing potion: %d", player.potion);
 
-        printf("\n");
-    }
+		printf("\n");
+	}
+}
 
-    printf("=========== Log ===========\n");
-    for (int i = 0; i < 3; i++)
-    {
-        printf("%s\n", logMessage[i]);
-    }
+
+void displayLog()	//·Î±× Ãâ·Â ÇÔ¼ö
+{
+	setCursorPosition(0, MAP_HEIGHT);
+	printf("=============================== Log ===============================\n");
+	for (int i = 0; i < 3; i++)
+	{
+		setCursorPosition(0, MAP_HEIGHT + 1 + i);
+		printf("%s\n", logMessage[i]);
+	}
+}
+
+void displayBattleLog()	//ÀüÅõ ·Î±× Ãâ·Â ÇÔ¼ö
+{
+	setCursorPosition(0, MAP_HEIGHT);
+	printf("=============================== Log ===============================\n");
+	for (int i = 0; i < 3; i++)
+	{
+		setCursorPosition(0, MAP_HEIGHT + 1 + i);
+		printf("%s\n", battleLogMessage[i]);
+	}
+}
+
+void updateBattleLog(const char* message)
+{
+	for (int i = 4; i > 0; i--)
+	{
+
+		snprintf(battleLogMessage[i], sizeof(battleLogMessage[i]), "%s", battleLogMessage[i - 1]);
+	}
+
+	snprintf(battleLogMessage[0], sizeof(battleLogMessage[0]), "%s", message);
 }
 
 void drawPlayer()
 {
-    setCursorPosition(player.pos.x, player.pos.y);
-    printf("P");
+	setCursorPosition(player.pos.x, player.pos.y);
+	printf("P");
 }
 void erasePlayer()
 {
-    setCursorPosition(player.pos.x, player.pos.y);
-    printf(" ");
+	setCursorPosition(player.pos.x, player.pos.y);
+	printf(" ");
+}
+
+void drawEnemy()
+{
+	setCursorPosition(Jap1.pos.x, Jap1.pos.y);
+	printf("E");
+}
+
+void eraseEnemy()
+{
+	setCursorPosition(Jap1.pos.x, Jap1.pos.y);
+	printf(" ");
 }
 
 void updateLog(const char* message)
 {
-    for (int i = 2; i > 0; i--)
-    {
-        snprintf(logMessage[i], sizeof(logMessage[i]), "%s", logMessage[i - 1]);
-    }
-    snprintf(logMessage[0], sizeof(logMessage[0]), "%s", message);
-}
+	for (int i = 2; i > 0; i--)
+	{
 
-void battleScreen() {
-    system("cls");
-    printf("=========== Battle Screen ===========\n");
-    printf("You encountered an enemy!\n");
-    printf("Press [A] to Attack or [R] to Run.\n");
+		snprintf(logMessage[i], sizeof(logMessage[i]), "%s", logMessage[i - 1]);
+	}
 
-    char action = getch();
-    if (action == 'a' || action == 'A') {
-        updateLog("You attacked the enemy!");
-        printf("You defeated the enemy!\n");
-    }
-    else if (action == 'r' || action == 'R') {
-        updateLog("You ran away from the enemy!");
-        printf("You fled from battle!\n");
-    }
-
-    printf("Press any key to return to the game.\n");
-    getch();
-
-    displayMap();
-    drawPlayer();
+	snprintf(logMessage[0], sizeof(logMessage[0]), "%s", message);
 }
 
 void movePlayer()
 {
-    char input = getch();
-    if (input == 'w' && player.pos.y > 1)
-    {
-        erasePlayer();
-        player.pos.y--;
-    }
-    else if (input == 's' && player.pos.y < MAP_HEIGHT - 2)
-    {
-        erasePlayer();
-        player.pos.y++;
-    }
-    else if (input == 'a' && player.pos.x > 1)
-    {
-        erasePlayer();
-        player.pos.x--;
-    }
-    else if (input == 'd' && player.pos.x < MAP_WIDTH - 2)
-    {
-        erasePlayer();
-        player.pos.x++;
-    }
 
-    if (map[player.pos.y][player.pos.x] == 'E') {
-        updateLog("You encountered an enemy!");
-        battleScreen();
-    }
+	int key = 0;
 
-    /*if (map[player.pos.y][player.pos.x] == 'E')
-    {
-       updateLog("You encountered an enemy!");
-    }
-    else if (map[player.pos.y][player.pos.x] == 'I')
-    {
-       player.hp += 5;
-       updateLog("You found a potion! HP +5");
-    }
-    */
-    //map[player.pos.y][player.pos.x] = 'P';
+	if (_kbhit() != 0)
+		key = _getch();
+
+	switch (key)
+	{
+	case 77://move to right
+		if (player.pos.x < MAP_WIDTH - 2)
+		{
+			erasePlayer();
+			player.pos.x++;
+		}
+		break;
+	case 75://move to left
+		if (player.pos.x > 1)
+		{
+			erasePlayer();
+			player.pos.x--;
+		}
+		break;
+
+	case 80:  // down block manual
+		if (player.pos.y < MAP_HEIGHT - 2)
+		{
+			erasePlayer();
+			player.pos.y++;
+		}
+		break;
+	case 72:// rotation
+		if (player.pos.y > 1)
+		{
+			erasePlayer();
+			player.pos.y--;
+		}
+		break;
+	}
+
+	/*
+	else if (map[player.pos.y][player.pos.x] == 'I')
+	{
+		player.hp += 5;
+		updateLog("You found a potion! HP +5");
+	}
+	*/
 }
+
+void displayBattleScreen()
+{
+	system("cls");
+	//¸ÊÃÊ±âÈ­
+	initializeMapBattle();
+
+	// º´»ç 1 (ÇÃ·¹ÀÌ¾î)
+	int playerX = MAP_WIDTH / 2 - 5; // Áß¾Ó¿¡ À§Ä¡
+	int playerY = MAP_HEIGHT / 2 - 2; // Áß¾Ó¿¡ À§Ä¡
+	mapBattle[playerY][playerX] = 'P';  // ¸Ó¸®
+	mapBattle[playerY + 1][playerX - 1] = '/';  // ¿ÞÆÈ
+	mapBattle[playerY + 1][playerX] = '|'; // ¸ö
+	mapBattle[playerY + 2][playerX] = '|'; // ¸ö
+	mapBattle[playerY + 1][playerX + 1] = '\\'; // ¿À¸¥ÆÈ
+	mapBattle[playerY + 1][playerX + 2] = '/';//°Ë
+	mapBattle[playerY][playerX + 3] = '/';//°Ë
+	mapBattle[playerY + 2][playerX - 1] = '/';  // ¿Þ´Ù¸®
+	mapBattle[playerY + 2][playerX] = ' '; // ºó °ø°£
+	mapBattle[playerY + 2][playerX + 1] = '\\'; // ¿À¸¥´Ù¸®
+
+	// º´»ç 2 (Àû±º)
+	int enemyX = MAP_WIDTH / 2 + 2; // Áß¾Ó¿¡ À§Ä¡
+	int enemyY = MAP_HEIGHT / 2 - 2; // Áß¾Ó¿¡ À§Ä¡
+	mapBattle[enemyY][enemyX] = 'E';   // ¸Ó¸®
+	mapBattle[enemyY + 1][enemyX - 1] = '/';   // ¿ÞÆÈ
+	mapBattle[enemyY + 1][enemyX - 2] = '\\';//°Ë
+	mapBattle[enemyY][enemyX - 3] = '\\';//°Ë
+	mapBattle[enemyY + 1][enemyX] = '|'; // ¸ö
+	mapBattle[enemyY + 2][enemyX] = '|'; // ¸ö
+	mapBattle[enemyY + 1][enemyX + 1] = '\\'; // ¿À¸¥ÆÈ
+	mapBattle[enemyY + 3][enemyX - 1] = '/';   // ¿Þ´Ù¸®
+	mapBattle[enemyY + 3][enemyX] = ' '; // ºó °ø°£
+	mapBattle[enemyY + 3][enemyX + 1] = '\\'; // ¿À¸¥´Ù¸®
+
+	for (int i = 0; i < MAP_HEIGHT; i++)
+	{
+		for (int j = 0; j < MAP_WIDTH + PANEL_WIDTH; j++)
+		{
+			printf("%c", mapBattle[i][j]);
+		}
+
+		if (i == 1) printf("  HP: %d", player.hp);
+		if (i == 2) printf("  attack point: %d", player.attack);
+		if (i == 3) printf("  defense point: %d", player.defense);
+		if (i == 4) printf("  healing potion: %d", player.potion);
+
+		printf("\n");
+	}
+	displayBattleLog();
+
+
+	/*
+	setCursorPosition(100, 0);
+	printf("What would you like to do?\n");
+	setCursorPosition(100, 1);
+	printf("1. Attack enemy\n");
+	setCursorPosition(100, 2);
+	printf("2. Drink potion\n");
+	setCursorPosition(100, 3);
+	printf("3. Run away!\n");
+	*/
+}
+
+
+/*
+void displayBattleMap()
+{
+	int damageToPlayer;
+	int damageToEnemy;
+	system("cls");
+	printf("=========== Battle Screen ===========\n");
+	printf("You encountered an enemy!\n");
+	printf("Press [A] to Attack or [R] to Run.\n");
+
+	char action = getch();
+	if (action == 'a' || action == 'A')
+	{
+		updateLog("You decided to attack the enemy!");
+
+		while (Jap1.hp > 0 || player.hp > 0)
+		{
+			printf("What would you like to do?\n");
+			printf("1. Attack enemy\n");
+			printf("2. Drink potion\n");
+			printf("3. Run away!\n");
+
+			char actionBattle = getch();
+
+			switch (actionBattle)
+			{
+			case '1':
+				printf("You tried to attack the enemy!\n");
+				damageToEnemy = player.attack - Jap1.defense;
+				Jap1.hp -= damageToEnemy;
+				printf("Enemy got %d damage!\n", damageToEnemy);
+
+				printf("Enemy tried to attack you!\n");
+				damageToPlayer = Jap1.attack - player.defense;
+				player.hp -= damageToPlayer;
+				printf("You got %d damage!\n", damageToPlayer);
+				break;
+
+			case '2':
+				printf("You drinked potion!\n");
+				player.hp += 5;
+				break;
+			case '3':
+				printf("You could't run away from enemy!\n");
+				Sleep(10);
+				printf("Enemy tried to attack you!\n");
+				damageToPlayer = Jap1.attack - player.defense;
+				player.hp -= damageToPlayer;
+				printf("You got %d damage!\n", damageToPlayer);
+				break;
+			}
+
+
+		}
+		map[Jap1.pos.y][Jap1.pos.x] = ' ';
+	}
+
+
+	else if (action == 'r' || action == 'R')
+	{
+		updateLog("You ran away from the enemy!");
+		printf("You fled from battle!\n");
+	}
+
+	printf("Press any key to return to the game.\n");
+	getch();
+
+	displayMap();
+	drawPlayer();
+}
+*/
+
+// ÀüÅõ ÇÔ¼ö
+void battle()
+{
+	updateBattleLog("Battle start!!");
+	int damageToEnemy;   // °ø°ÝÇÒ ¶§ »ç¿ëÇÒ º¯¼ö
+	int damageToPlayer;  // ¹Ý°ÝÇÒ ¶§ »ç¿ëÇÒ º¯¼ö
+
+	while (Jap1.hp > 0 && player.hp > 0)
+	{
+		displayBattleScreen();
+		char action = getch();
+
+		switch (action)
+		{
+		case 'a':
+		case 'A':
+			// °ø°Ý ·ÎÁ÷
+			damageToEnemy = player.attack - Jap1.defense; // ÀÌÀü¿¡ ¼±¾ðÇÑ º¯¼ö¸¦ »ç¿ë
+			if (damageToEnemy > 0) {
+				Jap1.hp -= damageToEnemy;
+				updateBattleLog("You attacked the enemy!");
+			}
+			else {
+				updateBattleLog("Your attack was too weak!");
+			}
+
+			// Àû ¹Ý°Ý
+			if (Jap1.hp > 0) {
+				damageToPlayer = Jap1.attack - player.defense; // ÀÌÀü¿¡ ¼±¾ðÇÑ º¯¼ö¸¦ »ç¿ë
+				if (damageToPlayer > 0) {
+					player.hp -= damageToPlayer;
+					updateBattleLog("The enemy attacked you!");
+				}
+			}
+			break;
+
+		case 'r':
+		case 'R':
+			updateBattleLog("You ran away from the enemy!");
+			Jap1.hp = 0; // Àû HP¸¦ 0À¸·Î ¼³Á¤ÇÏ¿© ÀüÅõ Á¾·á
+			break;
+
+		default:
+			updateBattleLog("Invalid action! Choose again.");
+			break;
+		}
+
+		// »óÅÂ Ã¼Å©
+		if (Jap1.hp <= 0) {
+			Jap1.hp = 0;
+			updateBattleLog("You defeated the enemy!");
+			Situation = 0;
+		}
+		else if (player.hp <= 0) {
+			player.hp = 0;
+			updateBattleLog("You have been defeated...");
+			Situation = 0;
+		}
+	}
+
+	// ÀüÅõ°¡ ³¡³­ ÈÄ ´ë±â ¹× º»·¡ È­¸éÀ¸·Î º¹±Í
+	updateBattleLog("Press any key to return to the main screen...");
+	displayBattleScreen();
+	getch();  // »ç¿ëÀÚ ÀÔ·Â ´ë±â
+
+	initializeMap(); // ¸Ê ÃÊ±âÈ­
+	displayMap(); // ÀÌµ¿ ¸Ê Ãâ·Â
+	drawPlayer(); // ÇÃ·¹ÀÌ¾î À§Ä¡ Ãâ·Â
+}
+
+int encountEnemy()
+{
+	if (map[player.pos.y][player.pos.x] == 'E')
+	{
+		Situation = 1;
+		return 1;
+	}
+	else
+	{
+		Situation = 0;
+		return 0;
+	}
+}
+
+void encountChoice()
+{
+	char action = getch();
+
+	switch (action)
+	{
+	default:
+		updateLog("You choose the wrong key");
+		updateLog("Press [A] to Attack or [R] to Run");
+		break;
+	case 'A':
+	case 'a':
+		updateLog("You decided to attack the enemy!");
+		Sleep(100);
+		displayBattleScreen();
+		battle();
+		break;
+	case 'R':
+	case 'r':
+		updateLog("You ran away from the enemy!");
+		updateLog("You fled from battle!");
+		Situation = 0;
+		break;
+	}
+	displayLog();
+}
+
+
 
 int main()
 {
-    start_screen();
-    initializeMap();
-    updateLog("Game started.");
-    displayMap();
+	start_screen();
+	initializeMap();
+	updateLog("Game started.");
+	displayMap();
+	displayLog();
 
-    map[player.pos.y][player.pos.x] = 'P';
+	drawEnemy();
+	map[Jap1.pos.y][Jap1.pos.x] = 'E';
 
-    while (1)
-    {
-        eraseCursor();
-        drawPlayer();
-        movePlayer();
-    }
+	while (1)
+	{
+		eraseCursor();
+		drawPlayer();
+		movePlayer();
+		displayLog();
+
+		if (encountEnemy())
+		{
+			updateLog("You encountered an enemy!");
+			updateLog("Press [A] to Attack or [R] to Run");
+			displayLog();
+
+			while (Situation == 1)
+			{
+				encountChoice();
+			}
+			if (Jap1.hp <= 0) {
+				updateLog("The enemy was defeated!");
+				initializeMap(); // ¸ÊÀ» ´Ù½Ã ÃÊ±âÈ­ÇÏ¿© Àû Á¦°Å
+				displayMap();
+				drawPlayer();
+				displayLog();
+			}
+		}
+	}
 
 
-    return 0;
+	return 0;
 }
