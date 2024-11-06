@@ -57,6 +57,7 @@ Shop Shop1 = { "상인", 99, 99, 99, 99, 99, {20, 15} };
 
 char map[MAP_HEIGHT][MAP_WIDTH + PANEL_WIDTH];
 char mapBattle[MAP_HEIGHT][MAP_WIDTH + PANEL_WIDTH];
+char mapShop[MAP_HEIGHT][MAP_WIDTH + PANEL_WIDTH];
 char logMessage[3][100] = { "", "", "" };
 char battleLogMessage[5][100] = { "", "", "", "", "" };
 
@@ -164,6 +165,32 @@ void initializeMap()
 }
 
 void initializeMapBattle()
+{
+	for (int i = 0; i < MAP_HEIGHT; i++)
+	{
+		for (int j = 0; j < MAP_WIDTH; j++)
+		{
+
+			if (i == 0 || i == MAP_HEIGHT - 1 || j == 0 || j == MAP_WIDTH - 1)
+			{
+				mapBattle[i][j] = '#';
+			}
+			else
+			{
+				mapBattle[i][j] = ' ';
+			}
+		}
+		for (int j = MAP_WIDTH; j < MAP_WIDTH + PANEL_WIDTH; j++)
+		{
+			if (i == 0 || i == MAP_HEIGHT - 1)
+			{
+				mapBattle[i][j] = '#';
+			}
+		}
+	}
+}
+
+void initializeMapShop()
 {
 	for (int i = 0; i < MAP_HEIGHT; i++)
 	{
@@ -389,8 +416,7 @@ void displayShopScreen()
 {
 	system("cls");
 	//맵초기화
-	initializeMapBattle();
-	
+	initializeMapShop();
 	for (int i = 0; i < MAP_HEIGHT / 2 - 4; i++)
 		printf("\n");
 	for (int i = 0; i < MAP_WIDTH / 2 - 10; i++)
@@ -414,6 +440,22 @@ void displayShopScreen()
 	for (int i = 0; i < MAP_WIDTH / 2 - 10; i++)
 		printf(" ");
 	printf("6. 상점을 떠난다.\n");
+
+	for (int i = 0; i < MAP_HEIGHT; i++)
+	{
+		for (int j = 0; j < MAP_WIDTH + PANEL_WIDTH; j++)
+		{
+			printf("%c", mapShop[i][j]);
+		}
+
+		if (i == 1) printf("  HP: %d", player.hp);
+		if (i == 2) printf("  attack point: %d", player.attack);
+		if (i == 3) printf("  defense point: %d", player.defense);
+		if (i == 4) printf("  healing potion: %d", player.potion);
+
+		printf("\n");
+	}
+	displayLog();
 	int num = getch();
 	switch (num)
 	{
@@ -424,7 +466,7 @@ void displayShopScreen()
 		break;
 	case '2':
 		updateLog("마나 포션 1개를 구매하였습니다.");
-		//player.potion += 1;
+		//player.manapotion += 1;
 		Shop1.manaPotion -= 1;
 		break;
 	case '3':
@@ -673,7 +715,11 @@ void encountShopChoice()
 	case 'a':
 		updateLog("You decided to use Shop!");
 		Sleep(100);
-		displayShopScreen();
+		useShop = 2;
+		while (useShop == 2)
+		{
+			displayShopScreen();
+		}
 		break;
 	case 'R':
 	case 'r':
