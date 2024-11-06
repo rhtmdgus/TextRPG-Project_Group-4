@@ -4,22 +4,22 @@
 void displayMap()
 {
 	system("cls");
-	initializeMap();
-	for (int i = 0; i < MAP_HEIGHT; i++)
-	{
-		for (int j = 0; j < MAP_WIDTH + PANEL_WIDTH; j++)
-		{
+
+	for (int i = 0; i < MAP_HEIGHT; i++) {
+		for (int j = 0; j < MAP_WIDTH + PANEL_WIDTH; j++) {
 			printf("%c", map[i][j]);
 		}
-
-		if (i == 1) printf("  HP: %d", player.hp);
-		if (i == 2) printf("  attack point: %d", player.attack);
-		if (i == 3) printf("  defense point: %d", player.defense);
-		if (i == 4) printf("  healing potion: %d", player.potion);
-
 		printf("\n");
 	}
+
+	// 맵을 그린 후 남아 있는 모든 적을 다시 표시합니다.
+	for (int i = 0; i < MAX_ENEMY; i++) {
+		if (currentEnemies[i].hp > 0) {
+			drawEnemy(&currentEnemies[i]);
+		}
+	}
 }
+
 
 void displayBattleScreen()
 {
@@ -61,16 +61,8 @@ void displayBattleScreen()
 		{
 			printf("%c", mapBattle[i][j]);
 		}
-
-		if (i == 1) printf("  HP: %d", player.hp);
-		if (i == 2) printf("  attack point: %d", player.attack);
-		if (i == 3) printf("  defense point: %d", player.defense);
-		if (i == 4) printf("  healing potion: %d", player.potion);
-
 		printf("\n");
 	}
-	displayBattleLog();
-
 
 	/*
 	setCursorPosition(100, 0);
@@ -83,3 +75,32 @@ void displayBattleScreen()
 	printf("3. Run away!\n");
 	*/
 }
+
+void displayPlayerStat()
+{
+	setCursorPosition(101, 1);
+	printf("HP: %3d", player.hp);
+	setCursorPosition(101, 2);
+	printf("attack point: %3d", player.attack);
+	setCursorPosition(101, 3);
+	printf("defense point: %3d", player.defense);
+	setCursorPosition(101, 4);
+	printf("healing potion: %3d", player.potion);
+}
+
+void displayEnemyStat(const Enemy* enemy)
+{
+	if (enemy == nullptr) {
+		printf("Error: Enemy data not available.\n");
+		return;
+	}
+	setCursorPosition(101, 7);
+	printf("%-70s", enemy->name);
+	setCursorPosition(101, 8);
+	printf("HP: %3d", enemy->hp);
+	setCursorPosition(101, 9);
+	printf("attack point: %3d", enemy->attack);
+	setCursorPosition(101, 10);
+	printf("defense point: %3d", enemy->defense);
+}
+

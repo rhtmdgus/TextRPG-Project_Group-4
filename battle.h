@@ -7,10 +7,9 @@
 #include "initmap.h"
 #include "displaymap.h"
 
-extern Enemy Jap1;         // 외부에서 선언된 Jap1 사용
-extern Player player;      // 외부에서 선언된 player 사용
+extern Enemy* currentEnemy;
 extern int Situation;      // 외부에서 선언된 Situation 사용
 
-void battle();
+void battle(Enemy* enemy);
 
 #endif // BATTLE_H

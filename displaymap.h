@@ -7,9 +7,11 @@
 #include "player.h"
 #include "enemy.h"
 
+extern Enemy* currentEnemy;
 
 void displayMap();
 void displayBattleScreen();
-
+void displayPlayerStat();
+void displayEnemyStat(const Enemy* enemy);
 
 #endif // DISPLAYMAP_H

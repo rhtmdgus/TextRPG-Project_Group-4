@@ -1,7 +1,8 @@
 #include "log.h"
 #include <stdio.h>
+#include <time.h>
 
-char logMessage[3][100] = { "", "", "" };
+char logMessage[5][100] = { "", "", "" };
 char battleLogMessage[5][100] = { "", "", "", "", "" };
 
 //일반로그//
@@ -10,18 +11,18 @@ void displayLog()	//로그 출력 함수
 {
 	setCursorPosition(0, MAP_HEIGHT);
 	printf("=============================== Log ===============================\n");
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		setCursorPosition(0, MAP_HEIGHT + 1 + i);
-		printf("%s\n", logMessage[i]);
+		printf("%-70s\n", logMessage[i]);
 	}
 }
 
 void updateLog(const char* message)
 {
-	for (int i = 2; i > 0; i--)
+	for (int i = 4; i > 0; i--)
 	{
-
+		Sleep(30);
 		snprintf(logMessage[i], sizeof(logMessage[i]), "%s", logMessage[i - 1]);
 	}
 
@@ -34,10 +35,11 @@ void displayBattleLog()	//전투 로그 출력 함수
 {
 	setCursorPosition(0, MAP_HEIGHT);
 	printf("=============================== Log ===============================\n");
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 5; i++)
 	{
+		Sleep(30);
 		setCursorPosition(0, MAP_HEIGHT + 1 + i);
-		printf("%s\n", battleLogMessage[i]);
+		printf("%-70s\n", battleLogMessage[i]);
 	}
 }
 

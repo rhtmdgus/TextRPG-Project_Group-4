@@ -3,7 +3,7 @@
 
 #include "utility.h"
 
-extern char logMessage[3][100];
+extern char logMessage[5][100];
 extern char battleLogMessage[5][100];
 
 void displayLog();

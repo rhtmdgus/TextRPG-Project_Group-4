@@ -4,18 +4,15 @@
 #include <time.h>
 #include <conio.h>
 #include <windows.h>
-#include "enemy.h"
-#include "utility.h"
-#include "startscreen.h"
-#include "initmap.h"
-#include "battle.h"
-#include "log.h"
-#include "displaymap.h"
-#include "player.h"
-
-
-Player player = { 10, 10, 5, 2, {1, 1} };
-Enemy Jap1 = createEnemy("왜군 잡졸", 10, 8, 3, {7, 10} );
+#include "enemy.h"			//적(enemy)관련 기능 및 구조체 정의
+#include "utility.h"		//공통으로 사용되는 유틸성 함수 및 변수 (ex. position, situation, 커서위치 등)
+#include "startscreen.h"	//게임 시작 화면 출력 함수 정의
+#include "initmap.h"		//맵 초기화 및 맵 구성에 필요한 상수 정의
+#include "battle.h"			//전투 관련 기능 정의
+#include "log.h"			//전투 및 일반 로그 기록 및 출력 관리
+#include "displaymap.h"		//일반 맵과 전투맵의 출력 및 갱신 함수 정의
+#include "player.h"			//플레이어 관련 기능 및 구조체 정의
+#include "encount.h"		//적(enemy), 아이템, NPC와의 조우 및 상호작용 정의
 
 /*
 void displayBattleMap()
@@ -91,48 +88,7 @@ void displayBattleMap()
 
 
 
-int encountEnemy()
-{
-	if (map[player.pos.y][player.pos.x] == 'E')
-	{
-		Situation = 1;
-		return 1;
-	}
-	else
-	{
-		Situation = 0;
-		return 0;
-	}
-}
-
-void encountChoice()
-{
-	char action = getch();
-
-	switch (action)
-	{
-	default:
-		updateLog("You choose the wrong key");
-		updateLog("Press [A] to Attack or [R] to Run");
-		break;
-	case 'A':
-	case 'a':
-		updateLog("You decided to attack the enemy!");
-		Sleep(100);
-		displayBattleScreen();
-		battle();
-		break;
-	case 'R':
-	case 'r':
-		updateLog("You ran away from the enemy!");
-		updateLog("You fled from battle!");
-		Situation = 0;
-		break;
-	}
-	displayLog();
-}
-
-
+Player player = { 10, 10, 5, 2, {1, 1} };
 
 int main()
 {
@@ -140,10 +96,9 @@ int main()
 	initializeMap();
 	updateLog("Game started.");
 	displayMap();
+	displayPlayerStat();
 	displayLog();
-
-	drawEnemy(&Jap1);
-	map[Jap1.pos.y][Jap1.pos.x] = 'E';
+	spawnEnemies();
 
 	while (1)
 	{
@@ -155,23 +110,36 @@ int main()
 		if (encountEnemy())
 		{
 			updateLog("You encountered an enemy!");
+			Sleep(100);
+			displayLog();
 			updateLog("Press [A] to Attack or [R] to Run");
+			Sleep(100);
 			displayLog();
 
 			while (Situation == 1)
 			{
 				encountChoice();
 			}
-			if (Jap1.hp <= 0) {
+			if (currentEnemy->hp <= 0) {
 				updateLog("The enemy was defeated!");
-				initializeMap(); // 맵을 다시 초기화하여 적 제거
-				displayMap();
-				drawPlayer();
+
+				// 해당 적의 위치를 초기화
+				eraseEnemy(currentEnemy);  // 해당 적만 지웁니다
+				map[currentEnemy->pos.y][currentEnemy->pos.x] = ' ';
+
+				// 적이 제거된 후 남아 있는 적들만 다시 그립니다.
+				for (int i = 0; i < MAX_ENEMY; i++) {
+					if (currentEnemies[i].hp > 0) {
+						drawEnemy(&currentEnemies[i]);
+					}
+				}
+
+				// 플레이어와 로그를 개별 업데이트하여 깜빡임 최소화
+				displayPlayerStat();
 				displayLog();
 			}
 		}
 	}
-
 
 	return 0;
 }
