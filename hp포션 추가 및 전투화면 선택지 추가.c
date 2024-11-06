@@ -22,7 +22,7 @@ typedef struct
 	int hp;
 	int attack;
 	int defense;
-	int potion;
+	int hppotion;
 	Position pos;
 } Player;
 
@@ -187,7 +187,7 @@ void displayMap()
 		if (i == 1) printf("  HP: %d", player.hp);
 		if (i == 2) printf("  attack point: %d", player.attack);
 		if (i == 3) printf("  defense point: %d", player.defense);
-		if (i == 4) printf("  healing potion: %d", player.potion);
+		if (i == 4) printf("  healing potion: %d", player.hppotion);
 
 		printf("\n");
 	}
@@ -251,11 +251,11 @@ void eraseEnemy()
 }
 
 void hppotion() {
-	if (player.potion == 0) {
+	if (player.hppotion == 0) {
 		updateBattleLog("당신은 현재 포션이 0개입니다!!");
 
 	}
-	else if (player.potion > 0) {
+	else if (player.hppotion > 0) {
 		if (player.hp == 10) {
 			updateBattleLog("더이상 회복할 hp가 없습니다!!");
 		}
@@ -358,7 +358,7 @@ void displayBattleScreen()
 		if (i == 1) printf("  HP: %d", player.hp);
 		if (i == 2) printf("  attack point: %d", player.attack);
 		if (i == 3) printf("  defense point: %d", player.defense);
-		if (i == 4) printf("  healing potion: %d", player.potion);
+		if (i == 4) printf("  healing potion: %d", player.hppotion);
 		if (i == 7) printf("  1. HP포션");
 		if (i == 8) printf("  2. MP포션");
 
@@ -496,7 +496,7 @@ void battle()
 
 		case '1':
 			hppotion();
-			player.potion--;
+			player.hppotion--;
 			break;
 
 		default:
