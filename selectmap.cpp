@@ -16,13 +16,6 @@ void map1_1()
 		map[i][34] = '#';
 	}
 
-	for (int i = 1; i < 13; i++)
-	{
-		for (int j = 1; j < 35; j++)
-		{
-			map[i][j] = 1;
-		}
-	}
 
 	for (int i = 5; i < 30; i++) {
 		map[i][55] = '#';
