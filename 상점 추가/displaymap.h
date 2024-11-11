@@ -6,11 +6,13 @@
 #include "log.h"
 #include "player.h"
 #include "enemy.h"
+#include "selectmap.h"
 
 extern Enemy* currentEnemy;
 
 void displayMap();
 void displayBattleScreen();
+void displayShopScreen();
 void displayPlayerStat();
 void displayEnemyStat(const Enemy* enemy);
 

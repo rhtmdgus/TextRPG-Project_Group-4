@@ -3,6 +3,7 @@
 //전투맵, 일반맵
 char map[MAP_HEIGHT][MAP_WIDTH + PANEL_WIDTH];
 char mapBattle[MAP_HEIGHT][MAP_WIDTH + PANEL_WIDTH];
+char mapShop[MAP_HEIGHT][MAP_WIDTH + PANEL_WIDTH];
 int Situation = 0;
 
 // 커서를 특정 위치로 이동시키는 함수

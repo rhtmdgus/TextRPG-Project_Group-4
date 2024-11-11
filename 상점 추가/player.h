@@ -4,19 +4,18 @@
 //#include "player.h"
 #include "utility.h"
 
-
 extern int EXPbar;
 
 
 typedef struct
 {
 	int hp;
-	int mana;
+	int mp;
 	int attack;
 	int defense;
 	int accuracy;
 	int HPpotion;
-	int MANApotion;
+	int MPpotion;
 	int level;
 	int exp;
 	int JRelationship;

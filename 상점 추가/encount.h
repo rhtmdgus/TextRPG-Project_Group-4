@@ -8,5 +8,8 @@ extern Enemy* currentEnemy;
 
 int encountEnemy();
 void encountChoice();
+int encountShop();
+void encountShopChoice();
+
 
 #endif	//ENCOUNT_H

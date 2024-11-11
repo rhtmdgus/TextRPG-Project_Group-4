@@ -1,10 +1,13 @@
-#include "battle.h"
 #include <conio.h>
 #include <time.h>
+#include "battle.h"
+#include "potion.h"
+
 
 int OriginalLevel;
 
-void LevelUp() {
+void LevelUp()	//레벨업
+{
 	if (player.exp >= EXPbar)
 	{
 		player.exp = player.exp - EXPbar;
@@ -21,7 +24,8 @@ void LevelUp() {
 
 }
 
-int Crit() {
+int Crit()	//크리티컬 히트
+{
 	// 랜덤 시드 초기화
 	srand((unsigned int)time(NULL));
 	// accuracy에 따라 치명타 확률 계산 (5%씩 증가)
@@ -38,6 +42,7 @@ int Crit() {
 		return 0; // 치명타 미발생
 	}
 }
+
 
 // 전투 함수
 void battle(Enemy* enemy)
@@ -62,6 +67,22 @@ void battle(Enemy* enemy)
 
 		switch (action)
 		{
+		case '1'://           hp포션 사용
+			hppotion();
+			displayPlayerStat();
+			displayEnemyStat(enemy);
+			Sleep(100);
+			displayBattleLog();
+			break;
+
+		case '2'://           mp포션 사용
+			mppotion();
+			displayPlayerStat();
+			displayEnemyStat(enemy);
+			Sleep(100);
+			displayBattleLog();
+			break;
+
 		case 'a':
 		case 'A':
 			// 공격 로직
