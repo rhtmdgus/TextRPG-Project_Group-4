@@ -5,6 +5,8 @@ void displayMap()
 {
 	system("cls");
 
+	map1_1();
+
 	for (int i = 0; i < MAP_HEIGHT; i++) {
 		for (int j = 0; j < MAP_WIDTH + PANEL_WIDTH; j++) {
 			printf("%c", map[i][j]);
@@ -81,11 +83,15 @@ void displayPlayerStat()
 	setCursorPosition(101, 1);
 	printf("HP: %3d", player.hp);
 	setCursorPosition(101, 2);
-	printf("attack point: %3d", player.attack);
+	printf("MP: %3d", player.mp);
 	setCursorPosition(101, 3);
-	printf("defense point: %3d", player.defense);
+	printf("attack point: %3d", player.attack);
 	setCursorPosition(101, 4);
-	printf("healing potion: %3d", player.potion);
+	printf("defense point: %3d", player.defense);
+	setCursorPosition(101, 5);
+	printf("hp potion: %3d", player.hppotion);
+	setCursorPosition(101, 6);
+	printf("mp potion: %3d", player.mppotion);
 }
 
 void displayEnemyStat(const Enemy* enemy)
@@ -94,13 +100,14 @@ void displayEnemyStat(const Enemy* enemy)
 		printf("Error: Enemy data not available.\n");
 		return;
 	}
-	setCursorPosition(101, 7);
-	printf("%-70s", enemy->name);
-	setCursorPosition(101, 8);
-	printf("HP: %3d", enemy->hp);
+
 	setCursorPosition(101, 9);
-	printf("attack point: %3d", enemy->attack);
+	printf("%-70s", enemy->name);
 	setCursorPosition(101, 10);
+	printf("HP: %3d", enemy->hp);
+	setCursorPosition(101, 11);
+	printf("attack point: %3d", enemy->attack);
+	setCursorPosition(101, 12);
 	printf("defense point: %3d", enemy->defense);
 }
 

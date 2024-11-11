@@ -1,5 +1,6 @@
 #include "battle.h"
 #include <conio.h>
+#include "potion.h"
 
 // 전투 함수
 void battle(Enemy* enemy)
@@ -72,6 +73,22 @@ void battle(Enemy* enemy)
 			enemy->hp = 0; // 적 HP를 0으로 설정하여 전투 종료
 			break;
 
+		case '1'://           hp포션 사용
+			hppotion();
+			displayPlayerStat();
+			displayEnemyStat(enemy);
+			Sleep(100);
+			displayBattleLog();
+			break;
+
+		case '2'://           mp포션 사용
+			mppotion();
+			displayPlayerStat();
+			displayEnemyStat(enemy);
+			Sleep(100);
+			displayBattleLog();
+			break;
+
 		default:
 			updateBattleLog("Invalid action! Choose again.");
 			Sleep(100);
@@ -95,6 +112,7 @@ void battle(Enemy* enemy)
 			Sleep(100);
 			displayBattleLog();
 			Situation = 0;
+			exit(1);
 		}
 	}
 

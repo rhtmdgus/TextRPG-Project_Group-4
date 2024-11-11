@@ -7,9 +7,11 @@
 typedef struct
 {
 	int hp;
+	int mp;
 	int attack;
 	int defense;
-	int potion;
+	int hppotion;
+	int mppotion;
 	Position pos;
 } Player;
 

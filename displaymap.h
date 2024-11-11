@@ -6,6 +6,7 @@
 #include "log.h"
 #include "player.h"
 #include "enemy.h"
+#include "selectmap.h"
 
 extern Enemy* currentEnemy;
 

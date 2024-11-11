@@ -13,6 +13,7 @@
 #include "displaymap.h"		//일반 맵과 전투맵의 출력 및 갱신 함수 정의
 #include "player.h"			//플레이어 관련 기능 및 구조체 정의
 #include "encount.h"		//적(enemy), 아이템, NPC와의 조우 및 상호작용 정의
+#include "selectmap.h"
 
 /*
 void displayBattleMap()
@@ -88,7 +89,7 @@ void displayBattleMap()
 
 
 
-Player player = { 10, 10, 5, 2, {1, 1} };
+Player player = { 10, 10, 10, 5, 2, 2, {1, 1} };
 
 int main()
 {
