@@ -14,6 +14,8 @@
 #include "player.h"			//플레이어 관련 기능 및 구조체 정의
 #include "encount.h"		//적(enemy), 아이템, NPC와의 조우 및 상호작용 정의
 #include "selectmap.h"
+#include "shop.h"
+
 
 /*
 void displayBattleMap()
@@ -90,6 +92,9 @@ void displayBattleMap()
 
 
 Player player = { 10, 10, 10, 5, 2, 2, 2, 1, 0, 0, 0, 0, {1, 1} };
+Position previousPos = { 1, 1 };
+Shop Shop1 = { "상인", 99, 99, 99, 99, 99, {3, 3} };
+
 
 int main()
 {
@@ -105,8 +110,9 @@ int main()
 	{
 		eraseCursor();
 		drawPlayer();
+		drawShop();
 		movePlayer();
-		displayLog();
+		//displayLog();
 
 		if (encountEnemy())
 		{
@@ -136,6 +142,22 @@ int main()
 				}
 
 				// 플레이어와 로그를 개별 업데이트하여 깜빡임 최소화
+				displayPlayerStat();
+				displayLog();
+			}
+		}
+
+		if (encountShop())
+		{
+			updateLog("You encountered a shop!");
+			updateLog("Press [A] to use Shop or [R] to leave");
+			displayLog();
+			while (Situation == 2)
+			{
+				encountShopChoice();
+			}
+			if (Situation == 0) {
+				displayMap();
 				displayPlayerStat();
 				displayLog();
 			}

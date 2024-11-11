@@ -7,6 +7,7 @@
 
 extern char map[MAP_HEIGHT][MAP_WIDTH + PANEL_WIDTH];
 extern char mapBattle[MAP_HEIGHT][MAP_WIDTH + PANEL_WIDTH];
+extern char mapShop[MAP_HEIGHT][MAP_WIDTH + PANEL_WIDTH];
 
 extern int Situation;	//인카운터 상황
 

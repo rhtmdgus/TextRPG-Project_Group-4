@@ -5,7 +5,7 @@
 #include "utility.h"
 
 extern int EXPbar;
-
+extern Position previousPos;
 
 typedef struct
 {

@@ -55,7 +55,7 @@ void battle(Enemy* enemy)
 	displayEnemyStat(enemy);
 	displayBattleLog();
 
-	while (enemy->hp > 0 && player.hp > 0)
+	while (enemy->hp > 0 && player.hp > 0 && Situation == 1)
 	{
 		char action = _getch();
 
@@ -70,7 +70,6 @@ void battle(Enemy* enemy)
 		case '1'://           hp포션 사용
 			hppotion();
 			displayPlayerStat();
-			displayEnemyStat(enemy);
 			Sleep(100);
 			displayBattleLog();
 			break;
@@ -78,7 +77,6 @@ void battle(Enemy* enemy)
 		case '2'://           mp포션 사용
 			mppotion();
 			displayPlayerStat();
-			displayEnemyStat(enemy);
 			Sleep(100);
 			displayBattleLog();
 			break;
@@ -126,14 +124,17 @@ void battle(Enemy* enemy)
 			}
 			break;
 
+		//적과 전투에서 도주
 		case 'r':
 		case 'R':
 			updateBattleLog("You ran away from the enemy!");
+			Situation = 0;
+			player.pos = previousPos;
 			displayPlayerStat();
 			displayEnemyStat(enemy);
 			Sleep(100);
 			displayBattleLog();
-			enemy->hp = 0; // 적 HP를 0으로 설정하여 전투 종료
+			updateLog("You fled from battle!");
 			break;
 
 		default:
@@ -173,7 +174,9 @@ void battle(Enemy* enemy)
 
 	if (player.level > OriginalLevel)
 		updateLog("Level up!!");
+
 	initializeMap(); // 맵 초기화
 	displayMap(); // 이동 맵 출력
+	displayPlayerStat(); //플레이어 스탯 표시
 	drawPlayer(); // 플레이어 위치 출력
 }
