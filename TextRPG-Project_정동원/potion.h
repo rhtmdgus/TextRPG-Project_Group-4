@@ -5,7 +5,6 @@
 #include "log.h"
 
 void hppotion();
-
 void mppotion();
 
 #endif POTION_H

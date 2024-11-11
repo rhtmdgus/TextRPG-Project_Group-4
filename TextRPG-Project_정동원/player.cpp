@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <conio.h>
 
+int EXPbar = 10;
+
 void drawPlayer()
 {
 	setCursorPosition(player.pos.x, player.pos.y);

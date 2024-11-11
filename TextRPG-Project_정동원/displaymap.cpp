@@ -81,17 +81,29 @@ void displayBattleScreen()
 void displayPlayerStat()
 {
 	setCursorPosition(101, 1);
-	printf("HP: %3d", player.hp);
+	printf("  LEVEL: %d", player.level);
 	setCursorPosition(101, 2);
-	printf("MP: %3d", player.mp);
+	printf("  EXP: %3d / %3d", player.exp, EXPbar);
 	setCursorPosition(101, 3);
-	printf("attack point: %3d", player.attack);
+	printf("  HP: %3d", player.hp);
 	setCursorPosition(101, 4);
-	printf("defense point: %3d", player.defense);
+	printf("  MP: %3d", player.mp);
 	setCursorPosition(101, 5);
-	printf("hp potion: %3d", player.hppotion);
+	printf("  attack point: %3d", player.attack);
 	setCursorPosition(101, 6);
-	printf("mp potion: %3d", player.mppotion);
+	printf("  defense point: %3d", player.defense);
+	setCursorPosition(101, 7);
+	printf("  accuracy point: %3d", player.accuracy);
+	setCursorPosition(101, 8);
+	printf("  healing potion: %3d", player.HPpotion);
+	setCursorPosition(101, 9);
+	printf("  mana potion: %3d", player.MPpotion);
+	setCursorPosition(101, 10);
+	printf("  관군과의 관계: %3d", player.JRelationship);
+	setCursorPosition(101, 11);
+	printf("  의병과의 관계: %3d", player.RRelationship);
+	setCursorPosition(101, 12);
+	printf("  왜군과의 관계: %3d", player.WRelationship);
 }
 
 void displayEnemyStat(const Enemy* enemy)
@@ -100,14 +112,13 @@ void displayEnemyStat(const Enemy* enemy)
 		printf("Error: Enemy data not available.\n");
 		return;
 	}
-
-	setCursorPosition(101, 9);
+	setCursorPosition(101, 14);
 	printf("%-70s", enemy->name);
-	setCursorPosition(101, 10);
+	setCursorPosition(101, 15);
 	printf("HP: %3d", enemy->hp);
-	setCursorPosition(101, 11);
+	setCursorPosition(101, 16);
 	printf("attack point: %3d", enemy->attack);
-	setCursorPosition(101, 12);
+	setCursorPosition(101, 17);
 	printf("defense point: %3d", enemy->defense);
 }
 

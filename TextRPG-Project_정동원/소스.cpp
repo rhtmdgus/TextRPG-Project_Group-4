@@ -89,7 +89,7 @@ void displayBattleMap()
 
 
 
-Player player = { 10, 10, 10, 5, 2, 2, {1, 1} };
+Player player = { 10, 10, 10, 5, 2, 2, 2, 1, 0, 0, 0, 0, {1, 1} };
 
 int main()
 {
