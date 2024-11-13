@@ -3,7 +3,7 @@
 
 //#include "player.h"
 #include "utility.h"
-#define MAX_ENEMY 5
+#define MAX_ENEMY 10	//적 스폰 수
 
 typedef enum {
 	warrior,  //왜군잡졸 유형

@@ -6,10 +6,12 @@
 #include "log.h"
 #include "initmap.h"
 #include "displaymap.h"
+#include "animation.h"
 
 extern Enemy* currentEnemy;
 extern int Situation;      // 외부에서 선언된 Situation 사용
 
+void LevelUp();
 void battle(Enemy* enemy);
 
 #endif // BATTLE_H

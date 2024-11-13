@@ -4,14 +4,24 @@
 //#include "player.h"
 #include "utility.h"
 
+extern int EXPbar;
+extern Position previousPos;
+
 typedef struct
 {
 	int hp;
 	int mp;
 	int attack;
 	int defense;
-	int hppotion;
-	int mppotion;
+	int accuracy;
+	int HPpotion;
+	int MPpotion;
+	int level;
+	int exp;
+	int JRelationship;
+	int RRelationship;
+	int WRelationship;
+	int job;
 	Position pos;
 } Player;
 

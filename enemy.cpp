@@ -25,9 +25,14 @@ Enemy createEnemy(const Enemy* enemyTemplate, Position pos) {
 
 int isPositionOccupied(int x, int y) {
     for (int i = 0; i < MAX_ENEMY; i++) {
-        if (currentEnemies[i].pos.x == x && currentEnemies[i].pos.y == y) {
+        if (currentEnemies[i].pos.x == x && currentEnemies[i].pos.y == y) 
+        {
             return 1;  // 위치가 이미 사용 중임
         }
+    }
+    if (map[y][x] == '#' || map[y][x] == 1)
+    {
+        return 1;
     }
     return 0;  // 위치가 사용되지 않음
 }

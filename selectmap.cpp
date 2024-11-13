@@ -1,9 +1,6 @@
 #include "selectmap.h"
 
 
-
-
-
 void map1_1()
 {
 
@@ -18,6 +15,7 @@ void map1_1()
 		map[i][33] = '#';
 		map[i][34] = '#';
 	}
+
 
 	for (int i = 5; i < 30; i++) {
 		map[i][55] = '#';
