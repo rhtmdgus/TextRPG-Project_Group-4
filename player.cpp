@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <conio.h>
 
+int EXPbar = 10;
+
+
 void drawPlayer()
 {
 	setCursorPosition(player.pos.x, player.pos.y);
@@ -26,41 +29,37 @@ void movePlayer()
 	switch (key)
 	{
 	case 77://move to right
-		if (player.pos.x < MAP_WIDTH - 2)
+		if (player.pos.x < MAP_WIDTH - 2 && map[player.pos.y][player.pos.x + 1] != '#')
 		{
+			previousPos = player.pos;
 			erasePlayer();
 			player.pos.x++;
 		}
 		break;
 	case 75://move to left
-		if (player.pos.x > 1)
+		if (player.pos.x > 1 && map[player.pos.y][player.pos.x - 1] != '#')
 		{
+			previousPos = player.pos;
 			erasePlayer();
 			player.pos.x--;
 		}
 		break;
 
-	case 80:  // down block manual
-		if (player.pos.y < MAP_HEIGHT - 2)
+	case 80:  // move to up
+		if (player.pos.y < MAP_HEIGHT - 2 && map[player.pos.y + 1][player.pos.x] != '#')
 		{
+			previousPos = player.pos;
 			erasePlayer();
 			player.pos.y++;
 		}
 		break;
-	case 72:// rotation
-		if (player.pos.y > 1)
+	case 72:// move to down
+		if (player.pos.y > 1 && map[player.pos.y - 1][player.pos.x] != '#')
 		{
+			previousPos = player.pos;
 			erasePlayer();
 			player.pos.y--;
 		}
 		break;
 	}
-
-	/*
-	else if (map[player.pos.y][player.pos.x] == 'I')
-	{
-		player.hp += 5;
-		updateLog("You found a potion! HP +5");
-	}
-	*/
 }
