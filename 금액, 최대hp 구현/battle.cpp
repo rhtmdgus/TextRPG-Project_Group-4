@@ -15,12 +15,13 @@ void LevelUp()	//·¹º§¾÷
 		player.exp = player.exp - EXPbar;
 		player.level++;
 		maxhp++;
+		maxmp++;
 	}
 	if (player.level >= 15)
 		EXPbar = 40;
 	else if (player.level >= 10)
 		EXPbar = 30;
-	else if (player.level >= 2)
+	else if (player.level >= 5)
 		EXPbar = 20;
 	else
 		EXPbar = 10;

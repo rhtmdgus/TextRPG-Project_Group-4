@@ -69,7 +69,7 @@ void displayPlayerStat()
 	setCursorPosition(101, 3);
 	printf("  HP: %3d / %3d", player.hp, maxhp);
 	setCursorPosition(101, 4);
-	printf("  MP: %3d", player.mp);
+	printf("  MP: %3d / %3d", player.mp, maxmp);
 	setCursorPosition(101, 5);
 	printf("  attack point: %3d", player.attack);
 	setCursorPosition(101, 6);

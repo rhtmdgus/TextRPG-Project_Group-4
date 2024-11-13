@@ -6,6 +6,7 @@
 
 extern int EXPbar;
 extern int maxhp;
+extern int maxmp;
 extern Position previousPos;
 
 typedef struct

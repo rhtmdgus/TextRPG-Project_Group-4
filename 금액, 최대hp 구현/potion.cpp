@@ -29,15 +29,15 @@ void mppotion() {
 
 	}
 	else if (player.MPpotion > 0) {
-		if (player.mp == 10) {
+		if (player.mp == maxmp) {
 			updateBattleLog("더이상 회복할 MP가 없습니다!!");
 		}
-		else if (player.mp <= 8) {
+		else if (player.mp <= maxmp - 2) {
 			player.mp += 2;
 			updateBattleLog("MP를 2 회복하였습니다!!");
 			player.MPpotion--;
 		}
-		else if (player.mp == 9) {
+		else if (player.mp == maxmp - 1) {
 			player.mp += 1;
 			updateBattleLog("MP를 1 회복하였습니다!!");
 			player.MPpotion--;
