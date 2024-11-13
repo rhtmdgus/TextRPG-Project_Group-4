@@ -30,10 +30,11 @@ int isPositionOccupied(int x, int y) {
             return 1;  // 위치가 이미 사용 중임
         }
     }
-    if (map[y][x] == '#' || map[y][x] == 1)
+    if (map[y][x] == '#' || map[y][x] == 1 || map[y][x] == 'N' || map[y][x] == 'S')     //스폰 위치가 벽/npc일 경우 위치 사용 중으로
     {
         return 1;
     }
+
     return 0;  // 위치가 사용되지 않음
 }
 
@@ -56,7 +57,9 @@ void spawnEnemies() {
 
 void drawEnemy(Enemy* enemy) {
     setCursorPosition(enemy->pos.x, enemy->pos.y);
+    setColor(4);
     printf("E");
+    setColor(7);
 }
 
 void eraseEnemy(Enemy* enemy) {

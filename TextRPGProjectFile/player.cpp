@@ -8,8 +8,10 @@ int EXPbar = 10;
 
 void drawPlayer()
 {
+	setColor(1);
 	setCursorPosition(player.pos.x, player.pos.y);
 	printf("P");
+	setColor(7);
 }
 void erasePlayer()
 {

@@ -2,6 +2,7 @@
 #include <time.h>
 #include "battle.h"
 #include "potion.h"
+#include "animation.h"
 
 
 int OriginalLevel;
@@ -84,6 +85,8 @@ void battle(Enemy* enemy)
 		case 'a':
 		case 'A':
 			// 공격 로직
+			playerAttackAnimation();
+			enemyAttackedAnimation();
 			damageToEnemy = player.attack - enemy->defense; // 이전에 선언한 변수를 사용
 			if (damageToEnemy > 0) {
 				if (Crit() == 1)
@@ -110,6 +113,8 @@ void battle(Enemy* enemy)
 
 			// 적 반격
 			if (enemy->hp > 0) {
+				enemyAttackAnimation();
+				playerAttackedAnimation();
 				damageToPlayer = enemy->attack - player.defense; // 이전에 선언한 변수를 사용
 				if (damageToPlayer > 0) {
 					player.hp -= damageToPlayer;

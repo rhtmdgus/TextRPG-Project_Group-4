@@ -1,4 +1,5 @@
 #include "displaymap.h"
+#include "npc.h"
 #include <stdio.h>
 #include <conio.h>
 
@@ -41,33 +42,6 @@ void displayBattleScreen()
 	//맵초기화
 	initializeMapBattle();
 
-	// 병사 1 (플레이어)
-	int playerX = MAP_WIDTH / 2 - 5; // 중앙에 위치
-	int playerY = MAP_HEIGHT / 2 - 2; // 중앙에 위치
-	mapBattle[playerY][playerX] = 'P';  // 머리
-	mapBattle[playerY + 1][playerX - 1] = '/';  // 왼팔
-	mapBattle[playerY + 1][playerX] = '|'; // 몸
-	mapBattle[playerY + 2][playerX] = '|'; // 몸
-	mapBattle[playerY + 1][playerX + 1] = '\\'; // 오른팔
-	mapBattle[playerY + 1][playerX + 2] = '/';//검
-	mapBattle[playerY][playerX + 3] = '/';//검
-	mapBattle[playerY + 2][playerX - 1] = '/';  // 왼다리
-	mapBattle[playerY + 2][playerX] = ' '; // 빈 공간
-	mapBattle[playerY + 2][playerX + 1] = '\\'; // 오른다리
-
-	// 병사 2 (적군)
-	int enemyX = MAP_WIDTH / 2 + 2; // 중앙에 위치
-	int enemyY = MAP_HEIGHT / 2 - 2; // 중앙에 위치
-	mapBattle[enemyY][enemyX] = 'E';   // 머리
-	mapBattle[enemyY + 1][enemyX - 1] = '/';   // 왼팔
-	mapBattle[enemyY + 1][enemyX - 2] = '\\';//검
-	mapBattle[enemyY][enemyX - 3] = '\\';//검
-	mapBattle[enemyY + 1][enemyX] = '|'; // 몸
-	mapBattle[enemyY + 2][enemyX] = '|'; // 몸
-	mapBattle[enemyY + 1][enemyX + 1] = '\\'; // 오른팔
-	mapBattle[enemyY + 3][enemyX - 1] = '/';   // 왼다리
-	mapBattle[enemyY + 3][enemyX] = ' '; // 빈 공간
-	mapBattle[enemyY + 3][enemyX + 1] = '\\'; // 오른다리
 
 	for (int i = 0; i < MAP_HEIGHT; i++)
 	{
@@ -77,6 +51,13 @@ void displayBattleScreen()
 		}
 		printf("\n");
 	}
+
+	printPlayer();
+
+
+	printEnemy();
+
+
 }
 
 void displayPlayerStat()
@@ -125,7 +106,6 @@ void displayEnemyStat(const Enemy* enemy)
 
 void displayShopScreen()
 {
-
 	setCursorPosition(40, 11);
 	printf("번호를 눌러 상품을 구매하세요.\n");
 	setCursorPosition(40, 12);
@@ -204,4 +184,41 @@ void displayShopScreen()
 		break;
 	}
 	displayLog();
+}
+
+void displayNPCScreen()
+{
+	outNpcInteract = 1;
+	while(outNpcInteract == 1)
+	{
+		setCursorPosition(40, 11);
+		printf("내 이름은 %s.\n", currentNPC->name);
+		setCursorPosition(40, 12);
+		printf("대화문\n");
+		setCursorPosition(40, 13);
+		printf("1. 당신은 누구요?\n");
+		setCursorPosition(40, 14);
+		printf("2.주변의 소문은 없소이까?\n");
+		setCursorPosition(40, 15);
+		printf("3. 할만한 의뢰는 있소이까?\n");
+		setCursorPosition(40, 16);
+		printf("4. 싸우자\n");
+		setCursorPosition(40, 17);
+		printf("6. NPC을 떠난다.\n");
+		displayPlayerStat();
+		displayLog();
+		interactionNPC();
+		clearScreen();
+		displayLog();
+	}
+}
+
+void clearScreen()
+{
+	for (int i = 1; i < MAP_HEIGHT - 1; i++) 
+	{
+		setCursorPosition(40, i);
+		for(int j = 40; j < MAP_WIDTH -1; j++)
+			printf(" ");
+	}
 }

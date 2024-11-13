@@ -21,6 +21,7 @@ typedef struct
 	int JRelationship;
 	int RRelationship;
 	int WRelationship;
+	int job;
 	Position pos;
 } Player;
 
