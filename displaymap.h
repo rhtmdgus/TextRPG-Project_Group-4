@@ -9,6 +9,7 @@
 #include "selectmap.h"
 #include "shop.h"
 #include "animation.h"
+#include "potal.h"
 
 extern Enemy* currentEnemy;
 

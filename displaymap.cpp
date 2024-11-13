@@ -2,11 +2,13 @@
 #include <stdio.h>
 #include <conio.h>
 
+
+
 void displayMap()
 {
 	system("cls");
-
-	map1_1();
+	
+	selectmap();
 
 	for (int i = 0; i < MAP_HEIGHT; i++) {
 		for (int j = 0; j < MAP_WIDTH + PANEL_WIDTH; j++) {
@@ -14,6 +16,8 @@ void displayMap()
 		}
 		printf("\n");
 	}
+
+	
 
 	// 맵을 그린 후 남아 있는 모든 적을 다시 표시합니다.
 	for (int i = 0; i < MAX_ENEMY; i++) {

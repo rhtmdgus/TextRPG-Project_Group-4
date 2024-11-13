@@ -16,6 +16,7 @@
 #include "selectmap.h"
 #include "shop.h"
 #include "animation.h"
+#include "potal.h"
 
 
 /*
@@ -92,13 +93,16 @@ void displayBattleMap()
 
 
 
-Player player = { 10, 10, 10, 5, 2, 2, 2, 1, 0, 0, 0, 0, 1, 1, {1, 1} };
+Player player = { 10, 10, 10, 5, 2, 2, 2, 1, 0, 0, 0, 0, 1, 0, {1, 1} };
 Position previousPos = { 1, 1 };
 Shop Shop1 = { "ªÛ¿Œ", 99, 99, 99, 99, 99, {3, 3} };
 
 
+
+
 int main()
 {
+
 	start_screen();
 	initializeMap();
 	updateLog("Game started.");
@@ -112,6 +116,7 @@ int main()
 		eraseCursor();
 		drawPlayer();
 		drawShop();
+		drawPotal();
 		movePlayer();
 		//displayLog();
 
@@ -162,6 +167,14 @@ int main()
 				displayPlayerStat();
 				displayLog();
 			}
+		}
+		if (encountPotal())
+		{
+			updateLog("You encountered a potal!");
+			updateLog("Press [A] to go next map or [R] to stay");
+			displayLog();
+			encountPotalChoice();
+			
 		}
 	}
 

@@ -2,8 +2,7 @@
 
 
 
-
-void map1_1()
+void map1_0()
 {
 
 	//두꺼운벽부분
@@ -38,7 +37,7 @@ void map1_1()
 
 }
 
-void map1_2()
+void map1_1()
 {
 	//두꺼운 벽 부분
 	for (int i = 1; i < 70; i++) {
@@ -59,3 +58,5 @@ void map1_2()
 	}
 
 }
+
+

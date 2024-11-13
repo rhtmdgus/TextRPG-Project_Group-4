@@ -6,6 +6,7 @@
 #include "displaymap.h"
 #include "player.h"
 #include "battle.h"
+#include "potal.h"
 
 int encountEnemy()
 {
@@ -101,6 +102,64 @@ void encountShopChoice()
     case 'r':
         updateLog("You decided to leave Shop");
         Situation = 0;
+        player.pos = previousPos;
+        break;
+    }
+    displayLog();
+}
+
+
+int encountPotal()
+{
+    if (player.pos.y == potal[player.currentmap].pos.y && player.pos.x == potal[player.currentmap].pos.x)
+    {
+        return 1;
+        
+    }
+    else
+    {
+        Situation = 0;
+        return 0;
+    }
+    
+    
+}
+
+void encountPotalChoice()
+{
+    char action = _getch();
+
+    switch (action)
+    {
+    default:
+        updateLog("You choose the wrong key");
+        updateLog("Press [A] to go next map or [R] to stay");
+        break;
+    case 'A':
+    case 'a':
+        Sleep(100);
+        updateLog("You decided to go next map!");
+        initializeMap();
+        player.pos.x = 1;
+        player.pos.y = 1;
+        
+        gotoNextMap();
+        initializeMap();
+        displayMap();
+        eraseAllEnemies();
+        spawnEnemies();
+        displayMap();
+        
+        
+
+
+
+        break;
+
+    case 'R':
+    case 'r':
+        updateLog("You decided to stay");
+
         player.pos = previousPos;
         break;
     }
