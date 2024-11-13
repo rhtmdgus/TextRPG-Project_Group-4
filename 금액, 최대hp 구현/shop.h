@@ -1,7 +1,12 @@
 #ifndef SHOP_H
 #define SHOP_H
-
 #include "utility.h"
+
+#define hpPotionPrice 2
+#define manaPotionPrice 2
+#define strengthPotionPrice 10
+#define defensePotionPrice 10
+#define accuracyPotionPrice 10
 
 typedef struct
 {

@@ -1,5 +1,5 @@
 #include "potion.h"
-
+#include "player.h"
 
 void hppotion() {
 	if (player.HPpotion == 0) {
@@ -7,15 +7,15 @@ void hppotion() {
 
 	}
 	else if (player.HPpotion > 0) {
-		if (player.hp == 10) {
+		if (player.hp == maxhp) {
 			updateBattleLog("더이상 회복할 hp가 없습니다!!");
 		}
-		else if (player.hp <= 8) {
+		else if (player.hp <= maxhp - 2) {
 			player.hp += 2;
 			updateBattleLog("hp를 2 회복하였습니다!!");
 			player.HPpotion--;
 		}
-		else if (player.hp == 9) {
+		else if (player.hp == maxhp - 1) {
 			player.hp += 1;
 			updateBattleLog("hp를 1 회복하였습니다!!");
 			player.HPpotion--;

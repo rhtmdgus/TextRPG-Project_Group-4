@@ -15,6 +15,8 @@
 #include "encount.h"		//적(enemy), 아이템, NPC와의 조우 및 상호작용 정의
 #include "selectmap.h"
 #include "shop.h"
+#include "animation.h"
+
 
 /*
 void displayBattleMap()
@@ -90,8 +92,10 @@ void displayBattleMap()
 
 
 
-Player player = { 10, 10, 10, 5, 2, 2, 2, 1, 0, 0, 0, 0, {1, 1} };
+Player player = { 10, 10, 10, 5, 2, 2, 2, 1, 0, 0, 0, 0, 1, 10, {1, 1} };
+Position previousPos = { 1, 1 };
 Shop Shop1 = { "상인", 99, 99, 99, 99, 99, {3, 3} };
+
 
 int main()
 {
@@ -107,9 +111,9 @@ int main()
 	{
 		eraseCursor();
 		drawPlayer();
-		movePlayer();
 		drawShop();
-		displayLog();
+		movePlayer();
+		//displayLog();
 
 		if (encountEnemy())
 		{
@@ -143,6 +147,7 @@ int main()
 				displayLog();
 			}
 		}
+
 		if (encountShop())
 		{
 			updateLog("You encountered a shop!");
@@ -153,9 +158,8 @@ int main()
 				encountShopChoice();
 			}
 			if (Situation == 0) {
-				player.pos.x -= 1;
 				displayMap();
-				drawPlayer();
+				displayPlayerStat();
 				displayLog();
 			}
 		}

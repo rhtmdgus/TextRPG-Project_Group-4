@@ -4,6 +4,7 @@
 #include <conio.h>
 
 int EXPbar = 10;
+int maxhp = 10;
 
 void drawPlayer()
 {
@@ -30,6 +31,7 @@ void movePlayer()
 	case 77://move to right
 		if (player.pos.x < MAP_WIDTH - 2 && map[player.pos.y][player.pos.x + 1] != '#')
 		{
+			previousPos = player.pos;
 			erasePlayer();
 			player.pos.x++;
 		}
@@ -37,6 +39,7 @@ void movePlayer()
 	case 75://move to left
 		if (player.pos.x > 1 && map[player.pos.y][player.pos.x - 1] != '#')
 		{
+			previousPos = player.pos;
 			erasePlayer();
 			player.pos.x--;
 		}
@@ -45,6 +48,7 @@ void movePlayer()
 	case 80:  // move to up
 		if (player.pos.y < MAP_HEIGHT - 2 && map[player.pos.y + 1][player.pos.x] != '#')
 		{
+			previousPos = player.pos;
 			erasePlayer();
 			player.pos.y++;
 		}
@@ -52,6 +56,7 @@ void movePlayer()
 	case 72:// move to down
 		if (player.pos.y > 1 && map[player.pos.y - 1][player.pos.x] != '#')
 		{
+			previousPos = player.pos;
 			erasePlayer();
 			player.pos.y--;
 		}

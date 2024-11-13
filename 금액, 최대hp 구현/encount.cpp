@@ -1,3 +1,4 @@
+#include <conio.h>
 #include "encount.h"
 #include "enemy.h"
 #include "log.h"
@@ -5,8 +6,6 @@
 #include "displaymap.h"
 #include "player.h"
 #include "battle.h"
-#include "shop.h"
-#include <conio.h>
 
 int encountEnemy()
 {
@@ -36,8 +35,8 @@ void encountChoice()
         Sleep(100);
         displayLog();
         updateLog("Press [A] to Attack or [R] to Run");
-        Sleep(100);
-        displayLog();
+       // Sleep(100);
+        //displayLog();
         break;
     case 'A':
     case 'a':
@@ -54,7 +53,7 @@ void encountChoice()
         displayLog();
         updateLog("You fled from battle!");
         Situation = 0;
-        player.pos.x -= 1;
+        player.pos  = previousPos;
         break;
     }
     Sleep(100);
@@ -88,9 +87,11 @@ void encountShopChoice()
         break;
     case 'A':
     case 'a':
-        updateLog("You decided to use Shop!");
         Sleep(100);
+        updateLog("You decided to use Shop!");
         Situation = 3;
+        initializeMap();
+        displayShopMap();
         while (Situation == 3)
         {
             displayShopScreen();
@@ -100,6 +101,7 @@ void encountShopChoice()
     case 'r':
         updateLog("You decided to leave Shop");
         Situation = 0;
+        player.pos = previousPos;
         break;
     }
     displayLog();

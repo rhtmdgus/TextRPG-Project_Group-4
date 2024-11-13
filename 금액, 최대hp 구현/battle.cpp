@@ -2,6 +2,8 @@
 #include <time.h>
 #include "battle.h"
 #include "potion.h"
+#include "animation.h"
+#include "player.h"
 
 
 int OriginalLevel;
@@ -12,6 +14,7 @@ void LevelUp()	//레벨업
 	{
 		player.exp = player.exp - EXPbar;
 		player.level++;
+		maxhp++;
 	}
 	if (player.level >= 15)
 		EXPbar = 40;
@@ -55,7 +58,7 @@ void battle(Enemy* enemy)
 	displayEnemyStat(enemy);
 	displayBattleLog();
 
-	while (enemy->hp > 0 && player.hp > 0)
+	while (enemy->hp > 0 && player.hp > 0 && Situation == 1)
 	{
 		char action = _getch();
 
@@ -70,7 +73,6 @@ void battle(Enemy* enemy)
 		case '1'://           hp포션 사용
 			hppotion();
 			displayPlayerStat();
-			displayEnemyStat(enemy);
 			Sleep(100);
 			displayBattleLog();
 			break;
@@ -78,7 +80,6 @@ void battle(Enemy* enemy)
 		case '2'://           mp포션 사용
 			mppotion();
 			displayPlayerStat();
-			displayEnemyStat(enemy);
 			Sleep(100);
 			displayBattleLog();
 			break;
@@ -86,6 +87,8 @@ void battle(Enemy* enemy)
 		case 'a':
 		case 'A':
 			// 공격 로직
+			playerAttackAnimation();
+			enemyAttackedAnimation();
 			damageToEnemy = player.attack - enemy->defense; // 이전에 선언한 변수를 사용
 			if (damageToEnemy > 0) {
 				if (Crit() == 1)
@@ -112,6 +115,8 @@ void battle(Enemy* enemy)
 
 			// 적 반격
 			if (enemy->hp > 0) {
+				enemyAttackAnimation();
+				playerAttackedAnimation();
 				damageToPlayer = enemy->attack - player.defense; // 이전에 선언한 변수를 사용
 				if (damageToPlayer > 0) {
 					player.hp -= damageToPlayer;
@@ -126,14 +131,17 @@ void battle(Enemy* enemy)
 			}
 			break;
 
+		//적과 전투에서 도주
 		case 'r':
 		case 'R':
 			updateBattleLog("You ran away from the enemy!");
+			Situation = 0;
+			player.pos = previousPos;
 			displayPlayerStat();
 			displayEnemyStat(enemy);
 			Sleep(100);
 			displayBattleLog();
-			enemy->hp = 0; // 적 HP를 0으로 설정하여 전투 종료
+			updateLog("You fled from battle!");
 			break;
 
 		default:
@@ -147,6 +155,7 @@ void battle(Enemy* enemy)
 		if (enemy->hp <= 0) {
 			updateBattleLog("You defeated the enemy!");
 			player.exp += 12;
+			player.money += 4;
 			displayPlayerStat();
 			displayEnemyStat(enemy);
 			Sleep(100);
@@ -173,7 +182,9 @@ void battle(Enemy* enemy)
 
 	if (player.level > OriginalLevel)
 		updateLog("Level up!!");
+
 	initializeMap(); // 맵 초기화
 	displayMap(); // 이동 맵 출력
+	displayPlayerStat(); //플레이어 스탯 표시
 	drawPlayer(); // 플레이어 위치 출력
 }

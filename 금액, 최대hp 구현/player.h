@@ -5,7 +5,8 @@
 #include "utility.h"
 
 extern int EXPbar;
-
+extern int maxhp;
+extern Position previousPos;
 
 typedef struct
 {
@@ -21,6 +22,8 @@ typedef struct
 	int JRelationship;
 	int RRelationship;
 	int WRelationship;
+	int job;
+	int money;
 	Position pos;
 } Player;
 

@@ -7,13 +7,16 @@
 #include "player.h"
 #include "enemy.h"
 #include "selectmap.h"
+#include "shop.h"
+#include "animation.h"
 
 extern Enemy* currentEnemy;
 
 void displayMap();
+void displayShopMap();
 void displayBattleScreen();
-void displayShopScreen();
 void displayPlayerStat();
 void displayEnemyStat(const Enemy* enemy);
+void displayShopScreen();
 
 #endif // DISPLAYMAP_H
