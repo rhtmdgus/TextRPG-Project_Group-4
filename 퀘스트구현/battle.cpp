@@ -154,6 +154,7 @@ void battle(Enemy* enemy)
 			updateBattleLog("You defeated the enemy!");
 			player.exp += 12;
 			player.money += 4;
+			player.killcount++;
 			displayPlayerStat();
 			displayEnemyStat(enemy);
 			Sleep(100);

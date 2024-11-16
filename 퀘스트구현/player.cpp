@@ -4,7 +4,7 @@
 #include <conio.h>
 
 int EXPbar = 10;
-
+int questmax = 3;
 
 void drawPlayer()
 {

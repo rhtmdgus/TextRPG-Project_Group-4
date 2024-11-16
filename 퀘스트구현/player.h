@@ -6,6 +6,7 @@
 
 extern int EXPbar;
 extern Position previousPos;
+extern int questmax;
 
 typedef struct
 {
@@ -23,7 +24,11 @@ typedef struct
 	int WRelationship;
 	int job;
 	int money;
-	int questitem;
+	int questitem1;
+	int questitem2;
+	int questitem3;
+	int killcount;
+	int questmax;
 	Position pos;
 } Player;
 

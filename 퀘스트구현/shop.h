@@ -17,6 +17,5 @@ typedef struct
 extern Shop Shop1;
 
 void drawShop();
-void eraseShop();
 
 #endif // SHOP_H

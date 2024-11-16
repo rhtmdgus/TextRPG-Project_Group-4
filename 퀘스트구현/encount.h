@@ -15,4 +15,8 @@ void encountShopChoice();
 int encountNpc();
 void encountNpcChoice();
 
+int encountQuestItem1();
+int encountQuestItem2();
+int encountQuestItem3();
+
 #endif	//ENCOUNT_H

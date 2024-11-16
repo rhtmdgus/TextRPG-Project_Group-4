@@ -7,6 +7,7 @@
 #include "player.h"
 #include "battle.h"
 #include "npc.h"
+#include "quest.h"
 
 int encountEnemy()
 {
@@ -154,4 +155,37 @@ void encountNpcChoice()
         break;
     }
     displayLog();
+}
+
+int encountQuestItem1()
+{
+    if (player.pos.y == questitem1.pos.y && player.pos.x == questitem1.pos.x)
+    {
+        Situation = 6;
+        return 6;
+    }
+    else
+        return 0;
+}
+
+int encountQuestItem2()
+{
+    if (player.pos.y == questitem2.pos.y && player.pos.x == questitem2.pos.x)
+    {
+        Situation = 7;
+        return 7;
+    }
+    else
+        return 0;
+}
+
+int encountQuestItem3()
+{
+    if (player.pos.y == questitem3.pos.y && player.pos.x == questitem3.pos.x)
+    {
+        Situation = 8;
+        return 8;
+    }
+    else
+        return 0;
 }
