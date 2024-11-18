@@ -66,3 +66,9 @@ void eraseEnemy(Enemy* enemy) {
     setCursorPosition(enemy->pos.x, enemy->pos.y);
     printf(" ");
 }
+
+void eraseAllEnemies() {
+    for (int i = 0; i < MAX_ENEMY; i++) {
+        eraseEnemy(&currentEnemies[i]); // 각 적의 위치를 지웁니다.
+    }
+}

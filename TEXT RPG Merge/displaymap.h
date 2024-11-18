@@ -11,6 +11,7 @@
 #include "animation.h"
 #include "npc.h"
 #include "interaction.h"
+#include "potal.h"
 
 extern Enemy* currentEnemy;
 extern NpcData* currentNPC;

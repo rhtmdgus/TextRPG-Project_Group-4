@@ -7,6 +7,8 @@
 #include "enemy.h"			//적(enemy)관련 기능 및 구조체 정의
 #include "utility.h"		//공통으로 사용되는 유틸성 함수 및 변수 (ex. position, situation, 커서위치 등)
 #include "startscreen.h"	//게임 시작 화면 출력 함수 정의
+#include "tutorialscreen.h"
+#include "jobselect.h"
 #include "initmap.h"		//맵 초기화 및 맵 구성에 필요한 상수 정의
 #include "battle.h"			//전투 관련 기능 정의
 #include "log.h"			//전투 및 일반 로그 기록 및 출력 관리
@@ -17,6 +19,7 @@
 #include "shop.h"
 #include "animation.h"
 #include "npc.h"
+#include "quest.h"
 
 
 /*
@@ -93,7 +96,7 @@ void displayBattleMap()
 
 
 
-Player player = { 10, 10, 10, 5, 2, 2, 2, 1, 0, 0, 0, 0, 1, {1, 1} };
+Player player = { 10, 10, 10, 5, 2, 2, 2, 1, 0, 0, 0, 0, 1, 0, 0, 0, {1, 1} };
 Position previousPos = { 1, 1 };
 Shop Shop1 = { "상인", 99, 99, 99, 99, 99, {3, 3} };
 
@@ -101,7 +104,12 @@ Shop Shop1 = { "상인", 99, 99, 99, 99, 99, {3, 3} };
 int main()
 {
 	start_screen();
+	system("cls");
+	tutorial_screen();
+	system("cls");
+	jobSelect_screen();
 	initializeMap();
+	initializeQuest();
 	updateLog("Game started.");
 	displayMap();
 	displayPlayerStat();
@@ -114,6 +122,7 @@ int main()
 		drawPlayer();
 		drawShop();
 		movePlayer();
+		drawPotal();
 		drawNpc(npcList);
 		//displayLog();
 
@@ -181,6 +190,13 @@ int main()
 				displayPlayerStat();
 				displayLog();
 			}
+		}
+		if (encountPotal())
+		{
+			updateLog("You encountered a potal!");
+			updateLog("Press [A] to go next map or [R] to stay");
+			displayLog();
+			encountPotalChoice();
 		}
 
 	}

@@ -13,6 +13,7 @@ extern int outNpcInteract;
 extern NpcData* currentNPC;
 
 void interactionNPC();
+void interactShop();
 void backToDialogue();
 void backToMap();
 

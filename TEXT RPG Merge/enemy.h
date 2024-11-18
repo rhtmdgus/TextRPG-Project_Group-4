@@ -32,5 +32,6 @@ int isPositionOccupied(int x, int y);
 void spawnEnemies();
 void drawEnemy(Enemy* enemy);
 void eraseEnemy(Enemy* enemy);
+void eraseAllEnemies();
 
 #endif // ENEMY_H

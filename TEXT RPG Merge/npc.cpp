@@ -6,7 +6,7 @@ NpcData* currentNPC = NULL;       // 포인터 정의
 
 void initializeNpc()
 {
-	npcList[0] = { "장 돌쇠", false, {5, 3}, Nobody};
+	npcList[0] = { "장 돌쇠", true, {5, 3}, Nobody};
 	npcList[1] = { "김두환", false, {7, 3}, VolunArmy};
 	npcList[2] = { "조병옥", false, {9, 3}, GoverArmy};
 	npcList[3] = { "나까무라", false, {11, 3}, JapArmy};

@@ -7,7 +7,7 @@ void displayMap()
 {
 	system("cls");
 
-	map1_1();
+	selectmap();
 
 	for (int i = 0; i < MAP_HEIGHT; i++) {
 		for (int j = 0; j < MAP_WIDTH + PANEL_WIDTH; j++) {
@@ -122,67 +122,9 @@ void displayShopScreen()
 	printf("6. 상점을 떠난다.\n");
 
 	displayPlayerStat();
-	
 	displayLog();
-	int num = _getch();
-	switch (num)
-	{
-	case '1':
-		if (Shop1.hpPotion <= 0)
-		{
-			updateLog("상품 수량이 부족합니다.");
-			break;
-		}
-		updateLog("체력 포션 1개를 구매하였습니다.");
-		player.HPpotion += 1;
-		Shop1.hpPotion -= 1;
-		break;
-	case '2':
-		if (Shop1.manaPotion <= 0)
-		{
-			updateLog("상품 수량이 부족합니다.");
-			break;
-		}
-		updateLog("마나 포션 1개를 구매하였습니다.");
-		player.MPpotion += 1;
-		Shop1.manaPotion -= 1;
-		break;
-	case '3':
-		if (Shop1.strengthPotion <= 0)
-		{
-			updateLog("상품 수량이 부족합니다.");
-			break;
-		}
-		updateLog("힘 포션 1개를 구매하였습니다.");
-		player.attack += 1;
-		Shop1.strengthPotion -= 1;
-		break;
-	case '4':
-		if (Shop1.accuracyPotion <= 0)
-		{
-			updateLog("상품 수량이 부족합니다.");
-			break;
-		}
-		updateLog("명중 포션 1개를 구매하였습니다.");
-		player.accuracy += 1;
-		Shop1.accuracyPotion -= 1;
-		break;
-	case '5':
-		if (Shop1.defensePotion <= 0)
-		{
-			updateLog("상품 수량이 부족합니다.");
-			break;
-		}
-		updateLog("방어 포션 1개를 구매하였습니다.");
-		player.defense += 1;
-		Shop1.defensePotion -= 1;
-		break;
-	case '6':
-		updateLog("상점을 떠나는걸 선택하셨습니다.");
-		Situation = 0;
-		player.pos = previousPos;
-		break;
-	}
+	interactShop();
+	clearScreen();
 	displayLog();
 }
 

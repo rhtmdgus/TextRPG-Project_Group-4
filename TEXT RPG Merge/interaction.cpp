@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include "interaction.h"
+#include "quest.h"
 
 /*
 setCursorPosition(40, 13);
@@ -27,6 +28,69 @@ void interactionNPC()
 		dialogueJapArmy();
 	else
 		dialogueNobody();
+}
+
+void interactShop() {
+	int num = _getch();
+	switch (num)
+	{
+	case '1':
+		if (Shop1.hpPotion <= 0)
+		{
+			updateLog("상품 수량이 부족합니다.");
+			break;
+		}
+		updateLog("체력 포션 1개를 구매하였습니다.");
+		player.HPpotion += 1;
+		Shop1.hpPotion -= 1;
+		break;
+	case '2':
+		if (Shop1.manaPotion <= 0)
+		{
+			updateLog("상품 수량이 부족합니다.");
+			break;
+		}
+		updateLog("마나 포션 1개를 구매하였습니다.");
+		player.MPpotion += 1;
+		Shop1.manaPotion -= 1;
+		break;
+	case '3':
+		if (Shop1.strengthPotion <= 0)
+		{
+			updateLog("상품 수량이 부족합니다.");
+			break;
+		}
+		updateLog("힘 포션 1개를 구매하였습니다.");
+		player.attack += 1;
+		Shop1.strengthPotion -= 1;
+		break;
+	case '4':
+		if (Shop1.accuracyPotion <= 0)
+		{
+			updateLog("상품 수량이 부족합니다.");
+			break;
+		}
+		updateLog("명중 포션 1개를 구매하였습니다.");
+		player.accuracy += 1;
+		Shop1.accuracyPotion -= 1;
+		break;
+	case '5':
+		if (Shop1.defensePotion <= 0)
+		{
+			updateLog("상품 수량이 부족합니다.");
+			break;
+		}
+		updateLog("방어 포션 1개를 구매하였습니다.");
+		player.defense += 1;
+		Shop1.defensePotion -= 1;
+		break;
+	case '6':
+		updateLog("상점을 떠나는걸 선택하셨습니다.");
+		Situation = 0;
+		player.pos = previousPos;
+		break;
+	}
+	displayLog();
 }
 
 void backToDialogue()
@@ -358,13 +422,54 @@ void dialogueNobody()
 		displayLog();
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
-		if (currentNPC->hasQuest == false)
+		if (currentNPC->hasQuest == true && quest[0].clear == 0)
+		{
+			if (quest[0].take == 0)
+			{
+				setCursorPosition(40, 11);
+				printf(quest[0].title);
+				setCursorPosition(40, 12);
+				printf(quest[0].description1);
+				int choice = _getch();
+				if (choice == 'a')
+				{
+					clearScreen();
+					setCursorPosition(40, 11);
+					printf("퀘스트를 수락하셨습니다!");
+					updateLog("퀘스트를 수락하셨습니다!");
+					quest[0].take = 1;
+					backToDialogue();
+					break;
+				}
+				else if (choice == 'r')
+				{
+					clearScreen();
+					setCursorPosition(40, 11);
+					printf(quest[0].description2);
+					setCursorPosition(40, 12);
+					printf("대화문\n");
+					setCursorPosition(40, 13);
+					printf("1. 미안하오\n");
+					updateLog("퀘스트를 거절하셨습니다!");
+					backToDialogue();
+					break;
+				}
+			}
+			else if (quest[0].take == 1)
+			{
+				QuestComplete1();
+				break;
+			}
+
+		}
+		else if (currentNPC->hasQuest == false || quest[0].clear == 1) {
+			setCursorPosition(40, 11);
 			printf("잘 모르겠는데, 관아에 가서 물어보시오.");
-		setCursorPosition(40, 12);
-		printf("대화문\n");
-		setCursorPosition(40, 13);
-		printf("1. 알겠소\n");
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 알겠소\n");
+		}
 		Sleep(150);
 		updateLog("A키를 눌러 이전 대화로 돌아가기");
 		backToDialogue();
