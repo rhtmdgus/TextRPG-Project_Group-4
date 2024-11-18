@@ -7,6 +7,7 @@
 #include "player.h"
 #include "battle.h"
 #include "npc.h"
+#include "quest.h"
 
 int encountEnemy()
 {
@@ -112,7 +113,7 @@ void encountShopChoice()
 int encountNpc()
 {
     for (int i = 0; i < MAX_NPC; i++) {
-        if (player.pos.y == npcList[i].pos.y && player.pos.x == npcList[i].pos.x)
+        if (player.pos.y == npcList[i].pos.y && player.pos.x == npcList[i].pos.x && player.currentmap == npcList[i].currentmap)
         {
             currentNPC = &npcList[i];
             Situation = 4;
@@ -161,6 +162,7 @@ int encountPotal()
 {
     if (player.pos.y == potal[player.currentmap].pos.y && player.pos.x == potal[player.currentmap].pos.x)
     {
+        Situation = 9;
         return 1;
 
     }
@@ -197,11 +199,7 @@ void encountPotalChoice()
         eraseAllEnemies();
         spawnEnemies();
         displayMap();
-
-
-
-
-
+        Situation = 0;
         break;
 
     case 'R':
@@ -212,4 +210,37 @@ void encountPotalChoice()
         break;
     }
     displayLog();
+}
+
+int encountQuestItem1()
+{
+    if (player.pos.y == questitem1.pos.y && player.pos.x == questitem1.pos.x)
+    {
+        Situation = 6;
+        return 6;
+    }
+    else
+        return 0;
+}
+
+int encountQuestItem2()
+{
+    if (player.pos.y == questitem2.pos.y && player.pos.x == questitem2.pos.x)
+    {
+        Situation = 7;
+        return 7;
+    }
+    else
+        return 0;
+}
+
+int encountQuestItem3()
+{
+    if (player.pos.y == questitem3.pos.y && player.pos.x == questitem3.pos.x)
+    {
+        Situation = 8;
+        return 8;
+    }
+    else
+        return 0;
 }

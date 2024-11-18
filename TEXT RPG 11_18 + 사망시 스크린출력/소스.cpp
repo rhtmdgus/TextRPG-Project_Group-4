@@ -7,6 +7,8 @@
 #include "enemy.h"			//적(enemy)관련 기능 및 구조체 정의
 #include "utility.h"		//공통으로 사용되는 유틸성 함수 및 변수 (ex. position, situation, 커서위치 등)
 #include "startscreen.h"	//게임 시작 화면 출력 함수 정의
+#include "tutorialscreen.h"
+#include "jobselect.h"
 #include "initmap.h"		//맵 초기화 및 맵 구성에 필요한 상수 정의
 #include "battle.h"			//전투 관련 기능 정의
 #include "log.h"			//전투 및 일반 로그 기록 및 출력 관리
@@ -92,16 +94,31 @@ void displayBattleMap()
 }
 */
 
+//situation 명 
+//situation 1 = encounting enemy
+//situation 2 = encounting shop
+//situation 3 = displaying shop screen
+//situation 4 = encounting NPC
+//situation 5 = displaying NPC screen
+//situation 6 = encount Quest item 1
+//situation 7 = encount Quest item 2
+//situation 8 = encount Quest item 3
+//situation 9 = encounting portal
 
-
-Player player = { 10, 10, 10, 5, 2, 2, 2, 1, 0, 0, 0, 0, 1, 0, 0, 0, {1, 1} };
+Player player = { 10, 10, 10, 5, 2, 2, 2, 1, 0, 0, 0, 0, 1, 10, 0, 0, 0, 0, 0, 0, {1, 1} };
 Position previousPos = { 1, 1 };
 Shop Shop1 = { "상인", 99, 99, 99, 99, 99, {3, 3} };
-
+QuestItem1 questitem1 = { "군량", 0, {15, 5} };
+QuestItem2 questitem2 = { "작전 서류", 0, {17, 5} };
+QuestItem3 questitem3 = { "바위", 0, {19, 5} };
 
 int main()
 {
 	start_screen();
+	system("cls");
+	tutorial_screen();
+	system("cls");
+	jobSelect_screen();
 	initializeMap();
 	initializeQuest();
 	updateLog("Game started.");
@@ -109,15 +126,23 @@ int main()
 	displayPlayerStat();
 	displayLog();
 	spawnEnemies();
+	initializeNpc();
 
 	while (1)
 	{
 		eraseCursor();
+		displayPlayerStat();
 		drawPlayer();
 		drawShop();
 		movePlayer();
 		drawPotal();
 		drawNpc(npcList);
+		if (questitem1.used == 0)
+			drawQuestItem1();
+		if (questitem2.used == 0)
+			drawQuestItem2();
+		if (questitem3.used == 0)
+			drawQuestItem3();
 		//displayLog();
 
 		if (encountEnemy())
@@ -185,15 +210,102 @@ int main()
 				displayLog();
 			}
 		}
+		if (encountQuestItem1() && questitem1.used == 0)
+		{
+			while (Situation == 6)
+			{
+				interactQuestItem1();
+			}
+			if (Situation == 0) {
+				displayMap();
+				displayPlayerStat();
+				displayLog();
+			}
+		}
+		if (encountQuestItem2() && questitem2.used == 0)
+		{
+			while (Situation == 7)
+			{
+				interactQuestItem2();
+			}
+			if (Situation == 0) {
+				displayMap();
+				displayPlayerStat();
+				displayLog();
+			}
+		}
+		if (encountQuestItem3() && questitem3.used == 0)
+		{
+			while (Situation == 8)
+			{
+				interactQuestItem3();
+			}
+			if (Situation == 0) {
+				displayMap();
+				displayPlayerStat();
+				displayLog();
+			}
+		}
 		if (encountPotal())
 		{
 			updateLog("You encountered a potal!");
 			updateLog("Press [A] to go next map or [R] to stay");
 			displayLog();
-			encountPotalChoice();
+			
+			while (Situation == 9)
+			{
+				encountPotalChoice();
+			}
+			if (Situation == 0) {
+				displayMap();
+				displayPlayerStat();
+				displayLog();
+			}
+		}
+		if (player.hp <= 0)
+		{
+
+			break;
 		}
 
 	}
+
+
+	system("cls");
+	for (int i = 0; i < (MAP_HEIGHT - 16) / 2; i++)
+		printf("\n");
+
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("=========================================================\n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("                                                     \n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("                당신은 사망하였습니다                \n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("                                                     \n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("=========================================================\n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("           아무 키나 눌러 게임을 종료하세요!\n\n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("           Press anykey to quit your adventure!\n");
+	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
+		printf(" ");
+	printf("=========================================================\n\n");
+
+
+
+	eraseCursor();
+
+
+
 
 	return 0;
 }

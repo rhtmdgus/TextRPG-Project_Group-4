@@ -3,6 +3,12 @@
 
 #include "utility.h"
 
+#define hpPotionPrice 2
+#define manaPotionPrice 2
+#define strengthPotionPrice 10
+#define defensePotionPrice 10
+#define accuracyPotionPrice 10
+
 typedef struct
 {
 	char name[50];

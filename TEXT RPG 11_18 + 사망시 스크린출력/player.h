@@ -5,6 +5,8 @@
 #include "utility.h"
 
 extern int EXPbar;
+extern int maxhp;
+extern int maxmp;
 extern Position previousPos;
 
 typedef struct
@@ -23,8 +25,12 @@ typedef struct
 	int WRelationship;
 	int job;
 	int money;
-	int questitem;
 	int currentmap;
+	int questitem1;
+	int questitem2;
+	int questitem3;
+	int killcount;
+	int questmax;
 	Position pos;
 } Player;
 

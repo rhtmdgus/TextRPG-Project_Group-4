@@ -4,7 +4,8 @@
 #include <conio.h>
 
 int EXPbar = 10;
-
+int maxhp = 10;
+int maxmp = 10;
 
 void drawPlayer()
 {

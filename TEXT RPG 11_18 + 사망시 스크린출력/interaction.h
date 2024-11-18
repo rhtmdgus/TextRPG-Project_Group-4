@@ -21,5 +21,10 @@ void dialogueVolunArmy();
 void dialogueGoverArmy();
 void dialogueJapArmy();
 void dialogueNobody();
+void dialogueNobody2();
+
+void interactQuestItem1();
+void interactQuestItem2();
+void interactQuestItem3();
 
 #endif // ! INTERACTION_H
