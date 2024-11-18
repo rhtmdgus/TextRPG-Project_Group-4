@@ -52,4 +52,4 @@ void updateBattleLog(const char* message)
 	}
 
 	snprintf(battleLogMessage[0], sizeof(battleLogMessage[0]), "%s", message);
-}
+}	

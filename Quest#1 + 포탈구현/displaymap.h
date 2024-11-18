@@ -9,9 +9,12 @@
 #include "selectmap.h"
 #include "shop.h"
 #include "animation.h"
+#include "npc.h"
+#include "interaction.h"
 #include "potal.h"
 
 extern Enemy* currentEnemy;
+extern NpcData* currentNPC;
 
 void displayMap();
 void displayShopMap();
@@ -19,5 +22,7 @@ void displayBattleScreen();
 void displayPlayerStat();
 void displayEnemyStat(const Enemy* enemy);
 void displayShopScreen();
+void displayNPCScreen();
 
+void clearScreen();
 #endif // DISPLAYMAP_H

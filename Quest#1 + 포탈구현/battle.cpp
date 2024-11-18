@@ -153,6 +153,7 @@ void battle(Enemy* enemy)
 		if (enemy->hp <= 0) {
 			updateBattleLog("You defeated the enemy!");
 			player.exp += 12;
+			player.money += 4;
 			displayPlayerStat();
 			displayEnemyStat(enemy);
 			Sleep(100);

@@ -1,13 +1,12 @@
 #include "displaymap.h"
+#include "npc.h"
 #include <stdio.h>
 #include <conio.h>
-
-
 
 void displayMap()
 {
 	system("cls");
-	
+
 	selectmap();
 
 	for (int i = 0; i < MAP_HEIGHT; i++) {
@@ -16,8 +15,6 @@ void displayMap()
 		}
 		printf("\n");
 	}
-
-	
 
 	// 맵을 그린 후 남아 있는 모든 적을 다시 표시합니다.
 	for (int i = 0; i < MAX_ENEMY; i++) {
@@ -109,7 +106,6 @@ void displayEnemyStat(const Enemy* enemy)
 
 void displayShopScreen()
 {
-
 	setCursorPosition(40, 11);
 	printf("번호를 눌러 상품을 구매하세요.\n");
 	setCursorPosition(40, 12);
@@ -126,66 +122,45 @@ void displayShopScreen()
 	printf("6. 상점을 떠난다.\n");
 
 	displayPlayerStat();
-	
 	displayLog();
-	int num = _getch();
-	switch (num)
+	interactShop();
+	clearScreen();
+	displayLog();
+}
+
+void displayNPCScreen()
+{
+	outNpcInteract = 1;
+	while(outNpcInteract == 1)
 	{
-	case '1':
-		if (Shop1.hpPotion <= 0)
-		{
-			updateLog("상품 수량이 부족합니다.");
-			break;
-		}
-		updateLog("체력 포션 1개를 구매하였습니다.");
-		player.HPpotion += 1;
-		Shop1.hpPotion -= 1;
-		break;
-	case '2':
-		if (Shop1.manaPotion <= 0)
-		{
-			updateLog("상품 수량이 부족합니다.");
-			break;
-		}
-		updateLog("마나 포션 1개를 구매하였습니다.");
-		player.MPpotion += 1;
-		Shop1.manaPotion -= 1;
-		break;
-	case '3':
-		if (Shop1.strengthPotion <= 0)
-		{
-			updateLog("상품 수량이 부족합니다.");
-			break;
-		}
-		updateLog("힘 포션 1개를 구매하였습니다.");
-		player.attack += 1;
-		Shop1.strengthPotion -= 1;
-		break;
-	case '4':
-		if (Shop1.accuracyPotion <= 0)
-		{
-			updateLog("상품 수량이 부족합니다.");
-			break;
-		}
-		updateLog("명중 포션 1개를 구매하였습니다.");
-		player.accuracy += 1;
-		Shop1.accuracyPotion -= 1;
-		break;
-	case '5':
-		if (Shop1.defensePotion <= 0)
-		{
-			updateLog("상품 수량이 부족합니다.");
-			break;
-		}
-		updateLog("방어 포션 1개를 구매하였습니다.");
-		player.defense += 1;
-		Shop1.defensePotion -= 1;
-		break;
-	case '6':
-		updateLog("상점을 떠나는걸 선택하셨습니다.");
-		Situation = 0;
-		player.pos = previousPos;
-		break;
+		setCursorPosition(40, 11);
+		printf("내 이름은 %s.\n", currentNPC->name);
+		setCursorPosition(40, 12);
+		printf("대화문\n");
+		setCursorPosition(40, 13);
+		printf("1. 당신은 누구요?\n");
+		setCursorPosition(40, 14);
+		printf("2.주변의 소문은 없소이까?\n");
+		setCursorPosition(40, 15);
+		printf("3. 할만한 의뢰는 있소이까?\n");
+		setCursorPosition(40, 16);
+		printf("4. 싸우자\n");
+		setCursorPosition(40, 17);
+		printf("6. NPC을 떠난다.\n");
+		displayPlayerStat();
+		displayLog();
+		interactionNPC();
+		clearScreen();
+		displayLog();
 	}
-	displayLog();
+}
+
+void clearScreen()
+{
+	for (int i = 1; i < MAP_HEIGHT - 1; i++) 
+	{
+		setCursorPosition(40, i);
+		for(int j = 40; j < MAP_WIDTH -1; j++)
+			printf(" ");
+	}
 }

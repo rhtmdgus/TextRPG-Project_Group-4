@@ -6,7 +6,7 @@
 #include "displaymap.h"
 #include "player.h"
 #include "battle.h"
-#include "potal.h"
+#include "npc.h"
 
 int encountEnemy()
 {
@@ -96,11 +96,59 @@ void encountShopChoice()
         while (Situation == 3)
         {
             displayShopScreen();
+            
         }
         break;
     case 'R':
     case 'r':
         updateLog("You decided to leave Shop");
+        Situation = 0;
+        player.pos = previousPos;
+        break;
+    }
+    displayLog();
+}
+
+int encountNpc()
+{
+    for (int i = 0; i < MAX_NPC; i++) {
+        if (player.pos.y == npcList[i].pos.y && player.pos.x == npcList[i].pos.x)
+        {
+            currentNPC = &npcList[i];
+            Situation = 4;
+            return 4;
+        }
+    }
+    Situation = 0;
+    currentNPC = nullptr;
+    return 0;
+}
+
+void encountNpcChoice()
+{
+    char action = _getch();
+
+    switch (action)
+    {
+    default:
+        updateLog("You choose the wrong key");
+        updateLog("Press [A] to talk NPC or [R] to Leave");
+        break;
+    case 'A':
+    case 'a':
+        Sleep(100);
+        updateLog("You decided to talk to NPC");
+        Situation = 5;
+        initializeMap();
+        displayShopMap();
+        while (Situation == 5)
+        {
+            displayNPCScreen();
+        }
+        break;
+    case 'R':
+    case 'r':
+        updateLog("You decided to leave NPC");
         Situation = 0;
         player.pos = previousPos;
         break;
@@ -114,15 +162,15 @@ int encountPotal()
     if (player.pos.y == potal[player.currentmap].pos.y && player.pos.x == potal[player.currentmap].pos.x)
     {
         return 1;
-        
+
     }
     else
     {
         Situation = 0;
         return 0;
     }
-    
-    
+
+
 }
 
 void encountPotalChoice()
@@ -142,15 +190,15 @@ void encountPotalChoice()
         initializeMap();
         player.pos.x = 1;
         player.pos.y = 1;
-        
+
         gotoNextMap();
         initializeMap();
         displayMap();
         eraseAllEnemies();
         spawnEnemies();
         displayMap();
-        
-        
+
+
 
 
 

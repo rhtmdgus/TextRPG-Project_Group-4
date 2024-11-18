@@ -22,6 +22,8 @@ typedef struct
 	int RRelationship;
 	int WRelationship;
 	int job;
+	int money;
+	int questitem;
 	int currentmap;
 	Position pos;
 } Player;

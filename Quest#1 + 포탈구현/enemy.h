@@ -3,7 +3,6 @@
 
 //#include "player.h"
 #include "utility.h"
-
 #define MAX_ENEMY 10	//적 스폰 수
 
 typedef enum {

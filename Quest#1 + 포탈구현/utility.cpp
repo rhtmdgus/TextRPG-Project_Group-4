@@ -23,3 +23,10 @@ void eraseCursor()
 	curCursorInfo.bVisible = 0;
 	SetConsoleCursorInfo(hConsoleOut, &curCursorInfo);
 }
+
+//글자에 색을 입히는 함수
+void setColor(int color)
+{
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hConsole, color);
+}

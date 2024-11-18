@@ -19,5 +19,6 @@ typedef struct	//적, 플레이어 등등의 위치 구조체
 
 void setCursorPosition(int x, int y);
 void eraseCursor();
+void setColor(int color);
 
 #endif // UTILITY_H

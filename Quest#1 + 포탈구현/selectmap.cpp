@@ -1,7 +1,6 @@
 #include "selectmap.h"
 
 
-
 void map1_0()
 {
 
@@ -58,5 +57,3 @@ void map1_1()
 	}
 
 }
-
-
