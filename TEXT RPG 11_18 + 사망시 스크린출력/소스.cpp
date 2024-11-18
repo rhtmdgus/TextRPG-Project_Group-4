@@ -137,11 +137,11 @@ int main()
 		movePlayer();
 		drawPotal();
 		drawNpc(npcList);
-		if (questitem1.used == 0)
+		if (questitem1.used == 0 && player.currentmap == 0)
 			drawQuestItem1();
-		if (questitem2.used == 0)
+		if (questitem2.used == 0 && player.currentmap == 0)
 			drawQuestItem2();
-		if (questitem3.used == 0)
+		if (questitem3.used == 0 && player.currentmap == 0)
 			drawQuestItem3();
 		//displayLog();
 
@@ -210,7 +210,7 @@ int main()
 				displayLog();
 			}
 		}
-		if (encountQuestItem1() && questitem1.used == 0)
+		if (encountQuestItem1() && questitem1.used == 0 && player.currentmap == 0)
 		{
 			while (Situation == 6)
 			{
@@ -222,7 +222,7 @@ int main()
 				displayLog();
 			}
 		}
-		if (encountQuestItem2() && questitem2.used == 0)
+		if (encountQuestItem2() && questitem2.used == 0 && player.currentmap == 0)
 		{
 			while (Situation == 7)
 			{
@@ -234,7 +234,7 @@ int main()
 				displayLog();
 			}
 		}
-		if (encountQuestItem3() && questitem3.used == 0)
+		if (encountQuestItem3() && questitem3.used == 0 && player.currentmap == 0)
 		{
 			while (Situation == 8)
 			{
@@ -251,7 +251,7 @@ int main()
 			updateLog("You encountered a potal!");
 			updateLog("Press [A] to go next map or [R] to stay");
 			displayLog();
-			
+
 			while (Situation == 9)
 			{
 				encountPotalChoice();
