@@ -1180,6 +1180,7 @@ char enemyArrowDamaged[][12][12] =
     }
 };
 
+
 void printPlayer() {
 
     int playerWidth = 12;
@@ -1290,9 +1291,9 @@ void playerAttackAnimation()
             }
             Sleep(50);
         }
-
+        
     }
-    else if (player.job == 2)
+    else if (player.job == 2) 
     {
         setCursorPosition(centerX, centerY); // 캐릭터 애니메이션을 전투 화면의 중앙에 출력
         // 애니메이션 출력
@@ -1313,7 +1314,10 @@ void playerAttackAnimation()
             }
             Sleep(50);
         }
+    
 
+        // 화면을 지우지 않고 계속 애니메이션 진행
+         // 잠시 대기 (애니메이션 효과를 위해)
     }
     else if (player.job == 3)
     {
@@ -1336,6 +1340,10 @@ void playerAttackAnimation()
             }
             Sleep(50);
         }
+
+
+        // 화면을 지우지 않고 계속 애니메이션 진행
+         // 잠시 대기 (애니메이션 효과를 위해)
     }
     else if (player.job == 4)
     {
@@ -1358,14 +1366,13 @@ void playerAttackAnimation()
             }
             Sleep(50);
         }
-    }
 
-    
 
         // 화면을 지우지 않고 계속 애니메이션 진행
          // 잠시 대기 (애니메이션 효과를 위해)
-}
+    }
 
+}
 
 
 void playerAttackedAnimation()
@@ -1448,11 +1455,15 @@ void playerAttackedAnimation()
             }
             Sleep(50);
         }
+
+
+        // 화면을 지우지 않고 계속 애니메이션 진행
+         // 잠시 대기 (애니메이션 효과를 위해)
     }
     else if (player.job == 4)
     {
         setCursorPosition(centerX, centerY); // 캐릭터 애니메이션을 전투 화면의 중앙에 출력
-       // 애니메이션 출력
+        // 애니메이션 출력
         for (int k = 0; k < 5; k++)
         {
             for (int i = 0; i < 12; i++)
@@ -1470,6 +1481,10 @@ void playerAttackedAnimation()
             }
             Sleep(50);
         }
+
+
+        // 화면을 지우지 않고 계속 애니메이션 진행
+         // 잠시 대기 (애니메이션 효과를 위해)
     }
 
 }
@@ -1606,17 +1621,17 @@ void enemyAttackedAnimation(Enemy* enemy)
         }
     }
 
-    
+
 }
 
 
 
 
 void enemyAttackAnimation(Enemy* enemy) {
-    
+
     // 현재 적 배열에서 잡졸 유형 적을 탐색
-    
-   
+
+
     if (enemy->type == warrior) {
         for (int k = 0; k < 5; k++)
         {
@@ -1677,5 +1692,3 @@ void enemyAttackAnimation(Enemy* enemy) {
         }
     }
 }
-   
-

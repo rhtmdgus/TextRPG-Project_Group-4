@@ -4,7 +4,6 @@
 #include "potion.h"
 #include "animation.h"
 
-
 int OriginalLevel;
 
 void LevelUp()	//레벨업
@@ -13,18 +12,19 @@ void LevelUp()	//레벨업
 	{
 		player.exp = player.exp - EXPbar;
 		player.level++;
+		maxhp++;
+		maxmp++;
 	}
 	if (player.level >= 15)
 		EXPbar = 40;
 	else if (player.level >= 10)
 		EXPbar = 30;
-	else if (player.level >= 2)
+	else if (player.level >= 5)
 		EXPbar = 20;
 	else
 		EXPbar = 10;
 
 }
-
 int Crit()	//크리티컬 히트
 {
 	// 랜덤 시드 초기화
@@ -153,6 +153,8 @@ void battle(Enemy* enemy)
 		if (enemy->hp <= 0) {
 			updateBattleLog("You defeated the enemy!");
 			player.exp += 12;
+			player.money += 4;
+			player.killcount++;
 			displayPlayerStat();
 			displayEnemyStat(enemy);
 			Sleep(100);
