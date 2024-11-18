@@ -10,6 +10,7 @@
 #include "shop.h"
 #include "animation.h"
 
+
 extern Enemy* currentEnemy;
 
 void displayMap();

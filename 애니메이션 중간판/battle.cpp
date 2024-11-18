@@ -86,7 +86,7 @@ void battle(Enemy* enemy)
 		case 'A':
 			// 공격 로직
 			playerAttackAnimation();
-			enemyAttackedAnimation();
+			enemyAttackedAnimation(enemy);
 			damageToEnemy = player.attack - enemy->defense; // 이전에 선언한 변수를 사용
 			if (damageToEnemy > 0) {
 				if (Crit() == 1)
@@ -113,7 +113,7 @@ void battle(Enemy* enemy)
 
 			// 적 반격
 			if (enemy->hp > 0) {
-				enemyAttackAnimation();
+				enemyAttackAnimation(enemy);
 				playerAttackedAnimation();
 				damageToPlayer = enemy->attack - player.defense; // 이전에 선언한 변수를 사용
 				if (damageToPlayer > 0) {

@@ -5,6 +5,7 @@
 #include "player.h"
 #include "battle.h"
 #include "utility.h"
+#include "enemy.h"
 
 void printPlayer(); // displaymap.cpp에 추가
 
@@ -12,10 +13,10 @@ void playerAttackAnimation(); // battle.cpp 의 case A: 에 추가
 
 void playerAttackedAnimation();
 
-void printEnemy();
+void printEnemy(Enemy* enemy);
 
-void enemyAttackedAnimation();
+void enemyAttackedAnimation(Enemy* enemy);
 
-void enemyAttackAnimation();
+void enemyAttackAnimation(Enemy* enemy);
 
 #endif // ANIMATION_H

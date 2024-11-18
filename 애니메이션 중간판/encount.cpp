@@ -43,7 +43,6 @@ void encountChoice()
         updateLog("You decided to attack the enemy!");
         Sleep(100);
         displayLog();
-        displayBattleScreen();
         battle(currentEnemy);  // currentEnemy РќДо
         break;
     case 'R':
