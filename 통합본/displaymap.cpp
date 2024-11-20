@@ -56,7 +56,7 @@ void displayBattleScreen()
 	printPlayer();
 
 
-	printEnemy();
+	printEnemy(currentEnemy);
 
 
 }

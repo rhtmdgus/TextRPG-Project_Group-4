@@ -2,6 +2,7 @@
 #define NPC_H
 
 #include "utility.h"
+#include "player.h"
 #define MAX_NPC 5
 
 typedef enum {
@@ -16,6 +17,7 @@ typedef struct
 {
 	char name[100];
 	bool hasQuest;
+	int currentmap;
 	Position pos;
 	NpcType type;
 } NpcData;

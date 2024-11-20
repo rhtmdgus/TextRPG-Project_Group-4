@@ -32,18 +32,21 @@ void drawQuestItem1() {
 	setCursorPosition(questitem1.pos.x, questitem1.pos.y);
 	setColor(3);
 	printf("F");
+	setColor(7);
 }
 
 void drawQuestItem2() {
 	setCursorPosition(questitem2.pos.x, questitem2.pos.y);
 	setColor(4);
 	printf("O");
+	setColor(7);
 }
 
 void drawQuestItem3() {
 	setCursorPosition(questitem3.pos.x, questitem3.pos.y);
 	setColor(7);
 	printf("R");
+	setColor(7);
 }
 
 void eraseQuestItem1() {
