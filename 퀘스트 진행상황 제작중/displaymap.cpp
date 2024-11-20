@@ -88,9 +88,9 @@ void displayPlayerStat()
 	setCursorPosition(101, 12);
 	printf("  왜군과의 관계: %3d", player.WRelationship);
 
-	setCursorPosition(101, 15);
+	setCursorPosition(101, 20);
 	printf("  무기: %s", player.currentweaponName);
-	setCursorPosition(101, 17);
+	setCursorPosition(101, 21);
 	printf("  장비: %s", player.currentequipmentName);
 }
 

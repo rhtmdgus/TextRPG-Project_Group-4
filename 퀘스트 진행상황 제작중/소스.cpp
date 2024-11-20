@@ -21,7 +21,7 @@
 #include "npc.h"
 #include "quest.h"
 #include "item.h"
-
+#include "currentquest.h"
 
 /*
 void displayBattleMap()

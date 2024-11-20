@@ -6,6 +6,7 @@
 #include "displaymap.h"
 #include "utility.h"
 #include "item.h"
+#include "currentquest.h"
 
 
 Quest quest[MAX_QUEST];
