@@ -7,6 +7,7 @@
 #include "utility.h"
 
 Quest quest[MAX_QUEST];
+PrologueQuest prologuequest; //프롤로그 퀘스트
 
 void initializeQuest()
 {
@@ -25,8 +26,23 @@ void initializeQuest()
 	quest[4] = { "노동을 도와주게",
 	"지금 바위가 길을 막았는데 도와줄수 있겠나?",
 	0, 0, "같은 조선인끼리 돕고 살아야지..", "아직 바위를 치우지 못했나?", "고맙군! 다음에도 일이 생기면 부탁할게" };
+	quest[5]  = {"부상당한 의병",
+	"거기 누구 있나? 다쳐서 움직일수가 없는데 좀 도와주게",
+	0, 0, "(의병이 사망하였다)", " ", "의병: 덕분에 살았다네, 의병증을 줄테니 대장님한테 가보지 않겠나?" };
+	quest[6] = {"관군 장군과의 만남",
+	"거기 자네, 왜구 간부와 싸우고 있는데 좀 도와줄수 있겠나?",
+	0, 0, "싸움은 못하나 보군.. 알겠네", "할 일이 있는가?", "고맙군! 자네 덕에 승리할수 있었어, 자네 공은 꼭 전하지" };
+	quest[7] = {"왜구 간부와의 만남",
+	"이봐 자네! 날 풀어주면 자네의 복수를 도와주겠네",
+	0, 0, "후회하게 될거야", "뭘 꾸물거리는 거야?", "탁월한 선택이네" };
 }
 
+void initializePrologueQuest()
+{
+	prologuequest = { "전쟁의 시작",
+	"머리가 아프다. 왜구들한테 습격을 받고 기절했었나 보다.",
+	"아내다, 왜구한테 당한듯하다", "왜구를 용서할 수 없다. 복수를 하러가자" };
+}
 
 void drawQuestItem1() {
 	setCursorPosition(questitem1.pos.x, questitem1.pos.y);
@@ -91,6 +107,8 @@ void QuestComplete1() {
 			setCursorPosition(40, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			Sleep(200);
+			displayLog();
 			backToDialogue();
 		}
 		else
@@ -146,6 +164,8 @@ void QuestComplete2() {
 			setCursorPosition(40, 13);
 			printf("1. 힘내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			Sleep(200);
+			displayLog();
 			backToDialogue();
 		}
 		else
@@ -203,6 +223,8 @@ void QuestComplete3() {
 			setCursorPosition(40, 13);
 			printf("1. 승리하길 바라오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			Sleep(200);
+			displayLog();
 			backToDialogue();
 		}
 		else
@@ -261,6 +283,8 @@ void QuestComplete4() {
 			setCursorPosition(40, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			Sleep(200);
+			displayLog();
 			backToDialogue();
 		}
 		else
@@ -316,6 +340,8 @@ void QuestComplete5() {
 			setCursorPosition(40, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			Sleep(200);
+			displayLog();
 			backToDialogue();
 		}
 		else
@@ -339,6 +365,121 @@ void QuestComplete5() {
 		printf("아직 돌을 치우지 않아 미션을 클리어할수 없다.");
 		setCursorPosition(40, 12);
 		printf("돌을 치우고 다시 오도록 하자.");
+		backToDialogue();
+	}
+}
+
+void QuestComplete6() {
+	if (//player.questitem1 == 1
+		true)
+	{
+		setCursorPosition(40, 11);
+		printf("임무를 완료할까?");
+		setCursorPosition(40, 12);
+		printf("대화문\n");
+		setCursorPosition(40, 13);
+		printf("1. 완료한다\n");
+		setCursorPosition(40, 14);
+		printf("2. 나중에 완료하자.\n");
+		int num = _getch();
+		if (num == 'a')
+		{
+			quest[6].clear = 1;
+			player.questitem1 = 0;
+			player.JRelationship += 20;
+			player.questmax--;
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[6].description4);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 과찬이오\n");
+			updateLog("퀘스트를 클리어 했습니다!");
+			Sleep(200);
+			displayLog();
+			backToDialogue();
+		}
+		else
+		{
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[6].description3);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 미안하오\n");
+			backToDialogue();
+		}
+	}
+	else
+	{
+		Sleep(100);
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("아직 왜구 간부를 잡지 못하였다.");
+		setCursorPosition(40, 12);
+		printf("왜구 장수를 잡고 다시 오도록 하자.");
+		backToDialogue();
+	}
+}
+
+void QuestComplete7() {
+	if (//player.questitem2 == 1
+		true)
+	{
+		setCursorPosition(40, 11);
+		printf("왜구 장수를 풀어줄까?");
+		setCursorPosition(40, 12);
+		printf("대화문\n");
+		setCursorPosition(40, 13);
+		printf("1. 완료한다\n");
+		setCursorPosition(40, 14);
+		printf("2. 나중에 완료하자.\n");
+		int num = _getch();
+		if (num == 'a')
+		{
+			quest[7].clear = 1;
+			//player.questitem2 = 0;
+			player.WRelationship += 30;
+			player.JRelationship -= 30;
+			player.questmax--;
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[7].description4);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 빨리 가시오\n");
+			updateLog("퀘스트를 클리어 했습니다!");
+			Sleep(200);
+			displayLog();
+			backToDialogue();
+		}
+		else
+		{
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[7].description3);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 기다려보시오\n");
+			backToDialogue();
+		}
+	}
+	else
+	{
+		Sleep(100);
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("아직 왜구 장수를 풀어줄 도구를 챙기지 못했다.");
+		setCursorPosition(40, 12);
+		printf("도구를 챙기고 다시 오도록 하자.");
 		backToDialogue();
 	}
 }

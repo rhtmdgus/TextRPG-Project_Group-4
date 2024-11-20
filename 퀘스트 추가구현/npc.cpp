@@ -11,6 +11,9 @@ void initializeNpc()
 	npcList[2] = { "조병옥", true, 0, {9, 3}, GoverArmy };
 	npcList[3] = { "나까무라", true, 0, {11, 3}, JapArmy };
 	npcList[4] = { "김 아무개", true, 0, {13, 3}, Nobody };
+	npcList[5] = { "이정재", true, 0, {8, 4}, VolunArmy };
+	npcList[6] = { "장택상", true, 0, {10, 4}, GoverArmy };
+	npcList[7] = { "미와 와사부로", true, 0, {12, 4}, JapArmy };
 }
 
 void drawNpc(NpcData* npcList)

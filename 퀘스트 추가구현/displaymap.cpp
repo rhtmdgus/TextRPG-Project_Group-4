@@ -141,7 +141,7 @@ void displayNPCScreen()
 		setCursorPosition(40, 13);
 		printf("1. 당신은 누구요?\n");
 		setCursorPosition(40, 14);
-		printf("2.주변의 소문은 없소이까?\n");
+		printf("2. 주변의 소문은 없소이까?\n");
 		setCursorPosition(40, 15);
 		printf("3. 할만한 의뢰는 있소이까?\n");
 		setCursorPosition(40, 16);

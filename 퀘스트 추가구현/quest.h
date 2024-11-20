@@ -15,6 +15,13 @@ typedef struct {
 
 typedef struct {
 	char title[50];
+	char description1[200];
+	char description2[200];
+	char description3[200];
+} PrologueQuest; // 프롤로그 퀘스트
+
+typedef struct {
+	char title[50];
 	int used;
 	Position pos;
 } QuestItem1;
@@ -32,16 +39,20 @@ typedef struct {
 } QuestItem3;
 
 extern Quest quest[MAX_QUEST];
+extern PrologueQuest prologuequest; //프롤로그 퀘스트
 extern QuestItem1 questitem1;
 extern QuestItem2 questitem2;
 extern QuestItem3 questitem3;
 
 void initializeQuest();
+void initializePrologueQuest();
 void QuestComplete1();
 void QuestComplete2();
 void QuestComplete3();
 void QuestComplete4();
 void QuestComplete5();
+void QuestComplete6();
+void QuestComplete7();
 
 void drawQuestItem1();
 void drawQuestItem2();
