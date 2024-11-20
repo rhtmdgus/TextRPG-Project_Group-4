@@ -28,8 +28,6 @@ void interactionNPC()
 		dialogueJapArmy();
 	else if (currentNPC->type == Nobody)
 		dialogueNobody();
-	else
-		dialogueNobody2();
 }
 
 void interactShop() {
@@ -606,6 +604,16 @@ void dialogueJapArmy()
 
 void dialogueNobody()
 {
+	if (strcmp(currentNPC->name,"장 돌쇠") == 0 && currentNPC->hasQuest == false)
+		NobodyLog_1();
+	if (strcmp(currentNPC->name, "김 아무개") == 0 && currentNPC->hasQuest == true)
+		NobodyLog_2();
+}
+
+
+//퀘스트 없는 무소속 NPC 로그
+void NobodyLog_1()
+{
 	int num = _getch();
 	switch (num)
 	{
@@ -745,9 +753,9 @@ void dialogueNobody()
 		backToMap();
 		break;
 	}
-}
-
-void dialogueNobody2()
+}//퀘스트 없는 NPC//
+//퀘스트 있는 무소속 NPC 로그
+void NobodyLog_2()
 {
 	int num = _getch();
 	switch (num)
@@ -889,6 +897,7 @@ void dialogueNobody2()
 		break;
 	}
 }
+
 
 void interactQuestItem1()
 {
