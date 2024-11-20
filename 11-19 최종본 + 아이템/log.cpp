@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <time.h>
 
-char logMessage[5][100] = { "", "", "" };
+char logMessage[5][100] = { "", "", "", "", ""};
 char battleLogMessage[5][100] = { "", "", "", "", "" };
 
 //일반로그//

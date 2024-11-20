@@ -87,6 +87,11 @@ void displayPlayerStat()
 	printf("  의병과의 관계: %3d", player.RRelationship);
 	setCursorPosition(101, 12);
 	printf("  왜군과의 관계: %3d", player.WRelationship);
+
+	setCursorPosition(101, 15);
+	printf("  무기: %s", player.currentweaponName);
+	setCursorPosition(101, 17);
+	printf("  장비: %s", player.currentequipmentName);
 }
 
 void displayEnemyStat(const Enemy* enemy)

@@ -5,6 +5,8 @@
 #include "player.h"
 #include "displaymap.h"
 #include "utility.h"
+#include "item.h"
+
 
 Quest quest[MAX_QUEST];
 
@@ -91,7 +93,9 @@ void QuestComplete1() {
 			setCursorPosition(40, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			updateLog("아이템을 획득하였습니다!");
 			backToDialogue();
+			weaponchange(3);
 		}
 		else
 		{
@@ -146,7 +150,9 @@ void QuestComplete2() {
 			setCursorPosition(40, 13);
 			printf("1. 힘내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			updateLog("아이템을 획득하였습니다!");
 			backToDialogue();
+			weaponchange(0);
 		}
 		else
 		{

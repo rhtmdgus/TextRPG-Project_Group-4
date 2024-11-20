@@ -1,6 +1,7 @@
 #ifndef QUEST_H
 #define QUEST_H
 #include "utility.h"
+
 #define MAX_QUEST 10
 
 typedef struct {

@@ -20,6 +20,7 @@
 #include "animation.h"
 #include "npc.h"
 #include "quest.h"
+#include "item.h"
 
 
 /*
@@ -105,7 +106,7 @@ void displayBattleMap()
 //situation 8 = encount Quest item 3
 //situation 9 = encounting portal
 
-Player player = { 10, 10, 10, 5, 2, 2, 2, 1, 0, 0, 0, 0, 1, 10, 0, 0, 0, 0, 0, 0, {1, 1} };
+Player player = { 10, 10, 10, 5, 2, 2, 2, 1, 0, 0, 0, 0, 1, 10, 0, 0, 0, 0, 0, 0, -1, -1, {"æ¯¿Ω"} , {"«Â ø "} , {1, 1}};
 Position previousPos = { 1, 1 };
 Shop Shop1 = { "ªÛ¿Œ", 99, 99, 99, 99, 99, {3, 3} };
 QuestItem1 questitem1 = { "±∫∑Æ", 0, {15, 5} };
@@ -251,7 +252,7 @@ int main()
 			updateLog("You encountered a potal!");
 			updateLog("Press [A] to go next map or [R] to stay");
 			displayLog();
-
+			
 			while (Situation == 9)
 			{
 				encountPotalChoice();
