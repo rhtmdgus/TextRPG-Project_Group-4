@@ -28,11 +28,10 @@ void selectmap() {
     if (player.currentmap == 0) {
         map1_0();
     }
+
     else if (player.currentmap == 1) {
         map1_1();
     }
-    
-
 }
 
 void drawPotal()

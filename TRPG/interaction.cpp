@@ -604,9 +604,9 @@ void dialogueJapArmy()
 
 void dialogueNobody()
 {
-	if (strcmp(currentNPC->name,"Àå µ¹¼è") == 0 && currentNPC->hasQuest == false)
+	if (strcmp(currentNPC->name,"Àå µ¹¼è") == 0)
 		NobodyLog_1();
-	if (strcmp(currentNPC->name, "±è ¾Æ¹«°³") == 0 && currentNPC->hasQuest == true)
+	if (strcmp(currentNPC->name, "±è ¾Æ¹«°³") == 0)
 		NobodyLog_2();
 }
 
