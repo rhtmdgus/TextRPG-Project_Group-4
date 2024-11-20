@@ -29,7 +29,7 @@ typedef struct
 
 extern weapon weapons[5][10];
 
-extern equipment equipments[5];
+extern equipment equipments[10];
 
 
 void weaponchange(int i);
