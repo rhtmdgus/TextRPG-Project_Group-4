@@ -10,7 +10,6 @@ typedef enum {
 	GoverArmy,	//包焙
 	JapArmy,	//恐焙
 	Nobody,		//公家加
-	Nobody2		//公家加2
 } NpcType;
 
 typedef struct

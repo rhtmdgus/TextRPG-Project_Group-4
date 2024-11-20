@@ -10,7 +10,7 @@ void initializeNpc()
 	npcList[1] = { "±èµÎÈ¯", true, 0, {7, 3}, VolunArmy };
 	npcList[2] = { "Á¶º´¿Á", true, 0, {9, 3}, GoverArmy };
 	npcList[3] = { "³ª±î¹«¶ó", true, 0, {11, 3}, JapArmy };
-	npcList[4] = { "±è ¾Æ¹«°³", true, 0, {13, 3}, Nobody2 };
+	npcList[4] = { "±è ¾Æ¹«°³", true, 0, {13, 3}, Nobody };
 }
 
 void drawNpc(NpcData* npcList)
