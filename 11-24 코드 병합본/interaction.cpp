@@ -187,7 +187,7 @@ void VolunArmyLog_1()
 {
 	Sleep(100);
 	clearScreen();
-	if (currentNPC->hasQuest == true)
+	if (currentNPC->hasQuest == true && quest[5].clear == 0)
 	{
 		setCursorPosition(40, 11);
 		printf(quest[5].title);
@@ -202,16 +202,32 @@ void VolunArmyLog_1()
 		int choice = _getch();
 		if (choice == 'a')
 		{
-			clearScreen();
-			updateLog("부상당한 의병에게 HP포션을 주었습니다.");
-			Sleep(200);
-			displayLog();
-			player.RRelationship += 20;
-			player.HPpotion--;
-			setCursorPosition(40, 11);
-			printf(quest[5].description4);
-			quest[5].clear = 1;
-			backToMap();
+			if (player.HPpotion < 1)
+			{
+				clearScreen();
+				updateLog("가지고 있는 HP포션이 부족합니다.");
+				Sleep(200);
+				displayLog();
+				setCursorPosition(40, 11);
+				printf(quest[5].description2);
+				setCursorPosition(40, 12);
+				printf("미안하오\n");
+				quest[5].clear = 2;
+				backToMap();
+			}
+			else
+			{
+				clearScreen();
+				updateLog("부상당한 의병에게 HP포션을 주었습니다.");
+				Sleep(200);
+				displayLog();
+				player.RRelationship += 20;
+				player.HPpotion--;
+				setCursorPosition(30, 11);
+				printf(quest[5].description4);
+				quest[5].clear = 1;
+				backToMap();
+			}
 		}
 		else if (choice == 'r')
 		{
@@ -223,9 +239,23 @@ void VolunArmyLog_1()
 			printf(quest[5].description2);
 			setCursorPosition(40, 12);
 			printf("미안하오\n");
-			quest[5].clear = 1;
+			quest[5].clear = 2;
 			backToMap();
 		}
+	}
+	else if (quest[5].clear == 1)
+	{
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("의병이 쉬고있다. 건드리지 말자.");
+		backToMap();
+	}
+	else if (quest[5].clear == 2)
+	{
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("치료받지 못해 죽은 의병이다.");
+		backToMap();
 	}
 
 	Sleep(150);
@@ -374,7 +404,6 @@ void VolunArmyLog_2()
 		break;
 	}
 }
-
 void dialogueGoverArmy()
 {
 	if (strcmp(currentNPC->name, "장택상") == 0 && currentNPC->hasQuest == true)
@@ -963,10 +992,9 @@ void JapArmyLog_2()
 		break;
 	}
 }
-
 void dialogueNobody()
 {
-	if (strcmp(currentNPC->name,"장 돌쇠") == 0 && currentNPC->hasQuest == true)
+	if (strcmp(currentNPC->name, "장 돌쇠") == 0 && currentNPC->hasQuest == true)
 		NobodyLog_1();
 	if (strcmp(currentNPC->name, "김 아무개") == 0 && currentNPC->hasQuest == true)
 		NobodyLog_2();
@@ -1261,6 +1289,8 @@ void NobodyLog_2()
 }
 
 
+
+
 void interactQuestItem1()
 {
 	updateLog("군량을 발견하였습니다.");
@@ -1369,7 +1399,7 @@ void interactQuestItem3()
 	displayLog();
 }
 
-// 프롤로그 쪽 함수
+/* 프롤로그 쪽 함수
 void interactPrologueNpc()
 {
 	Sleep(100);
@@ -1385,3 +1415,4 @@ void interactPrologueNpc()
 	setCursorPosition(40, 11);
 	printf(prologuequest.description3);
 }
+ */

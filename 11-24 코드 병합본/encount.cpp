@@ -34,16 +34,16 @@ void encountChoice()
     {
     default:
         updateLog("You choose the wrong key");
-        Sleep(100);
+        Sleep(200);
         displayLog();
         updateLog("Press [A] to Attack or [R] to Run");
-       // Sleep(100);
-        //displayLog();
+        Sleep(200);
+        displayLog();
         break;
     case 'A':
     case 'a':
         updateLog("You decided to attack the enemy!");
-        Sleep(100);
+        Sleep(200);
         displayLog();
         displayBattleScreen();
         battle(currentEnemy);  // currentEnemy РќДо
@@ -51,9 +51,11 @@ void encountChoice()
     case 'R':
     case 'r':
         updateLog("You ran away from the enemy!");
-        Sleep(100);
+        Sleep(200);
         displayLog();
         updateLog("You fled from battle!");
+        Sleep(200);
+        displayLog();
         Situation = 0;
         player.pos  = previousPos;
         break;
@@ -171,8 +173,6 @@ int encountPotal()
         Situation = 0;
         return 0;
     }
-
-
 }
 
 void encountPotalChoice()
@@ -205,7 +205,7 @@ void encountPotalChoice()
     case 'R':
     case 'r':
         updateLog("You decided to stay");
-
+        Situation = 0;
         player.pos = previousPos;
         break;
     }
