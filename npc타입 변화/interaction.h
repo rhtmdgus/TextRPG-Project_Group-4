@@ -30,10 +30,11 @@ void JapArmyLog_2();
 void NobodyLog_1();
 void NobodyLog_2();
 
-void interactQuestItem1();
-void interactQuestItem2();
-void interactQuestItem3();
-
+void interactionQuestItem();
+void dialogueVolunQuestItem();
+void dialogueGoverQuestItem();
+void dialogueJapQuestItem();
+void dialogueNobodyQuestItem();
 void interactPrologueNpc();
 
 #endif // ! INTERACTION_H

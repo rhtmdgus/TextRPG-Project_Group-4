@@ -172,35 +172,11 @@ int main()
 				displayLog();
 			}
 		}
-		if (encountQuestItem1() && QuestItemList[0].isActive == 1 && player.currentmap == 0)
+		if (encountQuestItem())
 		{
 			while (Situation == 6)
 			{
-				interactQuestItem1();
-			}
-			if (Situation == 0) {
-				displayMap();
-				displayPlayerStat();
-				displayLog();
-			}
-		}
-		if (encountQuestItem2() && QuestItemList[1].isActive == 1 && player.currentmap == 0)
-		{
-			while (Situation == 7)
-			{
-				interactQuestItem2();
-			}
-			if (Situation == 0) {
-				displayMap();
-				displayPlayerStat();
-				displayLog();
-			}
-		}
-		if (encountQuestItem3() && QuestItemList[2].isActive == 1 && player.currentmap == 0)
-		{
-			while (Situation == 8)
-			{
-				interactQuestItem3();
+				interactionQuestItem();
 			}
 			if (Situation == 0) {
 				displayMap();

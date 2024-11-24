@@ -18,9 +18,7 @@ void encountNpcChoice();
 int encountPotal();
 void encountPotalChoice();
 
-int encountQuestItem1();
-int encountQuestItem2();
-int encountQuestItem3();
+int encountQuestItem();
 
 
 #endif	//ENCOUNT_H

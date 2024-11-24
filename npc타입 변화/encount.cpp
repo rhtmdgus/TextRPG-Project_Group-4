@@ -212,35 +212,17 @@ void encountPotalChoice()
     displayLog();
 }
 
-int encountQuestItem1()
+int encountQuestItem()
 {
-    if (player.pos.y == QuestItemList[0].pos.y && player.pos.x == QuestItemList[0].pos.x)
-    {
-        Situation = 6;
-        return 6;
+    for (int i = 0; i < MAX_QUESTITEM; i++) {
+        if (player.pos.y == QuestItemList[i].pos.y && player.pos.x == QuestItemList[i].pos.x && player.currentmap == QuestItemList[i].currentmap && QuestItemList[i].isActive == 1)
+        {
+            currentQuestItem = &QuestItemList[i];
+            Situation = 6;
+            return 6;
+        }
     }
-    else
-        return 0;
-}
-
-int encountQuestItem2()
-{
-    if (player.pos.y == QuestItemList[1].pos.y && player.pos.x == QuestItemList[1].pos.x)
-    {
-        Situation = 7;
-        return 7;
-    }
-    else
-        return 0;
-}
-
-int encountQuestItem3()
-{
-    if (player.pos.y == QuestItemList[2].pos.y && player.pos.x == QuestItemList[2].pos.x)
-    {
-        Situation = 8;
-        return 8;
-    }
-    else
-        return 0;
+    Situation = 0;
+    currentQuestItem = nullptr;
+    return 0;
 }

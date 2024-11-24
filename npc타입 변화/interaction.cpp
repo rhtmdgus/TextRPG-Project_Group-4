@@ -1282,10 +1282,19 @@ void NobodyLog_2()
 	}
 }
 
+void interactionQuestItem()
+{
+	if (currentQuestItem->type == VolunArmy && currentQuestItem->isActive == 1)
+		dialogueVolunQuestItem();
+	else if (currentQuestItem->type == GoverArmy && currentQuestItem->isActive == 1)
+		dialogueGoverQuestItem();
+	else if (currentQuestItem->type == JapArmy && currentQuestItem->isActive == 1)
+		dialogueJapQuestItem();
+	else if (currentQuestItem->type == Nobody && currentQuestItem->isActive == 1)
+		dialogueNobodyQuestItem();
+}
 
-
-
-void interactQuestItem1()
+void dialogueVolunQuestItem()
 {
 	updateLog("군량을 발견하였습니다.");
 	updateLog("[A]를 눌러 획득하거나 [R]을 눌러 맵으로 돌아가세요.");
@@ -1316,7 +1325,12 @@ void interactQuestItem1()
 	displayLog();
 }
 
-void interactQuestItem2()
+void dialogueGoverQuestItem()
+{
+
+}
+
+void dialogueJapQuestItem()
 {
 	updateLog("작전 서류를 발견하였습니다.");
 	updateLog("[A]를 눌러 훔치거나 [R]을 눌러 맵으로 돌아가세요.");
@@ -1347,7 +1361,7 @@ void interactQuestItem2()
 	displayLog();
 }
 
-void interactQuestItem3()
+void dialogueNobodyQuestItem()
 {
 	updateLog("바위를 발견하였습니다.");
 	updateLog("[A]를 눌러 치우거나 [R]을 눌러 맵으로 돌아가세요.");

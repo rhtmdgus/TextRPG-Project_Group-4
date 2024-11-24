@@ -49,9 +49,9 @@ void initializePrologueQuest()
 
 void initializeQuestItem()
 {
-	QuestItemList[0] = {"군량", 0, 1, {15, 5}, VolunArmyQ};
-	QuestItemList[1] = { "작전 서류", 0, 1, {17, 5} , JapArmyQ};
-	QuestItemList[2] = { "바위", 0, 1, {19, 5} , NobodyQ};
+	QuestItemList[0] = {"군량", 1, 1, {15, 5}, VolunArmyQ};
+	QuestItemList[1] = { "작전 서류", 1, 1, {17, 5} , JapArmyQ};
+	QuestItemList[2] = { "바위", 1, 1, {19, 5} , NobodyQ};
 }
 
 void drawQuestItem(QuestItemData* QuestItemList)
