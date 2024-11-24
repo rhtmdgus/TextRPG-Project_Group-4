@@ -8,6 +8,8 @@
 
 Quest quest[MAX_QUEST];
 PrologueQuest prologuequest; //프롤로그 퀘스트
+QuestItemData QuestItemList[MAX_QUESTITEM];
+QuestItemData* currentQuestItem = NULL;
 
 void initializeQuest()
 {
@@ -45,40 +47,33 @@ void initializePrologueQuest()
 	"아내다, 왜구한테 당한듯하다", "왜구를 용서할 수 없다. 복수를 하러가자" };
 }  */
 
-void drawQuestItem1() {
-	setCursorPosition(questitem1.pos.x, questitem1.pos.y);
-	setColor(3);
-	printf("F");
-	setColor(7);
+void initializeQuestItem()
+{
+	QuestItemList[0] = {"군량", 0, 1, {15, 5}, VolunArmyQ};
+	QuestItemList[1] = { "작전 서류", 0, 1, {17, 5} , JapArmyQ};
+	QuestItemList[2] = { "바위", 0, 1, {19, 5} , NobodyQ};
 }
 
-void drawQuestItem2() {
-	setCursorPosition(questitem2.pos.x, questitem2.pos.y);
-	setColor(4);
-	printf("O");
-	setColor(7);
-}
-
-void drawQuestItem3() {
-	setCursorPosition(questitem3.pos.x, questitem3.pos.y);
-	setColor(7);
-	printf("R");
-	setColor(7);
-}
-
-void eraseQuestItem1() {
-	setCursorPosition(questitem1.pos.x, questitem1.pos.y);
-	printf(" ");
-}
-
-void eraseQuestItem2() {
-	setCursorPosition(questitem2.pos.x, questitem2.pos.y);
-	printf(" ");
-}
-
-void eraseQuestItem3() {
-	setCursorPosition(questitem3.pos.x, questitem3.pos.y);
-	printf(" ");
+void drawQuestItem(QuestItemData* QuestItemList)
+{
+	for (int i = 0; i < MAX_QUESTITEM; i++)
+	{
+		if (player.currentmap == (QuestItemList + i)->currentmap)
+		{
+			setCursorPosition((QuestItemList + i)->pos.x, (QuestItemList + i)->pos.y);
+			if ((QuestItemList + i)->type == Nobody)
+				setColor(7);
+			else if ((QuestItemList + i)->type == GoverArmy)
+				setColor(2);
+			else if ((QuestItemList + i)->type == JapArmy)
+				setColor(4);
+			else if ((QuestItemList + i)->type == VolunArmy)
+				setColor(3);
+			if ((QuestItemList + i)->isActive)
+				printf("Q");
+			setColor(7);
+		}
+	}
 }
 
 void QuestComplete1() {
@@ -379,6 +374,7 @@ void QuestComplete6() {
 			player.questitem1 = 0;
 			player.JRelationship += 20;
 			player.questmax--;
+			npcList[7].isActive = 1;
 			Sleep(100);
 			clearScreen();
 			setCursorPosition(40, 11);

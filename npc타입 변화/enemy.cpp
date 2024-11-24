@@ -1,4 +1,5 @@
 #include "enemy.h"
+#include "player.h"
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
@@ -30,7 +31,11 @@ int isPositionOccupied(int x, int y) {
             return 1;  // 위치가 이미 사용 중임
         }
     }
-    if (map[y][x] == '#' || map[y][x] == 1 || map[y][x] == 'N' || map[y][x] == 'S')     //스폰 위치가 벽/npc일 경우 위치 사용 중으로
+    if (x == 1 && y == 1)
+    {
+        return 1;
+    }
+    if (map[y][x] == '#' || map[y][x] == 1 || map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'T' || map[y][x] == 'F' || map[y][x] == 'O' || map[y][x] == 'R')     //스폰 위치가 벽/npc일 경우 위치 사용 중으로
     {
         return 1;
     }

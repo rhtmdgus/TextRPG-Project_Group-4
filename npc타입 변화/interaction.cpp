@@ -187,7 +187,7 @@ void VolunArmyLog_1()
 {
 	Sleep(100);
 	clearScreen();
-	if (currentNPC->hasQuest == true && quest[5].clear == 0)
+	if (currentNPC->hasQuest == true && quest[5].clear == 0 && currentNPC->isActive == 1)
 	{
 		setCursorPosition(40, 11);
 		printf(quest[5].title);
@@ -213,6 +213,7 @@ void VolunArmyLog_1()
 				setCursorPosition(40, 12);
 				printf("미안하오\n");
 				quest[5].clear = 2;
+				npcList[5].isActive = 0;
 				backToMap();
 			}
 			else
@@ -240,24 +241,17 @@ void VolunArmyLog_1()
 			setCursorPosition(40, 12);
 			printf("미안하오\n");
 			quest[5].clear = 2;
+			npcList[5].isActive = 0;
 			backToMap();
 		}
 	}
-	else if (quest[5].clear == 1)
+	else if (quest[5].clear == 1 && currentNPC->isActive == 1)
 	{
 		clearScreen();
 		setCursorPosition(40, 11);
 		printf("의병이 쉬고있다. 건드리지 말자.");
 		backToMap();
 	}
-	else if (quest[5].clear == 2)
-	{
-		clearScreen();
-		setCursorPosition(40, 11);
-		printf("치료받지 못해 죽은 의병이다.");
-		backToMap();
-	}
-
 	Sleep(150);
 	backToMap();
 }
@@ -404,7 +398,6 @@ void VolunArmyLog_2()
 		break;
 	}
 }
-
 void dialogueGoverArmy()
 {
 	if (strcmp(currentNPC->name, "장택상") == 0 && currentNPC->hasQuest == true)
@@ -993,10 +986,9 @@ void JapArmyLog_2()
 		break;
 	}
 }
-
 void dialogueNobody()
 {
-	if (strcmp(currentNPC->name,"장 돌쇠") == 0 && currentNPC->hasQuest == true)
+	if (strcmp(currentNPC->name, "장 돌쇠") == 0 && currentNPC->hasQuest == true)
 		NobodyLog_1();
 	if (strcmp(currentNPC->name, "김 아무개") == 0 && currentNPC->hasQuest == true)
 		NobodyLog_2();
@@ -1291,6 +1283,8 @@ void NobodyLog_2()
 }
 
 
+
+
 void interactQuestItem1()
 {
 	updateLog("군량을 발견하였습니다.");
@@ -1305,10 +1299,9 @@ void interactQuestItem1()
 		break;
 	case 'A':
 	case 'a':
-		questitem1.used = 1;
 		updateLog("군량을 획득하였습니다.");
+		QuestItemList[0].isActive = 0;
 		player.questitem1 = 1;
-		eraseQuestItem1();
 		updateLog("맵으로 돌아갑니다.");
 		player.pos = previousPos;
 		Situation = 0;
@@ -1337,10 +1330,9 @@ void interactQuestItem2()
 		break;
 	case 'A':
 	case 'a':
-		questitem2.used = 1;
 		updateLog("작전 서류를 훔쳤습니다.");
+		QuestItemList[1].isActive = 0;
 		player.questitem2 = 1;
-		eraseQuestItem2();
 		updateLog("맵으로 돌아갑니다.");
 		player.pos = previousPos;
 		Situation = 0;
@@ -1372,11 +1364,10 @@ void interactQuestItem3()
 		Sleep(100);
 		if (player.hp > 1)
 		{
-			questitem3.used = 1;
 			updateLog("바위를 치웠습니다. HP가 1 소모되었습니다.");
+			QuestItemList[2].isActive = 0;
 			player.questitem3 = 1;
 			player.hp--;
-			eraseQuestItem3();
 			updateLog("맵으로 돌아갑니다.");
 			player.pos = previousPos;
 			Situation = 0;
@@ -1399,7 +1390,7 @@ void interactQuestItem3()
 	displayLog();
 }
 
-// 프롤로그 쪽 함수
+/* 프롤로그 쪽 함수
 void interactPrologueNpc()
 {
 	Sleep(100);
@@ -1415,3 +1406,4 @@ void interactPrologueNpc()
 	setCursorPosition(40, 11);
 	printf(prologuequest.description3);
 }
+ */

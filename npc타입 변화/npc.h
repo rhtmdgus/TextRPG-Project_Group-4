@@ -17,6 +17,7 @@ typedef struct
 	char name[100];
 	bool hasQuest;
 	int currentmap;
+	int isActive;
 	Position pos;
 	NpcType type;
 } NpcData;

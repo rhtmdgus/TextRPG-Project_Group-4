@@ -37,9 +37,6 @@
 Player player = { 10, 10, 10, 5, 2, 2, 2, 1, 0, 0, 0, 0, 1, 10, 0, 0, 0, 0, 0, 0, {20, 13} };
 Position previousPos = { 1, 1 };
 Shop Shop1 = { "상인", 99, 99, 99, 99, 99, {3, 3} };
-QuestItem1 questitem1 = { "군량", 0, {15, 5} };
-QuestItem2 questitem2 = { "작전 서류", 0, {17, 5} };
-QuestItem3 questitem3 = { "바위", 0, {19, 5} };
 
 int main()
 {
@@ -96,6 +93,7 @@ int main()
 	displayLog();
 	spawnEnemies();
 	initializeNpc();
+	initializeQuestItem();
 
 	while (1)	//본편
 	{
@@ -106,12 +104,7 @@ int main()
 		movePlayer();
 		drawPotal();
 		drawNpc(npcList);
-		if (questitem1.used == 0 && player.currentmap == 0)
-			drawQuestItem1();
-		if (questitem2.used == 0 && player.currentmap == 0)
-			drawQuestItem2();
-		if (questitem3.used == 0 && player.currentmap == 0)
-			drawQuestItem3();
+		drawQuestItem(QuestItemList);
 		//displayLog();
 
 		if (encountEnemy())
@@ -179,7 +172,7 @@ int main()
 				displayLog();
 			}
 		}
-		if (encountQuestItem1() && questitem1.used == 0 && player.currentmap == 0)
+		if (encountQuestItem1() && QuestItemList[0].isActive == 1 && player.currentmap == 0)
 		{
 			while (Situation == 6)
 			{
@@ -191,7 +184,7 @@ int main()
 				displayLog();
 			}
 		}
-		if (encountQuestItem2() && questitem2.used == 0 && player.currentmap == 0)
+		if (encountQuestItem2() && QuestItemList[1].isActive == 1 && player.currentmap == 0)
 		{
 			while (Situation == 7)
 			{
@@ -203,7 +196,7 @@ int main()
 				displayLog();
 			}
 		}
-		if (encountQuestItem3() && questitem3.used == 0 && player.currentmap == 0)
+		if (encountQuestItem3() && QuestItemList[2].isActive == 1 && player.currentmap == 0)
 		{
 			while (Situation == 8)
 			{
