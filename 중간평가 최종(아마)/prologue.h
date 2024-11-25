@@ -12,6 +12,7 @@
 #include "enemy.h"
 #include "animation.h"
 #include "potion.h"
+#include "item.h"
 
 typedef struct
 {

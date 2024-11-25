@@ -6,11 +6,13 @@
 #include "displaymap.h"
 #include "utility.h"
 #include "questmanager.h"
+#include "item.h"
 
 Quest quest[MAX_QUEST];
 PrologueQuest prologuequest; //프롤로그 퀘스트
 QuestItemData QuestItemList[MAX_QUESTITEM];
 QuestItemData* currentQuestItem = NULL;
+int checkboss1 = 0;
 
 void initializeQuest()
 {
@@ -36,7 +38,7 @@ void initializeQuest()
 	"거기 자네, 왜구 간부와 싸우고 있는데 좀 도와줄수 있겠나?",
 	0, 0, "싸움은 못하나 보군.. 알겠네", "할 일이 있는가?", "고맙군! 자네 덕에 승리할수 있었어, 자네 공은 꼭 전하지" , 0, 1};
 	quest[7] = { "왜구 간부와의 만남",
-	"이봐 자네! 날 풀어주면 자네의 복수를 도와주겠네",
+	"이봐 자네! 날 풀어주면 돈을 주도록 하지",
 	0, 0, "후회하게 될거야", "뭘 꾸물거리는 거야?", "탁월한 선택이네" , 0, 1};
 }
 /*
@@ -160,6 +162,10 @@ void QuestComplete2() {
 			setCursorPosition(40, 13);
 			printf("1. 힘내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			updateLog("무기를 획득하였습니다!");
+			updateLog("장비를 획득하였습니다!");
+			weaponchange(2);
+			equipmentchange(2);
 			completeQuest(1);
 			backToDialogue();
 		}
@@ -218,6 +224,10 @@ void QuestComplete3() {
 			setCursorPosition(40, 13);
 			printf("1. 승리하길 바라오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			updateLog("무기를 획득하였습니다!");
+			updateLog("장비를 획득하였습니다!");
+			weaponchange(5);
+			equipmentchange(5);
 			completeQuest(2);
 			backToDialogue();
 		}
@@ -277,6 +287,10 @@ void QuestComplete4() {
 			setCursorPosition(40, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			updateLog("무기를 획득하였습니다!");
+			updateLog("장비를 획득하였습니다!");
+			weaponchange(4);
+			equipmentchange(4);
 			completeQuest(3);
 			backToDialogue();
 		}
@@ -333,6 +347,10 @@ void QuestComplete5() {
 			setCursorPosition(40, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			updateLog("무기를 획득하였습니다!");
+			updateLog("장비를 획득하였습니다!");
+			weaponchange(3);
+			equipmentchange(3);
 			completeQuest(4);
 			backToDialogue();
 		}
@@ -362,8 +380,7 @@ void QuestComplete5() {
 }
 
 void QuestComplete6() {
-	if (//player.questitem1 == 1
-		true)
+	if (checkboss1 == 1)
 	{
 		setCursorPosition(40, 11);
 		printf("임무를 완료할까?");
@@ -421,8 +438,7 @@ void QuestComplete6() {
 }
 
 void QuestComplete7() {
-	if (//player.questitem2 == 1
-		true)
+	if (quest[7].clear == 0)
 	{
 		setCursorPosition(40, 11);
 		printf("왜구 장수를 풀어줄까?");
@@ -436,9 +452,10 @@ void QuestComplete7() {
 		if (num == 'a')
 		{
 			quest[7].clear = 1;
-			//player.questitem2 = 0;
 			player.WRelationship += 30;
 			player.JRelationship -= 30;
+			player.RRelationship -= 10;
+			player.money += 20;
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
@@ -450,9 +467,10 @@ void QuestComplete7() {
 			printf("1. 빨리 가시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
 			completeQuest(7);
+			npcList[7].isActive = 0;
 			Sleep(200);
 			displayLog();
-			backToDialogue();
+			backToMap();
 		}
 		else
 		{

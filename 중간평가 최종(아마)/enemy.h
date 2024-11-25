@@ -22,7 +22,7 @@ typedef struct
 	EnemyType type;
 } Enemy;
 
-extern Enemy enemyTemplates[4];
+extern Enemy enemyTemplates[6];
 extern Enemy currentEnemies[MAX_ENEMY];
 extern Enemy* currentEnemy;
 extern Enemy currentBosses[MAX_BOSS];
@@ -35,7 +35,8 @@ int isPositionOccupied(int x, int y);
 void spawnEnemies();
 void drawEnemy(Enemy* enemy);
 void eraseEnemy(Enemy* enemy);
-void spawnBoss();
+void spawnBoss1();
+// void spawnBoss();
 void drawBoss(Enemy* boss);
 void eraseBoss(Enemy* boss);
 void eraseAllEnemies();

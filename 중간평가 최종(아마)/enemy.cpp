@@ -4,11 +4,13 @@
 #include <string.h>
 #include <time.h>
 
-Enemy enemyTemplates[4] = {
+Enemy enemyTemplates[6] = {
     {"왜군 잡졸", 10, 8, 3, {0, 0}, warrior},
     {"왜군 창병", 12, 10, 4, {0, 0}, spear},
     {"왜군 궁병", 8, 6, 2, {0, 0}, archor},
-    {"왜군 장수", 20, 12, 8, {0, 0}, warrior}
+    {"왜군 장수", 20, 12, 8, {0, 0}, warrior},
+    {"의병 장군", 15, 15, 6, {0, 0}, archor},
+    {"관군 장군", 18, 12, 10, {0, 0}, spear}
 };
 
 Enemy currentEnemies[MAX_ENEMY];  // 배열 정의
@@ -74,16 +76,56 @@ void spawnEnemies() {
     }
 }
 
+
+void spawnBoss1() {
+
+    Position pos;
+    pos.x = MAP_WIDTH - 10;
+    pos.y = 2;
+    if (player.JRelationship < 0)
+    {
+        currentBosses[0] = createBoss(&enemyTemplates[5], pos);
+        drawBoss(&currentBosses[0]);
+        map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
+    }
+    else if (player.WRelationship < 0)
+    {
+        currentBosses[0] = createBoss(&enemyTemplates[4], pos);
+        drawBoss(&currentBosses[0]);
+        map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
+    }
+    else
+    {
+        currentBosses[0] = createBoss(&enemyTemplates[3], pos);
+        drawBoss(&currentBosses[0]);
+        map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
+    }
+}
+/*
 void spawnBoss() {
 
     Position pos;
     pos.x = MAP_WIDTH - 10;
     pos.y = 2;
-
-    currentBosses[0] = createBoss(&enemyTemplates[3], pos);
-    drawBoss(&currentBosses[0]);
-    map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
-}
+    if (player.JRelationship < 0)
+    {
+        currentBosses[0] = createBoss(&enemyTemplates[5], pos);
+        drawBoss(&currentBosses[0]);
+        map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
+    }
+    else if (player.WRelationship < 0)
+    {
+        currentBosses[0] = createBoss(&enemyTemplates[4], pos);
+        drawBoss(&currentBosses[0]);
+        map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
+    }
+    else
+    {
+        currentBosses[0] = createBoss(&enemyTemplates[3], pos);
+        drawBoss(&currentBosses[0]);
+        map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
+    }
+} */
 
 void drawEnemy(Enemy* enemy) {
     setCursorPosition(enemy->pos.x, enemy->pos.y);

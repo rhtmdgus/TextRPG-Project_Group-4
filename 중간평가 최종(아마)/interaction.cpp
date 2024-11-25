@@ -480,6 +480,7 @@ void GoverArmyLog_1()
 						player.questmax++;
 						acceptQuest(6);
 						backToDialogue();
+						spawnBoss1();
 						break;
 					}
 					else
@@ -700,7 +701,7 @@ void GoverArmyLog_2()
 
 void dialogueJapArmy()
 {
-	if (strcmp(currentNPC->name, "미와 와사부로") == 0 && currentNPC->hasQuest == true)
+	if (strcmp(currentNPC->name, "미와 와사부로") == 0 && currentNPC->hasQuest == true && currentNPC->isActive == 1)
 		JapArmyLog_1();
 	if (strcmp(currentNPC->name, "나까무라") == 0 && currentNPC->hasQuest == true)
 		JapArmyLog_2();
@@ -807,7 +808,11 @@ void JapArmyLog_1()
 			else if (quest[7].take == 1)
 			{
 				QuestComplete7();
-				
+				if (currentNPC->isActive == 0)
+				{
+					backToMap();
+					break;
+				}
 				break;
 			}
 

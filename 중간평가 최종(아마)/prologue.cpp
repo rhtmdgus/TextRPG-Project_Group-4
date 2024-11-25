@@ -429,6 +429,7 @@ void StorageLog()
 			printf("1. 확인\n");
 			Sleep(150);
 			updateLog("A키를 눌러 이전 대화로 돌아가기");
+			weaponchange(0);
 			break;
 		case 2:
 			setCursorPosition(35, 11);
@@ -439,6 +440,7 @@ void StorageLog()
 			printf("1. 확인\n");
 			Sleep(150);
 			updateLog("A키를 눌러 이전 대화로 돌아가기");
+			weaponchange(0);
 			break;
 		case 3:
 			setCursorPosition(35, 11);
@@ -449,6 +451,7 @@ void StorageLog()
 			printf("1. 확인\n");
 			Sleep(150);
 			updateLog("A키를 눌러 이전 대화로 돌아가기");
+			weaponchange(0);
 			break;
 		case 4:
 			setCursorPosition(35, 11);
@@ -459,6 +462,7 @@ void StorageLog()
 			printf("1. 확인\n");
 			Sleep(150);
 			updateLog("A키를 눌러 이전 대화로 돌아가기");
+			weaponchange(0);
 			break;
 		}
 		displayPlayerStat();

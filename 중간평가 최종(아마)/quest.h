@@ -43,6 +43,7 @@ extern QuestItemData QuestItemList[MAX_QUESTITEM];
 extern QuestItemData* currentQuestItem;
 
 extern Quest quest[MAX_QUEST];
+extern int checkboss1;
 extern PrologueQuest prologuequest; //프롤로그 퀘스트
 
 void initializeQuest();
