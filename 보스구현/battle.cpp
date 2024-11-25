@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "potion.h"
 #include "animation.h"
+#include "quest.h"
 
 int OriginalLevel;
 
@@ -155,6 +156,7 @@ void battle(Enemy* enemy)
 			player.exp += 12;
 			player.money += 4;
 			player.killcount++;
+			updateQuestStatusKill();
 			displayPlayerStat();
 			displayEnemyStat(enemy);
 			Sleep(100);
@@ -297,7 +299,8 @@ void bossbattle(Enemy* boss)
 			updateBattleLog("You defeated the boss!");
 			player.exp += 30;
 			player.money += 10;
-			player.killcount++;
+			player.questitem1 = 1;
+			checkboss1 = 1;
 			displayPlayerStat();
 			displayBossStat(boss);
 			Sleep(100);

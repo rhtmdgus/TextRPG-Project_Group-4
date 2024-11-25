@@ -21,6 +21,7 @@
 #include "npc.h"
 #include "quest.h"
 #include "prologue.h"
+#include "prologuemap.h"
 
 
 //situation 명 
@@ -34,7 +35,7 @@
 //situation 8 = encount Quest item 3
 //situation 9 = encounting portal
 
-Player player = { 10, 10, 10, 5, 2, 2, 2, 1, 0, 0, 0, 0, 1, 1000, 0, 0, 0, 0, 0, 0, {20, 13} };
+Player player = { 10, 10, 10, 5, 2, 2, 2, 1, 0, 0, 0, 0, 1, 100, 0, 0, 0, 0, 0, 0, {20, 13} };
 Position previousPos = { 1, 1 };
 Shop Shop1 = { "상인", 99, 99, 99, 99, 99, {3, 3} };
 
@@ -45,7 +46,6 @@ int main()
 	system("cls");
 	tutorial_screen();
 	system("cls");
-	jobSelect_screen();
 	updateLog("Game started.");
 
 	initializeMap();
@@ -56,10 +56,12 @@ int main()
 	{
 		drawPotal_prologue();
 		drawPlayer();
+		spawnEnemies_P();
+		drawNpc_prologue(npcListP);
 		displayPlayerStat();
 		movePlayer();
 
-		if (encountPotal_prologue())
+		if (encountPotal_prologue())		//프롤로그 포탈
 		{
 			updateLog("You encountered a potal!");
 			Sleep(200);
@@ -78,6 +80,59 @@ int main()
 				displayLog();
 			}
 		}
+
+		if (encountNpc_prologue())		//프롤로그 NPC조우
+		{
+			updateLog("You encountered NPC!");
+			updateLog("Press [A] to talk NPC or [R] to leave");
+			displayLog();
+
+			while (Situation == 4)
+			{
+				encountNpcChoice_prologue();
+			}
+			if (Situation == 0) {
+				displayMap_Prologue();
+				displayPlayerStat();
+				displayLog();
+			}
+		}
+
+		if (encountEnemy_P())			//프롤로그 enemy 조우
+		{
+			updateLog("You encountered an enemy!");
+			Sleep(100);
+			displayLog();
+			updateLog("Press [A] to Attack or [R] to Run");
+			Sleep(100);
+			displayLog();
+
+			while (Situation == 1)
+			{
+				encountChoice_P();
+			}
+			if (currentEnemy->hp <= 0) {
+				updateLog("The enemy was defeated!");
+
+				// 해당 적의 위치를 초기화
+				eraseEnemy_P(currentEnemy);  // 해당 적만 지웁니다
+				map[currentEnemy->pos.y][currentEnemy->pos.x] = ' ';
+
+				// 적이 제거된 후 남아 있는 적들만 다시 그립니다.
+				for (int i = 0; i < 3; i++) {
+					if (currentEnemies_P[i].hp > 0) {
+						drawEnemy_P(&currentEnemies_P[i]);
+					}
+				}
+
+				// 플레이어와 로그를 개별 업데이트하여 깜빡임 최소화
+				displayPlayerStat();
+				displayLog();
+			}
+		}
+
+
+
 		if (player.currentmap == 3)
 		{
 			player.currentmap = 0;
@@ -91,7 +146,6 @@ int main()
 	displayMap();
 	displayPlayerStat();
 	displayLog();
-	spawnBoss();
 	spawnEnemies();
 	initializeNpc();
 	initializeQuestItem();

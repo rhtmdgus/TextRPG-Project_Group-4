@@ -12,6 +12,8 @@ typedef struct {
 	char description2[200];
 	char description3[200];
 	char description4[200];
+	int questCondition;
+	int questGoal;
 } Quest;
 
 typedef struct {
@@ -41,6 +43,7 @@ extern QuestItemData QuestItemList[MAX_QUESTITEM];
 extern QuestItemData* currentQuestItem;
 
 extern Quest quest[MAX_QUEST];
+extern int checkboss1;
 extern PrologueQuest prologuequest; //프롤로그 퀘스트
 
 void initializeQuest();

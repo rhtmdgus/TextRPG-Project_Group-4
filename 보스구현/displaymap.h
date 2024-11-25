@@ -19,6 +19,7 @@ extern NpcData* currentNPC;
 void displayMap();
 void displayShopMap();
 void displayBattleScreen();
+void displayQuestScreen();
 void displayBossBattleScreen();
 void displayPlayerStat();
 void displayEnemyStat(const Enemy* enemy);

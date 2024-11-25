@@ -326,6 +326,7 @@ void VolunArmyLog_2()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[1].take = 1;
 						player.questmax++;
+						acceptQuest(1);
 						backToDialogue();
 						break;
 					}
@@ -356,6 +357,7 @@ void VolunArmyLog_2()
 			else if (quest[1].take == 1)
 			{
 				QuestComplete2();
+				
 				break;
 			}
 
@@ -476,7 +478,9 @@ void GoverArmyLog_1()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[6].take = 1;
 						player.questmax++;
+						acceptQuest(6);
 						backToDialogue();
+						spawnBoss1();
 						break;
 					}
 					else
@@ -506,6 +510,7 @@ void GoverArmyLog_1()
 			else if (quest[6].take == 1)
 			{
 				QuestComplete6();
+				
 				break;
 			}
 
@@ -619,6 +624,7 @@ void GoverArmyLog_2()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[2].take = 1;
 						player.questmax++;
+						acceptQuest(2);
 						backToDialogue();
 						break;
 					}
@@ -649,6 +655,7 @@ void GoverArmyLog_2()
 			else if (quest[2].take == 1)
 			{
 				QuestComplete3();
+				
 				break;
 			}
 
@@ -694,7 +701,7 @@ void GoverArmyLog_2()
 
 void dialogueJapArmy()
 {
-	if (strcmp(currentNPC->name, "미와 와사부로") == 0 && currentNPC->hasQuest == true)
+	if (strcmp(currentNPC->name, "미와 와사부로") == 0 && currentNPC->hasQuest == true && currentNPC->isActive == 1)
 		JapArmyLog_1();
 	if (strcmp(currentNPC->name, "나까무라") == 0 && currentNPC->hasQuest == true)
 		JapArmyLog_2();
@@ -770,6 +777,7 @@ void JapArmyLog_1()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[7].take = 1;
 						player.questmax++;
+						acceptQuest(7);
 						backToDialogue();
 						break;
 					}
@@ -800,6 +808,11 @@ void JapArmyLog_1()
 			else if (quest[7].take == 1)
 			{
 				QuestComplete7();
+				if (currentNPC->isActive == 0)
+				{
+					backToMap();
+					break;
+				}
 				break;
 			}
 
@@ -914,6 +927,7 @@ void JapArmyLog_2()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[3].take = 1;
 						player.questmax++;
+						acceptQuest(3);
 						backToDialogue();
 						break;
 					}
@@ -944,6 +958,7 @@ void JapArmyLog_2()
 			else if (quest[3].take == 1)
 			{
 				QuestComplete4();
+				
 				break;
 			}
 
@@ -1066,6 +1081,7 @@ void NobodyLog_1()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[0].take = 1;
 						player.questmax++;
+						acceptQuest(0);
 						backToDialogue();
 						break;
 					}
@@ -1096,6 +1112,7 @@ void NobodyLog_1()
 			else if (quest[0].take == 1)
 			{
 				QuestComplete1();
+				
 				break;
 			}
 
@@ -1209,6 +1226,7 @@ void NobodyLog_2()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[4].take = 1;
 						player.questmax++;
+						acceptQuest(4);
 						backToDialogue();
 						break;
 					}
@@ -1239,6 +1257,7 @@ void NobodyLog_2()
 			else if (quest[4].take == 1)
 			{
 				QuestComplete5();
+				
 				break;
 			}
 
@@ -1312,6 +1331,7 @@ void dialogueVolunQuestItem()
 		QuestItemList[0].isActive = 0;
 		player.questitem1 = 1;
 		updateLog("맵으로 돌아갑니다.");
+		updateQuestStatusItem(1);
 		player.pos = previousPos;
 		Situation = 0;
 		break;
@@ -1348,6 +1368,7 @@ void dialogueJapQuestItem()
 		QuestItemList[1].isActive = 0;
 		player.questitem2 = 1;
 		updateLog("맵으로 돌아갑니다.");
+		updateQuestStatusItem(3);
 		player.pos = previousPos;
 		Situation = 0;
 		break;
@@ -1383,6 +1404,7 @@ void dialogueNobodyQuestItem()
 			player.questitem3 = 1;
 			player.hp--;
 			updateLog("맵으로 돌아갑니다.");
+			updateQuestStatusItem(4);
 			player.pos = previousPos;
 			Situation = 0;
 			break;
