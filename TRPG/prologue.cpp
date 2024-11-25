@@ -25,7 +25,7 @@ int checkingSpawnEnemy_P = 0;
 
 //프롤로그 적
 Enemy enemyTemplates_P[1] = {			
-	{"허접한 왜군 잡졸", 7, 4, 3, {0, 0}, warrior}
+	{"허접한 왜군 잡졸", 5, 3, 1, {0, 0}, warrior}		//hp, attack, deffence
 };
 
 Enemy currentEnemies_P[3];  // 배열 정의
@@ -209,17 +209,17 @@ void displayNPCScreen_prologue()
 	case 1:
 		while (outNpcInteract_prologue == 1)
 		{
-			setCursorPosition(40, 11);
+			setCursorPosition(35, 11);
 			printf("피를 흘리고 있는 사람이다");
-			setCursorPosition(40, 12);
+			setCursorPosition(35, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(35, 13);
 			printf("1. 생사를 확인한다\n");
-			setCursorPosition(40, 14);
+			setCursorPosition(35, 14);
 			printf("2. 얼굴을 확인한다\n");
-			setCursorPosition(40, 15);
+			setCursorPosition(35, 15);
 			printf("3. 소지품을 뒤진다\n");
-			setCursorPosition(40, 16);
+			setCursorPosition(35, 16);
 			printf("4. NPC를 떠난다\n");
 			displayPlayerStat();
 			displayLog();
@@ -231,13 +231,13 @@ void displayNPCScreen_prologue()
 	case 2:
 		while (outNpcInteract_prologue == 1)
 		{
-			setCursorPosition(40, 11);
+			setCursorPosition(35, 11);
 			printf("허름한 창고다.");
-			setCursorPosition(40, 12);
+			setCursorPosition(35, 12);
 			printf("낡았지만, 쓸만한 무기가 몇개 있다.");
-			setCursorPosition(40, 13);
+			setCursorPosition(35, 13);
 			printf("1. 무기를 선택한다.\n");
-			setCursorPosition(40, 14);
+			setCursorPosition(35, 14);
 			printf("2. NPC를 떠난다\n");
 			displayPlayerStat();
 			displayLog();
@@ -269,11 +269,11 @@ void DeadbodyLog_1()
 		displayLog();
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(35, 11);
 		printf("숨이 멎은지 오래된 시신이다....");
-		setCursorPosition(40, 12);
+		setCursorPosition(35, 12);
 		printf("대화문\n");
-		setCursorPosition(40, 13);
+		setCursorPosition(35, 13);
 		printf("1. 확인\n");
 		Sleep(150);
 		updateLog("A키를 눌러 이전 대화로 돌아가기");
@@ -285,15 +285,15 @@ void DeadbodyLog_1()
 		displayLog();
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(35, 11);
 		printf("내 아내다....");
-		setCursorPosition(40, 12);
+		setCursorPosition(35, 12);
 		printf("왜구에게 도망치다가 당한것 같다.");
-		setCursorPosition(40, 13);
+		setCursorPosition(35, 13);
 		printf("죽일 놈의 것들....");
-		setCursorPosition(40, 14);
+		setCursorPosition(35, 14);
 		printf("대화문\n");
-		setCursorPosition(40, 15);
+		setCursorPosition(35, 15);
 		printf("1. 확인\n");
 		Sleep(150);
 		updateLog("A키를 눌러 이전 대화로 돌아가기");
@@ -304,11 +304,15 @@ void DeadbodyLog_1()
 		displayLog();
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
-		printf("약간의 은화와 포션을 얻었다.");
-		setCursorPosition(40, 14);
-		printf("대화문\n");
-		setCursorPosition(40, 15);
+		setCursorPosition(35, 11);
+		printf("편지가 있다.");
+		setCursorPosition(35, 12);
+		printf("당신 생일 선물로 준비해둔게 있어요");
+		setCursorPosition(35, 13);
+		printf("마을 뒷편의 창에 보시면 ");
+		setCursorPosition(35, 14);
+		printf("당신을 위한 선물이 있어요.");
+		setCursorPosition(35, 15);
 		printf("1. 확인\n");
 		Sleep(150);
 		updateLog("A키를 눌러 이전 대화로 돌아가기");
@@ -319,10 +323,16 @@ void DeadbodyLog_1()
 		displayLog();
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(35, 11);
 		printf("나중에 필히 와서 양지바른 곳에 묻어드리오");
-		potalP[player.currentmap].SpawnPotal_P = true;
 		backToMap_prologue();
+		Sleep(200);
+		updateLog("창고로 한번 가보자");
+		Sleep(200);
+		displayLog();
+		updateLog("창고는 I로 표시되어있다.");
+		Sleep(200);
+		displayLog();
 		break;
 	}
 }
@@ -336,11 +346,11 @@ void DeadbodyLog_2()
 		displayLog();
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(35, 11);
 		printf("죽은지 얼마 안된 아직 따듯한 시신이다....");
-		setCursorPosition(40, 12);
+		setCursorPosition(35, 12);
 		printf("대화문\n");
-		setCursorPosition(40, 13);
+		setCursorPosition(35, 13);
 		printf("1. 확인\n");
 		Sleep(150);
 		updateLog("A키를 눌러 이전 대화로 돌아가기");
@@ -352,15 +362,15 @@ void DeadbodyLog_2()
 		displayLog();
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(35, 11);
 		printf("내 아들이다!!");
-		setCursorPosition(40, 12);
+		setCursorPosition(35, 12);
 		printf("어린아들까지 죽이다니!");
-		setCursorPosition(40, 13);
+		setCursorPosition(35, 13);
 		printf("용서하지 못한다!");
-		setCursorPosition(40, 14);
+		setCursorPosition(35, 14);
 		printf("대화문\n");
-		setCursorPosition(40, 15);
+		setCursorPosition(35, 15);
 		printf("1. 확인\n");
 		Sleep(150);
 		updateLog("A키를 눌러 이전 대화로 돌아가기");
@@ -371,11 +381,11 @@ void DeadbodyLog_2()
 		displayLog();
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(35, 11);
 		printf("아무것도 없다");
-		setCursorPosition(40, 14);
+		setCursorPosition(35, 14);
 		printf("대화문\n");
-		setCursorPosition(40, 15);
+		setCursorPosition(35, 15);
 		printf("1. 확인\n");
 		Sleep(150);
 		updateLog("A키를 눌러 이전 대화로 돌아가기");
@@ -386,9 +396,14 @@ void DeadbodyLog_2()
 		displayLog();
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(35, 11);
 		printf("간악한 왜구놈들... 아내까지 죽이고 이젠 내 아들까지 죽이다니...");
 		backToMap_prologue();
+		Sleep(200);
+		updateLog("왜군 잔당들이 나타났다!");
+		Sleep(200);
+		displayLog();
+		updateLog("왜군을 잡아야지 다음 스테이지로 넘어가는 포탈이 생성될것 같다.");
 		break;
 	}
 }
@@ -406,41 +421,41 @@ void StorageLog()
 		switch (player.job)
 		{
 		case 1:
-			setCursorPosition(40, 11);
+			setCursorPosition(35, 11);
 			printf("검사를 선택하셨습니다");
-			setCursorPosition(40, 14);
+			setCursorPosition(35, 14);
 			printf("대화문\n");
-			setCursorPosition(40, 15);
+			setCursorPosition(35, 15);
 			printf("1. 확인\n");
 			Sleep(150);
 			updateLog("A키를 눌러 이전 대화로 돌아가기");
 			break;
 		case 2:
-			setCursorPosition(40, 11);
+			setCursorPosition(35, 11);
 			printf("궁수를 선택하셨습니다");
-			setCursorPosition(40, 14);
+			setCursorPosition(35, 14);
 			printf("대화문\n");
-			setCursorPosition(40, 15);
+			setCursorPosition(35, 15);
 			printf("1. 확인\n");
 			Sleep(150);
 			updateLog("A키를 눌러 이전 대화로 돌아가기");
 			break;
 		case 3:
-			setCursorPosition(40, 11);
+			setCursorPosition(35, 11);
 			printf("창병을 선택하셨습니다");
-			setCursorPosition(40, 14);
+			setCursorPosition(35, 14);
 			printf("대화문\n");
-			setCursorPosition(40, 15);
+			setCursorPosition(35, 15);
 			printf("1. 확인\n");
 			Sleep(150);
 			updateLog("A키를 눌러 이전 대화로 돌아가기");
 			break;
 		case 4:
-			setCursorPosition(40, 11);
+			setCursorPosition(35, 11);
 			printf("방패병을 선택하셨습니다");
-			setCursorPosition(40, 14);
+			setCursorPosition(35, 14);
 			printf("대화문\n");
-			setCursorPosition(40, 15);
+			setCursorPosition(35, 15);
 			printf("1. 확인\n");
 			Sleep(150);
 			updateLog("A키를 눌러 이전 대화로 돌아가기");
@@ -455,8 +470,9 @@ void StorageLog()
 		displayLog();
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(35, 11);
 		printf("나를 위한 마지막 선물이라니...고맙소.");
+		potalP[player.currentmap].SpawnPotal_P = true;
 		backToMap_prologue();
 		break;
 	}
@@ -623,15 +639,15 @@ void showTutorial()
 	switch (player.currentmap)
 	{
 	case 0:
-		setCursorPosition(40, 8);
+		setCursorPosition(35, 8);
 		printf("이동방식");
-		setCursorPosition(40, 9);
+		setCursorPosition(35, 9);
 		printf("키보드의 화살표 버튼을 눌러 이동합니다.");
-		setCursorPosition(40, 10);
+		setCursorPosition(35, 10);
 		printf("↑키는 위로,  →키는 오른쪽으로");
-		setCursorPosition(40, 11);
+		setCursorPosition(35, 11);
 		printf("←키는 왼쪽으로, ↓키는 아래로");
-		setCursorPosition(40, 12);
+		setCursorPosition(35, 12);
 		printf("이동합니다.");
 		break;
 	case 1:
@@ -654,26 +670,26 @@ void showTutorial()
 		setCursorPosition(40, 17);
 		printf("상점 NPC도 마찬가지로 넘패드로 진행됩니다.");
 		break;
-	case 2:
-		setCursorPosition(40, 7);
+	case 2:	
+		setCursorPosition(45, 7);
 		printf("전투 방식");
-		setCursorPosition(40, 8);
+		setCursorPosition(45, 8);
 		printf("전투는 턴제 방식입니다.");
-		setCursorPosition(40, 9);
+		setCursorPosition(45, 9);
 		printf("플레이어의 직업에 따라 스킬과 모션이 다릅니다.");
-		setCursorPosition(40, 10);
+		setCursorPosition(45, 10);
 		printf("적(E)표시로 플레이어를 이동 시켜서");
-		setCursorPosition(40, 11);
+		setCursorPosition(45, 11);
 		printf("공격할지 안할지를 결정합니다.");
-		setCursorPosition(40, 12);
+		setCursorPosition(45, 12);
 		printf("공격 결정은 NPC상호작용과 같습니다.");
-		setCursorPosition(40, 14);
+		setCursorPosition(45, 14);
 		printf("전투는 A버튼과 R버튼, 넘패드로 진행됩니다.");
-		setCursorPosition(40, 15);
+		setCursorPosition(45, 15);
 		printf("A버튼은 공격, 숫자키 1, 2는 각각 HP와 MP 포션입니다.");
-		setCursorPosition(40, 16);
-		printf("스킬은 '미구현'버튼으로,");
-		setCursorPosition(40, 17);
+		setCursorPosition(45, 16);
+		printf("스킬은 숫자 1~4번 버튼으로,");
+		setCursorPosition(45, 17);
 		printf(" 특정 레벨에 도달 할때마다 스킬 하나를 얻습니다.");
 	}
 }

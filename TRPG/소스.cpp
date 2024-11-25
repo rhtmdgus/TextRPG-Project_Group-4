@@ -34,7 +34,7 @@
 //situation 8 = encount Quest item 3
 //situation 9 = encounting portal
 
-Player player = { 10, 10, 20, 0, 0, 2, 2, 1, 0, 0, 0, 0, 1, 10, 0, 0, 0, 0, 0, 0, {20, 13} };
+Player player = { 10, 10, 0, 0, 0, 2, 2, 1, 0, 0, 0, 0, 1, 10, 0, 0, 0, 0, 0, 0, {20, 13} };
 /*
 int hp;
 int mp;

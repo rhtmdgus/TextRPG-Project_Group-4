@@ -160,8 +160,8 @@ void clearScreen()
 {
 	for (int i = 1; i < MAP_HEIGHT - 1; i++) 
 	{
-		setCursorPosition(40, i);
-		for(int j = 40; j < MAP_WIDTH -1; j++)
+		setCursorPosition(35, i);
+		for(int j = 35; j < MAP_WIDTH -1; j++)
 			printf(" ");
 	}
 }
