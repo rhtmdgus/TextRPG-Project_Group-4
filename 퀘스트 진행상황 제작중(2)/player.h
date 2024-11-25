@@ -3,6 +3,7 @@
 
 //#include "player.h"
 #include "utility.h"
+#include "questmanager.h"
 
 extern int EXPbar;
 extern int maxhp;
@@ -31,10 +32,6 @@ typedef struct
 	int questitem3;
 	int killcount;
 	int questmax;
-	int currentweapon;
-	int currentequipment;
-	char currentweaponName[20];
-	char currentequipmentName[20];
 	Position pos;
 } Player;
 

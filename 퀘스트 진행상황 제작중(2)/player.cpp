@@ -1,4 +1,5 @@
 #include "player.h"
+#include "questmanager.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
@@ -26,8 +27,13 @@ void movePlayer()
 
 	int key = 0;
 
-	if (_kbhit() != 0)
+	if (_kbhit() != 0) {
 		key = _getch();
+		if (key == 'q' || key == 'Q') {
+			printQuestWindow();  // 퀘스트 창 출력 함수 호출
+			
+		}
+	}
 
 	switch (key)
 	{
@@ -64,5 +70,8 @@ void movePlayer()
 			player.pos.y--;
 		}
 		break;
+	
 	}
+
+	
 }

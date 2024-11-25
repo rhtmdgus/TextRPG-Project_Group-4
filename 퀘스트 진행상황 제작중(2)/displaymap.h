@@ -12,7 +12,6 @@
 #include "npc.h"
 #include "interaction.h"
 #include "potal.h"
-#include "item.h"
 
 extern Enemy* currentEnemy;
 extern NpcData* currentNPC;
@@ -24,6 +23,7 @@ void displayPlayerStat();
 void displayEnemyStat(const Enemy* enemy);
 void displayShopScreen();
 void displayNPCScreen();
+void displayQuestScreen();
 
 void clearScreen();
 #endif // DISPLAYMAP_H

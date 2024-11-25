@@ -21,10 +21,19 @@ void dialogueVolunArmy();
 void dialogueGoverArmy();
 void dialogueJapArmy();
 void dialogueNobody();
-void dialogueNobody2();
+void VolunArmyLog_1();
+void VolunArmyLog_2();
+void GoverArmyLog_1();
+void GoverArmyLog_2();
+void JapArmyLog_1();
+void JapArmyLog_2();
+void NobodyLog_1();
+void NobodyLog_2();
 
 void interactQuestItem1();
 void interactQuestItem2();
 void interactQuestItem3();
+
+void interactPrologueNpc();
 
 #endif // ! INTERACTION_H

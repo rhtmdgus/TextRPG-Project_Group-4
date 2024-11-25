@@ -61,6 +61,23 @@ void displayBattleScreen()
 
 }
 
+
+void displayQuestScreen() {
+	system("cls");
+	//맵초기화
+	initializeMapBattle();
+
+
+	for (int i = 0; i < MAP_HEIGHT; i++)
+	{
+		for (int j = 0; j < MAP_WIDTH + PANEL_WIDTH; j++)
+		{
+			printf("%c", mapBattle[i][j]);
+		}
+		printf("\n");
+	}
+}
+
 void displayPlayerStat()
 {
 	setCursorPosition(101, 1);
@@ -87,11 +104,6 @@ void displayPlayerStat()
 	printf("  의병과의 관계: %3d", player.RRelationship);
 	setCursorPosition(101, 12);
 	printf("  왜군과의 관계: %3d", player.WRelationship);
-
-	setCursorPosition(101, 20);
-	printf("  무기: %s", player.currentweaponName);
-	setCursorPosition(101, 21);
-	printf("  장비: %s", player.currentequipmentName);
 }
 
 void displayEnemyStat(const Enemy* enemy)
@@ -136,31 +148,41 @@ void displayShopScreen()
 
 void displayNPCScreen()
 {
-	outNpcInteract = 1;
-	while(outNpcInteract == 1)
+	if (strcmp(currentNPC->name, "이정재") == 0)
 	{
-		setCursorPosition(40, 11);
-		printf("내 이름은 %s.\n", currentNPC->name);
-		setCursorPosition(40, 12);
-		printf("대화문\n");
-		setCursorPosition(40, 13);
-		printf("1. 당신은 누구요?\n");
-		setCursorPosition(40, 14);
-		printf("2.주변의 소문은 없소이까?\n");
-		setCursorPosition(40, 15);
-		printf("3. 할만한 의뢰는 있소이까?\n");
-		setCursorPosition(40, 16);
-		printf("4. 싸우자\n");
-		setCursorPosition(40, 17);
-		printf("6. NPC을 떠난다.\n");
 		displayPlayerStat();
 		displayLog();
 		interactionNPC();
 		clearScreen();
 		displayLog();
 	}
+	else
+	{
+		outNpcInteract = 1;
+		while (outNpcInteract == 1)
+		{
+			setCursorPosition(40, 11);
+			printf("내 이름은 %s.\n", currentNPC->name);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 당신은 누구요?\n");
+			setCursorPosition(40, 14);
+			printf("2. 주변의 소문은 없소이까?\n");
+			setCursorPosition(40, 15);
+			printf("3. 할만한 의뢰는 있소이까?\n");
+			setCursorPosition(40, 16);
+			printf("4. 싸우자\n");
+			setCursorPosition(40, 17);
+			printf("6. NPC을 떠난다.\n");
+			displayPlayerStat();
+			displayLog();
+			interactionNPC();
+			clearScreen();
+			displayLog();
+		}
+	}
 }
-
 void clearScreen()
 {
 	for (int i = 1; i < MAP_HEIGHT - 1; i++) 

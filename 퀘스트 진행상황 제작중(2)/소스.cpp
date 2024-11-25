@@ -20,80 +20,9 @@
 #include "animation.h"
 #include "npc.h"
 #include "quest.h"
-#include "item.h"
-#include "currentquest.h"
+#include "prologue.h"
+#include "questmanager.h"
 
-/*
-void displayBattleMap()
-{
-	int damageToPlayer;
-	int damageToEnemy;
-	system("cls");
-	printf("=========== Battle Screen ===========\n");
-	printf("You encountered an enemy!\n");
-	printf("Press [A] to Attack or [R] to Run.\n");
-
-	char action = getch();
-	if (action == 'a' || action == 'A')
-	{
-		updateLog("You decided to attack the enemy!");
-
-		while (Jap1.hp > 0 || player.hp > 0)
-		{
-			printf("What would you like to do?\n");
-			printf("1. Attack enemy\n");
-			printf("2. Drink potion\n");
-			printf("3. Run away!\n");
-
-			char actionBattle = getch();
-
-			switch (actionBattle)
-			{
-			case '1':
-				printf("You tried to attack the enemy!\n");
-				damageToEnemy = player.attack - Jap1.defense;
-				Jap1.hp -= damageToEnemy;
-				printf("Enemy got %d damage!\n", damageToEnemy);
-
-				printf("Enemy tried to attack you!\n");
-				damageToPlayer = Jap1.attack - player.defense;
-				player.hp -= damageToPlayer;
-				printf("You got %d damage!\n", damageToPlayer);
-				break;
-
-			case '2':
-				printf("You drinked potion!\n");
-				player.hp += 5;
-				break;
-			case '3':
-				printf("You could't run away from enemy!\n");
-				Sleep(10);
-				printf("Enemy tried to attack you!\n");
-				damageToPlayer = Jap1.attack - player.defense;
-				player.hp -= damageToPlayer;
-				printf("You got %d damage!\n", damageToPlayer);
-				break;
-			}
-
-
-		}
-		map[Jap1.pos.y][Jap1.pos.x] = ' ';
-	}
-
-
-	else if (action == 'r' || action == 'R')
-	{
-		updateLog("You ran away from the enemy!");
-		printf("You fled from battle!\n");
-	}
-
-	printf("Press any key to return to the game.\n");
-	getch();
-
-	displayMap();
-	drawPlayer();
-}
-*/
 
 //situation 명 
 //situation 1 = encounting enemy
@@ -106,30 +35,68 @@ void displayBattleMap()
 //situation 8 = encount Quest item 3
 //situation 9 = encounting portal
 
-Player player = { 10, 10, 10, 5, 2, 2, 2, 1, 0, 0, 0, 0, 1, 10, 0, 0, 0, 0, 0, 0, -1, -1, {"없음"} , {"헌 옷"} , {1, 1}};
+Player player = { 10, 10, 10, 5, 2, 2, 2, 1, 0, 0, 0, 0, 1, 10, 0, 0, 0, 0, 0, 0, {20, 13} };
 Position previousPos = { 1, 1 };
 Shop Shop1 = { "상인", 99, 99, 99, 99, 99, {3, 3} };
-QuestItem1 questitem1 = { "군량", 0, {15, 5} };
-QuestItem2 questitem2 = { "작전 서류", 0, {17, 5} };
-QuestItem3 questitem3 = { "바위", 0, {19, 5} };
 
 int main()
 {
+	eraseCursor();
 	start_screen();
 	system("cls");
 	tutorial_screen();
 	system("cls");
 	jobSelect_screen();
+	updateLog("Game started.");
+
+	initializeMap();
+	displayMap_Prologue();
+	displayLog();
+
+	while (1)	//프롤로그
+	{
+		drawPotal_prologue();
+		drawPlayer();
+		displayPlayerStat();
+		movePlayer();
+
+		if (encountPotal_prologue())
+		{
+			updateLog("You encountered a potal!");
+			Sleep(200);
+			displayLog();
+			updateLog("Press [A] to go next map or [R] to stay");
+			Sleep(200);
+			displayLog();
+
+			while (Situation == 9)
+			{
+				encountPotal_prologueChoice();
+			}
+			if (Situation == 0) {
+				displayMap_Prologue();
+				displayPlayerStat();
+				displayLog();
+			}
+		}
+		if (player.currentmap == 3)
+		{
+			player.currentmap = 0;
+			system("cls");
+			break;
+		}
+	}
+
 	initializeMap();
 	initializeQuest();
-	updateLog("Game started.");
 	displayMap();
 	displayPlayerStat();
 	displayLog();
 	spawnEnemies();
 	initializeNpc();
+	initializeQuestItem();
 
-	while (1)
+	while (1)	//본편
 	{
 		eraseCursor();
 		displayPlayerStat();
@@ -138,12 +105,7 @@ int main()
 		movePlayer();
 		drawPotal();
 		drawNpc(npcList);
-		if (questitem1.used == 0 && player.currentmap == 0)
-			drawQuestItem1();
-		if (questitem2.used == 0 && player.currentmap == 0)
-			drawQuestItem2();
-		if (questitem3.used == 0 && player.currentmap == 0)
-			drawQuestItem3();
+		drawQuestItem(QuestItemList);
 		//displayLog();
 
 		if (encountEnemy())
@@ -211,7 +173,7 @@ int main()
 				displayLog();
 			}
 		}
-		if (encountQuestItem1() && questitem1.used == 0 && player.currentmap == 0)
+		if (encountQuestItem1() && QuestItemList[0].isActive == 1 && player.currentmap == 0)
 		{
 			while (Situation == 6)
 			{
@@ -223,7 +185,7 @@ int main()
 				displayLog();
 			}
 		}
-		if (encountQuestItem2() && questitem2.used == 0 && player.currentmap == 0)
+		if (encountQuestItem2() && QuestItemList[1].isActive == 1 && player.currentmap == 0)
 		{
 			while (Situation == 7)
 			{
@@ -235,7 +197,7 @@ int main()
 				displayLog();
 			}
 		}
-		if (encountQuestItem3() && questitem3.used == 0 && player.currentmap == 0)
+		if (encountQuestItem3() && QuestItemList[2].isActive == 1 && player.currentmap == 0)
 		{
 			while (Situation == 8)
 			{
@@ -263,6 +225,10 @@ int main()
 				displayLog();
 			}
 		}
+
+		
+
+
 		if (player.hp <= 0)
 		{
 
