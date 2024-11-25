@@ -5,6 +5,7 @@
 #include "player.h"
 #include "displaymap.h"
 #include "utility.h"
+#include "questmanager.h"
 
 Quest quest[MAX_QUEST];
 PrologueQuest prologuequest; //프롤로그 퀘스트
@@ -49,9 +50,9 @@ void initializePrologueQuest()
 
 void initializeQuestItem()
 {
-	QuestItemList[0] = {"군량", 0, 1, {15, 5}, VolunArmyQ};
-	QuestItemList[1] = { "작전 서류", 0, 1, {17, 5} , JapArmyQ};
-	QuestItemList[2] = { "바위", 0, 1, {19, 5} , NobodyQ};
+	QuestItemList[0] = {"군량", 1, 1, {15, 5}, VolunArmyQ};
+	QuestItemList[1] = { "작전 서류", 1, 1, {17, 5} , JapArmyQ};
+	QuestItemList[2] = { "바위", 1, 1, {19, 5} , NobodyQ};
 }
 
 void drawQuestItem(QuestItemData* QuestItemList)
@@ -103,6 +104,7 @@ void QuestComplete1() {
 			setCursorPosition(40, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			completeQuest(0);
 			backToDialogue();
 		}
 		else
@@ -158,6 +160,7 @@ void QuestComplete2() {
 			setCursorPosition(40, 13);
 			printf("1. 힘내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			completeQuest(1);
 			backToDialogue();
 		}
 		else
@@ -215,6 +218,7 @@ void QuestComplete3() {
 			setCursorPosition(40, 13);
 			printf("1. 승리하길 바라오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			completeQuest(2);
 			backToDialogue();
 		}
 		else
@@ -273,6 +277,7 @@ void QuestComplete4() {
 			setCursorPosition(40, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			completeQuest(3);
 			backToDialogue();
 		}
 		else
@@ -328,6 +333,7 @@ void QuestComplete5() {
 			setCursorPosition(40, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			completeQuest(4);
 			backToDialogue();
 		}
 		else
@@ -384,6 +390,7 @@ void QuestComplete6() {
 			setCursorPosition(40, 13);
 			printf("1. 과찬이오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			completeQuest(6);
 			Sleep(200);
 			displayLog();
 			backToDialogue();
@@ -442,6 +449,7 @@ void QuestComplete7() {
 			setCursorPosition(40, 13);
 			printf("1. 빨리 가시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			completeQuest(7);
 			Sleep(200);
 			displayLog();
 			backToDialogue();

@@ -8,7 +8,7 @@ int OriginalLevel;
 
 void LevelUp()	//레벨업
 {
-	if (player.exp >= EXPbar)
+	while (player.exp >= EXPbar)
 	{
 		player.exp = player.exp - EXPbar;
 		player.level++;
@@ -155,6 +155,7 @@ void battle(Enemy* enemy)
 			player.exp += 12;
 			player.money += 4;
 			player.killcount++;
+			updateQuestStatusKill();
 			displayPlayerStat();
 			displayEnemyStat(enemy);
 			Sleep(100);
@@ -165,6 +166,149 @@ void battle(Enemy* enemy)
 			updateBattleLog("You have been defeated...");
 			displayPlayerStat();
 			displayEnemyStat(enemy);
+			Sleep(100);
+			displayBattleLog();
+			Situation = 0;
+		}
+	}
+
+	OriginalLevel = player.level;
+	// 전투가 끝난 후 대기 및 본래 화면으로 복귀
+	updateBattleLog("Press any key to return to the main screen...");
+	LevelUp();
+	displayPlayerStat();
+	displayBattleLog();
+	_getch();  // 사용자 입력 대기
+
+	if (player.level > OriginalLevel)
+		updateLog("Level up!!");
+
+	initializeMap(); // 맵 초기화
+	displayMap(); // 이동 맵 출력
+	displayPlayerStat(); //플레이어 스탯 표시
+	drawPlayer(); // 플레이어 위치 출력
+}
+
+// 보스 전투 함수
+void bossbattle(Enemy* boss)
+{
+	updateBattleLog("Battle start!!");
+	int damageToBoss;   // 공격할 때 사용할 변수
+	int damageToPlayer;  // 반격할 때 사용할 변수
+	displayBossBattleScreen();
+	displayPlayerStat();
+	displayBossStat(boss);
+	displayBattleLog();
+
+	while (boss->hp > 0 && player.hp > 0 && Situation == 7)
+	{
+		char action = _getch();
+
+		if (boss == nullptr) {
+			updateBattleLog("Error: No boss to battle.");
+			displayBattleLog();
+			return;
+		}
+
+		switch (action)
+		{
+		case '1'://           hp포션 사용
+			hppotion();
+			displayPlayerStat();
+			Sleep(100);
+			displayBattleLog();
+			break;
+
+		case '2'://           mp포션 사용
+			mppotion();
+			displayPlayerStat();
+			Sleep(100);
+			displayBattleLog();
+			break;
+
+		case 'a':
+		case 'A':
+			// 공격 로직
+			playerAttackAnimation();
+			enemyAttackedAnimation(boss);
+			damageToBoss = player.attack - boss->defense; // 이전에 선언한 변수를 사용
+			if (damageToBoss > 0) {
+				if (Crit() == 1)
+				{
+					updateBattleLog("Critical Attack!");
+					damageToBoss *= 2;
+				}
+				boss->hp -= damageToBoss;
+				if (boss->hp <= 0)
+					boss->hp = 0;
+				updateBattleLog("You attacked the enemy!");
+				displayPlayerStat();
+				displayBossStat(boss);
+				Sleep(100);
+				displayBattleLog();
+			}
+			else {
+				updateBattleLog("Your attack was too weak!");
+				displayPlayerStat();
+				displayBossStat(boss);
+				Sleep(100);
+				displayBattleLog();
+			}
+
+			// 적 반격
+			if (boss->hp > 0) {
+				enemyAttackAnimation(boss);
+				playerAttackedAnimation();
+				damageToPlayer = boss->attack - player.defense; // 이전에 선언한 변수를 사용
+				if (damageToPlayer > 0) {
+					player.hp -= damageToPlayer;
+					if (player.hp <= 0)
+						player.hp = 0;
+					updateBattleLog("The boss attacked you!");
+					displayPlayerStat();
+					displayBossStat(boss);
+					Sleep(100);
+					displayBattleLog();
+				}
+			}
+			break;
+
+			//적과 전투에서 도주
+		case 'r':
+		case 'R':
+			updateBattleLog("You ran away from the boss!");
+			Situation = 0;
+			player.pos = previousPos;
+			displayPlayerStat();
+			displayBossStat(boss);
+			Sleep(100);
+			displayBattleLog();
+			updateLog("You fled from battle!");
+			break;
+
+		default:
+			updateBattleLog("Invalid action! Choose again.");
+			Sleep(100);
+			displayBattleLog();
+			break;
+		}
+
+		// 상태 체크
+		if (boss->hp <= 0) {
+			updateBattleLog("You defeated the boss!");
+			player.exp += 30;
+			player.money += 10;
+			player.killcount++;
+			displayPlayerStat();
+			displayBossStat(boss);
+			Sleep(100);
+			displayBattleLog();
+			Situation = 0;
+		}
+		else if (player.hp <= 0) {
+			updateBattleLog("You have been defeated...");
+			displayPlayerStat();
+			displayBossStat(boss);
 			Sleep(100);
 			displayBattleLog();
 			Situation = 0;

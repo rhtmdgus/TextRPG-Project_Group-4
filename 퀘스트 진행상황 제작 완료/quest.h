@@ -1,7 +1,7 @@
 #ifndef QUEST_H
 #define QUEST_H
 #include "utility.h"
-#define MAX_QUEST 8
+#define MAX_QUEST 10
 #define MAX_QUESTITEM 3
 
 typedef struct {
@@ -12,7 +12,7 @@ typedef struct {
 	char description2[200];
 	char description3[200];
 	char description4[200];
-	int questCondition; // ==0일시 아이템형 퀘스트, ==1일시 사냥형 퀘스트
+	int questCondition;
 	int questGoal;
 } Quest;
 

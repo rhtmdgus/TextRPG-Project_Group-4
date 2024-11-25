@@ -12,9 +12,11 @@ typedef struct QuestStatus {
     int killCount = 0;   // 적군 킬 카운트
     int itemCount = 0;   // 아이템 획득 카운트
     int isCompleted = 0;     // 퀘스트 완료 여부
-    char questName[30] = " ";
+    char questName[50] = " ";
     int questGoal = 1;
 } QuestStatus;
+
+
 
 // 퀘스트 수락 함수
 void acceptQuest(int questId);
@@ -23,15 +25,14 @@ void acceptQuest(int questId);
 void updateQuestStatusItem(int questId);
 
 // 퀘스트 진행상황을 업데이트하는 함수, 아이템형
-void updateQuestStatusKill(int questId);
+void updateQuestStatusKill();
 
 // 퀘스트를 완료하면 퀘스트창을 업데이트하는 함수
-void complitQuest(int questId);
+void completeQuest(int questId);
 
 // 퀘스트 창을 출력하는 함수
 void printQuestWindow();
 
-// 퀘스트 진행상황 초기화 함수
-void initializeQuestStatus();
+
 
 #endif // QUESTMANAGER_H

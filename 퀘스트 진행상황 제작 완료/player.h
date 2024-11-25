@@ -3,7 +3,6 @@
 
 //#include "player.h"
 #include "utility.h"
-#include "questmanager.h"
 
 extern int EXPbar;
 extern int maxhp;

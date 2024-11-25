@@ -10,7 +10,9 @@ extern Enemy* currentEnemy;
 extern NpcData* currentNPC;
 
 int encountEnemy();
+int encountBoss();
 void encountChoice();
+void encountBossChoice();
 int encountShop();
 void encountShopChoice();
 int encountNpc();
@@ -18,9 +20,7 @@ void encountNpcChoice();
 int encountPotal();
 void encountPotalChoice();
 
-int encountQuestItem1();
-int encountQuestItem2();
-int encountQuestItem3();
+int encountQuestItem();
 
 
 #endif	//ENCOUNT_H

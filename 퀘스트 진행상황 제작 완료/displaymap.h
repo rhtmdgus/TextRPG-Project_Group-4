@@ -19,11 +19,13 @@ extern NpcData* currentNPC;
 void displayMap();
 void displayShopMap();
 void displayBattleScreen();
+void displayQuestScreen();
+void displayBossBattleScreen();
 void displayPlayerStat();
 void displayEnemyStat(const Enemy* enemy);
+void displayBossStat(const Enemy* boss);
 void displayShopScreen();
 void displayNPCScreen();
-void displayQuestScreen();
 
 void clearScreen();
 #endif // DISPLAYMAP_H

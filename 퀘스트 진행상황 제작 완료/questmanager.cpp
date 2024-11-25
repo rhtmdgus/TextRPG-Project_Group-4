@@ -1,5 +1,6 @@
 #include "questmanager.h"
 #include "quest.h"
+#include "player.h"
 #include "displaymap.h"
 #include "interaction.h"
 #include <stdio.h>
@@ -9,11 +10,10 @@
 
 #define MAX_QUESTS 3
 
-QuestStatus questStatus[MAX_QUESTS]; // 퀘스트 진행상황을 저장하는 배열
+QuestStatus questStatus[MAX_QUESTS];
 
 // 퀘스트 수락 시 퀘스트 내용과 상태 초기화
 void acceptQuest(int questId) {
-    initializeQuest();
 
     for (int i = 0; i < MAX_QUESTS; i++) {
         if (questStatus[i].accepted != 1) {
@@ -54,11 +54,11 @@ void updateQuestStatusItem(int questId)
 
 
 // 퀘스트 진행상황 업데이트 사냥형
-void updateQuestStatusKill(int questId) 
+void updateQuestStatusKill() 
 {
     for (int i = 0; i < MAX_QUESTS; i++) 
     {
-        if (questStatus[i].questId == questId && questStatus[i].accepted) 
+        if (questStatus[i].questcondition == 1) 
         {
             questStatus[i].killCount++; // 킬 카운트 증가
             if (questStatus[i].killCount >= questStatus[i].questGoal) 
@@ -71,7 +71,7 @@ void updateQuestStatusKill(int questId)
 
 
 
-void complitQuest(int questId) {
+void completeQuest(int questId) {
     // 완료된 퀘스트 제거
     for (int i = 0; i < MAX_QUESTS; i++) {
         if (questStatus[i].questId == questId && questStatus[i].accepted == 1) {
@@ -136,17 +136,7 @@ void printQuestWindow() {
         
     }
 
-    setCursorPosition(30, 16);
-    printf("%d 번 퀘스트", 3);
-    setCursorPosition(30, 17);
-    printf("퀘스트 목표: %s", questStatus[2].questName);
-    setCursorPosition(30, 18);
-    if (questStatus[2].questcondition == 0) {
-        printf("%d/1", questStatus[2].itemCount);
-    }
-    else if (questStatus[2].questcondition == 1) {
-        printf("%d/5", questStatus[2].killCount);
-    }
+         
 
 
     updateBattleLog("Press any key to return to the main screen...");

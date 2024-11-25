@@ -31,7 +31,7 @@ void movePlayer()
 		key = _getch();
 		if (key == 'q' || key == 'Q') {
 			printQuestWindow();  // 퀘스트 창 출력 함수 호출
-			
+
 		}
 	}
 
@@ -70,8 +70,5 @@ void movePlayer()
 			player.pos.y--;
 		}
 		break;
-	
 	}
-
-	
 }

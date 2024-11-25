@@ -4,14 +4,17 @@
 #include <string.h>
 #include <time.h>
 
-Enemy enemyTemplates[3] = {
+Enemy enemyTemplates[4] = {
     {"왜군 잡졸", 10, 8, 3, {0, 0}, warrior},
     {"왜군 창병", 12, 10, 4, {0, 0}, spear},
-    {"왜군 궁병", 8, 6, 2, {0, 0}, archor}
+    {"왜군 궁병", 8, 6, 2, {0, 0}, archor},
+    {"왜군 장수", 20, 12, 8, {0, 0}, warrior}
 };
 
 Enemy currentEnemies[MAX_ENEMY];  // 배열 정의
 Enemy* currentEnemy = NULL;       // 포인터 정의
+Enemy currentBosses[MAX_BOSS];
+Enemy* currentBoss = NULL;
 
 Enemy createEnemy(const Enemy* enemyTemplate, Position pos) {
     Enemy enemy;
@@ -22,6 +25,17 @@ Enemy createEnemy(const Enemy* enemyTemplate, Position pos) {
     enemy.pos = pos;
     enemy.type = enemyTemplate->type;
     return enemy;
+}
+
+Enemy createBoss(const Enemy* enemyTemplate, Position pos) {
+    Enemy boss;
+    strcpy_s(boss.name, sizeof(boss.name), enemyTemplate->name);
+    boss.hp = enemyTemplate->hp;
+    boss.attack = enemyTemplate->attack;
+    boss.defense = enemyTemplate->defense;
+    boss.pos = pos;
+    boss.type = enemyTemplate->type;
+    return boss;
 }
 
 int isPositionOccupied(int x, int y) {
@@ -35,7 +49,7 @@ int isPositionOccupied(int x, int y) {
     {
         return 1;
     }
-    if (map[y][x] == '#' || map[y][x] == 1 || map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'T' || map[y][x] == 'F' || map[y][x] == 'O' || map[y][x] == 'R')     //스폰 위치가 벽/npc일 경우 위치 사용 중으로
+    if (map[y][x] == '#' || map[y][x] == 1 || map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'T' || map[y][x] == 'F' || map[y][x] == 'O' || map[y][x] == 'R' || map[y][x] == 'B')     //스폰 위치가 벽/npc일 경우 위치 사용 중으로
     {
         return 1;
     }
@@ -60,6 +74,17 @@ void spawnEnemies() {
     }
 }
 
+void spawnBoss() {
+
+    Position pos;
+    pos.x = MAP_WIDTH - 10;
+    pos.y = 2;
+
+    currentBosses[0] = createBoss(&enemyTemplates[3], pos);
+    drawBoss(&currentBosses[0]);
+    map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
+}
+
 void drawEnemy(Enemy* enemy) {
     setCursorPosition(enemy->pos.x, enemy->pos.y);
     setColor(4);
@@ -69,6 +94,18 @@ void drawEnemy(Enemy* enemy) {
 
 void eraseEnemy(Enemy* enemy) {
     setCursorPosition(enemy->pos.x, enemy->pos.y);
+    printf(" ");
+}
+
+void drawBoss(Enemy* boss) {
+    setCursorPosition(boss->pos.x, boss->pos.y);
+    setColor(6);
+    printf("B");
+    setColor(7);
+}
+
+void eraseBoss(Enemy* boss) {
+    setCursorPosition(boss->pos.x, boss->pos.y);
     printf(" ");
 }
 

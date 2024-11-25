@@ -26,6 +26,23 @@ int encountEnemy()
     return 0;
 }
 
+int encountBoss()
+{
+    for (int i = 0; i < MAX_BOSS; i++) {
+        if (currentBosses[i].hp > 0 &&
+            currentBosses[i].pos.x == player.pos.x &&
+            currentBosses[i].pos.y == player.pos.y)
+        {
+            currentBoss = &currentBosses[i];
+            Situation = 7;
+            return 7;
+        }
+    }
+    Situation = 0;
+    currentBoss = nullptr;
+    return 0;
+}
+
 void encountChoice()
 {
     char action = _getch();
@@ -63,6 +80,45 @@ void encountChoice()
     Sleep(100);
     displayLog();
 }
+
+void encountBossChoice()
+{
+    char action = _getch();
+
+    switch (action)
+    {
+    default:
+        updateLog("You choose the wrong key");
+        Sleep(200);
+        displayLog();
+        updateLog("Press [A] to Attack or [R] to Run");
+        Sleep(200);
+        displayLog();
+        break;
+    case 'A':
+    case 'a':
+        updateLog("You decided to attack the boss!");
+        Sleep(200);
+        displayLog();
+        displayBossBattleScreen();
+        bossbattle(currentBoss);  // currentBoss РќДо
+        break;
+    case 'R':
+    case 'r':
+        updateLog("You ran away from the boss!");
+        Sleep(200);
+        displayLog();
+        updateLog("You fled from battle!");
+        Sleep(200);
+        displayLog();
+        Situation = 0;
+        player.pos = previousPos;
+        break;
+    }
+    Sleep(100);
+    displayLog();
+}
+
 
 
 int encountShop()
@@ -212,35 +268,17 @@ void encountPotalChoice()
     displayLog();
 }
 
-int encountQuestItem1()
+int encountQuestItem()
 {
-    if (player.pos.y == QuestItemList[0].pos.y && player.pos.x == QuestItemList[0].pos.x)
-    {
-        Situation = 6;
-        return 6;
+    for (int i = 0; i < MAX_QUESTITEM; i++) {
+        if (player.pos.y == QuestItemList[i].pos.y && player.pos.x == QuestItemList[i].pos.x && player.currentmap == QuestItemList[i].currentmap && QuestItemList[i].isActive == 1)
+        {
+            currentQuestItem = &QuestItemList[i];
+            Situation = 6;
+            return 6;
+        }
     }
-    else
-        return 0;
-}
-
-int encountQuestItem2()
-{
-    if (player.pos.y == QuestItemList[1].pos.y && player.pos.x == QuestItemList[1].pos.x)
-    {
-        Situation = 7;
-        return 7;
-    }
-    else
-        return 0;
-}
-
-int encountQuestItem3()
-{
-    if (player.pos.y == QuestItemList[2].pos.y && player.pos.x == QuestItemList[2].pos.x)
-    {
-        Situation = 8;
-        return 8;
-    }
-    else
-        return 0;
+    Situation = 0;
+    currentQuestItem = nullptr;
+    return 0;
 }

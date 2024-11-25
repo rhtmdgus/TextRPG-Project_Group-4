@@ -357,7 +357,7 @@ void VolunArmyLog_2()
 			else if (quest[1].take == 1)
 			{
 				QuestComplete2();
-				complitQuest(1);
+				
 				break;
 			}
 
@@ -509,7 +509,7 @@ void GoverArmyLog_1()
 			else if (quest[6].take == 1)
 			{
 				QuestComplete6();
-				complitQuest(6);
+				
 				break;
 			}
 
@@ -654,7 +654,7 @@ void GoverArmyLog_2()
 			else if (quest[2].take == 1)
 			{
 				QuestComplete3();
-				complitQuest(2);
+				
 				break;
 			}
 
@@ -807,7 +807,7 @@ void JapArmyLog_1()
 			else if (quest[7].take == 1)
 			{
 				QuestComplete7();
-				complitQuest(7);
+				
 				break;
 			}
 
@@ -953,7 +953,7 @@ void JapArmyLog_2()
 			else if (quest[3].take == 1)
 			{
 				QuestComplete4();
-				complitQuest(3);
+				
 				break;
 			}
 
@@ -1107,7 +1107,7 @@ void NobodyLog_1()
 			else if (quest[0].take == 1)
 			{
 				QuestComplete1();
-				complitQuest(0);
+				
 				break;
 			}
 
@@ -1252,7 +1252,7 @@ void NobodyLog_2()
 			else if (quest[4].take == 1)
 			{
 				QuestComplete5();
-				complitQuest(4);
+				
 				break;
 			}
 
@@ -1296,10 +1296,19 @@ void NobodyLog_2()
 	}
 }
 
+void interactionQuestItem()
+{
+	if (currentQuestItem->type == VolunArmy && currentQuestItem->isActive == 1)
+		dialogueVolunQuestItem();
+	else if (currentQuestItem->type == GoverArmy && currentQuestItem->isActive == 1)
+		dialogueGoverQuestItem();
+	else if (currentQuestItem->type == JapArmy && currentQuestItem->isActive == 1)
+		dialogueJapQuestItem();
+	else if (currentQuestItem->type == Nobody && currentQuestItem->isActive == 1)
+		dialogueNobodyQuestItem();
+}
 
-
-
-void interactQuestItem1()
+void dialogueVolunQuestItem()
 {
 	updateLog("군량을 발견하였습니다.");
 	updateLog("[A]를 눌러 획득하거나 [R]을 눌러 맵으로 돌아가세요.");
@@ -1317,6 +1326,7 @@ void interactQuestItem1()
 		QuestItemList[0].isActive = 0;
 		player.questitem1 = 1;
 		updateLog("맵으로 돌아갑니다.");
+		updateQuestStatusItem(1);
 		player.pos = previousPos;
 		Situation = 0;
 		break;
@@ -1330,7 +1340,12 @@ void interactQuestItem1()
 	displayLog();
 }
 
-void interactQuestItem2()
+void dialogueGoverQuestItem()
+{
+
+}
+
+void dialogueJapQuestItem()
 {
 	updateLog("작전 서류를 발견하였습니다.");
 	updateLog("[A]를 눌러 훔치거나 [R]을 눌러 맵으로 돌아가세요.");
@@ -1348,6 +1363,7 @@ void interactQuestItem2()
 		QuestItemList[1].isActive = 0;
 		player.questitem2 = 1;
 		updateLog("맵으로 돌아갑니다.");
+		updateQuestStatusItem(3);
 		player.pos = previousPos;
 		Situation = 0;
 		break;
@@ -1361,7 +1377,7 @@ void interactQuestItem2()
 	displayLog();
 }
 
-void interactQuestItem3()
+void dialogueNobodyQuestItem()
 {
 	updateLog("바위를 발견하였습니다.");
 	updateLog("[A]를 눌러 치우거나 [R]을 눌러 맵으로 돌아가세요.");
@@ -1383,6 +1399,7 @@ void interactQuestItem3()
 			player.questitem3 = 1;
 			player.hp--;
 			updateLog("맵으로 돌아갑니다.");
+			updateQuestStatusItem(4);
 			player.pos = previousPos;
 			Situation = 0;
 			break;

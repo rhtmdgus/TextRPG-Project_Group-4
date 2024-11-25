@@ -23,6 +23,11 @@ void displayMap()
 			drawEnemy(&currentEnemies[i]);
 		}
 	}
+	for (int i = 0; i < MAX_BOSS; i++) {
+		if (currentBosses[i].hp > 0) {
+			drawBoss(&currentBosses[i]);
+		}
+	}
 }
 
 void displayShopMap()
@@ -61,7 +66,6 @@ void displayBattleScreen()
 
 }
 
-
 void displayQuestScreen() {
 	system("cls");
 	//∏ √ ±‚»≠
@@ -76,6 +80,29 @@ void displayQuestScreen() {
 		}
 		printf("\n");
 	}
+}
+
+void displayBossBattleScreen()
+{
+	system("cls");
+	//∏ √ ±‚»≠
+	initializeMapBattle();
+
+	setColor(4);
+	for (int i = 0; i < MAP_HEIGHT; i++)
+	{
+		for (int j = 0; j < MAP_WIDTH + PANEL_WIDTH; j++)
+		{
+			printf("%c", mapBattle[i][j]);
+		}
+		printf("\n");
+	}
+	setColor(7);
+	printPlayer();
+
+
+	printBoss(currentBoss);
+
 }
 
 void displayPlayerStat()
@@ -120,6 +147,22 @@ void displayEnemyStat(const Enemy* enemy)
 	printf("attack point: %3d", enemy->attack);
 	setCursorPosition(101, 17);
 	printf("defense point: %3d", enemy->defense);
+}
+
+void displayBossStat(const Enemy* boss)
+{
+	if (boss == nullptr) {
+		printf("Error: Enemy data not available.\n");
+		return;
+	}
+	setCursorPosition(101, 14);
+	printf("%-70s", boss->name);
+	setCursorPosition(101, 15);
+	printf("HP: %3d", boss->hp);
+	setCursorPosition(101, 16);
+	printf("attack point: %3d", boss->attack);
+	setCursorPosition(101, 17);
+	printf("defense point: %3d", boss->defense);
 }
 
 void displayShopScreen()
@@ -187,8 +230,8 @@ void clearScreen()
 {
 	for (int i = 1; i < MAP_HEIGHT - 1; i++) 
 	{
-		setCursorPosition(40, i);
-		for(int j = 40; j < MAP_WIDTH -1; j++)
+		setCursorPosition(35, i);
+		for(int j = 35; j < MAP_WIDTH -1; j++)
 			printf(" ");
 	}
 }
