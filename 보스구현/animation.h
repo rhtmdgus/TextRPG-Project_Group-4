@@ -14,6 +14,8 @@ void playerAttackedAnimation();
 
 void printEnemy(Enemy* enemy);
 
+void printBoss(Enemy* boss);
+
 void enemyAttackedAnimation(Enemy* enemy);
 
 void enemyAttackAnimation(Enemy* enemy);

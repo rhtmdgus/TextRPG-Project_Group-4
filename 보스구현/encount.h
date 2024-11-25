@@ -10,7 +10,9 @@ extern Enemy* currentEnemy;
 extern NpcData* currentNPC;
 
 int encountEnemy();
+int encountBoss();
 void encountChoice();
+void encountBossChoice();
 int encountShop();
 void encountShopChoice();
 int encountNpc();

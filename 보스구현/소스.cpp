@@ -34,7 +34,7 @@
 //situation 8 = encount Quest item 3
 //situation 9 = encounting portal
 
-Player player = { 10, 10, 10, 5, 2, 2, 2, 1, 0, 0, 0, 0, 1, 10, 0, 0, 0, 0, 0, 0, {20, 13} };
+Player player = { 10, 10, 10, 5, 2, 2, 2, 1, 0, 0, 0, 0, 1, 1000, 0, 0, 0, 0, 0, 0, {20, 13} };
 Position previousPos = { 1, 1 };
 Shop Shop1 = { "상인", 99, 99, 99, 99, 99, {3, 3} };
 
@@ -91,6 +91,7 @@ int main()
 	displayMap();
 	displayPlayerStat();
 	displayLog();
+	spawnBoss();
 	spawnEnemies();
 	initializeNpc();
 	initializeQuestItem();
@@ -139,7 +140,38 @@ int main()
 				displayLog();
 			}
 		}
+		if (encountBoss())
+		{
+			updateLog("You encountered an boss!");
+			Sleep(100);
+			displayLog();
+			updateLog("Press [A] to Attack or [R] to Run");
+			Sleep(100);
+			displayLog();
 
+			while (Situation == 7)
+			{
+				encountBossChoice();
+			}
+			if (currentBoss->hp <= 0) {
+				updateLog("The boss was defeated!");
+
+				// 해당 보스의 위치를 초기화
+				eraseBoss(currentBoss);  // 해당 보스만 지웁니다
+				map[currentBoss->pos.y][currentBoss->pos.x] = ' ';
+
+				// 적이 제거된 후 남아 있는 적들만 다시 그립니다.
+				for (int i = 0; i < MAX_BOSS; i++) {
+					if (currentBosses[i].hp > 0) {
+						drawBoss(&currentBosses[i]);
+					}
+				}
+
+				// 플레이어와 로그를 개별 업데이트하여 깜빡임 최소화
+				displayPlayerStat();
+				displayLog();
+			}
+		}
 		if (encountShop())
 		{
 			updateLog("You encountered a shop!");

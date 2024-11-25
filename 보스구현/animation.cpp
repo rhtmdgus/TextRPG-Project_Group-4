@@ -1489,6 +1489,72 @@ void playerAttackedAnimation()
 
 }
 
+void printBoss(Enemy* boss)
+{
+    // 적의 유형에 따라 다르게 처리
+    if (boss->type == warrior)
+    {
+        // 잡졸 유형 출력
+        for (int i = 0; i < 12; i++)
+        {
+            setCursorPosition(60, 10 + i);
+            for (int j = 0; j < 12; j++)
+            {
+                if (enemySwordDamaged[0][i][j] == 0)
+                {
+                    printf(" ");
+                }
+                else
+                {
+                    printf("%c", enemySwordDamaged[0][i][j]);
+                }
+            }
+            printf("\n");
+        }
+    }
+    else if (boss->type == spear)
+    {
+        // 창병 유형 출력
+        for (int i = 0; i < 12; i++)
+        {
+            setCursorPosition(60, 10 + i);
+            for (int j = 0; j < 12; j++)
+            {
+                if (enemySpearDamaged[0][i][j] == 0)  // 다른 배열 또는 시각적 데이터 사용
+                {
+                    printf(" ");
+                }
+                else
+                {
+                    printf("%c", enemySpearDamaged[0][i][j]);  // 창병의 데이터 출력
+                }
+            }
+            printf("\n");
+        }
+    }
+    else if (boss->type == archor)
+    {
+        //활
+        for (int i = 0; i < 12; i++)
+        {
+            setCursorPosition(60, 10 + i);
+            for (int j = 0; j < 12; j++)
+            {
+                if (enemyArrowDamaged[0][i][j] == 0)  // 다른 배열 또는 시각적 데이터 사용
+                {
+                    printf(" ");
+                }
+                else
+                {
+                    printf("%c", enemyArrowDamaged[0][i][j]);  // 창병의 데이터 출력
+                }
+            }
+            printf("\n");
+        }
+    }
+    Sleep(50);  // 각 적을 출력한 후 일정 시간 지연
+}
+
 void printEnemy(Enemy* enemy)
 {
     // 적의 유형에 따라 다르게 처리
@@ -1554,8 +1620,6 @@ void printEnemy(Enemy* enemy)
     }
     Sleep(50);  // 각 적을 출력한 후 일정 시간 지연
 }
-
-
 
 
 
