@@ -68,81 +68,84 @@ void jobSelect_screen()
 void jobSelect()
 {
     int num;
-    char action;
+    int selectedJob = 0;
     while(1)
     {
         num = _getch();
         switch (num)
         {
         case '1':
+            selectedJob = 1;
             setCursorPosition(23, 23);
             printf("%-70s", "검사를 선택하셨습니다.");
             setCursorPosition(23, 24);
             printf("%-70s", "확정이시면 a버튼을 눌러주세요");
-            action = _getch();
-            if (action == 'a' || action == 'A')
-            {
-                //플레이어 스텟 변경
-                player.job = 1;
-                player.attack = 4;
-                player.defense = 2;
-                player.accuracy = 1;
-                updateLog("검사를 선택하셨습니다.");
-                return;
-            }
+            
             break;
 
         case '2':
+            selectedJob = 2;
             setCursorPosition(23, 23);
             printf("%-70s", "궁수를 선택하셨습니다.");
             setCursorPosition(23, 24);
             printf("%-70s", "확정이시면 a버튼을 눌러주세요");
-            action = _getch();
-            if (action == 'a' || action == 'A')
-            {
-                //플레이어 스텟 변경
-                player.job = 2;
-                player.attack = 2;
-                player.defense = 2;
-                player.accuracy = 3;
-                updateLog("궁수를 선택하셨습니다.");
-                return;
-            }
             break;
         case '3':
+            selectedJob = 3;
             setCursorPosition(23, 23);
             printf("%-70s", "창병을 선택하셨습니다.");
             setCursorPosition(23, 24);
             printf("%-70s", "확정이시면 a버튼을 눌러주세요");
-            action = _getch();
-            if (action == 'a' || action == 'A')
-            {
-                //플레이어 스텟 변경
-                player.job = 3;
-                player.attack = 2;
-                player.defense = 2;
-                player.accuracy = 2;
-                updateLog("창병을 선택하셨습니다.");
-                return;
-            }
             break;
         case '4':
+            selectedJob = 4;
             setCursorPosition(23, 23);
             printf("%-70s", "방패병을 선택하셨습니다.");
             setCursorPosition(23, 24);
             printf("%-70s", "확정이시면 a버튼을 눌러주세요");
-            action = _getch();
-            if (action == 'a' || action == 'A')
+            break;
+        case 'a':
+        case 'A':
+            if(selectedJob != 0)
             {
-                //플레이어 스텟 변경
-                player.job = 4;
-                player.attack = 2;
-                player.defense = 4;
-                player.accuracy = 1;
-                updateLog("방패병을 선택하셨습니다.");
+                switch (selectedJob)
+                {
+                case 1:
+                    player.job = 1;
+                    player.attack = 100;
+                    player.defense = 3;
+                    player.accuracy = 1;
+                    updateLog("검사를 선택하셨습니다.");
+                    break;
+                case 2:
+                    player.job = 2;
+                    player.attack = 5;
+                    player.defense = 2;
+                    player.accuracy = 3;
+                    updateLog("궁수를 선택하셨습니다.");
+                    break;
+                case 3:
+                    player.job = 3;
+                    player.attack = 5;
+                    player.defense = 3;
+                    player.accuracy = 2;
+                    updateLog("창병을 선택하셨습니다.");
+                    break;
+                case 4:
+                    player.job = 4;
+                    player.attack = 4;
+                    player.defense = 5;
+                    player.accuracy = 1;
+                    updateLog("방패병을 선택하셨습니다.");
+                    break;
+                }
                 return;
             }
-            break;
+            else
+            {
+                setCursorPosition(23, 23);
+                printf("%-70s", "직업을 먼저 선택해주세요");
+            }
         }
     }
 }
