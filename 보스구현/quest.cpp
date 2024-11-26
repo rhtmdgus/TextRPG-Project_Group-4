@@ -6,6 +6,7 @@
 #include "displaymap.h"
 #include "utility.h"
 #include "questmanager.h"
+#include "item.h"
 
 Quest quest[MAX_QUEST];
 PrologueQuest prologuequest; //프롤로그 퀘스트
@@ -161,6 +162,10 @@ void QuestComplete2() {
 			setCursorPosition(40, 13);
 			printf("1. 힘내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			updateLog("무기를 획득하였습니다!");
+			updateLog("장비를 획득하였습니다!");
+			weaponchange(2);
+			equipmentchange(2);
 			completeQuest(1);
 			backToDialogue();
 		}
@@ -219,6 +224,10 @@ void QuestComplete3() {
 			setCursorPosition(40, 13);
 			printf("1. 승리하길 바라오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			updateLog("무기를 획득하였습니다!");
+			updateLog("장비를 획득하였습니다!");
+			weaponchange(5);
+			equipmentchange(5);
 			completeQuest(2);
 			backToDialogue();
 		}
@@ -278,6 +287,10 @@ void QuestComplete4() {
 			setCursorPosition(40, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			updateLog("무기를 획득하였습니다!");
+			updateLog("장비를 획득하였습니다!");
+			weaponchange(4);
+			equipmentchange(4);
 			completeQuest(3);
 			backToDialogue();
 		}
@@ -334,6 +347,10 @@ void QuestComplete5() {
 			setCursorPosition(40, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
+			updateLog("무기를 획득하였습니다!");
+			updateLog("장비를 획득하였습니다!");
+			weaponchange(3);
+			equipmentchange(3);
 			completeQuest(4);
 			backToDialogue();
 		}

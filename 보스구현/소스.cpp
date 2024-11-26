@@ -22,6 +22,7 @@
 #include "quest.h"
 #include "prologue.h"
 #include "prologuemap.h"
+#include "item.h"
 
 
 //situation ∏Ì 
@@ -35,7 +36,7 @@
 //situation 8 = encount Quest item 3
 //situation 9 = encounting portal
 
-Player player = { 10, 10, 10, 5, 2, 2, 2, 1, 0, 0, 0, 0, 1, 100, 0, 0, 0, 0, 0, 0, {20, 13} };
+Player player = { 10, 10, 6, 5, 2, 2, 2, 1, 0, 0, 0, 0, 1, 100, 0, 0, 0, 0, 0, 0,  -1, -1, {"æ¯¿Ω"} , {"«Â ø "} , {20, 13} };
 Position previousPos = { 1, 1 };
 Shop Shop1 = { "ªÛ¿Œ", 99, 99, 99, 99, 99, {3, 3} };
 

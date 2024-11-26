@@ -15,8 +15,7 @@ typedef struct
 	char name[50];
 	int currentmap;
 	int nextmap;
-
-
+	bool spawnPotal;
 	Position pos;
 
 

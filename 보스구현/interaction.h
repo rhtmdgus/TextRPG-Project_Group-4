@@ -8,6 +8,7 @@
 #include "player.h"
 #include "displaymap.h"
 #include "questmanager.h"
+#include "potal.h"
 
 extern int outNpcInteract;
 

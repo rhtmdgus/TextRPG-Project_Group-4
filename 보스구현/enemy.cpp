@@ -9,8 +9,8 @@ Enemy enemyTemplates[6] = {
     {"왜군 창병", 12, 10, 4, {0, 0}, spear},
     {"왜군 궁병", 8, 6, 2, {0, 0}, archor},
     {"왜군 장수", 20, 12, 8, {0, 0}, warrior},
-    {"의병 장군", 15, 15, 6, {0, 0}, archor},
-    {"관군 장군", 18, 12, 10, {0, 0}, spear}
+    {"의병 장군", 15, 15, 6, {0, 0}, warrior},
+    {"관군 장군", 18, 12, 10, {0, 0}, warrior}
 };
 
 Enemy currentEnemies[MAX_ENEMY];  // 배열 정의
