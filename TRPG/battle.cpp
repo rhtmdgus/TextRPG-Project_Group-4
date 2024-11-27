@@ -15,6 +15,10 @@ void LevelUp()	//·¹º§¾÷
 		player.level++;
 		maxhp++;
 		maxmp++;
+		if (player.hp < maxhp)
+			player.hp = maxhp;
+		if (player.mp < maxmp)
+			player.mp = maxmp;
 		if (player.job == 1)
 		{
 			player.attack++;
@@ -325,11 +329,10 @@ void bossbattle(Enemy* boss)
 		if (boss->hp <= 0) {
 			BossDying(boss);
 			updateBattleLog("You defeated the boss!");
+			updateQuestStatusItem(6);
 			player.exp += 30;
 			player.money += 10;
 			player.questitem1 = 1;
-			player.killcount++;
-			updateQuestStatusItem(6);
 			checkboss1 = 1;
 			displayPlayerStat();
 			displayBossStat(boss);
