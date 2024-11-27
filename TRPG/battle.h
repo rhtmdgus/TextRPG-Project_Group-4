@@ -3,19 +3,21 @@
 
 #include "utility.h"
 #include "enemy.h"
-#include "prologue.h"
 #include "log.h"
 #include "initmap.h"
 #include "displaymap.h"
 #include "animation.h"
+#include "questmanager.h"
 
 extern int OriginalLevel;
 
 extern Enemy* currentEnemy;
+extern Enemy* currentBoss;
 extern int Situation;      // 외부에서 선언된 Situation 사용
 
+int Crit();
 void LevelUp();
 void battle(Enemy* enemy);
-int Crit();
+void bossbattle(Enemy* boss);
 
 #endif // BATTLE_H

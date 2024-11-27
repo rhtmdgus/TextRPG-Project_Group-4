@@ -177,6 +177,87 @@ void backToMap()
 
 void dialogueVolunArmy()
 {
+	if (strcmp(currentNPC->name, "이정재") == 0 && currentNPC->hasQuest == true)
+		VolunArmyLog_1();
+	if (strcmp(currentNPC->name, "김두환") == 0 && currentNPC->hasQuest == true)
+		VolunArmyLog_2();
+}
+
+void VolunArmyLog_1()
+{
+	Sleep(100);
+	clearScreen();
+	if (currentNPC->hasQuest == true && quest[5].clear == 0 && currentNPC->isActive == 1)
+	{
+		setCursorPosition(40, 11);
+		printf(quest[5].title);
+		setCursorPosition(40, 12);
+		printf(quest[5].description1);
+		setCursorPosition(40, 13);
+		printf("대화문\n");
+		setCursorPosition(40, 14);
+		printf("1. 부상당한 의병한테 HP포션 하나를 준다.\n");
+		setCursorPosition(40, 15);
+		printf("2. 부상당한 의병을 돕지 않는다.\n");
+		int choice = _getch();
+		if (choice == 'a')
+		{
+			if (player.HPpotion < 1)
+			{
+				clearScreen();
+				updateLog("가지고 있는 HP포션이 부족합니다.");
+				Sleep(200);
+				displayLog();
+				setCursorPosition(40, 11);
+				printf(quest[5].description2);
+				setCursorPosition(40, 12);
+				printf("미안하오\n");
+				quest[5].clear = 2;
+				npcList[5].isActive = 0;
+				backToMap();
+			}
+			else
+			{
+				clearScreen();
+				updateLog("부상당한 의병에게 HP포션을 주었습니다.");
+				Sleep(200);
+				displayLog();
+				player.RRelationship += 20;
+				player.HPpotion--;
+				setCursorPosition(30, 11);
+				printf(quest[5].description4);
+				quest[5].clear = 1;
+				backToMap();
+			}
+		}
+		else if (choice == 'r')
+		{
+			clearScreen();
+			updateLog("부상당한 의병에게 HP포션을 주지 않기로 하였습니다.");
+			Sleep(200);
+			displayLog();
+			setCursorPosition(40, 11);
+			printf(quest[5].description2);
+			setCursorPosition(40, 12);
+			printf("미안하오\n");
+			quest[5].clear = 2;
+			npcList[5].isActive = 0;
+			backToMap();
+		}
+	}
+	else if (quest[5].clear == 1 && currentNPC->isActive == 1)
+	{
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("의병이 쉬고있다. 건드리지 말자.");
+		backToMap();
+	}
+	Sleep(150);
+	backToMap();
+}
+
+void VolunArmyLog_2()
+{
 	int num = _getch();
 	switch (num)
 	{
@@ -245,6 +326,7 @@ void dialogueVolunArmy()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[1].take = 1;
 						player.questmax++;
+						acceptQuest(1);
 						backToDialogue();
 						break;
 					}
@@ -275,6 +357,7 @@ void dialogueVolunArmy()
 			else if (quest[1].take == 1)
 			{
 				QuestComplete2();
+				
 				break;
 			}
 
@@ -319,6 +402,14 @@ void dialogueVolunArmy()
 }
 void dialogueGoverArmy()
 {
+	if (strcmp(currentNPC->name, "장택상") == 0 && currentNPC->hasQuest == true)
+		GoverArmyLog_1();
+	if (strcmp(currentNPC->name, "조병옥") == 0 && currentNPC->hasQuest == true)
+		GoverArmyLog_2();
+}
+
+void GoverArmyLog_1()
+{
 	int num = _getch();
 	switch (num)
 	{
@@ -345,13 +436,159 @@ void dialogueGoverArmy()
 		clearScreen();
 		setCursorPosition(40, 11);
 		printf("바다에 이순신 장군님께서 홀로 왜군을 무찌르고 있다고 들었소.");
-		setCursorPosition(40, 11);
-		printf("허나 그 분을 시샘하는 자들이 많은 것인지");
 		setCursorPosition(40, 12);
-		printf("조정에서 그자를 잡아들여야 한다는 미친 소리가 돌고 있소.");
+		printf("허나 그 분을 시샘하는 자들이 많은 것인지");
 		setCursorPosition(40, 13);
-		printf("대화문\n");
+		printf("조정에서 그자를 잡아들여야 한다는 미친 소리가 돌고 있소.");
 		setCursorPosition(40, 14);
+		printf("대화문\n");
+		setCursorPosition(40, 15);
+		printf("1. 알겠소\n");
+		Sleep(150);
+		updateLog("A키를 눌러 이전 대화로 돌아가기");
+		backToDialogue();
+		break;
+	case '3':
+		updateLog("할만한 일은 없소이까?");
+		displayLog();
+		Sleep(100);
+		clearScreen();
+		if (currentNPC->hasQuest == true && quest[6].clear == 0)
+		{
+			if (quest[6].take == 0)
+			{
+				setCursorPosition(40, 11);
+				printf(quest[6].title);
+				setCursorPosition(40, 12);
+				printf(quest[6].description1);
+				setCursorPosition(40, 13);
+				printf("대화문\n");
+				setCursorPosition(40, 14);
+				printf("1. 수락한다.\n");
+				setCursorPosition(40, 15);
+				printf("2. 거절한다.\n");
+				int choice = _getch();
+				if (choice == 'a')
+				{
+					if (player.questmax < 3)
+					{
+						clearScreen();
+						setCursorPosition(40, 11);
+						printf("퀘스트를 수락하셨습니다!");
+						updateLog("퀘스트를 수락하셨습니다!");
+						quest[6].take = 1;
+						player.questmax++;
+						acceptQuest(6);
+						backToDialogue();
+						spawnBoss1();
+						break;
+					}
+					else
+					{
+						clearScreen();
+						setCursorPosition(40, 11);
+						printf("퀘스트는 한번에 최대 3개까지 수락 가능합니다!");
+						updateLog("퀘스트는 한번에 최대 3개까지 수락 가능합니다!");
+						backToDialogue();
+						break;
+					}
+				}
+				else if (choice == 'r')
+				{
+					clearScreen();
+					setCursorPosition(40, 11);
+					printf(quest[6].description2);
+					setCursorPosition(40, 12);
+					printf("대화문\n");
+					setCursorPosition(40, 13);
+					printf("1. 미안하오\n");
+					updateLog("퀘스트를 거절하셨습니다!");
+					backToDialogue();
+					break;
+				}
+			}
+			else if (quest[6].take == 1)
+			{
+				QuestComplete6();
+				potal[player.currentmap].spawnPotal = true;				
+				break;
+			}
+
+		}
+		else if (currentNPC->hasQuest == false || quest[6].clear == 1) {
+			setCursorPosition(40, 11);
+			printf("잘 모르겠는데, 장군님께 한번 물어보겠소.");
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 알겠소\n");
+		}
+		Sleep(150);
+		updateLog("A키를 눌러 이전 대화로 돌아가기");
+		backToDialogue();
+		break;
+	case '4':
+		updateLog("싸우자");
+		displayLog();
+		Sleep(100);
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("지금 군을 무시하는 것인가?");
+		setCursorPosition(40, 12);
+		printf("대화문\n");
+		setCursorPosition(40, 13);
+		printf("1. 알겠소\n");
+		Sleep(150);
+		updateLog("A키를 눌러 이전 대화로 돌아가기");
+		backToDialogue();
+		break;
+	case '6':
+		updateLog("NPC을 떠난다");
+		displayLog();
+		Sleep(100);
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("잘가시오, 왜놈들 조심하고");
+		backToMap();
+		break;
+	}
+}
+
+void GoverArmyLog_2()
+{
+	int num = _getch();
+	switch (num)
+	{
+	case '1':
+		updateLog("당신은 누구요?");
+		displayLog();
+		Sleep(100);
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("딱 보면 모르겠소? 왜병 잡으러 온 관군이잖소?");
+		setCursorPosition(40, 12);
+		printf("대화문\n");
+		setCursorPosition(40, 13);
+		printf("1. 알겠소\n");
+		Sleep(150);
+		updateLog("A키를 눌러 이전 대화로 돌아가기");
+		backToDialogue();
+		break;
+
+	case '2':
+		updateLog("주변의 소문은 없소이까?");
+		displayLog();
+		Sleep(100);
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("바다에 이순신 장군님께서 홀로 왜군을 무찌르고 있다고 들었소.");
+		setCursorPosition(40, 12);
+		printf("허나 그 분을 시샘하는 자들이 많은 것인지");
+		setCursorPosition(40, 13);
+		printf("조정에서 그자를 잡아들여야 한다는 미친 소리가 돌고 있소.");
+		setCursorPosition(40, 14);
+		printf("대화문\n");
+		setCursorPosition(40, 15);
 		printf("1. 알겠소\n");
 		Sleep(150);
 		updateLog("A키를 눌러 이전 대화로 돌아가기");
@@ -387,6 +624,7 @@ void dialogueGoverArmy()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[2].take = 1;
 						player.questmax++;
+						acceptQuest(2);
 						backToDialogue();
 						break;
 					}
@@ -417,6 +655,7 @@ void dialogueGoverArmy()
 			else if (quest[2].take == 1)
 			{
 				QuestComplete3();
+				
 				break;
 			}
 
@@ -459,7 +698,166 @@ void dialogueGoverArmy()
 		break;
 	}
 }
+
 void dialogueJapArmy()
+{
+	if (strcmp(currentNPC->name, "미와 와사부로") == 0 && currentNPC->hasQuest == true && currentNPC->isActive == 1)
+		JapArmyLog_1();
+	if (strcmp(currentNPC->name, "나까무라") == 0 && currentNPC->hasQuest == true)
+		JapArmyLog_2();
+}
+
+void JapArmyLog_1()
+{
+	int num = _getch();
+	switch (num)
+	{
+	case '1':
+		updateLog("당신은 누구요?");
+		displayLog();
+		Sleep(100);
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("네놈이 잡은 왜군 장수 마와 와사부로다");
+		setCursorPosition(40, 12);
+		printf("대화문\n");
+		setCursorPosition(40, 13);
+		printf("1. 알겠소\n");
+		Sleep(150);
+		updateLog("A키를 눌러 이전 대화로 돌아가기");
+		backToDialogue();
+		break;
+
+	case '2':
+		updateLog("주변의 소문은 없소이까?");
+		displayLog();
+		Sleep(100);
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("내 말을 어떻게 이해하는지는 모르겠다만");
+		setCursorPosition(40, 12);
+		printf("우리는 조선을 점령하러 온 것이 아닌 해방시키러 온 거다");
+		setCursorPosition(40, 13);
+		printf("그러니 풀어주는게 서로 좋을거다");
+		setCursorPosition(40, 14);
+		printf("대화문\n");
+		setCursorPosition(40, 15);
+		printf("1. 알겠소\n");
+		Sleep(150);
+		updateLog("A키를 눌러 이전 대화로 돌아가기");
+		backToDialogue();
+		break;
+	case '3':
+		updateLog("원하는 것이 있소?");
+		displayLog();
+		Sleep(100);
+		clearScreen();
+		if (currentNPC->hasQuest == true && quest[7].clear == 0)
+		{
+			if (quest[7].take == 0)
+			{
+				setCursorPosition(40, 11);
+				printf(quest[7].title);
+				setCursorPosition(40, 12);
+				printf(quest[7].description1);
+				setCursorPosition(40, 13);
+				printf("대화문\n");
+				setCursorPosition(40, 14);
+				printf("1. 수락한다.\n");
+				setCursorPosition(40, 15);
+				printf("2. 거절한다.\n");
+				int choice = _getch();
+				if (choice == 'a')
+				{
+					if (player.questmax < 3)
+					{
+						clearScreen();
+						setCursorPosition(40, 11);
+						printf("퀘스트를 수락하셨습니다!");
+						updateLog("퀘스트를 수락하셨습니다!");
+						quest[7].take = 1;
+						player.questmax++;
+						acceptQuest(7);
+						backToDialogue();
+						break;
+					}
+					else
+					{
+						clearScreen();
+						setCursorPosition(40, 11);
+						printf("퀘스트는 한번에 최대 3개까지 수락 가능합니다!");
+						updateLog("퀘스트는 한번에 최대 3개까지 수락 가능합니다!");
+						backToDialogue();
+						break;
+					}
+				}
+				else if (choice == 'r')
+				{
+					clearScreen();
+					setCursorPosition(40, 11);
+					printf(quest[7].description2);
+					setCursorPosition(40, 12);
+					printf("대화문\n");
+					setCursorPosition(40, 13);
+					printf("1. 그럴거 같지는 않소\n");
+					updateLog("퀘스트를 거절하셨습니다!");
+					backToDialogue();
+					break;
+				}
+			}
+			else if (quest[7].take == 1)
+			{
+				QuestComplete7();
+				if (currentNPC->isActive == 0)
+				{
+					backToMap();
+					break;
+				}
+				break;
+			}
+
+		}
+		else if (currentNPC->hasQuest == false || quest[7].clear == 1) {
+			//break;
+			setCursorPosition(40, 11);
+			printf(" ");
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 알겠소\n");
+		}
+		Sleep(150);
+		updateLog("A키를 눌러 이전 대화로 돌아가기");
+		backToDialogue();
+		break;
+	case '4':
+		updateLog("싸우자");
+		displayLog();
+		Sleep(100);
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("바카야로!");
+		setCursorPosition(40, 12);
+		printf("대화문\n");
+		setCursorPosition(40, 13);
+		printf("1. 알겠소\n");
+		Sleep(150);
+		updateLog("A키를 눌러 이전 대화로 돌아가기");
+		backToDialogue();
+		break;
+	case '6':
+		updateLog("NPC을 떠난다");
+		displayLog();
+		Sleep(100);
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("다른 놈들처럼 행동하지 마시오");
+		backToMap();
+		break;
+	}
+}
+
+void JapArmyLog_2()
 {
 	int num = _getch();
 	switch (num)
@@ -487,13 +885,13 @@ void dialogueJapArmy()
 		clearScreen();
 		setCursorPosition(40, 11);
 		printf("내 말을 어떻게 이해하는지는 모르겠다만");
-		setCursorPosition(40, 11);
-		printf("우리는 조선을 점령하러 온 것이 아닌 해방시키러 온 거요");
 		setCursorPosition(40, 12);
-		printf("그대는 우리를 죽이려 하는 저 무지렁이와는 다르길 바라오");
+		printf("우리는 조선을 점령하러 온 것이 아닌 해방시키러 온 거요");
 		setCursorPosition(40, 13);
-		printf("대화문\n");
+		printf("그대는 우리를 죽이려 하는 저 무지렁이와는 다르길 바라오");
 		setCursorPosition(40, 14);
+		printf("대화문\n");
+		setCursorPosition(40, 15);
 		printf("1. 알겠소\n");
 		Sleep(150);
 		updateLog("A키를 눌러 이전 대화로 돌아가기");
@@ -529,6 +927,7 @@ void dialogueJapArmy()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[3].take = 1;
 						player.questmax++;
+						acceptQuest(3);
 						backToDialogue();
 						break;
 					}
@@ -559,6 +958,7 @@ void dialogueJapArmy()
 			else if (quest[3].take == 1)
 			{
 				QuestComplete4();
+				
 				break;
 			}
 
@@ -601,12 +1001,11 @@ void dialogueJapArmy()
 		break;
 	}
 }
-
 void dialogueNobody()
 {
-	if (strcmp(currentNPC->name,"장 돌쇠") == 0)
+	if (strcmp(currentNPC->name, "장 돌쇠") == 0 && currentNPC->hasQuest == true)
 		NobodyLog_1();
-	if (strcmp(currentNPC->name, "김 아무개") == 0)
+	if (strcmp(currentNPC->name, "김 아무개") == 0 && currentNPC->hasQuest == true)
 		NobodyLog_2();
 }
 
@@ -640,13 +1039,13 @@ void NobodyLog_1()
 		clearScreen();
 		setCursorPosition(40, 11);
 		printf("왜군들이 이동네 저동네를 약탈한다고 들었소.");
-		setCursorPosition(40, 11);
-		printf("관군이 빨리 와서 우리 좀 지켜줬으면 하는데,");
 		setCursorPosition(40, 12);
-		printf("아직도 안온거 보면, 소식이 조정까지 전해지지 못했나보오.");
+		printf("관군이 빨리 와서 우리 좀 지켜줬으면 하는데,");
 		setCursorPosition(40, 13);
-		printf("대화문\n");
+		printf("아직도 안온거 보면, 소식이 조정까지 전해지지 못했나보오.");
 		setCursorPosition(40, 14);
+		printf("대화문\n");
+		setCursorPosition(40, 15);
 		printf("1. 알겠소\n");
 		Sleep(150);
 		updateLog("A키를 눌러 이전 대화로 돌아가기");
@@ -682,6 +1081,7 @@ void NobodyLog_1()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[0].take = 1;
 						player.questmax++;
+						acceptQuest(0);
 						backToDialogue();
 						break;
 					}
@@ -712,6 +1112,7 @@ void NobodyLog_1()
 			else if (quest[0].take == 1)
 			{
 				QuestComplete1();
+				
 				break;
 			}
 
@@ -783,13 +1184,13 @@ void NobodyLog_2()
 		clearScreen();
 		setCursorPosition(40, 11);
 		printf("왜군들이 이동네 저동네를 약탈한다고 들었소.");
-		setCursorPosition(40, 11);
-		printf("관군이 빨리 와서 우리 좀 지켜줬으면 하는데,");
 		setCursorPosition(40, 12);
-		printf("아직도 안온거 보면, 소식이 조정까지 전해지지 못했나보오.");
+		printf("관군이 빨리 와서 우리 좀 지켜줬으면 하는데,");
 		setCursorPosition(40, 13);
-		printf("대화문\n");
+		printf("아직도 안온거 보면, 소식이 조정까지 전해지지 못했나보오.");
 		setCursorPosition(40, 14);
+		printf("대화문\n");
+		setCursorPosition(40, 15);
 		printf("1. 알겠소\n");
 		Sleep(150);
 		updateLog("A키를 눌러 이전 대화로 돌아가기");
@@ -825,6 +1226,7 @@ void NobodyLog_2()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[4].take = 1;
 						player.questmax++;
+						acceptQuest(4);
 						backToDialogue();
 						break;
 					}
@@ -855,6 +1257,7 @@ void NobodyLog_2()
 			else if (quest[4].take == 1)
 			{
 				QuestComplete5();
+				
 				break;
 			}
 
@@ -898,8 +1301,19 @@ void NobodyLog_2()
 	}
 }
 
+void interactionQuestItem()
+{
+	if (currentQuestItem->type == VolunArmy && currentQuestItem->isActive == 1)
+		dialogueVolunQuestItem();
+	else if (currentQuestItem->type == GoverArmy && currentQuestItem->isActive == 1)
+		dialogueGoverQuestItem();
+	else if (currentQuestItem->type == JapArmy && currentQuestItem->isActive == 1)
+		dialogueJapQuestItem();
+	else if (currentQuestItem->type == Nobody && currentQuestItem->isActive == 1)
+		dialogueNobodyQuestItem();
+}
 
-void interactQuestItem1()
+void dialogueVolunQuestItem()
 {
 	updateLog("군량을 발견하였습니다.");
 	updateLog("[A]를 눌러 획득하거나 [R]을 눌러 맵으로 돌아가세요.");
@@ -913,11 +1327,11 @@ void interactQuestItem1()
 		break;
 	case 'A':
 	case 'a':
-		questitem1.used = 1;
 		updateLog("군량을 획득하였습니다.");
+		QuestItemList[0].isActive = 0;
 		player.questitem1 = 1;
-		eraseQuestItem1();
 		updateLog("맵으로 돌아갑니다.");
+		updateQuestStatusItem(1);
 		player.pos = previousPos;
 		Situation = 0;
 		break;
@@ -931,7 +1345,12 @@ void interactQuestItem1()
 	displayLog();
 }
 
-void interactQuestItem2()
+void dialogueGoverQuestItem()
+{
+
+}
+
+void dialogueJapQuestItem()
 {
 	updateLog("작전 서류를 발견하였습니다.");
 	updateLog("[A]를 눌러 훔치거나 [R]을 눌러 맵으로 돌아가세요.");
@@ -945,11 +1364,11 @@ void interactQuestItem2()
 		break;
 	case 'A':
 	case 'a':
-		questitem2.used = 1;
 		updateLog("작전 서류를 훔쳤습니다.");
+		QuestItemList[1].isActive = 0;
 		player.questitem2 = 1;
-		eraseQuestItem2();
 		updateLog("맵으로 돌아갑니다.");
+		updateQuestStatusItem(3);
 		player.pos = previousPos;
 		Situation = 0;
 		break;
@@ -963,7 +1382,7 @@ void interactQuestItem2()
 	displayLog();
 }
 
-void interactQuestItem3()
+void dialogueNobodyQuestItem()
 {
 	updateLog("바위를 발견하였습니다.");
 	updateLog("[A]를 눌러 치우거나 [R]을 눌러 맵으로 돌아가세요.");
@@ -980,12 +1399,12 @@ void interactQuestItem3()
 		Sleep(100);
 		if (player.hp > 1)
 		{
-			questitem3.used = 1;
 			updateLog("바위를 치웠습니다. HP가 1 소모되었습니다.");
+			QuestItemList[2].isActive = 0;
 			player.questitem3 = 1;
 			player.hp--;
-			eraseQuestItem3();
 			updateLog("맵으로 돌아갑니다.");
+			updateQuestStatusItem(4);
 			player.pos = previousPos;
 			Situation = 0;
 			break;
@@ -1006,3 +1425,21 @@ void interactQuestItem3()
 	}
 	displayLog();
 }
+
+/* 프롤로그 쪽 함수
+void interactPrologueNpc()
+{
+	Sleep(100);
+	clearScreen();
+	setCursorPosition(40, 11);
+	printf(prologuequest.title);
+	setCursorPosition(40, 12);
+	printf(prologuequest.description1);
+	//if (encountPrologueNpc1())
+	setCursorPosition(40, 11);
+	printf(prologuequest.description2);
+	//if (encountPrologueNpc2())
+	setCursorPosition(40, 11);
+	printf(prologuequest.description3);
+}
+ */

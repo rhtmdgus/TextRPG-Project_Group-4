@@ -3,7 +3,7 @@
 
 #include "utility.h"
 #include "player.h"
-#define MAX_NPC 5
+#define MAX_NPC 8
 
 typedef enum {
 	VolunArmy,	//ÀÇº´
@@ -17,6 +17,7 @@ typedef struct
 	char name[100];
 	bool hasQuest;
 	int currentmap;
+	int isActive;
 	Position pos;
 	NpcType type;
 } NpcData;

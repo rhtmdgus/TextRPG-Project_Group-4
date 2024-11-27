@@ -21,6 +21,8 @@
 #include "npc.h"
 #include "quest.h"
 #include "prologue.h"
+#include "prologuemap.h"
+#include "item.h"
 
 
 //situation 명 
@@ -34,20 +36,9 @@
 //situation 8 = encount Quest item 3
 //situation 9 = encounting portal
 
-Player player = { 10, 10, 0, 0, 0, 2, 2, 1, 0, 0, 0, 0, 1, 10, 0, 0, 0, 0, 0, 0, {20, 13} };
-/*
-int hp;
-int mp;
-int attack;
-int defense;
-int accuracy;
-*/
-
+Player player = { 10, 10, 6, 5, 2, 2, 2, 1, 0, 0, 0, 0, 1, 100, 0, 0, 0, 0, 0, 0,  -1, -1, {"없음"} , {"헌 옷"} , {20, 13} };
 Position previousPos = { 1, 1 };
 Shop Shop1 = { "상인", 99, 99, 99, 99, 99, {3, 3} };
-QuestItem1 questitem1 = { "군량", 0, {15, 5} };
-QuestItem2 questitem2 = { "작전 서류", 0, {17, 5} };
-QuestItem3 questitem3 = { "바위", 0, {19, 5} };
 
 int main()
 {
@@ -158,6 +149,7 @@ int main()
 	displayLog();
 	spawnEnemies();
 	initializeNpc();
+	initializeQuestItem();
 
 	while (1)	//본편
 	{
@@ -168,12 +160,7 @@ int main()
 		movePlayer();
 		drawPotal();
 		drawNpc(npcList);
-		if (questitem1.used == 0 && player.currentmap == 0)
-			drawQuestItem1();
-		if (questitem2.used == 0 && player.currentmap == 0)
-			drawQuestItem2();
-		if (questitem3.used == 0 && player.currentmap == 0)
-			drawQuestItem3();
+		drawQuestItem(QuestItemList);
 		//displayLog();
 
 		if (encountEnemy())
@@ -208,7 +195,38 @@ int main()
 				displayLog();
 			}
 		}
+		if (encountBoss())
+		{
+			updateLog("You encountered an boss!");
+			Sleep(100);
+			displayLog();
+			updateLog("Press [A] to Attack or [R] to Run");
+			Sleep(100);
+			displayLog();
 
+			while (Situation == 7)
+			{
+				encountBossChoice();
+			}
+			if (currentBoss->hp <= 0) {
+				updateLog("The boss was defeated!");
+
+				// 해당 보스의 위치를 초기화
+				eraseBoss(currentBoss);  // 해당 보스만 지웁니다
+				map[currentBoss->pos.y][currentBoss->pos.x] = ' ';
+
+				// 적이 제거된 후 남아 있는 적들만 다시 그립니다.
+				for (int i = 0; i < MAX_BOSS; i++) {
+					if (currentBosses[i].hp > 0) {
+						drawBoss(&currentBosses[i]);
+					}
+				}
+
+				// 플레이어와 로그를 개별 업데이트하여 깜빡임 최소화
+				displayPlayerStat();
+				displayLog();
+			}
+		}
 		if (encountShop())
 		{
 			updateLog("You encountered a shop!");
@@ -241,35 +259,11 @@ int main()
 				displayLog();
 			}
 		}
-		if (encountQuestItem1() && questitem1.used == 0 && player.currentmap == 0)
+		if (encountQuestItem())
 		{
 			while (Situation == 6)
 			{
-				interactQuestItem1();
-			}
-			if (Situation == 0) {
-				displayMap();
-				displayPlayerStat();
-				displayLog();
-			}
-		}
-		if (encountQuestItem2() && questitem2.used == 0 && player.currentmap == 0)
-		{
-			while (Situation == 7)
-			{
-				interactQuestItem2();
-			}
-			if (Situation == 0) {
-				displayMap();
-				displayPlayerStat();
-				displayLog();
-			}
-		}
-		if (encountQuestItem3() && questitem3.used == 0 && player.currentmap == 0)
-		{
-			while (Situation == 8)
-			{
-				interactQuestItem3();
+				interactionQuestItem();
 			}
 			if (Situation == 0) {
 				displayMap();

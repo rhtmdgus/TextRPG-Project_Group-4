@@ -29,7 +29,7 @@ void jobSelect_screen()
         printf(" ");
     printf("           숫자키로 선택을 합니다\n\n");
 
-    // 직업 설명 섹션
+    // 조작키 설명 섹션
     for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
         printf(" ");
     printf("====================================================================\n");
@@ -62,7 +62,7 @@ void jobSelect_screen()
     printf("====================================================================\n");
    
     jobSelect();
-    system("cls");
+
 }
 
 void jobSelect()
@@ -112,31 +112,31 @@ void jobSelect()
                 {
                 case 1:
                     player.job = 1;
-                    player.attack = 6;
+                    player.attack = 10;
                     player.defense = 3;
                     player.accuracy = 1;
-                    //updateLog("검사를 선택하셨습니다.");
+                    updateLog("검사를 선택하셨습니다.");
                     break;
                 case 2:
                     player.job = 2;
                     player.attack = 5;
                     player.defense = 2;
                     player.accuracy = 3;
-                    //updateLog("궁수를 선택하셨습니다.");
+                    updateLog("궁수를 선택하셨습니다.");
                     break;
                 case 3:
                     player.job = 3;
                     player.attack = 5;
                     player.defense = 3;
                     player.accuracy = 2;
-                    //updateLog("창병을 선택하셨습니다.");
+                    updateLog("창병을 선택하셨습니다.");
                     break;
                 case 4:
                     player.job = 4;
                     player.attack = 4;
                     player.defense = 5;
                     player.accuracy = 1;
-                    //updateLog("방패병을 선택하셨습니다.");
+                    updateLog("방패병을 선택하셨습니다.");
                     break;
                 }
                 return;
