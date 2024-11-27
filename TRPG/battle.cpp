@@ -328,6 +328,8 @@ void bossbattle(Enemy* boss)
 			player.exp += 30;
 			player.money += 10;
 			player.questitem1 = 1;
+			player.killcount++;
+			updateQuestStatusItem(6);
 			checkboss1 = 1;
 			displayPlayerStat();
 			displayBossStat(boss);

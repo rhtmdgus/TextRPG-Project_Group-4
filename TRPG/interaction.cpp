@@ -200,7 +200,7 @@ void VolunArmyLog_1()
 		setCursorPosition(40, 15);
 		printf("2. 부상당한 의병을 돕지 않는다.\n");
 		int choice = _getch();
-		if (choice == 'a')
+		if (choice == '1')
 		{
 			if (player.HPpotion < 1)
 			{
@@ -230,7 +230,7 @@ void VolunArmyLog_1()
 				backToMap();
 			}
 		}
-		else if (choice == 'r')
+		else if (choice == '2')
 		{
 			clearScreen();
 			updateLog("부상당한 의병에게 HP포션을 주지 않기로 하였습니다.");
@@ -316,7 +316,7 @@ void VolunArmyLog_2()
 				setCursorPosition(40, 15);
 				printf("2. 거절한다.\n");
 				int choice = _getch();
-				if (choice == 'a')
+				if (choice == '1')
 				{
 					if (player.questmax < 3)
 					{
@@ -340,7 +340,7 @@ void VolunArmyLog_2()
 						break;
 					}
 				}
-				else if (choice == 'r')
+				else if (choice == '2')
 				{
 					clearScreen();
 					setCursorPosition(40, 11);
@@ -468,7 +468,7 @@ void GoverArmyLog_1()
 				setCursorPosition(40, 15);
 				printf("2. 거절한다.\n");
 				int choice = _getch();
-				if (choice == 'a')
+				if (choice == '1')
 				{
 					if (player.questmax < 3)
 					{
@@ -493,7 +493,7 @@ void GoverArmyLog_1()
 						break;
 					}
 				}
-				else if (choice == 'r')
+				else if (choice == '2')
 				{
 					clearScreen();
 					setCursorPosition(40, 11);
@@ -614,7 +614,7 @@ void GoverArmyLog_2()
 				setCursorPosition(40, 15);
 				printf("2. 거절한다.\n");
 				int choice = _getch();
-				if (choice == 'a')
+				if (choice == '1')
 				{
 					if (player.questmax < 3)
 					{
@@ -638,7 +638,7 @@ void GoverArmyLog_2()
 						break;
 					}
 				}
-				else if (choice == 'r')
+				else if (choice == '2')
 				{
 					clearScreen();
 					setCursorPosition(40, 11);
@@ -767,7 +767,7 @@ void JapArmyLog_1()
 				setCursorPosition(40, 15);
 				printf("2. 거절한다.\n");
 				int choice = _getch();
-				if (choice == 'a')
+				if (choice == '1')
 				{
 					if (player.questmax < 3)
 					{
@@ -791,7 +791,7 @@ void JapArmyLog_1()
 						break;
 					}
 				}
-				else if (choice == 'r')
+				else if (choice == '2')
 				{
 					clearScreen();
 					setCursorPosition(40, 11);
@@ -917,7 +917,7 @@ void JapArmyLog_2()
 				setCursorPosition(40, 15);
 				printf("2. 거절한다.\n");
 				int choice = _getch();
-				if (choice == 'a')
+				if (choice == '1')
 				{
 					if (player.questmax < 3)
 					{
@@ -941,7 +941,7 @@ void JapArmyLog_2()
 						break;
 					}
 				}
-				else if (choice == 'r')
+				else if (choice == '2')
 				{
 					clearScreen();
 					setCursorPosition(40, 11);
@@ -1071,7 +1071,7 @@ void NobodyLog_1()
 				setCursorPosition(40, 15);
 				printf("2. 거절한다.\n");
 				int choice = _getch();
-				if (choice == 'a')
+				if (choice == '1')
 				{
 					if (player.questmax < 3)
 					{
@@ -1095,7 +1095,7 @@ void NobodyLog_1()
 						break;
 					}
 				}
-				else if (choice == 'r')
+				else if (choice == '2')
 				{
 					clearScreen();
 					setCursorPosition(40, 11);
@@ -1216,7 +1216,7 @@ void NobodyLog_2()
 				setCursorPosition(40, 15);
 				printf("2. 거절한다.\n");
 				int choice = _getch();
-				if (choice == 'a')
+				if (choice == '1')
 				{
 					if (player.questmax < 3)
 					{
@@ -1240,7 +1240,7 @@ void NobodyLog_2()
 						break;
 					}
 				}
-				else if (choice == 'r')
+				else if (choice == '2')
 				{
 					clearScreen();
 					setCursorPosition(40, 11);

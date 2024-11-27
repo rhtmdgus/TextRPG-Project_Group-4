@@ -218,7 +218,7 @@ void encountNpcChoice()
 
 int encountPotal()
 {
-    if (player.pos.y == potal[player.currentmap].pos.y && player.pos.x == potal[player.currentmap].pos.x)
+    if (player.pos.y == potal[player.currentmap].pos.y && player.pos.x == potal[player.currentmap].pos.x && potal[player.currentmap].spawnPotal == true)
     {
         Situation = 9;
         return 1;
