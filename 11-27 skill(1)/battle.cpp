@@ -4,6 +4,7 @@
 #include "potion.h"
 #include "animation.h"
 #include "quest.h"
+#include "skill.h"
 
 int OriginalLevel;
 
@@ -15,6 +16,19 @@ void LevelUp()	//레벨업
 		player.level++;
 		maxhp++;
 		maxmp++;
+		if (player.job == 1)
+		{
+			player.attack++;
+		}
+		else if (player.job == 2)
+		{
+			player.accuracy++;
+		}
+		else if (player.job == 4)
+		{
+			player.defense++;
+		}
+
 	}
 	if (player.level >= 15)
 		EXPbar = 40;
@@ -56,6 +70,11 @@ void battle(Enemy* enemy)
 	displayPlayerStat();
 	displayEnemyStat(enemy);
 	displayBattleLog();
+	SkillAppear();  //                                                                      고쳐!
+	
+
+
+
 
 	while (enemy->hp > 0 && player.hp > 0 && Situation == 1)
 	{
@@ -86,14 +105,20 @@ void battle(Enemy* enemy)
 		case 'a':
 		case 'A':
 			// 공격 로직
-			playerAttackAnimation();
-			enemyAttackedAnimation(enemy);
+			
 			damageToEnemy = player.attack - enemy->defense; // 이전에 선언한 변수를 사용
 			if (damageToEnemy > 0) {
 				if (Crit() == 1)
 				{
+					playerCritAnimation();
+					enemyAttackedAnimation(enemy);
 					updateBattleLog("Critical Attack!");
 					damageToEnemy *= 2;
+				}
+				else
+				{
+					playerAttackAnimation();
+					enemyAttackedAnimation(enemy);
 				}
 				enemy->hp -= damageToEnemy;
 				if (enemy->hp <= 0)
@@ -152,6 +177,7 @@ void battle(Enemy* enemy)
 
 		// 상태 체크
 		if (enemy->hp <= 0) {
+			enemyDyingAnimation(enemy);
 			updateBattleLog("You defeated the enemy!");
 			player.exp += 12;
 			player.money += 4;
@@ -164,6 +190,7 @@ void battle(Enemy* enemy)
 			Situation = 0;
 		}
 		else if (player.hp <= 0) {
+			playerDyingAnimation();
 			updateBattleLog("You have been defeated...");
 			displayPlayerStat();
 			displayEnemyStat(enemy);
@@ -230,14 +257,20 @@ void bossbattle(Enemy* boss)
 		case 'a':
 		case 'A':
 			// 공격 로직
-			playerAttackAnimation();
-			enemyAttackedAnimation(boss);
+			
 			damageToBoss = player.attack - boss->defense; // 이전에 선언한 변수를 사용
 			if (damageToBoss > 0) {
 				if (Crit() == 1)
 				{
+					playerCritAnimation();
+					BossDamaged(boss);
 					updateBattleLog("Critical Attack!");
 					damageToBoss *= 2;
+				}
+				else
+				{
+					playerAttackAnimation();
+					BossDamaged(boss);
 				}
 				boss->hp -= damageToBoss;
 				if (boss->hp <= 0)
@@ -258,7 +291,7 @@ void bossbattle(Enemy* boss)
 
 			// 적 반격
 			if (boss->hp > 0) {
-				enemyAttackAnimation(boss);
+				BossAttack(boss);
 				playerAttackedAnimation();
 				damageToPlayer = boss->attack - player.defense; // 이전에 선언한 변수를 사용
 				if (damageToPlayer > 0) {
@@ -296,6 +329,7 @@ void bossbattle(Enemy* boss)
 
 		// 상태 체크
 		if (boss->hp <= 0) {
+			BossDying(boss);
 			updateBattleLog("You defeated the boss!");
 			player.exp += 30;
 			player.money += 10;
@@ -308,6 +342,7 @@ void bossbattle(Enemy* boss)
 			Situation = 0;
 		}
 		else if (player.hp <= 0) {
+			playerDyingAnimation();
 			updateBattleLog("You have been defeated...");
 			displayPlayerStat();
 			displayBossStat(boss);

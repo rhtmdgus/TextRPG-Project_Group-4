@@ -133,7 +133,6 @@ void printQuestWindow() {
             j++;
             cnt++;
         }
-        
     }
 
          

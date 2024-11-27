@@ -45,13 +45,13 @@ Enemy createEnemy_P(const Enemy* enemyTemplate_P, Position pos) {
 void spawnEnemies_P() {
 	if(checkingSpawnEnemy_P == 1)
 	{
-		Position pos = { 4, 20 };
+		Position pos = { 12, 15 };
 		currentEnemies_P[0] = createEnemy_P(&enemyTemplates_P[0], pos);
 		drawEnemy_P(&currentEnemies_P[0]);
-		pos = { 2, 20 };
+		pos = { 4, 20 };
 		currentEnemies_P[1] = createEnemy_P(&enemyTemplates_P[0], pos);
 		drawEnemy_P(&currentEnemies_P[1]);
-		pos = { 6, 20 };
+		pos = { 8, 18 };
 		currentEnemies_P[2] = createEnemy_P(&enemyTemplates_P[0], pos);
 		drawEnemy_P(&currentEnemies_P[2]);
 		checkingSpawnEnemy_P = 0;
