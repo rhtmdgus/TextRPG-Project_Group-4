@@ -58,7 +58,18 @@ int isPositionOccupied(int x, int y) {
     {
         return 1;
     }
-
+    if (player.currentmap == 0)
+    {
+        for (int i = 1; i <= 13; i++)
+        {
+            for (int j = 1; j <= 34; j++)
+            {
+                if (x == j || y == i)
+                    return 1;
+            }
+        }
+        
+    }
     return 0;  // 위치가 사용되지 않음
 }
 
