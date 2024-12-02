@@ -47,7 +47,7 @@ extern int checkboss1;
 extern PrologueQuest prologuequest; //프롤로그 퀘스트
 
 void initializeQuest();
-void initializePrologueQuest();
+void ActiveQuestItem();
 void QuestComplete1();
 void QuestComplete2();
 void QuestComplete3();

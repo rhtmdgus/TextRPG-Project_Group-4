@@ -27,5 +27,6 @@ extern NpcData* currentNPC;
 
 void initializeNpc();
 void drawNpc(NpcData* npcList);
+void ActiveNpc();
 
 #endif // !NPC_H

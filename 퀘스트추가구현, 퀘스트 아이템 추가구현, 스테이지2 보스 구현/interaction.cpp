@@ -954,8 +954,7 @@ void GoverArmyLog_1()
 			}
 			else if (quest[6].take == 1)
 			{
-				QuestComplete6();
-				potal[player.currentmap].spawnPotal = true;				
+				QuestComplete6();			
 				break;
 			}
 

@@ -248,7 +248,8 @@ void encountPotalChoice()
         initializeMap();
         player.pos.x = 1;
         player.pos.y = 1;
-
+        ActiveNpc();
+        ActiveQuestItem();
         gotoNextMap();
         initializeMap();
         displayMap();

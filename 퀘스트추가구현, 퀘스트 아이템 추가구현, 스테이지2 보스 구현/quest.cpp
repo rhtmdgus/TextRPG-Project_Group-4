@@ -95,6 +95,19 @@ void initializeQuestItem()
 	QuestItemList[6] = { "º­", 1, 1, {11, 3} , NobodyQ };
 }
 
+void ActiveQuestItem()
+{
+
+	if (player.JRelationship >= player.WRelationship && player.JRelationship >= player.RRelationship)
+		QuestItemList[5].isActive = 1;
+	else if (player.RRelationship >= player.WRelationship && player.RRelationship >= player.JRelationship)
+		QuestItemList[3].isActive = 1;
+	else if (player.WRelationship >= player.RRelationship && player.WRelationship >= player.JRelationship)
+		QuestItemList[4].isActive = 1;
+	else
+		return;
+}
+
 void drawQuestItem(QuestItemData* QuestItemList)
 {
 	for (int i = 0; i < MAX_QUESTITEM; i++)
@@ -436,6 +449,7 @@ void QuestComplete6() {
 			player.JRelationship += 20;
 			player.questmax--;
 			npcList[7].isActive = 1;
+			potal[player.currentmap].spawnPotal = true;
 			Sleep(100);
 			clearScreen();
 			setCursorPosition(40, 11);

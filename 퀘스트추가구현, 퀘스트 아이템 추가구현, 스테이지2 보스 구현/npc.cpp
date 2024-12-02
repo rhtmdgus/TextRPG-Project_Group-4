@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "npc.h"
+#include "player.h"
 
 NpcData npcList[MAX_NPC];		 //¹è¿­ Á¤ÀÇ
 NpcData* currentNPC = NULL;       // Æ÷ÀÎÅÍ Á¤ÀÇ
@@ -16,9 +17,9 @@ void initializeNpc()
 	npcList[7] = { "¹Ì¿Í ¿Í»çºÎ·Î", true, 0, 0, {9,27}, JapArmy };
 	npcList[8] = { "±èÀÏµ¿", true, 1, 1, {5, 5}, Nobody };
 	npcList[9] = { "°íµ¹¼è", true, 1, 1, {7, 5}, Nobody };
-	npcList[10] = { "±è¿µÅÂ", true, 1, 1, {9, 5}, VolunArmy };
-	npcList[11] = { "±è¹«¿Á", true, 1, 1, {11, 5}, VolunArmy };
-	npcList[12] = { "¹®¿µÃ¶", true, 1, 1, {13, 15}, VolunArmy };
+	npcList[10] = { "±è¿µÅÂ", true, 1, 0, {9, 5}, VolunArmy };
+	npcList[11] = { "±è¹«¿Á", true, 1, 0, {11, 5}, VolunArmy };
+	npcList[12] = { "¹®¿µÃ¶", true, 1, 0, {13, 5}, VolunArmy };
 	npcList[13] = { "Á¶°³¿Á", true, 1, 0, {9, 5}, GoverArmy };
 	npcList[14] = { "±èÁ¾¿ø", true, 1, 0, {11, 5}, GoverArmy };
 	npcList[15] = { "±èÃ¢·æ", true, 1, 0, {13, 5}, GoverArmy };
@@ -26,6 +27,30 @@ void initializeNpc()
 	npcList[17] = { "¾Æ»ç³ë", true, 1, 0, {11, 5}, JapArmy };
 	npcList[18] = { "¸¶¾²¶ó", true, 1, 0, {13, 5}, JapArmy };
 
+}
+
+void ActiveNpc()
+{
+	if (player.JRelationship >= player.WRelationship && player.JRelationship >= player.RRelationship)
+	{
+		npcList[13].isActive = 1;
+		npcList[14].isActive = 1;
+		npcList[15].isActive = 1;
+	}
+	else if (player.RRelationship >= player.WRelationship && player.RRelationship >= player.JRelationship)
+	{
+		npcList[10].isActive = 1;
+		npcList[11].isActive = 1;
+		npcList[12].isActive = 1;
+	}
+	else if (player.WRelationship >= player.RRelationship && player.WRelationship >= player.JRelationship)
+	{
+		npcList[16].isActive = 1;
+		npcList[17].isActive = 1;
+		npcList[18].isActive = 1;
+	}
+	else
+		return;
 }
 
 void drawNpc(NpcData* npcList)
