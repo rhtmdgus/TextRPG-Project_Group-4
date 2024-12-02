@@ -70,14 +70,39 @@ void battle(Enemy* enemy)
 	displayPlayerStat();
 	displayEnemyStat(enemy);
 	displayBattleLog();
-	SkillAppear();  //                                                                      고쳐!
-	
 
+
+	SkillAppear();  //                                                                      고쳐!
 
 
 
 	while (enemy->hp > 0 && player.hp > 0 && Situation == 1)
 	{
+		if (player.buffcount1 > 0) {
+			player.buffcount1--;
+			if (player.buffcount1 == 0) {
+				player.attack -= player.buff_attack;  // 공격력 버프 제거
+				player.buff_attack = 0;
+				updateBattleLog("버프의 지속시간이 끝났습니다!");
+			}
+		}
+
+		if (player.buffcount2 > 0) {
+			player.buffcount2--;
+			if (player.buffcount2 == 0) {
+				player.defense -= player.buff_defense; // 방어력 버프 제거
+				player.buff_defense = 0;
+				updateBattleLog("방어태세의 지속시간이 끝났습니다!");
+			}
+		}
+		if (player.buffcount3 > 0) {
+			player.buffcount3--;
+			if (player.buffcount3 == 0) {
+				player.buff_reflect = 0;  // 가시갑옷 비활성화
+				updateBattleLog("가시갑옷의 지속 시간이 끝났습니다!");
+			}
+		}
+
 		char action = _getch();
 
 		if (enemy == nullptr) {
@@ -107,6 +132,82 @@ void battle(Enemy* enemy)
 			// 공격 로직
 			
 			damageToEnemy = player.attack - enemy->defense; // 이전에 선언한 변수를 사용
+			if (damageToEnemy > 0) {
+				if (Crit() == 1)
+				{
+					playerCritAnimation();
+					enemyAttackedAnimation(enemy);
+					updateBattleLog("Critical Attack!");
+					damageToEnemy *= 2;
+				}
+				else
+				{
+					playerAttackAnimation();
+					enemyAttackedAnimation(enemy);
+				}
+				enemy->hp -= damageToEnemy;
+				if (player.job == 2 && player.buffcount1 > 0) {    // 궁수 스킬 3 도트딜 구현
+					Sleep(100);
+					enemyAttackedAnimation(enemy);
+					enemy->hp -= 3;
+				}
+				if (enemy->hp <= 0)
+					enemy->hp = 0;
+				updateBattleLog("You attacked the enemy!");
+				displayPlayerStat();
+				displayEnemyStat(enemy);
+				Sleep(100);
+				displayBattleLog();
+			}
+			else {
+				updateBattleLog("Your attack was too weak!");
+				displayPlayerStat();
+				displayEnemyStat(enemy);
+				Sleep(100);
+				displayBattleLog();
+			}
+
+			// 적 반격
+			if (enemy->hp > 0) {
+				enemyAttackAnimation(enemy);
+				playerAttackedAnimation();
+				damageToPlayer = enemy->attack - player.defense; // 이전에 선언한 변수를 사용
+				if (damageToPlayer > 0) {
+					if (player.buff_reflect == 1) {  // 가시갑옷 반사 로직
+						int reflectedDamage = damageToPlayer; // 반사 데미지 계산
+						enemy->hp -= reflectedDamage;
+						if (enemy->hp < 0) enemy->hp = 0;
+						updateBattleLog("가시갑옷으로 적에게 데미지를 반사했습니다!");
+					}
+					else
+						player.hp -= damageToPlayer;
+					if (player.hp <= 0)
+						player.hp = 0;
+					updateBattleLog("The enemy attacked you!");
+					displayPlayerStat();
+					displayEnemyStat(enemy);
+					Sleep(100);
+					displayBattleLog();
+				}
+			}
+			break;
+		case 'z':  //스킬 1
+		case 'Z':
+			// 공격 로직
+			if (player.level < 5) {
+				updateBattleLog("레벨이 부족합니다!!");
+				displayLog();
+				break;
+			}
+			if (player.mp < 5) {
+				updateBattleLog("마나가 부족합니다!!");
+				displayLog();
+				break;
+			}
+
+			damageToEnemy = skill1(player.attack) - enemy->defense; // 이전에 선언한 변수를 사용
+			player.mp -= 5;
+
 			if (damageToEnemy > 0) {
 				if (Crit() == 1)
 				{
@@ -154,6 +255,186 @@ void battle(Enemy* enemy)
 				}
 			}
 			break;
+
+		case 'x':  // 스킬 2
+		case 'X':
+			if (player.level < 10) {
+				updateBattleLog("레벨이 부족합니다!!");
+				displayLog();
+				break;
+			}
+			if (player.mp < 10) {
+				updateBattleLog("마나가 부족합니다!!");
+				displayLog();
+				break;
+			}
+			// 공격 로직
+			if (player.job == 4 ) { // 방패병 스킬 2 
+				player.mp -= 10;
+				player.buff_defense += 5;  // 방어력 5 증가
+				player.buffcount2 = 3;     // 3턴 지속, buffcount2 에 방패병 스킬2를 할당
+				updateBattleLog("방어태세 발동!");
+				displayPlayerStat();
+			}
+			else  {
+				damageToEnemy = skill2(player.attack) - enemy->defense; // 이전에 선언한 변수를 사용
+				player.mp -= 10;
+
+				if (damageToEnemy > 0) {
+					if (Crit() == 1)
+					{
+						playerCritAnimation();
+						enemyAttackedAnimation(enemy);
+						updateBattleLog("Critical Attack!");
+						damageToEnemy *= 2;
+					}
+					else
+					{
+						playerAttackAnimation();
+						enemyAttackedAnimation(enemy);
+					}
+					enemy->hp -= damageToEnemy;
+					if (enemy->hp <= 0)
+						enemy->hp = 0;
+					updateBattleLog("You attacked the enemy!");
+					displayPlayerStat();
+					displayEnemyStat(enemy);
+					Sleep(100);
+					displayBattleLog();
+				}
+				else {
+					updateBattleLog("Your attack was too weak!");
+					displayPlayerStat();
+					displayEnemyStat(enemy);
+					Sleep(100);
+					displayBattleLog();
+				}
+			}
+
+			// 적 반격
+			if (enemy->hp > 0) {
+				enemyAttackAnimation(enemy);
+				playerAttackedAnimation();
+				damageToPlayer = enemy->attack - player.defense; // 이전에 선언한 변수를 사용
+				if (damageToPlayer > 0) {
+					player.hp -= damageToPlayer;
+					if (player.hp <= 0)
+						player.hp = 0;
+					updateBattleLog("The enemy attacked you!");
+					displayPlayerStat();
+					displayEnemyStat(enemy);
+					Sleep(100);
+					displayBattleLog();
+				}
+			}
+			break;
+
+
+		case 'c':  //스킬 3
+		case 'C':
+			if (player.level < 15) {
+				updateBattleLog("레벨이 부족합니다!!");
+				displayLog();
+				break;
+			}
+			if (player.mp < 20) {
+				updateBattleLog("마나가 부족합니다!!");
+				displayLog();
+				break;
+			}
+
+			if (player.job == 1) { // 전사 스킬 3 광폭화
+				player.mp -= 20;
+				player.buff_attack += 10;  // 공격력 10 증가
+				player.buffcount1 = 3;     // 3턴 지속
+				updateBattleLog("광폭화 발동!");
+				displayPlayerStat();
+			}
+			else if (player.job == 4) { // 방패병 스킬 3: 가시방패
+				player.mp -= 20;
+				player.buff_reflect = 1;    // 가시방패 활성화
+				player.buffcount3 = 5;      // 5턴 지속, 방패병 스킬 3을 buffcount3에 할당
+				updateBattleLog("가시방패 발동!");
+				displayPlayerStat();
+			}
+			else if (player.job == 2) { // 궁수 스킬 3 불화살
+				damageToEnemy = player.attack - enemy->defense; // 이전에 선언한 변수를 사용
+				player.mp -= 20;
+				player.buffcount1 = 5;
+
+
+				if (damageToEnemy > 0) {
+					if (Crit() == 1)
+					{
+						playerCritAnimation();
+						enemyAttackedAnimation(enemy);
+						updateBattleLog("Critical Attack!");
+						damageToEnemy *= 2;
+					}
+					else
+					{
+						playerAttackAnimation();
+						enemyAttackedAnimation(enemy);
+					}
+					enemy->hp -= damageToEnemy;
+					if (player.buffcount1 > 0) {
+						Sleep(100);
+						enemy->hp -= 3;
+						enemyAttackedAnimation(enemy);
+					}
+					if (enemy->hp <= 0)
+						enemy->hp = 0;
+					updateBattleLog("You attacked the enemy!");
+					displayPlayerStat();
+					displayEnemyStat(enemy);
+					Sleep(100);
+					displayBattleLog();
+				}
+				else {
+					updateBattleLog("Your attack was too weak!");
+					displayPlayerStat();
+					displayEnemyStat(enemy);
+					Sleep(100);
+					displayBattleLog();
+				}
+			}
+			else if (player.job == 3) {
+				damageToEnemy = skill3(player.attack) - enemy->defense; // 이전에 선언한 변수를 사용
+				player.mp -= 20;
+
+				if (damageToEnemy > 0) {
+					if (Crit() == 1)
+					{
+						playerCritAnimation();
+						enemyAttackedAnimation(enemy);
+						updateBattleLog("Critical Attack!");
+						damageToEnemy *= 2;
+					}
+					else
+					{
+						playerAttackAnimation();
+						enemyAttackedAnimation(enemy);
+					}
+					enemy->hp -= damageToEnemy;
+					if (enemy->hp <= 0)
+						enemy->hp = 0;
+					updateBattleLog("You attacked the enemy!");
+					displayPlayerStat();
+					displayEnemyStat(enemy);
+					Sleep(100);
+					displayBattleLog();
+				}
+				else {
+					updateBattleLog("Your attack was too weak!");
+					displayPlayerStat();
+					displayEnemyStat(enemy);
+					Sleep(100);
+					displayBattleLog();
+				}
+			}
+			break;
+
+
 
 		//적과 전투에서 도주
 		case 'r':

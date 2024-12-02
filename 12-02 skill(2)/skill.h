@@ -3,6 +3,13 @@
 
 #include "player.h"
 
+int skill1(int playerAttackPoint);
+
+int skill2(int playerAttackPoint);
+
+int skill3(int playerAttackPoint);
+
+
 int warriorSkill1();
 int warriorSkill2();
 int warriorSkill3();

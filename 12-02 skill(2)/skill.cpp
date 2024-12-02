@@ -2,6 +2,117 @@
 #include <stdio.h>
 
 
+int skill1(int playerAttackPoint) {
+	if (player.job == 1) {
+
+		int Damage;
+
+		Damage = player.attack * 3;
+
+		return Damage;
+
+	}
+	else if (player.job == 2) {
+
+		int Damage;
+
+		Damage = player.attack * 3;
+
+		return Damage;
+
+	}
+	else if (player.job == 3) {
+
+		int Damage;
+
+		Damage = player.attack * 3;
+
+		return Damage;
+	}
+	else if (player.job == 4) {
+		int Damage;
+
+		Damage = player.attack * 3;
+
+		return Damage;
+	}
+
+
+}
+
+int skill2(int playerAttackPoint) {
+	if (player.job == 1) {
+
+		int Damage;
+
+		Damage = player.attack * 4;
+
+		return Damage;
+
+	}
+	else if (player.job == 2) {
+
+		int Damage;
+
+		Damage = player.attack * 5;
+
+		return Damage;
+
+	}
+	else if (player.job == 3) {
+
+		int Damage;
+
+		Damage = player.attack * 4;
+
+		return Damage;
+	}
+	else if (player.job == 4) {
+		
+		int increaseDefense;
+
+		increaseDefense = 5;
+
+		return increaseDefense;
+
+	}
+
+
+}
+
+int skill3(int playerAttackPoint) {
+	if (player.job == 1) {
+		int increaseAttack = 8;
+
+		return increaseAttack;
+
+	}
+	else if (player.job == 2) {
+		int Damage;
+
+		Damage = player.attack * 2;
+
+		return Damage;
+	}
+	else if (player.job == 3) {
+		int Damage;
+
+		Damage = player.attack * 6;
+
+		return Damage;
+	}
+
+	
+}
+
+
+
+
+
+
+
+
+
 int warriorSkill1() {
 	
 	int Damage;
