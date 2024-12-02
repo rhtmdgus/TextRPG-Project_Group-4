@@ -132,9 +132,9 @@ void displayPlayerStat()
 	setCursorPosition(101, 12);
 	printf("  왜군과의 관계: %3d", player.WRelationship);
 
-	setCursorPosition(101, 19);
-	printf("  무기: %-15s", player.currentweaponName);
 	setCursorPosition(101, 20);
+	printf("  무기: %-15s", player.currentweaponName);
+	setCursorPosition(101, 21);
 	printf("  장비: %-15s", player.currentequipmentName);
 }
 
@@ -145,13 +145,13 @@ void displayEnemyStat(const Enemy* enemy)
 		return;
 	}
 	setCursorPosition(101, 14);
-	printf("  %-70s", enemy->name);
+	printf("%-70s", enemy->name);
 	setCursorPosition(101, 15);
-	printf("  HP: %3d", enemy->hp);
+	printf("HP: %3d", enemy->hp);
 	setCursorPosition(101, 16);
-	printf("  attack point: %3d", enemy->attack);
+	printf("attack point: %3d", enemy->attack);
 	setCursorPosition(101, 17);
-	printf("  defense point: %3d", enemy->defense);
+	printf("defense point: %3d", enemy->defense);
 }
 
 void displayBossStat(const Enemy* boss)

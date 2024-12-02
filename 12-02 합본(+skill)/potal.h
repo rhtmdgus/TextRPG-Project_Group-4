@@ -25,8 +25,6 @@ extern Potal potal[20];
 
 
 
-
-
 void gotoNextMap();
 
 void selectmap();

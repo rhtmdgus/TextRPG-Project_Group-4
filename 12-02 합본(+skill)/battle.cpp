@@ -4,7 +4,7 @@
 #include "potion.h"
 #include "animation.h"
 #include "quest.h"
-#include "skill.h"
+
 
 int OriginalLevel;
 
@@ -16,6 +16,10 @@ void LevelUp()	//레벨업
 		player.level++;
 		maxhp++;
 		maxmp++;
+		if (player.hp < maxhp)
+			player.hp = maxhp;
+		if (player.mp < maxmp)
+			player.mp = maxmp;
 		if (player.job == 1)
 		{
 			player.attack++;
@@ -60,6 +64,8 @@ int Crit()	//크리티컬 히트
 }
 
 
+
+
 // 전투 함수
 void battle(Enemy* enemy)
 {
@@ -71,14 +77,11 @@ void battle(Enemy* enemy)
 	displayEnemyStat(enemy);
 	displayBattleLog();
 
-
-	SkillAppear();  //                                                                      고쳐!
-
-
+	SkillAppear();
 
 	while (enemy->hp > 0 && player.hp > 0 && Situation == 1)
 	{
-		
+
 
 		char action = _getch();
 
@@ -107,7 +110,7 @@ void battle(Enemy* enemy)
 		case 'a':
 		case 'A':
 			// 공격 로직
-			
+
 			damageToEnemy = player.attack - enemy->defense; // 이전에 선언한 변수를 사용
 			if (damageToEnemy > 0) {
 				if (Crit() == 1)
@@ -151,17 +154,16 @@ void battle(Enemy* enemy)
 				enemyAttackAnimation(enemy);
 				playerAttackedAnimation();
 				damageToPlayer = enemy->attack - player.defense; // 이전에 선언한 변수를 사용
+				if (player.buff_reflect == 1) {  // 가시갑옷 반사 로직
+					int reflectedDamage = enemy->attack; // 반사 데미지 계산
+					enemy->hp -= reflectedDamage;
+					if (enemy->hp < 0) enemy->hp = 0;
+					updateBattleLog("가시갑옷으로 적에게 데미지를 반사했습니다!");
+					displayBattleLog();
+					displayEnemyStat(enemy);
+				}
 				if (damageToPlayer > 0) {
-					if (player.buff_reflect == 1) {  // 가시갑옷 반사 로직
-						int reflectedDamage = enemy->attack; // 반사 데미지 계산
-						enemy->hp -= reflectedDamage;
-						if (enemy->hp < 0) enemy->hp = 0;
-						updateBattleLog("가시갑옷으로 적에게 데미지를 반사했습니다!");
-						displayBattleLog();
-						displayEnemyStat(enemy);
-					}
-					else
-						player.hp -= damageToPlayer;
+					player.hp -= damageToPlayer;
 					if (player.hp <= 0)
 						player.hp = 0;
 					updateBattleLog("The enemy attacked you!");
@@ -241,16 +243,16 @@ void battle(Enemy* enemy)
 				enemyAttackAnimation(enemy);
 				playerAttackedAnimation();
 				damageToPlayer = enemy->attack - player.defense; // 이전에 선언한 변수를 사용
+				if (player.buff_reflect == 1) {  // 가시갑옷 반사 로직
+					int reflectedDamage = enemy->attack; // 반사 데미지 계산
+					enemy->hp -= reflectedDamage;
+					if (enemy->hp < 0) enemy->hp = 0;
+					updateBattleLog("가시갑옷으로 적에게 데미지를 반사했습니다!");
+					displayBattleLog();
+					displayEnemyStat(enemy);
+				}
 				if (damageToPlayer > 0) {
 					player.hp -= damageToPlayer;
-					if (player.buff_reflect == 1) {  // 가시갑옷 반사 로직
-						int reflectedDamage = enemy->attack; // 반사 데미지 계산
-						enemy->hp -= reflectedDamage;
-						if (enemy->hp < 0) enemy->hp = 0;
-						updateBattleLog("가시갑옷으로 적에게 데미지를 반사했습니다!");
-						displayBattleLog();
-						displayEnemyStat(enemy);
-					}
 					if (player.hp <= 0)
 						player.hp = 0;
 					updateBattleLog("The enemy attacked you!");
@@ -278,7 +280,7 @@ void battle(Enemy* enemy)
 			updateBattleLog("스킬 2이 발동되었습니다!");
 			displayLog();
 			// 공격 로직
-			if (player.job == 4 ) { // 방패병 스킬 2 
+			if (player.job == 4) { // 방패병 스킬 2 
 				player.mp -= 10;
 				player.buff_defense = 5;  // 방어력 5 증가
 				player.defense += player.buff_defense;
@@ -287,7 +289,7 @@ void battle(Enemy* enemy)
 				displayBattleLog();
 				displayPlayerStat();
 			}
-			else  {
+			else {
 				damageToEnemy = skill2(player.attack) - enemy->defense; // 이전에 선언한 변수를 사용
 				player.mp -= 10;
 				if (player.job == 1) {
@@ -338,16 +340,16 @@ void battle(Enemy* enemy)
 				enemyAttackAnimation(enemy);
 				playerAttackedAnimation();
 				damageToPlayer = enemy->attack - player.defense; // 이전에 선언한 변수를 사용
+				if (player.buff_reflect == 1) {  // 가시갑옷 반사 로직
+					int reflectedDamage = enemy->attack; // 반사 데미지 계산
+					enemy->hp -= reflectedDamage;
+					if (enemy->hp < 0) enemy->hp = 0;
+					updateBattleLog("가시갑옷으로 적에게 데미지를 반사했습니다!");
+					displayBattleLog();
+					displayEnemyStat(enemy);
+				}
 				if (damageToPlayer > 0) {
 					player.hp -= damageToPlayer;
-					if (player.buff_reflect == 1) {  // 가시갑옷 반사 로직
-						int reflectedDamage = enemy->attack; // 반사 데미지 계산
-						enemy->hp -= reflectedDamage;
-						if (enemy->hp < 0) enemy->hp = 0;
-						updateBattleLog("가시갑옷으로 적에게 데미지를 반사했습니다!");
-						displayBattleLog();
-						displayEnemyStat(enemy);
-					}
 					if (player.hp <= 0)
 						player.hp = 0;
 					updateBattleLog("The enemy attacked you!");
@@ -478,16 +480,16 @@ void battle(Enemy* enemy)
 				enemyAttackAnimation(enemy);
 				playerAttackedAnimation();
 				damageToPlayer = enemy->attack - player.defense; // 이전에 선언한 변수를 사용
+				if (player.buff_reflect == 1) {  // 가시갑옷 반사 로직
+					int reflectedDamage = enemy->attack; // 반사 데미지 계산
+					enemy->hp -= reflectedDamage;
+					if (enemy->hp < 0) enemy->hp = 0;
+					updateBattleLog("가시갑옷으로 적에게 데미지를 반사했습니다!");
+					displayBattleLog();
+					displayEnemyStat(enemy);
+				}
 				if (damageToPlayer > 0) {
 					player.hp -= damageToPlayer;
-					if (player.buff_reflect == 1) {  // 가시갑옷 반사 로직
-						int reflectedDamage = enemy->attack; // 반사 데미지 계산
-						enemy->hp -= reflectedDamage;
-						if (enemy->hp < 0) enemy->hp = 0;
-						updateBattleLog("가시갑옷으로 적에게 데미지를 반사했습니다!");
-						displayBattleLog();
-						displayEnemyStat(enemy);
-					}
 					if (player.hp <= 0)
 						player.hp = 0;
 					updateBattleLog("The enemy attacked you!");
@@ -501,7 +503,7 @@ void battle(Enemy* enemy)
 
 
 
-		//적과 전투에서 도주
+			//적과 전투에서 도주
 		case 'r':
 		case 'R':
 			updateBattleLog("You ran away from the enemy!");
@@ -521,10 +523,10 @@ void battle(Enemy* enemy)
 			break;
 		}
 
-		if (player.buffcount1 > 0) 
+		if (player.buffcount1 > 0)
 		{
 			player.buffcount1--;
-			if (player.buffcount1 == 0) 
+			if (player.buffcount1 == 0)
 			{
 				player.attack -= player.buff_attack;  // 공격력 버프 제거
 				player.buff_attack = 0;
@@ -532,20 +534,20 @@ void battle(Enemy* enemy)
 			}
 		}
 
-		if (player.buffcount2 > 0) 
+		if (player.buffcount2 > 0)
 		{
 			player.buffcount2--;
-			if (player.buffcount2 == 0) 
+			if (player.buffcount2 == 0)
 			{
 				player.defense -= player.buff_defense; // 방어력 버프 제거
 				player.buff_defense = 0;
 				updateBattleLog("방어태세의 지속시간이 끝났습니다!");
 			}
 		}
-		if (player.buffcount3 > 0) 
+		if (player.buffcount3 > 0)
 		{
 			player.buffcount3--;
-			if (player.buffcount3 == 0) 
+			if (player.buffcount3 == 0)
 			{
 				player.buff_reflect = 0;  // 가시갑옷 비활성화
 				updateBattleLog("가시갑옷의 지속 시간이 끝났습니다!");
@@ -559,6 +561,10 @@ void battle(Enemy* enemy)
 			player.exp += 12;
 			player.money += 4;
 			player.killcount++;
+			player.buff_reflect = 0;
+			player.buffcount1 = 0;
+			player.buffcount2 = 0;
+			player.buffcount3 = 0;
 			updateQuestStatusKill();
 			displayPlayerStat();
 			displayEnemyStat(enemy);
@@ -707,6 +713,7 @@ void bossbattle(Enemy* boss)
 		if (boss->hp <= 0) {
 			BossDying(boss);
 			updateBattleLog("You defeated the boss!");
+			updateQuestStatusItem(6);
 			player.exp += 30;
 			player.money += 10;
 			player.questitem1 = 1;

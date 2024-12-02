@@ -804,8 +804,9 @@ void battle_P(Enemy* enemy)
 
 		// 상태 체크
 		if (enemy->hp <= 0) {
+			enemyDyingAnimation(enemy);
 			updateBattleLog("You defeated the enemy!");
-			player.exp += 12;
+			//player.exp += 12;
 			player.money += 4;
 			player.killcount++;
 			Enemy_PNum--;
@@ -821,6 +822,7 @@ void battle_P(Enemy* enemy)
 			Situation = 0;
 		}
 		else if (player.hp <= 0) {
+			playerDyingAnimation();
 			updateBattleLog("You have been defeated...");
 			displayPlayerStat();
 			displayEnemyStat(enemy);
@@ -830,10 +832,10 @@ void battle_P(Enemy* enemy)
 		}
 	}
 
-	OriginalLevel = player.level;
+	//OriginalLevel = player.level;
 	// 전투가 끝난 후 대기 및 본래 화면으로 복귀
 	updateBattleLog("Press any key to return to the main screen...");
-	LevelUp();
+	//LevelUp();
 	displayPlayerStat();
 	displayBattleLog();
 	_getch();  // 사용자 입력 대기
