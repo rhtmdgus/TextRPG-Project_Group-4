@@ -218,7 +218,7 @@ void encountNpcChoice()
 
 int encountPotal()
 {
-    if (player.pos.y == potal[player.currentmap].pos.y && player.pos.x == potal[player.currentmap].pos.x)
+    if (player.pos.y == potal[player.currentmap].pos.y && player.pos.x == potal[player.currentmap].pos.x && potal[player.currentmap].spawnPotal == true)
     {
         Situation = 9;
         return 1;
@@ -248,7 +248,8 @@ void encountPotalChoice()
         initializeMap();
         player.pos.x = 1;
         player.pos.y = 1;
-
+        ActiveNpc();
+        ActiveQuestItem();
         gotoNextMap();
         initializeMap();
         displayMap();
@@ -267,6 +268,30 @@ void encountPotalChoice()
     }
     displayLog();
 }
+
+/**
+int encountRandom()
+{
+    if (player.pos.y == Random.pos.y && player.pos.x == Random.pos.x)
+    {
+        Situation = 10;
+        return 10;
+    }
+    else
+    {
+        Situation = 0;
+        return 0;
+    }
+}
+*/
+
+/**
+void encountRandomChoice()
+{
+
+}
+*/
+
 
 int encountQuestItem()
 {

@@ -50,11 +50,11 @@ int isPositionOccupied(int x, int y) {
             return 1;  // 위치가 이미 사용 중임
         }
     }
-    if (x == 1 && y == 1)
+    if (player.currentmap == 0 && x >= 1 &&x <= 34 && y >= 1 && y <= 15)
     {
         return 1;
     }
-    if (map[y][x] == '#' || map[y][x] == 1 || map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'T' || map[y][x] == 'F' || map[y][x] == 'O' || map[y][x] == 'R' || map[y][x] == 'B')     //스폰 위치가 벽/npc일 경우 위치 사용 중으로
+    if (map[y][x] == '#' || map[y][x] == 1 || map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'T' || map[y][x] == 'F' || map[y][x] == 'O' || map[y][x] == 'R' || map[y][x] == 'B' || map[y][x] == '?')     //스폰 위치가 벽/npc일 경우 위치 사용 중으로
     {
         return 1;
     }

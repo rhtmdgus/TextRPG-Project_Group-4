@@ -1,4 +1,4 @@
-#include <stdio.h>
+ #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
 #include "quest.h"
@@ -449,6 +449,8 @@ void QuestComplete6() {
 			player.JRelationship += 20;
 			player.questmax--;
 			npcList[7].isActive = 1;
+			checkboss1 = 0;
+			checkboss2 = 0;
 			potal[player.currentmap].spawnPotal = true;
 			Sleep(100);
 			clearScreen();

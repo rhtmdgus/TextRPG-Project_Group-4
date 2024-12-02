@@ -5,6 +5,7 @@
 #include "enemy.h"
 #include "npc.h"
 #include "potal.h"
+//#include "randomencount.h"
 
 extern Enemy* currentEnemy;
 extern NpcData* currentNPC;
@@ -19,6 +20,9 @@ int encountNpc();
 void encountNpcChoice();
 int encountPotal();
 void encountPotalChoice();
+
+int encountRandom();
+void encountRandomChoice();
 
 int encountQuestItem();
 
