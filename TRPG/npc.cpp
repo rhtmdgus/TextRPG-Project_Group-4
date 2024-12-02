@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "npc.h"
+#include "player.h"
 
 NpcData npcList[MAX_NPC];		 //배열 정의
 NpcData* currentNPC = NULL;       // 포인터 정의
@@ -14,6 +15,42 @@ void initializeNpc()
 	npcList[5] = { "이정재", true, 0, 1, {33, 13}, VolunArmy };
 	npcList[6] = { "장택상", true, 0, 1, {88, 2}, GoverArmy };
 	npcList[7] = { "미와 와사부로", true, 0, 0, {9,27}, JapArmy };
+	npcList[8] = { "김일동", true, 1, 1, {5, 5}, Nobody };
+	npcList[9] = { "고돌쇠", true, 1, 1, {7, 5}, Nobody };
+	npcList[10] = { "김영태", true, 1, 0, {9, 5}, VolunArmy };
+	npcList[11] = { "김무옥", true, 1, 0, {11, 5}, VolunArmy };
+	npcList[12] = { "문영철", true, 1, 0, {13, 5}, VolunArmy };
+	npcList[13] = { "조개옥", true, 1, 0, {9, 5}, GoverArmy };
+	npcList[14] = { "김종원", true, 1, 0, {11, 5}, GoverArmy };
+	npcList[15] = { "김창룡", true, 1, 0, {13, 5}, GoverArmy };
+	npcList[16] = { "마에다", true, 1, 0, {9, 5}, JapArmy };
+	npcList[17] = { "아사노", true, 1, 0, {11, 5}, JapArmy };
+	npcList[18] = { "마쓰라", true, 1, 0, {13, 5}, JapArmy };
+
+}
+
+void ActiveNpc()
+{
+	if (player.JRelationship >= player.WRelationship && player.JRelationship >= player.RRelationship)
+	{
+		npcList[13].isActive = 1;
+		npcList[14].isActive = 1;
+		npcList[15].isActive = 1;
+	}
+	else if (player.RRelationship >= player.WRelationship && player.RRelationship >= player.JRelationship)
+	{
+		npcList[10].isActive = 1;
+		npcList[11].isActive = 1;
+		npcList[12].isActive = 1;
+	}
+	else if (player.WRelationship >= player.RRelationship && player.WRelationship >= player.JRelationship)
+	{
+		npcList[16].isActive = 1;
+		npcList[17].isActive = 1;
+		npcList[18].isActive = 1;
+	}
+	else
+		return;
 }
 
 void drawNpc(NpcData* npcList)

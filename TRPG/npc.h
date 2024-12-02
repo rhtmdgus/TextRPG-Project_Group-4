@@ -3,7 +3,7 @@
 
 #include "utility.h"
 #include "player.h"
-#define MAX_NPC 8
+#define MAX_NPC 19
 
 typedef enum {
 	VolunArmy,	//ÀÇº´
@@ -27,5 +27,6 @@ extern NpcData* currentNPC;
 
 void initializeNpc();
 void drawNpc(NpcData* npcList);
+void ActiveNpc();
 
 #endif // !NPC_H

@@ -41,6 +41,39 @@ void initializeQuest()
 	quest[7] = { "왜구 간부와의 만남",
 	"이봐 자네! 날 풀어주면 돈을 주도록 하지",
 	0, 0, "후회하게 될거야", "뭘 꾸물거리는 거야?", "탁월한 선택이네" , 0, 1 };
+	quest[8] = { "식수 부족",
+	"거기 자네 혹시 물 하나 있으면 좀 줄수 있겠나?",
+	0, 0, "목이 너무 마른데..아쉽군", "아직 물이 없는가?", "고맙네, 이제 다시 일하러 가야겠군" , 0, 1 }; // 평민
+	quest[9] = { "벼 수확",
+	"벼를 수확하려는데 일손이 부족해, 좀 도와줄수 있겠나?",
+	0, 0, "도와주면 좀 나눠줄테니 부탁하네", "조금 더 쉬었다 할 생각인가?", "이걸로 이번주는 어찌 버틸수 있겠어, 여기 좀 나눠주지" , 0, 1 }; // 평민
+	quest[10] = { "왜군 처리",
+	"많은 수의 왜군을 죽였는데 계속 증원되고 있어, 좀 도와주게",
+	0, 0, "좀 도와주게, 전쟁을 빨리 끝내야 하지 않겠나?", "아직 할 일이 있는가?", "이로서 한숨 돌리곘어.. 고맙네" , 0, 5 }; // 의병
+	quest[11] = { "왜군 식량창고 제거",
+	"왜군의 식량창고 위치 첩보가 들어왔네, 불을 질러서 없애버리세",
+	0, 0, "식량창고를 제거해야 숨이 트인다네", "아직 완료하지 못했나?", "이로서 놈들의 사기가 꺾였을 걸세, 고맙다네" , 0, 1 };// 의병
+	quest[12] = { "장군 처리",
+	"앞에 우리를 가로막는 놈이 있다네, 좀 도와주게",
+	0, 0, "놈을 처리하지 않고서는 지나갈 수 없어", "아직 처리하지 못했나?", "드디어 길이 열렸군, 갑세" , 0, 1 };// 의병
+	quest[13] = { "왜군 처리",
+	"왜군 본토에서 계속 지원이 오고있네, 자네도 돕게나",
+	0, 0, "조정의 명을 거역할 셈인가?", "아직 완료하지 못했나?", "좋다, 자네덕에 우리가 우세하게 될걸세" , 0, 5 };// 관군
+	quest[14] = { "물자 보급",
+	"전쟁이 길어저서 물자가 부족해, 후방에서 보급 받아 오게나",
+	0, 0, "보급받지 않으면 전쟁을 이어갈수 없어!", "아직 가져오지 못했나?", "좋아, 계속 싸울수 있겠어" , 0, 1 };// 관군
+	quest[15] = { "강적 처리",
+	"앞에 가로막는 저놈은 누구지? 같이 처리하세",
+	0, 0, "처리하지 않으면 더이상 싸울수 없어!", "아직 처리하지 못했나?", "좋아, 계속 나아가세" , 0, 1 };// 관군
+	quest[16] = { "물 거래",
+	"식수좀 가지고 있나? 주면 돈을 주지",
+	0, 0, "싫음 말게", "아직 가져오지 못했나?", "시원하군, 여기 약속한 돈이다." , 0, 1 };// 왜군
+	quest[17] = { "수탈한 물품 수송",
+	"조선 백성들 수탈해서 벌어온 물품이 너무 많아서 못 들고왔네, 좀 들고와줘",
+	0, 0, "너무 나쁘게만 생각하지 말게, 좀 때주지", "아직 안 들고왔나?", "짭잘하구먼, 여기 좀 주겠네" , 0, 1 };// 왜군
+	quest[18] = { "장군 처리",
+	"우릴 도왔던 조선인이구만? 저놈 처리좀 도와주게",
+	0, 0, "도와주면 우리쪽 자리 알아봐주지", "아직 처리하지 못했나?", "자네는 이제 왜군장군이 될거야" , 0, 1 };// 왜군
 }
 /*
 
@@ -56,6 +89,23 @@ void initializeQuestItem()
 	QuestItemList[0] = { "군량", 0, 1, {2, 18}, VolunArmyQ };
 	QuestItemList[1] = { "작전 서류", 0, 1, {19, 27} , JapArmyQ };
 	QuestItemList[2] = { "바위", 0, 1, {34, 14} , NobodyQ };
+	QuestItemList[3] = { "왜군 식량 창고", 1, 0, {5, 3}, VolunArmyQ };
+	QuestItemList[4] = { "수탈한 물품", 1, 0, {7, 3} , JapArmyQ };
+	QuestItemList[5] = { "군수 물자", 1, 0, {9, 3} , GoverArmyQ };
+	QuestItemList[6] = { "벼", 1, 1, {11, 3} , NobodyQ };
+}
+
+void ActiveQuestItem()
+{
+
+	if (player.JRelationship >= player.WRelationship && player.JRelationship >= player.RRelationship)
+		QuestItemList[5].isActive = 1;
+	else if (player.RRelationship >= player.WRelationship && player.RRelationship >= player.JRelationship)
+		QuestItemList[3].isActive = 1;
+	else if (player.WRelationship >= player.RRelationship && player.WRelationship >= player.JRelationship)
+		QuestItemList[4].isActive = 1;
+	else
+		return;
 }
 
 void drawQuestItem(QuestItemData* QuestItemList)
@@ -399,6 +449,7 @@ void QuestComplete6() {
 			player.JRelationship += 20;
 			player.questmax--;
 			npcList[7].isActive = 1;
+			potal[player.currentmap].spawnPotal = true;
 			Sleep(100);
 			clearScreen();
 			setCursorPosition(40, 11);
@@ -494,6 +545,663 @@ void QuestComplete7() {
 		printf("아직 왜구 장수를 풀어줄 도구를 챙기지 못했다.");
 		setCursorPosition(40, 12);
 		printf("도구를 챙기고 다시 오도록 하자.");
+		backToDialogue();
+	}
+}
+void QuestComplete8() {
+	if (player.MPpotion >= 1)
+	{
+		setCursorPosition(40, 11);
+		printf("마나 포션 한개를 줄까?");
+		setCursorPosition(40, 12);
+		printf("대화문\n");
+		setCursorPosition(40, 13);
+		printf("1. 준다\n");
+		setCursorPosition(40, 14);
+		printf("2. 나중에 하자\n");
+		int num = _getch();
+		if (num == 'a')
+		{
+			quest[8].clear = 1;
+			player.MPpotion--;
+			player.RRelationship += 10;
+			player.JRelationship += 10;
+			player.questmax--;
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[8].description4);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 잘 지내시오\n");
+			updateLog("퀘스트를 클리어 했습니다!");
+			updateLog("무기를 획득하였습니다!");
+			updateLog("장비를 획득하였습니다!");
+			//weaponchange();
+			//equipmentchange();
+			//completeQuest();
+			backToDialogue();
+		}
+		else
+		{
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[8].description3);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 미안하오\n");
+			backToDialogue();
+		}
+	}
+	else
+	{
+		Sleep(100);
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("마나 포션이 없어서 완료할 수 없다.");
+		setCursorPosition(40, 12);
+		printf("상점에서 구매하고 오자.");
+		backToDialogue();
+	}
+}
+void QuestComplete9() {
+	if (player.questitem1 == 1)
+	{
+		setCursorPosition(40, 11);
+		printf("퀘스트를 완료할까?");
+		setCursorPosition(40, 12);
+		printf("대화문\n");
+		setCursorPosition(40, 13);
+		printf("1. 완료한다\n");
+		setCursorPosition(40, 14);
+		printf("2. 나중에 하자\n");
+		int num = _getch();
+		if (num == 'a')
+		{
+			quest[9].clear = 1;
+			player.questitem1 = 0;
+			player.RRelationship += 10;
+			player.JRelationship += 10;
+			player.questmax--;
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[9].description4);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 잘 지내시오\n");
+			updateLog("퀘스트를 클리어 했습니다!");
+			updateLog("무기를 획득하였습니다!");
+			updateLog("장비를 획득하였습니다!");
+			//weaponchange();
+			//equipmentchange();
+			//completeQuest();
+			backToDialogue();
+		}
+		else
+		{
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[9].description3);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 미안하오\n");
+			backToDialogue();
+		}
+	}
+	else
+	{
+		Sleep(100);
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("아직 쌀을 수확하지 못했다.");
+		setCursorPosition(40, 12);
+		printf("쌀을 수확하고 오자.");
+		backToDialogue();
+	}
+}
+void QuestComplete10() {
+	if (player.killcount >= 5)
+	{
+		setCursorPosition(40, 11);
+		printf("퀘스트를 완료할까?");
+		setCursorPosition(40, 12);
+		printf("대화문\n");
+		setCursorPosition(40, 13);
+		printf("1. 완료한다\n");
+		setCursorPosition(40, 14);
+		printf("2. 나중에 하자\n");
+		int num = _getch();
+		if (num == 'a')
+		{
+			quest[10].clear = 1;
+			player.killcount = 0;
+			player.RRelationship += 30;
+			player.questmax--;
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[10].description4);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 잘 지내시오\n");
+			updateLog("퀘스트를 클리어 했습니다!");
+			updateLog("무기를 획득하였습니다!");
+			updateLog("장비를 획득하였습니다!");
+			//weaponchange();
+			//equipmentchange();
+			//completeQuest();
+			backToDialogue();
+		}
+		else
+		{
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[10].description3);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 미안하오\n");
+			backToDialogue();
+		}
+	}
+	else
+	{
+		Sleep(100);
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("아직 충분한 수의 적을 죽이지 못했다.");
+		setCursorPosition(40, 12);
+		printf("적을 죽이고 다시 오자.");
+		backToDialogue();
+	}
+}
+void QuestComplete11() {
+	if (player.questitem2 == 1)
+	{
+		setCursorPosition(40, 11);
+		printf("퀘스트를 완료할까?");
+		setCursorPosition(40, 12);
+		printf("대화문\n");
+		setCursorPosition(40, 13);
+		printf("1. 완료한다\n");
+		setCursorPosition(40, 14);
+		printf("2. 나중에 하자\n");
+		int num = _getch();
+		if (num == 'a')
+		{
+			quest[11].clear = 1;
+			player.questitem2 = 0;
+			player.RRelationship += 30;
+			player.questmax--;
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[11].description4);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 잘 지내시오\n");
+			updateLog("퀘스트를 클리어 했습니다!");
+			updateLog("무기를 획득하였습니다!");
+			updateLog("장비를 획득하였습니다!");
+			//weaponchange();
+			//equipmentchange();
+			//completeQuest();
+			backToDialogue();
+		}
+		else
+		{
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[11].description3);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 미안하오\n");
+			backToDialogue();
+		}
+	}
+	else
+	{
+		Sleep(100);
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("아직 식량창고를 태우지 못했다.");
+		setCursorPosition(40, 12);
+		printf("식량창고를 태우고 오자.");
+		backToDialogue();
+	}
+}
+void QuestComplete12() {
+	if (checkboss2 == 1)
+	{
+		setCursorPosition(40, 11);
+		printf("퀘스트를 완료할까?");
+		setCursorPosition(40, 12);
+		printf("대화문\n");
+		setCursorPosition(40, 13);
+		printf("1. 완료한다\n");
+		setCursorPosition(40, 14);
+		printf("2. 나중에 하자\n");
+		int num = _getch();
+		if (num == 'a')
+		{
+			quest[12].clear = 1;
+			checkboss2 = 0;
+			player.RRelationship += 50;
+			player.money += 30;
+			player.questmax--;
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[12].description4);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 갑시다\n");
+			updateLog("퀘스트를 클리어 했습니다!");
+			updateLog("무기를 획득하였습니다!");
+			updateLog("장비를 획득하였습니다!");
+			//weaponchange();
+			//equipmentchange();
+			//completeQuest();
+			backToDialogue();
+		}
+		else
+		{
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[12].description3);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 미안하오\n");
+			backToDialogue();
+		}
+	}
+	else
+	{
+		Sleep(100);
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("아직 보스를 처치하지 못했다.");
+		setCursorPosition(40, 12);
+		printf("보스를 처치하고 오자.");
+		backToDialogue();
+	}
+}
+
+void QuestComplete13() {
+	if (player.killcount >= 5)
+	{
+		setCursorPosition(40, 11);
+		printf("퀘스트를 완료할까?");
+		setCursorPosition(40, 12);
+		printf("대화문\n");
+		setCursorPosition(40, 13);
+		printf("1. 완료한다\n");
+		setCursorPosition(40, 14);
+		printf("2. 나중에 하자\n");
+		int num = _getch();
+		if (num == 'a')
+		{
+			quest[13].clear = 1;
+			player.killcount = 0;
+			player.JRelationship += 30;
+			player.questmax--;
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[13].description4);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 잘 지내시오\n");
+			updateLog("퀘스트를 클리어 했습니다!");
+			updateLog("무기를 획득하였습니다!");
+			updateLog("장비를 획득하였습니다!");
+			//weaponchange();
+			//equipmentchange();
+			//completeQuest();
+			backToDialogue();
+		}
+		else
+		{
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[13].description3);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 미안하오\n");
+			backToDialogue();
+		}
+	}
+	else
+	{
+		Sleep(100);
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("아직 충분한 수의 적을 죽이지 못했다.");
+		setCursorPosition(40, 12);
+		printf("적을 죽이고 다시 오자.");
+		backToDialogue();
+	}
+}
+
+void QuestComplete14() {
+	if (player.questitem2 == 1)
+	{
+		setCursorPosition(40, 11);
+		printf("퀘스트를 완료할까?");
+		setCursorPosition(40, 12);
+		printf("대화문\n");
+		setCursorPosition(40, 13);
+		printf("1. 완료한다\n");
+		setCursorPosition(40, 14);
+		printf("2. 나중에 하자\n");
+		int num = _getch();
+		if (num == 'a')
+		{
+			quest[14].clear = 1;
+			player.questitem2 = 0;
+			player.JRelationship += 30;
+			player.questmax--;
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[14].description4);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 잘 지내시오\n");
+			updateLog("퀘스트를 클리어 했습니다!");
+			updateLog("무기를 획득하였습니다!");
+			updateLog("장비를 획득하였습니다!");
+			//weaponchange();
+			//equipmentchange();
+			//completeQuest();
+			backToDialogue();
+		}
+		else
+		{
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[14].description3);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 미안하오\n");
+			backToDialogue();
+		}
+	}
+	else
+	{
+		Sleep(100);
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("아직 물자를 가져오지 못했다.");
+		setCursorPosition(40, 12);
+		printf("물자를 가지고 오자.");
+		backToDialogue();
+	}
+}
+
+void QuestComplete15() {
+	if (checkboss2 == 1)
+	{
+		setCursorPosition(40, 11);
+		printf("퀘스트를 완료할까?");
+		setCursorPosition(40, 12);
+		printf("대화문\n");
+		setCursorPosition(40, 13);
+		printf("1. 완료한다\n");
+		setCursorPosition(40, 14);
+		printf("2. 나중에 하자\n");
+		int num = _getch();
+		if (num == 'a')
+		{
+			quest[15].clear = 1;
+			checkboss2 = 0;
+			player.JRelationship += 50;
+			player.money += 30;
+			player.questmax--;
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[15].description4);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 갑시다\n");
+			updateLog("퀘스트를 클리어 했습니다!");
+			updateLog("무기를 획득하였습니다!");
+			updateLog("장비를 획득하였습니다!");
+			//weaponchange();
+			//equipmentchange();
+			//completeQuest();
+			backToDialogue();
+		}
+		else
+		{
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[15].description3);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 미안하오\n");
+			backToDialogue();
+		}
+	}
+	else
+	{
+		Sleep(100);
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("아직 보스를 처치하지 못했다.");
+		setCursorPosition(40, 12);
+		printf("보스를 처치하고 오자.");
+		backToDialogue();
+	}
+}
+
+void QuestComplete16() {
+	if (player.MPpotion >= 1)
+	{
+		setCursorPosition(40, 11);
+		printf("마나 포션 한개를 줄까?");
+		setCursorPosition(40, 12);
+		printf("대화문\n");
+		setCursorPosition(40, 13);
+		printf("1. 준다\n");
+		setCursorPosition(40, 14);
+		printf("2. 나중에 하자\n");
+		int num = _getch();
+		if (num == 'a')
+		{
+			quest[16].clear = 1;
+			player.MPpotion--;
+			player.WRelationship += 30;
+			player.RRelationship -= 30;
+			player.JRelationship -= 30;
+			player.money += 20;
+			player.questmax--;
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[16].description4);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 잘 지내시오\n");
+			updateLog("퀘스트를 클리어 했습니다!");
+			updateLog("무기를 획득하였습니다!");
+			updateLog("장비를 획득하였습니다!");
+			//weaponchange();
+			//equipmentchange();
+			//completeQuest();
+			backToDialogue();
+		}
+		else
+		{
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[16].description3);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 미안하오\n");
+			backToDialogue();
+		}
+	}
+	else
+	{
+		Sleep(100);
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("마나 포션이 없어서 완료할 수 없다.");
+		setCursorPosition(40, 12);
+		printf("상점에서 구매하고 오자.");
+		backToDialogue();
+	}
+}
+
+void QuestComplete17() {
+	if (player.questitem2 == 1)
+	{
+		setCursorPosition(40, 11);
+		printf("퀘스트를 완료할까?");
+		setCursorPosition(40, 12);
+		printf("대화문\n");
+		setCursorPosition(40, 13);
+		printf("1. 완료한다\n");
+		setCursorPosition(40, 14);
+		printf("2. 나중에 하자\n");
+		int num = _getch();
+		if (num == 'a')
+		{
+			quest[17].clear = 1;
+			player.questitem2 = 0;
+			player.WRelationship += 30;
+			player.JRelationship -= 30;
+			player.RRelationship -= 30;
+			player.money += 50;
+			player.questmax--;
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[17].description4);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 잘 지내시오\n");
+			updateLog("퀘스트를 클리어 했습니다!");
+			updateLog("무기를 획득하였습니다!");
+			updateLog("장비를 획득하였습니다!");
+			//weaponchange();
+			//equipmentchange();
+			//completeQuest();
+			backToDialogue();
+		}
+		else
+		{
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[17].description3);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 미안하오\n");
+			backToDialogue();
+		}
+	}
+	else
+	{
+		Sleep(100);
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("아직 수탈한 물품을 가지고 오지 못했다");
+		setCursorPosition(40, 12);
+		printf("수탈한 물품을 가지고 오자.");
+		backToDialogue();
+	}
+}
+
+void QuestComplete18() {
+	if (checkboss2 == 1)
+	{
+		setCursorPosition(40, 11);
+		printf("퀘스트를 완료할까?");
+		setCursorPosition(40, 12);
+		printf("대화문\n");
+		setCursorPosition(40, 13);
+		printf("1. 완료한다\n");
+		setCursorPosition(40, 14);
+		printf("2. 나중에 하자\n");
+		int num = _getch();
+		if (num == 'a')
+		{
+			quest[18].clear = 1;
+			checkboss2 = 0;
+			player.WRelationship += 50;
+			player.JRelationship -= 30;
+			player.RRelationship -= 30;
+			player.money += 100;
+			player.questmax--;
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[18].description4);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 갑시다\n");
+			updateLog("퀘스트를 클리어 했습니다!");
+			updateLog("무기를 획득하였습니다!");
+			updateLog("장비를 획득하였습니다!");
+			//weaponchange();
+			//equipmentchange();
+			//completeQuest();
+			backToDialogue();
+		}
+		else
+		{
+			Sleep(100);
+			clearScreen();
+			setCursorPosition(40, 11);
+			printf(quest[18].description3);
+			setCursorPosition(40, 12);
+			printf("대화문\n");
+			setCursorPosition(40, 13);
+			printf("1. 미안하오\n");
+			backToDialogue();
+		}
+	}
+	else
+	{
+		Sleep(100);
+		clearScreen();
+		setCursorPosition(40, 11);
+		printf("아직 보스를 처치하지 못했다.");
+		setCursorPosition(40, 12);
+		printf("보스를 처치하고 오자.");
 		backToDialogue();
 	}
 }

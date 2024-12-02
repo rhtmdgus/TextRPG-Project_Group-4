@@ -50,26 +50,15 @@ int isPositionOccupied(int x, int y) {
             return 1;  // 위치가 이미 사용 중임
         }
     }
-    if (x == 1 && y == 1)
+    if (player.currentmap == 0 && x >= 1 &&x <= 34 && y >= 1 && y <= 15)
     {
         return 1;
     }
-    if (map[y][x] == '#' || map[y][x] == 1 || map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'T' || map[y][x] == 'F' || map[y][x] == 'O' || map[y][x] == 'R' || map[y][x] == 'B')     //스폰 위치가 벽/npc일 경우 위치 사용 중으로
+    if (map[y][x] == '#' || map[y][x] == 1 || map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'T' || map[y][x] == 'F' || map[y][x] == 'O' || map[y][x] == 'R' || map[y][x] == 'B' || map[y][x] == '?')     //스폰 위치가 벽/npc일 경우 위치 사용 중으로
     {
         return 1;
     }
-    if (player.currentmap == 0)
-    {
-        for (int i = 1; i <= 13; i++)
-        {
-            for (int j = 1; j <= 34; j++)
-            {
-                if (x == j || y == i)
-                    return 1;
-            }
-        }
-        
-    }
+
     return 0;  // 위치가 사용되지 않음
 }
 
@@ -119,8 +108,8 @@ void spawnBoss1() {
 void spawnBoss2() {
 
     Position pos;
-    pos.x = MAP_WIDTH - 10;
-    pos.y = 2;
+    pos.x = 60;
+    pos.y = 24;
     if (player.JRelationship < 0)
     {
         currentBosses[0] = createBoss(&enemyTemplates[8], pos);

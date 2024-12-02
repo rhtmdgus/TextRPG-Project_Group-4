@@ -180,6 +180,7 @@ void battle(Enemy* enemy)
 			player.exp += 12;
 			player.money += 4;
 			player.killcount++;
+			player.WRelationship--;
 			updateQuestStatusKill();
 			displayPlayerStat();
 			displayEnemyStat(enemy);
