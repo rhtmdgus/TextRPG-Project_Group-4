@@ -8,6 +8,7 @@
 #include "displaymap.h"
 #include "animation.h"
 #include "questmanager.h"
+#include "skill.h"
 
 extern int OriginalLevel;
 

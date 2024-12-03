@@ -45,13 +45,13 @@ Enemy createEnemy_P(const Enemy* enemyTemplate_P, Position pos) {
 void spawnEnemies_P() {
 	if(checkingSpawnEnemy_P == 1)
 	{
-		Position pos = { 4, 20 };
+		Position pos = { 12, 15 };
 		currentEnemies_P[0] = createEnemy_P(&enemyTemplates_P[0], pos);
 		drawEnemy_P(&currentEnemies_P[0]);
-		pos = { 2, 20 };
+		pos = { 4, 20 };
 		currentEnemies_P[1] = createEnemy_P(&enemyTemplates_P[0], pos);
 		drawEnemy_P(&currentEnemies_P[1]);
-		pos = { 6, 20 };
+		pos = { 8, 18 };
 		currentEnemies_P[2] = createEnemy_P(&enemyTemplates_P[0], pos);
 		drawEnemy_P(&currentEnemies_P[2]);
 		checkingSpawnEnemy_P = 0;
@@ -804,8 +804,9 @@ void battle_P(Enemy* enemy)
 
 		// 상태 체크
 		if (enemy->hp <= 0) {
+			enemyDyingAnimation(enemy);
 			updateBattleLog("You defeated the enemy!");
-			player.exp += 12;
+			//player.exp += 12;
 			player.money += 4;
 			player.killcount++;
 			Enemy_PNum--;
@@ -821,6 +822,7 @@ void battle_P(Enemy* enemy)
 			Situation = 0;
 		}
 		else if (player.hp <= 0) {
+			playerDyingAnimation();
 			updateBattleLog("You have been defeated...");
 			displayPlayerStat();
 			displayEnemyStat(enemy);
@@ -830,10 +832,10 @@ void battle_P(Enemy* enemy)
 		}
 	}
 
-	OriginalLevel = player.level;
+	//OriginalLevel = player.level;
 	// 전투가 끝난 후 대기 및 본래 화면으로 복귀
 	updateBattleLog("Press any key to return to the main screen...");
-	LevelUp();
+	//LevelUp();
 	displayPlayerStat();
 	displayBattleLog();
 	_getch();  // 사용자 입력 대기

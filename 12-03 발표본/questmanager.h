@@ -12,7 +12,7 @@ typedef struct QuestStatus {
     int killCount = 0;   // 적군 킬 카운트
     int itemCount = 0;   // 아이템 획득 카운트
     int isCompleted = 0;     // 퀘스트 완료 여부
-    char questName[50] = " ";
+    char questName[100] = " ";
     int questGoal = 1;
 } QuestStatus;
 

@@ -4,13 +4,16 @@
 #include <string.h>
 #include <time.h>
 
-Enemy enemyTemplates[6] = {
+Enemy enemyTemplates[9] = {
     {"왜군 잡졸", 10, 8, 3, {0, 0}, warrior},
     {"왜군 창병", 12, 10, 4, {0, 0}, spear},
     {"왜군 궁병", 8, 6, 2, {0, 0}, archor},
     {"왜군 장수", 20, 12, 8, {0, 0}, warrior},
     {"의병 장군", 15, 15, 6, {0, 0}, warrior},
-    {"관군 장군", 18, 12, 10, {0, 0}, warrior}
+    {"관군 장군", 18, 12, 10, {0, 0}, warrior},
+    {"왜군 정예 장수", 40, 25, 15, {0, 0}, warrior},
+    {"의병 정예 장군", 30, 30, 12, {0, 0}, warrior},
+    {"관군 정예 장군", 35, 25, 20, {0, 0}, warrior}
 };
 
 Enemy currentEnemies[MAX_ENEMY];  // 배열 정의
@@ -47,11 +50,11 @@ int isPositionOccupied(int x, int y) {
             return 1;  // 위치가 이미 사용 중임
         }
     }
-    if (x == 1 && y == 1)
+    if (player.currentmap == 0 && x >= 1 &&x <= 34 && y >= 1 && y <= 15)
     {
         return 1;
     }
-    if (map[y][x] == '#' || map[y][x] == 1 || map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'T' || map[y][x] == 'F' || map[y][x] == 'O' || map[y][x] == 'R' || map[y][x] == 'B')     //스폰 위치가 벽/npc일 경우 위치 사용 중으로
+    if (map[y][x] == '#' || map[y][x] == 1 || map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'T' || map[y][x] == 'F' || map[y][x] == 'O' || map[y][x] == 'R' || map[y][x] == 'B' || map[y][x] == '?')     //스폰 위치가 벽/npc일 경우 위치 사용 중으로
     {
         return 1;
     }
@@ -101,6 +104,32 @@ void spawnBoss1() {
         map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
     }
 }
+
+void spawnBoss2() {
+
+    Position pos;
+    pos.x = 60;
+    pos.y = 24;
+    if (player.JRelationship < 0)
+    {
+        currentBosses[0] = createBoss(&enemyTemplates[8], pos);
+        drawBoss(&currentBosses[0]);
+        map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
+    }
+    else if (player.WRelationship < 0)
+    {
+        currentBosses[0] = createBoss(&enemyTemplates[7], pos);
+        drawBoss(&currentBosses[0]);
+        map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
+    }
+    else
+    {
+        currentBosses[0] = createBoss(&enemyTemplates[6], pos);
+        drawBoss(&currentBosses[0]);
+        map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
+    }
+}
+
 /*
 void spawnBoss() {
 

@@ -119,11 +119,11 @@ void printQuestWindow() {
     {
         if (questStatus[i].accepted == 1) 
         {
-            setCursorPosition(30, 10 + 3 * cnt);
+            setCursorPosition(10, 10 + 3 * cnt);
             printf("%d ¹ø Äù½ºÆ®", j + 1);
-            setCursorPosition(30, 11 + 3 * cnt);
+            setCursorPosition(10, 11 + 3 * cnt);
             printf("Äù½ºÆ® ¸ñÇ¥: %s", questStatus[i].questName);
-            setCursorPosition(30, 12 + 3 * cnt);
+            setCursorPosition(10, 12 + 3 * cnt);
             if (questStatus[i].questcondition == 0) {
                 printf("%d/1", questStatus[i].itemCount);
             }

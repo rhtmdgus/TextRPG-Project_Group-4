@@ -7,10 +7,9 @@
 
 Potal potal[20] = {
 
-    {"1-0 -> 1-1", 0, 1, {10, 2}},
-    {"1-1 -> 1-2", 1, 2, {50, 28}},
-    {"1-2 -> 1-3", 2, 3, {98, 2}}
-
+    {"1-0 -> 1-1", 0, 1, false, {10, 2}},
+    {"1-1 -> 1-2", 1, 2, true, {50, 28}},
+    {"1-2 -> 1-3", 2, 3, true, {98, 2}}
 };
 
 
@@ -36,6 +35,9 @@ void selectmap() {
 
 void drawPotal()
 {
-    setCursorPosition(potal[player.currentmap].pos.x, potal[player.currentmap].pos.y);
-    printf("T");
+    if(potal[player.currentmap].spawnPotal == true)
+    {
+        setCursorPosition(potal[player.currentmap].pos.x, potal[player.currentmap].pos.y);
+        printf("T");
+    }
 }
