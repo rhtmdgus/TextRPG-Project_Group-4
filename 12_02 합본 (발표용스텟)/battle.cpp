@@ -563,9 +563,20 @@ void battle(Enemy* enemy)
 			player.money += 4;
 			player.killcount++;
 			player.buff_reflect = 0;
-			player.buffcount1 = 0;
-			player.buffcount2 = 0;
-			player.buffcount3 = 0;
+			if (player.buffcount1 != 0) {
+				player.buffcount1 = 0;
+				player.attack -= player.buff_attack;  // 공격력 버프 제거
+				player.buff_attack = 0;
+			}
+			if (player.buffcount2 != 0) {
+				player.buffcount2 = 0;
+				player.defense -= player.buff_defense; // 방어력 버프 제거
+				player.buff_defense = 0;
+			}
+			if (player.buffcount3 != 0) {
+				player.buffcount3 = 0;
+				player.buff_reflect = 0;  // 가시갑옷 비활성화
+			}
 			updateQuestStatusKill();
 			displayPlayerStat();
 			displayEnemyStat(enemy);
@@ -719,6 +730,7 @@ void bossbattle(Enemy* boss)
 			player.money += 10;
 			player.questitem1 = 1;
 			checkboss1 = 1;
+			checkboss2 = 1;
 			displayPlayerStat();
 			displayBossStat(boss);
 			Sleep(100);

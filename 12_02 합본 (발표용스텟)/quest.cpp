@@ -449,6 +449,8 @@ void QuestComplete6() {
 			player.JRelationship += 20;
 			player.questmax--;
 			npcList[7].isActive = 1;
+			checkboss1 = 0;
+			checkboss2 = 0;
 			potal[player.currentmap].spawnPotal = true;
 			Sleep(100);
 			clearScreen();
@@ -637,9 +639,9 @@ void QuestComplete9() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
-			//weaponchange();
-			//equipmentchange();
-			//completeQuest();
+			weaponchange(2);
+			equipmentchange(2);
+			completeQuest(9);
 			backToDialogue();
 		}
 		else
@@ -695,9 +697,9 @@ void QuestComplete10() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
-			//weaponchange();
-			//equipmentchange();
-			//completeQuest();
+			weaponchange(3);
+			equipmentchange(3);
+			completeQuest(10);
 			backToDialogue();
 		}
 		else
@@ -753,9 +755,9 @@ void QuestComplete11() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
-			//weaponchange();
-			//equipmentchange();
-			//completeQuest();
+			weaponchange(1);
+			equipmentchange(1);
+			completeQuest(11);
 			backToDialogue();
 		}
 		else
@@ -812,9 +814,9 @@ void QuestComplete12() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
-			//weaponchange();
-			//equipmentchange();
-			//completeQuest();
+			weaponchange(5);
+			equipmentchange(5);
+			completeQuest(12);
 			backToDialogue();
 		}
 		else
@@ -871,9 +873,9 @@ void QuestComplete13() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
-			//weaponchange();
-			//equipmentchange();
-			//completeQuest();
+			weaponchange(4);
+			equipmentchange(4);
+			completeQuest(13);
 			backToDialogue();
 		}
 		else
@@ -930,9 +932,9 @@ void QuestComplete14() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
-			//weaponchange();
-			//equipmentchange();
-			//completeQuest();
+			weaponchange(2);
+			equipmentchange(2);
+			completeQuest(14);
 			backToDialogue();
 		}
 		else
@@ -990,9 +992,9 @@ void QuestComplete15() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
-			//weaponchange();
-			//equipmentchange();
-			//completeQuest();
+			weaponchange(4);
+			equipmentchange(4);
+			completeQuest(15);
 			backToDialogue();
 		}
 		else
@@ -1052,9 +1054,9 @@ void QuestComplete16() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
-			//weaponchange();
-			//equipmentchange();
-			//completeQuest();
+			weaponchange(6);
+			equipmentchange(6);
+			completeQuest(16);
 			backToDialogue();
 		}
 		else
@@ -1114,9 +1116,9 @@ void QuestComplete17() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
-			//weaponchange();
-			//equipmentchange();
-			//completeQuest();
+			weaponchange(6);
+			equipmentchange(6);
+			completeQuest(17);
 			backToDialogue();
 		}
 		else
@@ -1176,9 +1178,9 @@ void QuestComplete18() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
-			//weaponchange();
-			//equipmentchange();
-			//completeQuest();
+			weaponchange(7);
+			equipmentchange(7);
+			completeQuest(18);
 			backToDialogue();
 		}
 		else

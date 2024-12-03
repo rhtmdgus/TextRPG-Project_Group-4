@@ -4802,7 +4802,7 @@ void playerSkillAnimation(int skilltype)
             {
                 for (int i = 0; i < 15; i++)
                 {
-
+                    setCursorPosition(centerX, centerY + i);
                     for (int j = 0; j < 15; j++)
                     {
                         if (swordSkill_1[k][i][j] == 0)
