@@ -112,9 +112,9 @@ void jobSelect()
                 {
                 case 1:
                     player.job = 1;
-                    player.attack = 10;
+                    player.attack = 6;
                     player.defense = 3;
-                    player.accuracy = 10;
+                    player.accuracy = 1;
                     updateLog("검사를 선택하셨습니다.");
                     break;
                 case 2:

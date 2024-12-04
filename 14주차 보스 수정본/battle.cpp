@@ -194,31 +194,33 @@ void battle(Enemy* enemy)
 			if (player.job == 1) {
 				updateBattleLog("강타 발동!");
 				displayBattleLog();
+				playerSkillAnimation(1);
 			}
 			else if (player.job == 2) {
 				updateBattleLog("연사 발동!");
 				displayBattleLog();
+				playerSkillAnimation(1);
 			}
 			else if (player.job == 3) {
 				updateBattleLog("투창 발동!");
 				displayBattleLog();
+				playerSkillAnimation(1);
 			}
 			else if (player.job == 4) {
 				updateBattleLog("방패밀치기 발동!");
 				displayBattleLog();
+				playerSkillAnimation(1);
 			}
 			displayBattleLog();
 			if (damageToEnemy > 0) {
 				if (Crit() == 1)
 				{
-					playerCritAnimation();
 					enemyAttackedAnimation(enemy);
 					updateBattleLog("Critical Attack!");
 					damageToEnemy *= 2;
 				}
 				else
 				{
-					playerAttackAnimation();
 					enemyAttackedAnimation(enemy);
 				}
 				enemy->hp -= damageToEnemy;
@@ -288,6 +290,7 @@ void battle(Enemy* enemy)
 				updateBattleLog("방어태세 발동!");
 				displayBattleLog();
 				displayPlayerStat();
+				playerSkillAnimation(2);
 			}
 			else {
 				damageToEnemy = skill2(player.attack) - enemy->defense; // 이전에 선언한 변수를 사용
@@ -295,26 +298,27 @@ void battle(Enemy* enemy)
 				if (player.job == 1) {
 					updateBattleLog("난도질 발동!");
 					displayBattleLog();
+					playerSkillAnimation(2);
 				}
 				else if (player.job == 2) {
 					updateBattleLog("집중사격 발동!");
 					displayBattleLog();
+					playerSkillAnimation(2);
 				}
 				else if (player.job == 3) {
 					updateBattleLog("삼조격 발동!");
 					displayBattleLog();
+					playerSkillAnimation(2);
 				}
 				if (damageToEnemy > 0) {
 					if (Crit() == 1)
 					{
-						playerCritAnimation();
 						enemyAttackedAnimation(enemy);
 						updateBattleLog("Critical Attack!");
 						damageToEnemy *= 2;
 					}
 					else
 					{
-						playerAttackAnimation();
 						enemyAttackedAnimation(enemy);
 					}
 					enemy->hp -= damageToEnemy;
@@ -386,6 +390,7 @@ void battle(Enemy* enemy)
 				updateBattleLog("광폭화 발동!");
 				displayBattleLog();
 				displayPlayerStat();
+				playerSkillAnimation(3);
 			}
 			else if (player.job == 4) { // 방패병 스킬 3: 가시방패
 				player.mp -= 20;
@@ -394,6 +399,7 @@ void battle(Enemy* enemy)
 				updateBattleLog("가시방패 발동!");
 				displayBattleLog();
 				displayPlayerStat();
+				playerSkillAnimation(3);
 			}
 			else if (player.job == 2) { // 궁수 스킬 3 불화살
 				damageToEnemy = player.attack - enemy->defense; // 이전에 선언한 변수를 사용
@@ -401,18 +407,17 @@ void battle(Enemy* enemy)
 				player.buffcount1 = 5;
 				updateBattleLog("불화살 발동!");
 				displayBattleLog();
+				playerSkillAnimation(3);
 
 				if (damageToEnemy > 0) {
 					if (Crit() == 1)
 					{
-						playerCritAnimation();
 						enemyAttackedAnimation(enemy);
 						updateBattleLog("Critical Attack!");
 						damageToEnemy *= 2;
 					}
 					else
 					{
-						playerAttackAnimation();
 						enemyAttackedAnimation(enemy);
 					}
 					enemy->hp -= damageToEnemy;
@@ -443,18 +448,17 @@ void battle(Enemy* enemy)
 				player.mp -= 20;
 				updateBattleLog("무쌍돌격 발동!");
 				displayBattleLog();
+				playerSkillAnimation(3);
 
 				if (damageToEnemy > 0) {
 					if (Crit() == 1)
 					{
-						playerCritAnimation();
 						enemyAttackedAnimation(enemy);
 						updateBattleLog("Critical Attack!");
 						damageToEnemy *= 2;
 					}
 					else
 					{
-						playerAttackAnimation();
 						enemyAttackedAnimation(enemy);
 					}
 					enemy->hp -= damageToEnemy;
@@ -562,9 +566,20 @@ void battle(Enemy* enemy)
 			player.money += 4;
 			player.killcount++;
 			player.buff_reflect = 0;
-			player.buffcount1 = 0;
-			player.buffcount2 = 0;
-			player.buffcount3 = 0;
+			if (player.buffcount1 != 0) {
+				player.buffcount1 = 0;
+				player.attack -= player.buff_attack;  // 공격력 버프 제거
+				player.buff_attack = 0;
+			}
+			if (player.buffcount2 != 0) {
+				player.buffcount2 = 0;
+				player.defense -= player.buff_defense; // 방어력 버프 제거
+				player.buff_defense = 0;
+			}
+			if (player.buffcount3 != 0) {
+				player.buffcount3 = 0;
+				player.buff_reflect = 0;  // 가시갑옷 비활성화
+			}
 			updateQuestStatusKill();
 			displayPlayerStat();
 			displayEnemyStat(enemy);

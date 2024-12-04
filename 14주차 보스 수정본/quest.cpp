@@ -1,4 +1,4 @@
- #include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
 #include "quest.h"
@@ -49,7 +49,7 @@ void initializeQuest()
 	0, 0, "도와주면 좀 나눠줄테니 부탁하네", "조금 더 쉬었다 할 생각인가?", "이걸로 이번주는 어찌 버틸수 있겠어, 여기 좀 나눠주지" , 0, 1 }; // 평민
 	quest[10] = { "왜군 처리",
 	"많은 수의 왜군을 죽였는데 계속 증원되고 있어, 좀 도와주게",
-	0, 0, "좀 도와주게, 전쟁을 빨리 끝내야 하지 않겠나?", "아직 할 일이 있는가?", "이로서 한숨 돌리곘어.. 고맙네" , 0, 5 }; // 의병
+	0, 0, "좀 도와주게, 전쟁을 빨리 끝내야 하지 않겠나?", "아직 할 일이 있는가?", "이로서 한숨 돌리곘어.. 고맙네" , 1, 5 }; // 의병
 	quest[11] = { "왜군 식량창고 제거",
 	"왜군의 식량창고 위치 첩보가 들어왔네, 불을 질러서 없애버리세",
 	0, 0, "식량창고를 제거해야 숨이 트인다네", "아직 완료하지 못했나?", "이로서 놈들의 사기가 꺾였을 걸세, 고맙다네" , 0, 1 };// 의병
@@ -58,7 +58,7 @@ void initializeQuest()
 	0, 0, "놈을 처리하지 않고서는 지나갈 수 없어", "아직 처리하지 못했나?", "드디어 길이 열렸군, 갑세" , 0, 1 };// 의병
 	quest[13] = { "왜군 처리",
 	"왜군 본토에서 계속 지원이 오고있네, 자네도 돕게나",
-	0, 0, "조정의 명을 거역할 셈인가?", "아직 완료하지 못했나?", "좋다, 자네덕에 우리가 우세하게 될걸세" , 0, 5 };// 관군
+	0, 0, "조정의 명을 거역할 셈인가?", "아직 완료하지 못했나?", "좋다, 자네덕에 우리가 우세하게 될걸세" , 1, 5 };// 관군
 	quest[14] = { "물자 보급",
 	"전쟁이 길어저서 물자가 부족해, 후방에서 보급 받아 오게나",
 	0, 0, "보급받지 않으면 전쟁을 이어갈수 없어!", "아직 가져오지 못했나?", "좋아, 계속 싸울수 있겠어" , 0, 1 };// 관군
@@ -89,10 +89,10 @@ void initializeQuestItem()
 	QuestItemList[0] = { "군량", 0, 1, {2, 18}, VolunArmyQ };
 	QuestItemList[1] = { "작전 서류", 0, 1, {19, 27} , JapArmyQ };
 	QuestItemList[2] = { "바위", 0, 1, {34, 14} , NobodyQ };
-	QuestItemList[3] = { "왜군 식량 창고", 1, 0, {5, 3}, VolunArmyQ };
-	QuestItemList[4] = { "수탈한 물품", 1, 0, {7, 3} , JapArmyQ };
-	QuestItemList[5] = { "군수 물자", 1, 0, {9, 3} , GoverArmyQ };
-	QuestItemList[6] = { "벼", 1, 1, {11, 3} , NobodyQ };
+	QuestItemList[3] = { "왜군 식량 창고", 1, 0, {51, 23}, VolunArmyQ };
+	QuestItemList[4] = { "수탈한 물품", 1, 0, {5, 2} , JapArmyQ };
+	QuestItemList[5] = { "군수 물자", 1, 0, {3, 13} , GoverArmyQ };
+	QuestItemList[6] = { "벼", 1, 1, {1, 9} , NobodyQ };
 }
 
 void ActiveQuestItem()
@@ -639,9 +639,9 @@ void QuestComplete9() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
-			//weaponchange();
-			//equipmentchange();
-			//completeQuest();
+			weaponchange(2);
+			equipmentchange(2);
+			completeQuest(9);
 			backToDialogue();
 		}
 		else
@@ -697,9 +697,9 @@ void QuestComplete10() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
-			//weaponchange();
-			//equipmentchange();
-			//completeQuest();
+			weaponchange(3);
+			equipmentchange(3);
+			completeQuest(10);
 			backToDialogue();
 		}
 		else
@@ -755,9 +755,9 @@ void QuestComplete11() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
-			//weaponchange();
-			//equipmentchange();
-			//completeQuest();
+			weaponchange(1);
+			equipmentchange(1);
+			completeQuest(11);
 			backToDialogue();
 		}
 		else
@@ -814,9 +814,9 @@ void QuestComplete12() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
-			//weaponchange();
-			//equipmentchange();
-			//completeQuest();
+			weaponchange(5);
+			equipmentchange(5);
+			completeQuest(12);
 			backToDialogue();
 		}
 		else
@@ -873,9 +873,9 @@ void QuestComplete13() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
-			//weaponchange();
-			//equipmentchange();
-			//completeQuest();
+			weaponchange(4);
+			equipmentchange(4);
+			completeQuest(13);
 			backToDialogue();
 		}
 		else
@@ -932,9 +932,9 @@ void QuestComplete14() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
-			//weaponchange();
-			//equipmentchange();
-			//completeQuest();
+			weaponchange(2);
+			equipmentchange(2);
+			completeQuest(14);
 			backToDialogue();
 		}
 		else
@@ -992,9 +992,9 @@ void QuestComplete15() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
-			//weaponchange();
-			//equipmentchange();
-			//completeQuest();
+			weaponchange(4);
+			equipmentchange(4);
+			completeQuest(15);
 			backToDialogue();
 		}
 		else
@@ -1054,9 +1054,9 @@ void QuestComplete16() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
-			//weaponchange();
-			//equipmentchange();
-			//completeQuest();
+			weaponchange(6);
+			equipmentchange(6);
+			completeQuest(16);
 			backToDialogue();
 		}
 		else
@@ -1116,9 +1116,9 @@ void QuestComplete17() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
-			//weaponchange();
-			//equipmentchange();
-			//completeQuest();
+			weaponchange(6);
+			equipmentchange(6);
+			completeQuest(17);
 			backToDialogue();
 		}
 		else
@@ -1178,9 +1178,9 @@ void QuestComplete18() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
-			//weaponchange();
-			//equipmentchange();
-			//completeQuest();
+			weaponchange(7);
+			equipmentchange(7);
+			completeQuest(18);
 			backToDialogue();
 		}
 		else

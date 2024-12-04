@@ -476,7 +476,7 @@ void VolunArmyLog_3()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[10].take = 1;
 						player.questmax++;
-						//acceptQuest();
+						acceptQuest(10);
 						backToDialogue();
 						break;
 					}
@@ -620,7 +620,7 @@ void VolunArmyLog_4()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[11].take = 1;
 						player.questmax++;
-						//acceptQuest();
+						acceptQuest(11);
 						backToDialogue();
 						break;
 					}
@@ -764,7 +764,7 @@ void VolunArmyLog_5()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[12].take = 1;
 						player.questmax++;
-						//acceptQuest();
+						acceptQuest(12);
 						backToDialogue();
 						spawnBoss2();
 						break;
@@ -1212,7 +1212,7 @@ void GoverArmyLog_3()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[13].take = 1;
 						player.questmax++;
-						//acceptQuest(13);
+						acceptQuest(13);
 						backToDialogue();
 						break;
 					}
@@ -1356,7 +1356,7 @@ void GoverArmyLog_4()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[14].take = 1;
 						player.questmax++;
-						//acceptQuest(14);
+						acceptQuest(14);
 						backToDialogue();
 						break;
 					}
@@ -1500,7 +1500,7 @@ void GoverArmyLog_5()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[15].take = 1;
 						player.questmax++;
-						//acceptQuest(15);
+						acceptQuest(15);
 						backToDialogue();
 						spawnBoss2();
 						break;
@@ -1954,7 +1954,7 @@ void JapArmyLog_3()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[16].take = 1;
 						player.questmax++;
-						//acceptQuest(16);
+						acceptQuest(16);
 						backToDialogue();
 						break;
 					}
@@ -2098,7 +2098,7 @@ void JapArmyLog_4()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[17].take = 1;
 						player.questmax++;
-						//acceptQuest(17);
+						acceptQuest(17);
 						backToDialogue();
 						break;
 					}
@@ -2242,7 +2242,7 @@ void JapArmyLog_5()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[18].take = 1;
 						player.questmax++;
-						//acceptQuest(18);
+						acceptQuest(18);
 						backToDialogue();
 						break;
 					}
@@ -2689,7 +2689,7 @@ void NobodyLog_3()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[8].take = 1;
 						player.questmax++;
-						//acceptQuest();
+						acceptQuest(8);
 						backToDialogue();
 						break;
 					}
@@ -2834,7 +2834,7 @@ void NobodyLog_4()
 						updateLog("퀘스트를 수락하셨습니다!");
 						quest[9].take = 1;
 						player.questmax++;
-						//acceptQuest();
+						acceptQuest(9);
 						backToDialogue();
 						break;
 					}
@@ -2944,7 +2944,7 @@ void VolunItemLog_1()
 		QuestItemList[0].isActive = 0;
 		player.questitem1 = 1;
 		updateLog("맵으로 돌아갑니다.");
-		updateQuestStatusItem(1);
+		updateQuestStatusItem(1); // quest[1] 퀘스트 아이템
 		player.pos = previousPos;
 		Situation = 0;
 		break;
@@ -2975,7 +2975,7 @@ void VolunItemLog_2()
 		QuestItemList[3].isActive = 0;
 		player.questitem2 = 1;
 		updateLog("맵으로 돌아갑니다.");
-		//updateQuestStatusItem(1);
+		updateQuestStatusItem(11); // quest[11] 퀘스트 아이템
 		player.pos = previousPos;
 		Situation = 0;
 		break;
@@ -3008,7 +3008,7 @@ void dialogueGoverQuestItem()
 		QuestItemList[5].isActive = 0;
 		player.questitem2 = 1;
 		updateLog("맵으로 돌아갑니다.");
-		//updateQuestStatusItem();
+		updateQuestStatusItem(14); // quest[14] 퀘스트 아이템
 		player.pos = previousPos;
 		Situation = 0;
 		break;
@@ -3048,7 +3048,7 @@ void JapItemLog_1()
 		QuestItemList[1].isActive = 0;
 		player.questitem2 = 1;
 		updateLog("맵으로 돌아갑니다.");
-		updateQuestStatusItem(3);
+		updateQuestStatusItem(3);  // quest[3] 퀘스트 아이템
 		player.pos = previousPos;
 		Situation = 0;
 		break;
@@ -3079,7 +3079,7 @@ void JapItemLog_2()
 		QuestItemList[4].isActive = 0;
 		player.questitem2 = 1;
 		updateLog("맵으로 돌아갑니다.");
-		//updateQuestStatusItem(3);
+		updateQuestStatusItem(17); // quest[17] 퀘스트 아이템
 		player.pos = previousPos;
 		Situation = 0;
 		break;
@@ -3121,7 +3121,7 @@ void NobodyItemLog_1()
 			player.questitem3 = 1;
 			player.hp--;
 			updateLog("맵으로 돌아갑니다.");
-			updateQuestStatusItem(4);
+			updateQuestStatusItem(4); // quest[4] 퀘스트 아이템
 			player.pos = previousPos;
 			Situation = 0;
 			break;
@@ -3164,7 +3164,7 @@ void NobodyItemLog_2()
 			player.questitem1 = 1;
 			player.hp -= 2;
 			updateLog("맵으로 돌아갑니다.");
-			//updateQuestStatusItem(4);
+			updateQuestStatusItem(9); // quest[9] 퀘스트 아이템
 			player.pos = previousPos;
 			Situation = 0;
 			break;

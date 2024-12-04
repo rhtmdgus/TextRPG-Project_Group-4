@@ -15,17 +15,17 @@ void initializeNpc()
 	npcList[5] = { "ÀÌÁ¤Àç", true, 0, 1, {33, 13}, VolunArmy };
 	npcList[6] = { "ÀåÅÃ»ó", true, 0, 1, {88, 2}, GoverArmy };
 	npcList[7] = { "¹Ì¿Í ¿Í»çºÎ·Î", true, 0, 0, {9,27}, JapArmy };
-	npcList[8] = { "±èÀÏµ¿", true, 1, 1, {5, 5}, Nobody };
-	npcList[9] = { "°íµ¹¼è", true, 1, 1, {7, 5}, Nobody };
-	npcList[10] = { "±è¿µÅÂ", true, 1, 0, {9, 5}, VolunArmy };
-	npcList[11] = { "±è¹«¿Á", true, 1, 0, {11, 5}, VolunArmy };
-	npcList[12] = { "¹®¿µÃ¶", true, 1, 0, {13, 5}, VolunArmy };
-	npcList[13] = { "Á¶°³¿Á", true, 1, 0, {9, 5}, GoverArmy };
-	npcList[14] = { "±èÁ¾¿ø", true, 1, 0, {11, 5}, GoverArmy };
-	npcList[15] = { "±èÃ¢·æ", true, 1, 0, {13, 5}, GoverArmy };
-	npcList[16] = { "¸¶¿¡´Ù", true, 1, 0, {9, 5}, JapArmy };
-	npcList[17] = { "¾Æ»ç³ë", true, 1, 0, {11, 5}, JapArmy };
-	npcList[18] = { "¸¶¾²¶ó", true, 1, 0, {13, 5}, JapArmy };
+	npcList[8] = { "±èÀÏµ¿", true, 1, 1, {3, 5}, Nobody };
+	npcList[9] = { "°íµ¹¼è", true, 1, 1, {12, 4}, Nobody };
+	npcList[10] = { "±è¿µÅÂ", true, 1, 0, {20, 4}, VolunArmy };
+	npcList[11] = { "±è¹«¿Á", true, 1, 0, {78, 18}, VolunArmy };
+	npcList[12] = { "¹®¿µÃ¶", true, 1, 0, {64, 26}, VolunArmy };
+	npcList[13] = { "Á¶°³¿Á", true, 1, 0, {20, 4}, GoverArmy };
+	npcList[14] = { "±èÁ¾¿ø", true, 1, 0, {78, 18}, GoverArmy };
+	npcList[15] = { "±èÃ¢·æ", true, 1, 0, {64, 26}, GoverArmy };
+	npcList[16] = { "¸¶¿¡´Ù", true, 1, 0, {20, 4}, JapArmy };
+	npcList[17] = { "¾Æ»ç³ë", true, 1, 0, {78, 18}, JapArmy };
+	npcList[18] = { "¸¶¾²¶ó", true, 1, 0, {64, 26}, JapArmy };
 
 }
 
