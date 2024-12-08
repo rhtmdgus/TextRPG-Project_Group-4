@@ -1,6 +1,7 @@
 #include "displaymap.h"
 #include "npc.h"
 #include "player.h"
+#include "randevent.h"
 #include <stdio.h>
 #include <conio.h>
 
@@ -26,6 +27,11 @@ void displayMap()
 	for (int i = 0; i < MAX_BOSS; i++) {
 		if (currentBosses[i].hp > 0) {
 			drawBoss(&currentBosses[i]);
+		}
+	}
+	for (int i = 0; i < MAX_EVENT; i++) {
+		if (currentEvents[i].check > 0) {
+			drawEvent(&currentEvents[i]);
 		}
 	}
 }

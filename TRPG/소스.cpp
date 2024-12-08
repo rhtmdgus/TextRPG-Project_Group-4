@@ -15,7 +15,7 @@
 #include "displaymap.h"		//일반 맵과 전투맵의 출력 및 갱신 함수 정의
 #include "player.h"			//플레이어 관련 기능 및 구조체 정의
 #include "encount.h"		//적(enemy), 아이템, NPC와의 조우 및 상호작용 정의
-//#include "randomencount.h"	//랜덤인카운트 전용 헤더
+#include "randevent.h"	//랜덤인카운트 전용 헤더
 #include "selectmap.h"
 #include "shop.h"
 #include "animation.h"
@@ -24,7 +24,6 @@
 #include "prologue.h"
 #include "prologuemap.h"
 #include "item.h"
-//ㅇㅁㅇ
 
 //situation 명 
 //situation 1 = encounting enemy
@@ -38,7 +37,7 @@
 //situation 9 = encounting portal
 //situation 10 = encounting random stuff
 
-Player player = { 10, 10, 6, 5, 2, 2, 2, 1, 0, 0, 0, 0, 1, 100, 0, 0, 0, 0, 0, 0,  -1, -1, {"없음"} , {"헌 옷"} , {20, 13} };
+Player player = { 100, 100, 6, 5, 2, 2, 2, 20, 0, 0, 0, 0, 1, 100, 0, 0, 0, 0, 0, 0,  -1, -1, {"없음"} , {"헌 옷"} , 0, 0, 0, 0, 0, 0, {20, 13} };
 Position previousPos = { 1, 1 };
 Shop Shop1 = { "상인", 99, 99, 99, 99, 99, {3, 3} };
 
@@ -150,6 +149,7 @@ int main()
 	displayPlayerStat();
 	displayLog();
 	spawnEnemies();
+	spawnEvents();
 	initializeNpc();
 	initializeQuestItem();
 
@@ -289,7 +289,7 @@ int main()
 				displayLog();
 			}
 		}
-
+		
 		if (encountRandom())
 		{
 			updateLog("You encountered something!");
@@ -306,7 +306,7 @@ int main()
 				displayLog();
 			}
 		}
-
+		
 		if (player.hp <= 0)
 		{
 			break;

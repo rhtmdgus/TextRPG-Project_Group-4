@@ -35,6 +35,12 @@ typedef struct
 	int currentequipment;
 	char currentweaponName[20];
 	char currentequipmentName[20];
+	int buffcount1;
+	int buffcount2;
+	int buffcount3;
+	int buff_attack;
+	int buff_defense;
+	int buff_reflect;
 	Position pos;
 } Player;
 

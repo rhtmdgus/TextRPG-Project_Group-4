@@ -5,7 +5,7 @@
 #include "enemy.h"
 #include "npc.h"
 #include "potal.h"
-#include "randomencount.h"
+//#include "randomencount.h"
 
 extern Enemy* currentEnemy;
 extern NpcData* currentNPC;

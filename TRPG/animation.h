@@ -5,6 +5,7 @@
 #include "player.h"
 #include "battle.h"
 #include "utility.h"
+#include "skill.h"
 
 void printPlayer(); // displaymap.cpp¿¡ Ãß°¡
 
@@ -31,5 +32,7 @@ void BossAttack(Enemy* boss);
 void BossDamaged(Enemy* boss);
 
 void BossDying(Enemy* boss);
+
+void playerSkillAnimation(int skilltype);
 
 #endif // ANIMATION_H

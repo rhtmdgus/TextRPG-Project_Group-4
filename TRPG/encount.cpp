@@ -7,6 +7,7 @@
 #include "player.h"
 #include "battle.h"
 #include "npc.h"
+#include "randevent.h"
 #include "quest.h"
 
 int encountEnemy()
@@ -269,24 +270,81 @@ void encountPotalChoice()
     displayLog();
 }
 
+
 int encountRandom()
 {
-    if (player.pos.y == Random.pos.y && player.pos.x == Random.pos.x)
-    {
-        Situation = 10;
-        return 10;
+    for (int i = 0; i < MAX_EVENT; i++) {
+        if (currentEvents[i].check != 1)
+            break;
+        else if (player.pos.y == currentEvents[i].pos.y && player.pos.x == currentEvents[i].pos.x)
+        {
+            currentEvent = &currentEvents[i];
+            Situation = 10;
+            return 1;
+        }
     }
-    else
-    {
-        Situation = 0;
-        return 0;
-    }
+    currentEvent = nullptr;
+    Situation = 0;
+    return 0;
 }
 
 void encountRandomChoice()
 {
+    char action = _getch();
 
+    switch (action)
+    {
+    default:
+        updateLog("잘못된 키를 눌렀습니다.");
+        displayLog();
+        Sleep(200);
+        updateLog("수상한 기운을 조사하려면 [A]를, 아니면 [R]을 누르세요.");
+        displayLog();
+        Sleep(200);
+        break;
+    case 'A':
+    case 'a':
+        updateLog("수상한 기운을 조사하기로 결정했습니다.");
+        displayLog();
+        Sleep(200);
+        
+        if (strcmp(currentEvent->name, "닌자") == 0)
+        {
+            updateLog("닌자를 발견했다!");
+            displayLog();
+            Sleep(200);
+        }
+        if (strcmp(currentEvent->name, "체력 약초 상자") == 0)
+        {
+            updateLog("버려진 상자를 발견했다.");
+            displayLog();
+            Sleep(200);
+        }
+
+        if (strcmp(currentEvent->name, "기력 약수 상자") == 0)
+        {
+            updateLog("때깔 좋은 상자를 발견했다.");
+            displayLog();
+            Sleep(200);
+        }
+
+        currentEvent->check = 0;
+        break;
+    case 'R':
+    case 'r':
+        updateLog("수상한 기운을 조사하지 않기로 결정했습니다.");
+        displayLog();
+        Sleep(200);
+        currentEvent->check = 0;
+        eraseEvent(currentEvent);
+
+        // 이전 위치로 돌아가기
+        player.pos = previousPos;
+        Situation = 0;
+        break;
+    }
 }
+
 
 
 int encountQuestItem()
