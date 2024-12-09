@@ -1,7 +1,7 @@
 #ifndef QUEST_H
 #define QUEST_H
 #include "utility.h"
-#define MAX_QUEST 21
+#define MAX_QUEST 22
 #define MAX_QUESTITEM 7
 
 typedef struct {
@@ -67,10 +67,10 @@ void QuestComplete15();
 void QuestComplete16();
 void QuestComplete17();
 void QuestComplete18();
-
+void QuestComplete19();
 
 void initializeQuestItem();
-void drawQuestItem(QuestItemData *QuestItemList);
+void drawQuestItem(QuestItemData* QuestItemList);
 
 #endif // QUEST_H
 

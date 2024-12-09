@@ -94,16 +94,16 @@ void encountChoice_P()
 	switch (action)
 	{
 	default:
-		updateLog("You choose the wrong key");
+		updateLog("잘못된 키를 입력하였습니다.");
 		Sleep(200);
 		displayLog();
-		updateLog("Press [A] to Attack or [R] to Run");
+		updateLog("[A]키를 눌러 전투할지 [R]키를 눌러 도망칠지 선택하십시오.");
 		Sleep(200);
 		displayLog();
 		break;
 	case 'A':
 	case 'a':
-		updateLog("You decided to attack the enemy!");
+		updateLog("적과의 전투가 시작됩니다!");
 		Sleep(200);
 		displayLog();
 		displayBattleScreen();
@@ -111,10 +111,10 @@ void encountChoice_P()
 		break;
 	case 'R':
 	case 'r':
-		updateLog("You ran away from the enemy!");
+		updateLog("적에게서 도망쳤습니다.!");
 		Sleep(200);
 		displayLog();
-		updateLog("You fled from battle!");
+		updateLog("전투에서 벗어낫습니다!");
 		Sleep(200);
 		displayLog();
 		Situation = 0;
@@ -169,13 +169,13 @@ void encountNpcChoice_prologue()
 	switch (action)
 	{
 	default:
-		updateLog("You choose the wrong key");
-		updateLog("Press [A] to talk NPC or [R] to Leave");
+		updateLog("잘못된 키를 입력하였습니다.");
+		updateLog("[A]키를 눌러 NPC와 대화할지 [R]키를 눌러 떠날지 선택하십시오.");
 		break;
 	case 'A':
 	case 'a':
 		Sleep(100);
-		updateLog("You decided to talk to NPC");
+		updateLog("NPC와 대화를 시작합니다.");
 		Situation = 5;
 		initializeMap();
 		displayShopMap();
@@ -186,7 +186,7 @@ void encountNpcChoice_prologue()
 		break;
 	case 'R':
 	case 'r':
-		updateLog("You decided to leave NPC");
+		updateLog("NPC를 떠납니다.");
 		Situation = 0;
 		player.pos = previousPos;
 		break;
@@ -559,17 +559,17 @@ void encountPotal_prologueChoice()
     switch (action)
     {
     default:
-        updateLog("You choose the wrong key");
+        updateLog("잘못된 키를 입력하였습니다.");
 		Sleep(200);
 		displayLog();
-        updateLog("Press [A] to go next map or [R] to stay");
+        updateLog("[A]키를 눌러 다음 마을로 갈지 [R]키를 눌러 머무를지 선택하십시오.");
 		Sleep(200);
 		displayLog();
         break;
     case 'A':
     case 'a':
         Sleep(100);
-        updateLog("You decided to go next map!");
+        updateLog("다음 마을로 떠납니다!");
 		Sleep(200);
 		displayLog();
   
@@ -581,7 +581,7 @@ void encountPotal_prologueChoice()
 
     case 'R':
     case 'r':
-        updateLog("You decided to stay");
+        updateLog("현재 마을에 머무릅니다");
 		Sleep(200);
 		displayLog();
 		Situation = 0;
@@ -701,7 +701,7 @@ void showTutorial()
 
 void battle_P(Enemy* enemy)
 {
-	updateBattleLog("Battle start!!");
+	updateBattleLog("전투시작!");
 	int damageToEnemy;   // 공격할 때 사용할 변수
 	int damageToPlayer;  // 반격할 때 사용할 변수
 	displayBattleScreen();
@@ -714,7 +714,7 @@ void battle_P(Enemy* enemy)
 		char action = _getch();
 
 		if (enemy == nullptr) {
-			updateBattleLog("Error: No enemy to battle.");
+			updateBattleLog("오류:전투에 적이 없습니다.");
 			displayBattleLog();
 			return;
 		}
@@ -744,20 +744,20 @@ void battle_P(Enemy* enemy)
 			if (damageToEnemy > 0) {
 				if (Crit() == 1)
 				{
-					updateBattleLog("Critical Attack!");
+					updateBattleLog("치명타공격!");
 					damageToEnemy *= 2;
 				}
 				enemy->hp -= damageToEnemy;
 				if (enemy->hp <= 0)
 					enemy->hp = 0;
-				updateBattleLog("You attacked the enemy!");
+				updateBattleLog("적을 공격하였습니다!");
 				displayPlayerStat();
 				displayEnemyStat(enemy);
 				Sleep(100);
 				displayBattleLog();
 			}
 			else {
-				updateBattleLog("Your attack was too weak!");
+				updateBattleLog("당신의 공격이 너무 약합니다!");
 				displayPlayerStat();
 				displayEnemyStat(enemy);
 				Sleep(100);
@@ -773,7 +773,7 @@ void battle_P(Enemy* enemy)
 					player.hp -= damageToPlayer;
 					if (player.hp <= 0)
 						player.hp = 0;
-					updateBattleLog("The enemy attacked you!");
+					updateBattleLog("적에게 공격당하였습니다!");
 					displayPlayerStat();
 					displayEnemyStat(enemy);
 					Sleep(100);
@@ -785,18 +785,18 @@ void battle_P(Enemy* enemy)
 			//적과 전투에서 도주
 		case 'r':
 		case 'R':
-			updateBattleLog("You ran away from the enemy!");
+			updateBattleLog("적에게서 도망쳤습니다!");
 			Situation = 0;
 			player.pos = previousPos;
 			displayPlayerStat();
 			displayEnemyStat(enemy);
 			Sleep(100);
 			displayBattleLog();
-			updateLog("You fled from battle!");
+			updateLog("전투에서 벗어났습니다!");
 			break;
 
 		default:
-			updateBattleLog("Invalid action! Choose again.");
+			updateBattleLog("불가능한 행동! 다시 선택해주세요.");
 			Sleep(100);
 			displayBattleLog();
 			break;
@@ -805,7 +805,7 @@ void battle_P(Enemy* enemy)
 		// 상태 체크
 		if (enemy->hp <= 0) {
 			enemyDyingAnimation(enemy);
-			updateBattleLog("You defeated the enemy!");
+			updateBattleLog("적을 물리쳤습니다!");
 			//player.exp += 12;
 			player.money += 4;
 			player.killcount++;
@@ -823,7 +823,7 @@ void battle_P(Enemy* enemy)
 		}
 		else if (player.hp <= 0) {
 			playerDyingAnimation();
-			updateBattleLog("You have been defeated...");
+			updateBattleLog("당신은 패배하엿습니다...");
 			displayPlayerStat();
 			displayEnemyStat(enemy);
 			Sleep(100);
@@ -834,14 +834,14 @@ void battle_P(Enemy* enemy)
 
 	//OriginalLevel = player.level;
 	// 전투가 끝난 후 대기 및 본래 화면으로 복귀
-	updateBattleLog("Press any key to return to the main screen...");
+	updateBattleLog("아무 키를 눌러 맵으로 돌아가십시오...");
 	//LevelUp();
 	displayPlayerStat();
 	displayBattleLog();
 	_getch();  // 사용자 입력 대기
 
 	if (player.level > OriginalLevel)
-		updateLog("Level up!!");
+		updateLog("레벨업!!");
 
 	initializeMap(); // 맵 초기화
 	displayMap_Prologue(); // 이동 맵 출력

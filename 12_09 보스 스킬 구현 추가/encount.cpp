@@ -50,16 +50,16 @@ void encountChoice()
     switch (action)
     {
     default:
-        updateLog("You choose the wrong key");
+        updateLog("잘못된 키를 입력하였습니다.");
         Sleep(200);
         displayLog();
-        updateLog("Press [A] to Attack or [R] to Run");
+        updateLog("[A]키를 눌러 전투할지 [R]키를 눌러 도망칠지 선택하십시오.");
         Sleep(200);
         displayLog();
         break;
     case 'A':
     case 'a':
-        updateLog("You decided to attack the enemy!");
+        updateLog("적과의 전투가 시작됩니다!");
         Sleep(200);
         displayLog();
         displayBattleScreen();
@@ -67,10 +67,10 @@ void encountChoice()
         break;
     case 'R':
     case 'r':
-        updateLog("You ran away from the enemy!");
+        updateLog("적에게서 도망쳤습니다!");
         Sleep(200);
         displayLog();
-        updateLog("You fled from battle!");
+        updateLog("전투를 벗어났습니다!");
         Sleep(200);
         displayLog();
         Situation = 0;
@@ -88,16 +88,16 @@ void encountBossChoice()
     switch (action)
     {
     default:
-        updateLog("You choose the wrong key");
+        updateLog("잘못된 키를 입력하였습니다.");
         Sleep(200);
         displayLog();
-        updateLog("Press [A] to Attack or [R] to Run");
+        updateLog("[A]키를 눌러 전투할지 [R]키를 눌러 도망칠지 선택하십시오.");
         Sleep(200);
         displayLog();
         break;
     case 'A':
     case 'a':
-        updateLog("You decided to attack the boss!");
+        updateLog("적 장수와의 전투가 시작됩니다!");
         Sleep(200);
         displayLog();
         displayBossBattleScreen();
@@ -105,10 +105,10 @@ void encountBossChoice()
         break;
     case 'R':
     case 'r':
-        updateLog("You ran away from the boss!");
+        updateLog("적 장수에게서 도망쳤습니다!");
         Sleep(200);
         displayLog();
-        updateLog("You fled from battle!");
+        updateLog("전투에서 벗어났습니다!");
         Sleep(200);
         displayLog();
         Situation = 0;
@@ -142,13 +142,13 @@ void encountShopChoice()
     switch (action)
     {
     default:
-        updateLog("You choose the wrong key");
-        updateLog("Press [A] to use Shop or [R] to Leave");
+        updateLog("잘못된 키를 입력하였습니다.");
+        updateLog("[A]키를 눌러 상점에 들어갈지 [R]키를 눌러 떠날지 선택하십시오.");
         break;
     case 'A':
     case 'a':
         Sleep(100);
-        updateLog("You decided to use Shop!");
+        updateLog("상점에 들어왔습니다!");
         Situation = 3;
         initializeMap();
         displayShopMap();
@@ -160,7 +160,7 @@ void encountShopChoice()
         break;
     case 'R':
     case 'r':
-        updateLog("You decided to leave Shop");
+        updateLog("상점을 떠났습니다.");
         Situation = 0;
         player.pos = previousPos;
         break;
@@ -190,13 +190,13 @@ void encountNpcChoice()
     switch (action)
     {
     default:
-        updateLog("You choose the wrong key");
-        updateLog("Press [A] to talk NPC or [R] to Leave");
+        updateLog("잘못된 키를 입력하였습니다.");
+        updateLog("[A]키를 눌러 대화할지 [R]키를 눌러 떠날지 선택하십시오.");
         break;
     case 'A':
     case 'a':
         Sleep(100);
-        updateLog("You decided to talk to NPC");
+        updateLog("NPC와 대화를 시작합니다.");
         Situation = 5;
         initializeMap();
         displayShopMap();
@@ -207,7 +207,7 @@ void encountNpcChoice()
         break;
     case 'R':
     case 'r':
-        updateLog("You decided to leave NPC");
+        updateLog("NPC와의 대화를 종료합니다.");
         Situation = 0;
         player.pos = previousPos;
         break;
@@ -238,13 +238,13 @@ void encountPotalChoice()
     switch (action)
     {
     default:
-        updateLog("You choose the wrong key");
-        updateLog("Press [A] to go next map or [R] to stay");
+        updateLog("잘못된 키를 입력하였습니다.");
+        updateLog("[A]키를 눌러 마을을 떠날지 [R]키를 눌러 머물지 선택하십시오.");
         break;
     case 'A':
     case 'a':
         Sleep(100);
-        updateLog("You decided to go next map!");
+        updateLog("다음 마을로 떠납니다!");
         initializeMap();
         player.pos.x = 1;
         player.pos.y = 1;
@@ -261,7 +261,7 @@ void encountPotalChoice()
 
     case 'R':
     case 'r':
-        updateLog("You decided to stay");
+        updateLog("현재 마을에 머물기로 결정하였습니다.");
         Situation = 0;
         player.pos = previousPos;
         break;

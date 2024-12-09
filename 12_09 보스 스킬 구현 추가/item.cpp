@@ -54,14 +54,14 @@ void weaponchange(int i)
         strncpy(player.currentweaponName, weapons[player.job][i].name, sizeof(player.currentweaponName) - 1);
         player.currentweaponName[sizeof(player.currentweaponName) - 1] = '\0'; // null-termination 보장
 
-        updateLog("현재장비보다 티어가 높은 장비이므로 장비를 교체합니다!");
+        updateLog("현재장비보다 등급이 높은 장비이므로 장비를 교체합니다!");
     }
     else if (player.currentweapon == weapons[player.job][i].weaponTier) 
     {
         updateLog("현재장비와 같은 장비이므로 장비를 교체하지 않습니다!");
     } 
     else {
-        updateLog("현재장비보다 티어가 낮은 장비이므로 장비를 교체하지 않습니다!");
+        updateLog("현재장비보다 등급이 낮은 장비이므로 장비를 교체하지 않습니다!");
     }
         
         
@@ -85,14 +85,14 @@ void equipmentchange(int i)
         strncpy(player.currentequipmentName, equipments[i].name, sizeof(player.currentequipmentName) - 1);
         player.currentequipmentName[sizeof(player.currentequipmentName) - 1] = '\0'; // null-termination 보장
         
-        updateLog("현재장비보다 티어가 높은 장비이므로 장비를 교체합니다!");
+        updateLog("현재장비보다 등급이 높은 장비이므로 장비를 교체합니다!");
     }
     else if (player.currentequipment == equipments[i].equipmentTier)
     {
         updateLog("현재장비와 같은 장비이므로 장비를 교체하지 않습니다!");
     }
     else {
-        updateLog("현재장비보다 티어가 낮은 장비이므로 장비를 교체하지 않습니다!");
+        updateLog("현재장비보다 등급이 낮은 장비이므로 장비를 교체하지 않습니다!");
     }
 
     

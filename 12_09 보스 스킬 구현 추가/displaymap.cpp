@@ -108,23 +108,23 @@ void displayBossBattleScreen()
 void displayPlayerStat()
 {
 	setCursorPosition(101, 1);
-	printf("  LEVEL: %d", player.level);
+	printf("  레벨: %d", player.level);
 	setCursorPosition(101, 2);
-	printf("  EXP: %3d / %3d 엽전: %3d", player.exp, EXPbar, player.money);
+	printf("  경험치: %3d / %3d 엽전: %3d", player.exp, EXPbar, player.money);
 	setCursorPosition(101, 3);
-	printf("  HP: %3d / %3d", player.hp, maxhp);
+	printf("  체력: %3d / %3d", player.hp, maxhp);
 	setCursorPosition(101, 4);
-	printf("  MP: %3d / %3d", player.mp, maxmp);
+	printf("  기력: %3d / %3d", player.mp, maxmp);
 	setCursorPosition(101, 5);
-	printf("  healing potion: %3d", player.HPpotion);
+	printf("  체력 물약: %3d", player.HPpotion);
 	setCursorPosition(101, 6);
-	printf("  mana potion: %3d", player.MPpotion);
+	printf("  기력 물약: %3d", player.MPpotion);
 	setCursorPosition(101, 7);
-	printf("  attack point: %3d", player.attack);
+	printf("  공격력: %3d", player.attack);
 	setCursorPosition(101, 8);
-	printf("  defense point: %3d", player.defense);
+	printf("  방어력: %3d", player.defense);
 	setCursorPosition(101, 9);
-	printf("  accuracy point: %3d", player.accuracy);
+	printf("  명중률: %3d", player.accuracy);
 	setCursorPosition(101, 10);
 	printf("  관군과의 관계: %3d", player.JRelationship);
 	setCursorPosition(101, 11);
@@ -141,33 +141,33 @@ void displayPlayerStat()
 void displayEnemyStat(const Enemy* enemy)
 {
 	if (enemy == nullptr) {
-		printf("Error: Enemy data not available.\n");
+		printf("오류: 적 데이터가 없습니다.\n");
 		return;
 	}
 	setCursorPosition(101, 14);
 	printf("%-70s", enemy->name);
 	setCursorPosition(101, 15);
-	printf("HP: %3d", enemy->hp);
+	printf("체력: %3d", enemy->hp);
 	setCursorPosition(101, 16);
-	printf("attack point: %3d", enemy->attack);
+	printf("공격력: %3d", enemy->attack);
 	setCursorPosition(101, 17);
-	printf("defense point: %3d", enemy->defense);
+	printf("방어력: %3d", enemy->defense);
 }
 
 void displayBossStat(const Enemy* boss)
 {
 	if (boss == nullptr) {
-		printf("Error: Enemy data not available.\n");
+		printf("오류: 적 데이터가 없습니다.\n");
 		return;
 	}
 	setCursorPosition(101, 14);
 	printf("%-70s", boss->name);
 	setCursorPosition(101, 15);
-	printf("HP: %3d", boss->hp);
+	printf("체력: %3d", boss->hp);
 	setCursorPosition(101, 16);
-	printf("attack point: %3d", boss->attack);
+	printf("공격력: %3d", boss->attack);
 	setCursorPosition(101, 17);
-	printf("defense point: %3d", boss->defense);
+	printf("방어력: %3d", boss->defense);
 }
 
 void displayShopScreen()
@@ -175,15 +175,15 @@ void displayShopScreen()
 	setCursorPosition(40, 11);
 	printf("번호를 눌러 상품을 구매하세요.\n");
 	setCursorPosition(40, 12);
-	printf("1. 체력 포션 2원 남은 갯수: %d\n", Shop1.hpPotion);
+	printf("1. 체력 물약 2원 남은 갯수: %d\n", Shop1.hpPotion);
 	setCursorPosition(40, 13);
-	printf("2. 마나 포션 2원 남은 갯수: %d\n", Shop1.manaPotion);
+	printf("2. 기력 물약 2원 남은 갯수: %d\n", Shop1.manaPotion);
 	setCursorPosition(40, 14);
-	printf("3. 힘 포션 10원 남은 갯수: %d\n", Shop1.strengthPotion);
+	printf("3. 공격력 물약 10원 남은 갯수: %d\n", Shop1.strengthPotion);
 	setCursorPosition(40, 15);
-	printf("4. 방어 포션 10원 남은 갯수: %d\n", Shop1.defensePotion);
+	printf("4. 방어력 물약 10원 남은 갯수: %d\n", Shop1.defensePotion);
 	setCursorPosition(40, 16);
-	printf("5. 명중 포션 10원 남은 갯수: %d\n", Shop1.accuracyPotion);
+	printf("5. 명중률 물약 10원 남은 갯수: %d\n", Shop1.accuracyPotion);
 	setCursorPosition(40, 17);
 	printf("6. 상점을 떠난다.\n");
 
