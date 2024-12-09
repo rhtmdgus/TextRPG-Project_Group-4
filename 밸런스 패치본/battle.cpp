@@ -1120,6 +1120,7 @@ void bossbattle(Enemy* boss)
 			player.questitem1 = 1;
 			checkboss1 = 1;
 			checkboss2 = 1;
+			checkboss3 = 1;
 			if (player.buffcount1 != 0) {
 				player.buffcount1 = 0;
 				player.attack -= player.buff_attack;  // 공격력 버프 제거

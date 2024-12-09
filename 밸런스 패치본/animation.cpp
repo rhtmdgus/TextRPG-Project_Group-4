@@ -6257,7 +6257,7 @@ void BossAttack(Enemy* boss)
     }
     else if (boss->type == archor)
     {
-        for (int k = 0; k < 13; k++)
+        for (int k = 0; k < 8; k++)
         {
             for (int i = 0; i < 15; i++)
             {

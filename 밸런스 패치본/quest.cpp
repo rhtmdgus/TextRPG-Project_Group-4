@@ -7,6 +7,7 @@
 #include "utility.h"
 #include "questmanager.h"
 #include "item.h"
+#include "ending.h"
 
 Quest quest[MAX_QUEST];
 PrologueQuest prologuequest; //프롤로그 퀘스트
@@ -1235,7 +1236,9 @@ void QuestComplete19() {
 		if (num == '1')
 		{
 			quest[19].clear = 1;
+			checkboss1 = 0;
 			checkboss2 = 0;
+			checkboss3 = 0;
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
@@ -1246,7 +1249,15 @@ void QuestComplete19() {
 			setCursorPosition(30, 13);
 			printf("1. 엔딩으로\n");
 			completeQuest(19);
-			backToDialogue();
+			if (player.WRelationship >= player.JRelationship && player.WRelationship >= player.JRelationship) {
+				clearScreen();
+				badEnding();
+			}
+			else {
+				clearScreen();
+				GoodEnding();
+			}
+			backToMap();
 		}
 		else
 		{
