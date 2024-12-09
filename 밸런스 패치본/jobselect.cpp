@@ -44,7 +44,7 @@ void jobSelect_screen()
     printf("||2. 궁수                                                         ||\n");
     for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
         printf(" ");
-    printf("||-방어력이 낮은 대신 치명타 확률이 높은 직업입니다.  ||\n");
+    printf("||-방어력이 낮은 대신 치명타 확률이 높은 직업입니다.              ||\n");
     for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
         printf(" ");
     printf("|| 3. 창병                                                        ||\n");

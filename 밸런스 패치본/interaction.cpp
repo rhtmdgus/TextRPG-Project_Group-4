@@ -369,6 +369,7 @@ void VolunArmyLog_2()
 
 		}
 		else if (currentNPC->hasQuest == false || quest[1].clear == 1) {
+			clearScreen();
 			setCursorPosition(30, 11);
 			printf("잘 모르겠는데, 내 친우들에게 한번 물어보겠소.");
 			setCursorPosition(30, 12);

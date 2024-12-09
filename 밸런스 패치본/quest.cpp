@@ -137,13 +137,13 @@ void drawQuestItem(QuestItemData* QuestItemList)
 void QuestComplete1() {
 	if (player.money > 1)
 	{
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("돌쇠에게 1냥을 줄까?");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("대화문\n");
-		setCursorPosition(40, 13);
+		setCursorPosition(30, 13);
 		printf("1. 준다\n");
-		setCursorPosition(40, 14);
+		setCursorPosition(30, 14);
 		printf("2. 좀 더 생각해보자\n");
 		int num = _getch();
 		if (num == '1')
@@ -154,11 +154,11 @@ void QuestComplete1() {
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[0].description4);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
 			completeQuest(0);
@@ -168,11 +168,11 @@ void QuestComplete1() {
 		{
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[0].description3);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 미안하오\n");
 			backToDialogue();
 		}
@@ -181,9 +181,9 @@ void QuestComplete1() {
 	{
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("돈이 없어서 미션을 클리어할수 없다.");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("돈을 모으고 다시 오도록 하자.");
 		backToDialogue();
 	}
@@ -193,13 +193,13 @@ void QuestComplete1() {
 void QuestComplete2() {
 	if (player.questitem1 == 1)
 	{
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("식량을 줄까?");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("대화문\n");
-		setCursorPosition(40, 13);
+		setCursorPosition(30, 13);
 		printf("1. 준다\n");
-		setCursorPosition(40, 14);
+		setCursorPosition(30, 14);
 		printf("2. 좀 더 생각해보자\n");
 		int num = _getch();
 		if (num == '1')
@@ -210,11 +210,11 @@ void QuestComplete2() {
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[1].description4);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 힘내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
@@ -228,11 +228,11 @@ void QuestComplete2() {
 		{
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[1].description3);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 미안하오\n");
 			backToDialogue();
 		}
@@ -241,9 +241,9 @@ void QuestComplete2() {
 	{
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("식량이 없어서 미션을 클리어할수 없다.");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("식량을 수집하고 다시 오도록 하자.");
 		backToDialogue();
 	}
@@ -253,13 +253,13 @@ void QuestComplete2() {
 void QuestComplete3() {
 	if (player.killcount >= 5)
 	{
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("관군에게 퀘스트를 완료했다고 말할까?");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("대화문\n");
-		setCursorPosition(40, 13);
+		setCursorPosition(30, 13);
 		printf("1. 말한다\n");
-		setCursorPosition(40, 14);
+		setCursorPosition(30, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
 		if (num == '1')
@@ -272,11 +272,11 @@ void QuestComplete3() {
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[2].description4);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 승리하길 바라오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
@@ -290,11 +290,11 @@ void QuestComplete3() {
 		{
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[2].description3);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 미안하오\n");
 			backToDialogue();
 		}
@@ -303,9 +303,9 @@ void QuestComplete3() {
 	{
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("아직 충분한 수의 왜군을 죽이지 못했다.");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("왜군을 조금 더 제거하고 오도록 하자.");
 		backToDialogue();
 	}
@@ -315,13 +315,13 @@ void QuestComplete3() {
 void QuestComplete4() {
 	if (player.questitem2 == 1)
 	{
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("왜군에게 작전서류를 넘길까?");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("대화문\n");
-		setCursorPosition(40, 13);
+		setCursorPosition(30, 13);
 		printf("1. 준다\n");
-		setCursorPosition(40, 14);
+		setCursorPosition(30, 14);
 		printf("2. 좀 더 생각해보자\n");
 		int num = _getch();
 		if (num == '1')
@@ -335,11 +335,11 @@ void QuestComplete4() {
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[3].description4);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
@@ -353,11 +353,11 @@ void QuestComplete4() {
 		{
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[3].description3);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 미안하오\n");
 			backToDialogue();
 		}
@@ -366,9 +366,9 @@ void QuestComplete4() {
 	{
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("작전 서류가 없어서 미션을 클리어할수 없다.");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("작전 서류를 훔치고 다시 오도록 하자.");
 		backToDialogue();
 	}
@@ -378,13 +378,13 @@ void QuestComplete4() {
 void QuestComplete5() {
 	if (player.questitem3 == 1)
 	{
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("임무를 완료할까?");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("대화문\n");
-		setCursorPosition(40, 13);
+		setCursorPosition(30, 13);
 		printf("1. 완료한다\n");
-		setCursorPosition(40, 14);
+		setCursorPosition(30, 14);
 		printf("2. 나중에 완료하자.\n");
 		int num = _getch();
 		if (num == '1')
@@ -395,11 +395,11 @@ void QuestComplete5() {
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[4].description4);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
 			completeQuest(4);
@@ -409,11 +409,11 @@ void QuestComplete5() {
 		{
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[4].description3);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 미안하오\n");
 			backToDialogue();
 		}
@@ -422,9 +422,9 @@ void QuestComplete5() {
 	{
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("아직 돌을 치우지 않아 미션을 클리어할수 없다.");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("돌을 치우고 다시 오도록 하자.");
 		backToDialogue();
 	}
@@ -433,13 +433,13 @@ void QuestComplete5() {
 void QuestComplete6() {
 	if (checkboss1 == 1)
 	{
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("임무를 완료할까?");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("대화문\n");
-		setCursorPosition(40, 13);
+		setCursorPosition(30, 13);
 		printf("1. 완료한다\n");
-		setCursorPosition(40, 14);
+		setCursorPosition(30, 14);
 		printf("2. 나중에 완료하자.\n");
 		int num = _getch();
 		if (num == '1')
@@ -455,11 +455,11 @@ void QuestComplete6() {
 			potal[player.currentmap].spawnPotal = true;
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[6].description4);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 과찬이오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
@@ -475,11 +475,11 @@ void QuestComplete6() {
 		{
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[6].description3);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 미안하오\n");
 			backToDialogue();
 		}
@@ -488,9 +488,9 @@ void QuestComplete6() {
 	{
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("아직 왜구 간부를 잡지 못하였다.");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("왜구 장수를 잡고 다시 오도록 하자.");
 		backToDialogue();
 	}
@@ -499,13 +499,13 @@ void QuestComplete6() {
 void QuestComplete7() {
 	if (quest[7].clear == 0)
 	{
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("왜구 장수를 풀어줄까?");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("대화문\n");
-		setCursorPosition(40, 13);
+		setCursorPosition(30, 13);
 		printf("1. 완료한다\n");
-		setCursorPosition(40, 14);
+		setCursorPosition(30, 14);
 		printf("2. 나중에 완료하자.\n");
 		int num = _getch();
 		if (num == '1')
@@ -518,11 +518,11 @@ void QuestComplete7() {
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[7].description4);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 빨리 가시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
@@ -539,11 +539,11 @@ void QuestComplete7() {
 		{
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[7].description3);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 기다려보시오\n");
 			backToDialogue();
 		}
@@ -552,9 +552,9 @@ void QuestComplete7() {
 	{
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("아직 왜구 장수를 풀어줄 도구를 챙기지 못했다.");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("도구를 챙기고 다시 오도록 하자.");
 		backToDialogue();
 	}
@@ -562,13 +562,13 @@ void QuestComplete7() {
 void QuestComplete8() {
 	if (player.MPpotion >= 1)
 	{
-		setCursorPosition(40, 11);
-		printf("마나 포션 한개를 줄까?");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 11);
+		printf("기력 물약 한개를 줄까?");
+		setCursorPosition(30, 12);
 		printf("대화문\n");
-		setCursorPosition(40, 13);
+		setCursorPosition(30, 13);
 		printf("1. 준다\n");
-		setCursorPosition(40, 14);
+		setCursorPosition(30, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
 		if (num == '1')
@@ -580,11 +580,11 @@ void QuestComplete8() {
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[8].description4);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
@@ -595,11 +595,11 @@ void QuestComplete8() {
 		{
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[8].description3);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 미안하오\n");
 			backToDialogue();
 		}
@@ -608,9 +608,9 @@ void QuestComplete8() {
 	{
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
-		printf("마나 포션이 없어서 완료할 수 없다.");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 11);
+		printf("기력 물약이 없어서 완료할 수 없다.");
+		setCursorPosition(30, 12);
 		printf("상점에서 구매하고 오자.");
 		backToDialogue();
 	}
@@ -618,13 +618,13 @@ void QuestComplete8() {
 void QuestComplete9() {
 	if (player.questitem1 == 1)
 	{
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("퀘스트를 완료할까?");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("대화문\n");
-		setCursorPosition(40, 13);
+		setCursorPosition(30, 13);
 		printf("1. 완료한다\n");
-		setCursorPosition(40, 14);
+		setCursorPosition(30, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
 		if (num == '1')
@@ -636,11 +636,11 @@ void QuestComplete9() {
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[9].description4);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
 			completeQuest(9);
@@ -650,11 +650,11 @@ void QuestComplete9() {
 		{
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[9].description3);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 미안하오\n");
 			backToDialogue();
 		}
@@ -663,9 +663,9 @@ void QuestComplete9() {
 	{
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("아직 쌀을 수확하지 못했다.");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("쌀을 수확하고 오자.");
 		backToDialogue();
 	}
@@ -673,13 +673,13 @@ void QuestComplete9() {
 void QuestComplete10() {
 	if (player.killcount >= 5)
 	{
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("퀘스트를 완료할까?");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("대화문\n");
-		setCursorPosition(40, 13);
+		setCursorPosition(30, 13);
 		printf("1. 완료한다\n");
-		setCursorPosition(40, 14);
+		setCursorPosition(30, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
 		if (num == '1')
@@ -690,11 +690,11 @@ void QuestComplete10() {
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[10].description4);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
@@ -708,11 +708,11 @@ void QuestComplete10() {
 		{
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[10].description3);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 미안하오\n");
 			backToDialogue();
 		}
@@ -721,9 +721,9 @@ void QuestComplete10() {
 	{
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("아직 충분한 수의 적을 죽이지 못했다.");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("적을 죽이고 다시 오자.");
 		backToDialogue();
 	}
@@ -731,13 +731,13 @@ void QuestComplete10() {
 void QuestComplete11() {
 	if (player.questitem2 == 1)
 	{
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("퀘스트를 완료할까?");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("대화문\n");
-		setCursorPosition(40, 13);
+		setCursorPosition(30, 13);
 		printf("1. 완료한다\n");
-		setCursorPosition(40, 14);
+		setCursorPosition(30, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
 		if (num == '1')
@@ -748,11 +748,11 @@ void QuestComplete11() {
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[11].description4);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
@@ -766,11 +766,11 @@ void QuestComplete11() {
 		{
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[11].description3);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 미안하오\n");
 			backToDialogue();
 		}
@@ -779,9 +779,9 @@ void QuestComplete11() {
 	{
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("아직 식량창고를 태우지 못했다.");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("식량창고를 태우고 오자.");
 		backToDialogue();
 	}
@@ -789,13 +789,13 @@ void QuestComplete11() {
 void QuestComplete12() {
 	if (checkboss2 == 1)
 	{
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("퀘스트를 완료할까?");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("대화문\n");
-		setCursorPosition(40, 13);
+		setCursorPosition(30, 13);
 		printf("1. 완료한다\n");
-		setCursorPosition(40, 14);
+		setCursorPosition(30, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
 		if (num == '1')
@@ -810,11 +810,11 @@ void QuestComplete12() {
 			potal[player.currentmap].spawnPotal = true;
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[12].description4);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 갑시다\n");
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
@@ -828,11 +828,11 @@ void QuestComplete12() {
 		{
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[12].description3);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 미안하오\n");
 			backToDialogue();
 		}
@@ -841,9 +841,9 @@ void QuestComplete12() {
 	{
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("아직 보스를 처치하지 못했다.");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("보스를 처치하고 오자.");
 		backToDialogue();
 	}
@@ -852,13 +852,13 @@ void QuestComplete12() {
 void QuestComplete13() {
 	if (player.killcount >= 5)
 	{
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("퀘스트를 완료할까?");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("대화문\n");
-		setCursorPosition(40, 13);
+		setCursorPosition(30, 13);
 		printf("1. 완료한다\n");
-		setCursorPosition(40, 14);
+		setCursorPosition(30, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
 		if (num == '1')
@@ -869,11 +869,11 @@ void QuestComplete13() {
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[13].description4);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
@@ -887,11 +887,11 @@ void QuestComplete13() {
 		{
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[13].description3);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 미안하오\n");
 			backToDialogue();
 		}
@@ -900,9 +900,9 @@ void QuestComplete13() {
 	{
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("아직 충분한 수의 적을 죽이지 못했다.");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("적을 죽이고 다시 오자.");
 		backToDialogue();
 	}
@@ -911,13 +911,13 @@ void QuestComplete13() {
 void QuestComplete14() {
 	if (player.questitem2 == 1)
 	{
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("퀘스트를 완료할까?");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("대화문\n");
-		setCursorPosition(40, 13);
+		setCursorPosition(30, 13);
 		printf("1. 완료한다\n");
-		setCursorPosition(40, 14);
+		setCursorPosition(30, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
 		if (num == '1')
@@ -928,11 +928,11 @@ void QuestComplete14() {
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[14].description4);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
@@ -946,11 +946,11 @@ void QuestComplete14() {
 		{
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[14].description3);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 미안하오\n");
 			backToDialogue();
 		}
@@ -959,9 +959,9 @@ void QuestComplete14() {
 	{
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("아직 물자를 가져오지 못했다.");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("물자를 가지고 오자.");
 		backToDialogue();
 	}
@@ -970,13 +970,13 @@ void QuestComplete14() {
 void QuestComplete15() {
 	if (checkboss2 == 1)
 	{
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("퀘스트를 완료할까?");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("대화문\n");
-		setCursorPosition(40, 13);
+		setCursorPosition(30, 13);
 		printf("1. 완료한다\n");
-		setCursorPosition(40, 14);
+		setCursorPosition(30, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
 		if (num == '1')
@@ -991,11 +991,11 @@ void QuestComplete15() {
 			potal[player.currentmap].spawnPotal = true;
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[15].description4);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 갑시다\n");
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
@@ -1009,11 +1009,11 @@ void QuestComplete15() {
 		{
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[15].description3);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 미안하오\n");
 			backToDialogue();
 		}
@@ -1022,9 +1022,9 @@ void QuestComplete15() {
 	{
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("아직 보스를 처치하지 못했다.");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("보스를 처치하고 오자.");
 		backToDialogue();
 	}
@@ -1033,13 +1033,13 @@ void QuestComplete15() {
 void QuestComplete16() {
 	if (player.MPpotion >= 1)
 	{
-		setCursorPosition(40, 11);
-		printf("마나 포션 한개를 줄까?");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 11);
+		printf("기력 물약 한개를 줄까?");
+		setCursorPosition(30, 12);
 		printf("대화문\n");
-		setCursorPosition(40, 13);
+		setCursorPosition(30, 13);
 		printf("1. 준다\n");
-		setCursorPosition(40, 14);
+		setCursorPosition(30, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
 		if (num == '1')
@@ -1053,11 +1053,11 @@ void QuestComplete16() {
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[16].description4);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
@@ -1071,11 +1071,11 @@ void QuestComplete16() {
 		{
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[16].description3);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 미안하오\n");
 			backToDialogue();
 		}
@@ -1084,9 +1084,9 @@ void QuestComplete16() {
 	{
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
-		printf("마나 포션이 없어서 완료할 수 없다.");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 11);
+		printf("기력 물약이 없어서 완료할 수 없다.");
+		setCursorPosition(30, 12);
 		printf("상점에서 구매하고 오자.");
 		backToDialogue();
 	}
@@ -1095,13 +1095,13 @@ void QuestComplete16() {
 void QuestComplete17() {
 	if (player.questitem2 == 1)
 	{
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("퀘스트를 완료할까?");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("대화문\n");
-		setCursorPosition(40, 13);
+		setCursorPosition(30, 13);
 		printf("1. 완료한다\n");
-		setCursorPosition(40, 14);
+		setCursorPosition(30, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
 		if (num == '1')
@@ -1115,11 +1115,11 @@ void QuestComplete17() {
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[17].description4);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 잘 지내시오\n");
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
@@ -1133,11 +1133,11 @@ void QuestComplete17() {
 		{
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[17].description3);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 미안하오\n");
 			backToDialogue();
 		}
@@ -1146,9 +1146,9 @@ void QuestComplete17() {
 	{
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("아직 수탈한 물품을 가지고 오지 못했다");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("수탈한 물품을 가지고 오자.");
 		backToDialogue();
 	}
@@ -1157,13 +1157,13 @@ void QuestComplete17() {
 void QuestComplete18() {
 	if (checkboss2 == 1)
 	{
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("퀘스트를 완료할까?");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("대화문\n");
-		setCursorPosition(40, 13);
+		setCursorPosition(30, 13);
 		printf("1. 완료한다\n");
-		setCursorPosition(40, 14);
+		setCursorPosition(30, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
 		if (num == '1')
@@ -1181,11 +1181,11 @@ void QuestComplete18() {
 			potal[player.currentmap].spawnPotal = true;
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[18].description4);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 갑시다\n");
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
@@ -1199,11 +1199,11 @@ void QuestComplete18() {
 		{
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[18].description3);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 미안하오\n");
 			backToDialogue();
 		}
@@ -1212,9 +1212,9 @@ void QuestComplete18() {
 	{
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("아직 보스를 처치하지 못했다.");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("보스를 처치하고 오자.");
 		backToDialogue();
 	}
@@ -1223,13 +1223,13 @@ void QuestComplete18() {
 void QuestComplete19() {
 	if (checkboss3 == 1)
 	{
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("퀘스트를 완료할까?");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("대화문\n");
-		setCursorPosition(40, 13);
+		setCursorPosition(30, 13);
 		printf("1. 완료한다\n");
-		setCursorPosition(40, 14);
+		setCursorPosition(30, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
 		if (num == '1')
@@ -1239,11 +1239,11 @@ void QuestComplete19() {
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf(quest[19].description4);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 엔딩으로\n");
 			completeQuest(19);
 			backToDialogue();
@@ -1257,9 +1257,9 @@ void QuestComplete19() {
 	{
 		Sleep(100);
 		clearScreen();
-		setCursorPosition(40, 11);
+		setCursorPosition(30, 11);
 		printf("아직 놈을 처치하지 못했다.");
-		setCursorPosition(40, 12);
+		setCursorPosition(30, 12);
 		printf("놈을 처치하고 오자.");
 		backToDialogue();
 	}
