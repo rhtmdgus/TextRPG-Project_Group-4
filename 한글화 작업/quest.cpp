@@ -554,7 +554,7 @@ void QuestComplete8() {
 	if (player.MPpotion >= 1)
 	{
 		setCursorPosition(40, 11);
-		printf("마나 포션 한개를 줄까?");
+		printf("기력 물약 한개를 줄까?");
 		setCursorPosition(40, 12);
 		printf("대화문\n");
 		setCursorPosition(40, 13);
@@ -603,7 +603,7 @@ void QuestComplete8() {
 		Sleep(100);
 		clearScreen();
 		setCursorPosition(40, 11);
-		printf("마나 포션이 없어서 완료할 수 없다.");
+		printf("기력 물약이 없어서 완료할 수 없다.");
 		setCursorPosition(40, 12);
 		printf("상점에서 구매하고 오자.");
 		backToDialogue();
@@ -1026,7 +1026,7 @@ void QuestComplete16() {
 	if (player.MPpotion >= 1)
 	{
 		setCursorPosition(40, 11);
-		printf("마나 포션 한개를 줄까?");
+		printf("기력 물약 한개를 줄까?");
 		setCursorPosition(40, 12);
 		printf("대화문\n");
 		setCursorPosition(40, 13);
@@ -1077,7 +1077,7 @@ void QuestComplete16() {
 		Sleep(100);
 		clearScreen();
 		setCursorPosition(40, 11);
-		printf("마나 포션이 없어서 완료할 수 없다.");
+		printf("기력 물약이 없어서 완료할 수 없다.");
 		setCursorPosition(40, 12);
 		printf("상점에서 구매하고 오자.");
 		backToDialogue();

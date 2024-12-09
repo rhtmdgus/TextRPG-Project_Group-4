@@ -202,7 +202,7 @@ void VolunArmyLog_1()
 		setCursorPosition(40, 13);
 		printf("대화문\n");
 		setCursorPosition(40, 14);
-		printf("1. 부상당한 의병한테 HP포션 하나를 준다.\n");
+		printf("1. 부상당한 의병한테 체력물약 하나를 준다.\n");
 		setCursorPosition(40, 15);
 		printf("2. 부상당한 의병을 돕지 않는다.\n");
 		int choice = _getch();
@@ -211,7 +211,7 @@ void VolunArmyLog_1()
 			if (player.HPpotion < 1)
 			{
 				clearScreen();
-				updateLog("가지고 있는 HP포션이 부족합니다.");
+				updateLog("가지고 있는 체력물약이 부족합니다.");
 				Sleep(200);
 				displayLog();
 				setCursorPosition(40, 11);
@@ -225,7 +225,7 @@ void VolunArmyLog_1()
 			else
 			{
 				clearScreen();
-				updateLog("부상당한 의병에게 HP포션을 주었습니다.");
+				updateLog("부상당한 의병에게 체력물약을 주었습니다.");
 				Sleep(200);
 				displayLog();
 				player.RRelationship += 20;
@@ -239,7 +239,7 @@ void VolunArmyLog_1()
 		else if (choice == '2')
 		{
 			clearScreen();
-			updateLog("부상당한 의병에게 HP포션을 주지 않기로 하였습니다.");
+			updateLog("부상당한 의병에게 체력물약을 주지 않기로 하였습니다.");
 			Sleep(200);
 			displayLog();
 			setCursorPosition(40, 11);
