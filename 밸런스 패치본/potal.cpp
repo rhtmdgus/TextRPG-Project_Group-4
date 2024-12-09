@@ -31,6 +31,9 @@ void selectmap() {
     else if (player.currentmap == 1) {
         map1_1();
     }
+    else if (player.currentmap == 2) {
+        map1_10();
+    }
 }
 
 void drawPotal()

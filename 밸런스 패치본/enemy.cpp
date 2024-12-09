@@ -86,24 +86,11 @@ void spawnBoss1() {
     Position pos;
     pos.x = MAP_WIDTH - 10;
     pos.y = 2;
-    if (player.JRelationship < 0)
-    {
-        currentBosses[0] = createBoss(&enemyTemplates[5], pos);
-        drawBoss(&currentBosses[0]);
-        map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
-    }
-    else if (player.RRelationship < 0)
-    {
-        currentBosses[0] = createBoss(&enemyTemplates[4], pos);
-        drawBoss(&currentBosses[0]);
-        map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
-    }
-    else
-    {
-        currentBosses[0] = createBoss(&enemyTemplates[3], pos);
-        drawBoss(&currentBosses[0]);
-        map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
-    }
+
+    currentBosses[0] = createBoss(&enemyTemplates[3], pos);
+    drawBoss(&currentBosses[0]);
+    map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
+
 }
 
 void spawnBoss2() {
@@ -134,8 +121,8 @@ void spawnBoss2() {
 void spawnBoss3() {
 
     Position pos;
-    pos.x = MAP_WIDTH - 10;
-    pos.y = 2;
+    pos.x = (MAP_WIDTH - 10) / 2;
+    pos.y = MAP_HEIGHT - 3;
     currentBosses[0] = createBoss(&enemyTemplates[9], pos);
     drawBoss(&currentBosses[0]);
     map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';

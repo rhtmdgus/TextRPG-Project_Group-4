@@ -165,30 +165,10 @@ int main()
 		drawQuestItem(QuestItemList);
 		//displayLog();
 
-		/*
 		if (player.currentmap == 2)
 		{
 			spawnBoss3();
-			setCursorPosition(40, 11);
-			printf(quest[10].title);
-			setCursorPosition(40, 12);
-			printf(quest[10].description1);
-			int choice = _getch();
-			if (choice == 'a' || choice == 'A')
-			{
-				clearScreen();
-				setCursorPosition(40, 11);
-				printf("최종 퀘스트를 수락하셨습니다!");
-				updateLog("최종 퀘스트를 수락하셨습니다!");
-				quest[19].take = 1;
-				player.questmax++;
-				acceptQuest(19);
-				backToDialogue();
-				break;
-			}
-			QuestComplete19();
 		}
-		*/
 
 
 		if (encountEnemy())
