@@ -38,7 +38,7 @@
 //situation 9 = encounting portal
 //situation 10 = encounting random stuff
 
-Player player = { 10, 10, 2, 2, 2, 2, 2, 20, 0, 0, 0, 0, 1, 900, 0, 0, 0, 0, 0, 0,  -1, -1, {"없음"} , {"헌 옷"} , 0, 0, 0, 0, 0, 0, {20, 13} };
+Player player = { 10, 10, 2, 2, 2, 2, 2, 1, 0, 0, 0, 0, 1, 900, 0, 0, 0, 0, 0, 0,  -1, -1, {"없음"} , {"헌 옷"} , 0, 0, 0, 0, 0, 0, {20, 13} };
 Position previousPos = { 1, 1 };
 Shop Shop1 = { "상인", 99, 99, 99, 99, 99, {3, 3} };
 
@@ -165,30 +165,10 @@ int main()
 		drawQuestItem(QuestItemList);
 		//displayLog();
 
-		/*
 		if (player.currentmap == 2)
 		{
 			spawnBoss3();
-			setCursorPosition(40, 11);
-			printf(quest[10].title);
-			setCursorPosition(40, 12);
-			printf(quest[10].description1);
-			int choice = _getch();
-			if (choice == 'a' || choice == 'A')
-			{
-				clearScreen();
-				setCursorPosition(40, 11);
-				printf("최종 퀘스트를 수락하셨습니다!");
-				updateLog("최종 퀘스트를 수락하셨습니다!");
-				quest[19].take = 1;
-				player.questmax++;
-				acceptQuest(19);
-				backToDialogue();
-				break;
-			}
-			QuestComplete19();
 		}
-		*/
 
 
 		if (encountEnemy())

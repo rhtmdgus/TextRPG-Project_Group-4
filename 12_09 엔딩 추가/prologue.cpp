@@ -24,7 +24,7 @@ int outNpcInteract_prologue = 0;
 int checkingSpawnEnemy_P = 0;
 
 //프롤로그 적
-Enemy enemyTemplates_P[1] = {			
+Enemy enemyTemplates_P[1] = {
 	{"허접한 왜군 잡졸", 5, 3, 1, {0, 0}, warrior}		//hp, attack, deffence
 };
 
@@ -43,7 +43,7 @@ Enemy createEnemy_P(const Enemy* enemyTemplate_P, Position pos) {
 }
 
 void spawnEnemies_P() {
-	if(checkingSpawnEnemy_P == 1)
+	if (checkingSpawnEnemy_P == 1)
 	{
 		Position pos = { 12, 15 };
 		currentEnemies_P[0] = createEnemy_P(&enemyTemplates_P[0], pos);
@@ -196,14 +196,14 @@ void encountNpcChoice_prologue()
 void displayNPCScreen_prologue()
 {
 	outNpcInteract_prologue = 1;
-	
+
 	int npctypeNum;
 
 	if (currentNPCP->type == Deadbody)
 		npctypeNum = 1;
 	else
 		npctypeNum = 2;
-	
+
 	switch (npctypeNum)
 	{
 	case 1:
@@ -286,14 +286,8 @@ void DeadbodyLog_1()
 		Sleep(100);
 		clearScreen();
 		setCursorPosition(35, 11);
-		printf("내 아내다....");
+		printf("확인할 수 없을 정도로 훼손 되었다.");
 		setCursorPosition(35, 12);
-		printf("왜구에게 도망치다가 당한것 같다.");
-		setCursorPosition(35, 13);
-		printf("죽일 놈의 것들....");
-		setCursorPosition(35, 14);
-		printf("대화문\n");
-		setCursorPosition(35, 15);
 		printf("1. 확인\n");
 		Sleep(150);
 		updateLog("A키를 눌러 이전 대화로 돌아가기");
@@ -305,14 +299,8 @@ void DeadbodyLog_1()
 		Sleep(100);
 		clearScreen();
 		setCursorPosition(35, 11);
-		printf("편지가 있다.");
+		printf("아내의 생일선물에 주었던 비녀가 있다.");
 		setCursorPosition(35, 12);
-		printf("당신 생일 선물로 준비해둔게 있어요");
-		setCursorPosition(35, 13);
-		printf("마을 뒷편의 창에 보시면 ");
-		setCursorPosition(35, 14);
-		printf("당신을 위한 선물이 있어요.");
-		setCursorPosition(35, 15);
 		printf("1. 확인\n");
 		Sleep(150);
 		updateLog("A키를 눌러 이전 대화로 돌아가기");
@@ -324,7 +312,9 @@ void DeadbodyLog_1()
 		Sleep(100);
 		clearScreen();
 		setCursorPosition(35, 11);
-		printf("나중에 필히 와서 양지바른 곳에 묻어드리오");
+		printf("아들을 찾아야한다.");
+		setCursorPosition(35, 12);
+		printf("일단 무기를 찾아야한다.");
 		backToMap_prologue();
 		Sleep(200);
 		updateLog("창고로 한번 가보자");
@@ -363,14 +353,12 @@ void DeadbodyLog_2()
 		Sleep(100);
 		clearScreen();
 		setCursorPosition(35, 11);
-		printf("내 아들이다!!");
+		printf("피범벅이된 아들이다..");
 		setCursorPosition(35, 12);
-		printf("어린아들까지 죽이다니!");
+		printf("이런...이런 짓을 벌이다니...");
 		setCursorPosition(35, 13);
-		printf("용서하지 못한다!");
-		setCursorPosition(35, 14);
 		printf("대화문\n");
-		setCursorPosition(35, 15);
+		setCursorPosition(35, 14);
 		printf("1. 확인\n");
 		Sleep(150);
 		updateLog("A키를 눌러 이전 대화로 돌아가기");
@@ -397,13 +385,15 @@ void DeadbodyLog_2()
 		Sleep(100);
 		clearScreen();
 		setCursorPosition(35, 11);
-		printf("간악한 왜구놈들... 아내까지 죽이고 이젠 내 아들까지 죽이다니...");
+		printf("간악한 왜구놈들... 나의 가족을 죽이다니...용서하지 못한다.");
+		setCursorPosition(35, 12);
+		printf("이런 짓을 벌인 놈을 찾아 복수해야한다.");
 		backToMap_prologue();
 		Sleep(200);
 		updateLog("왜군 잔당들이 나타났다!");
 		Sleep(200);
 		displayLog();
-		updateLog("왜군을 잡아야지 다음 스테이지로 넘어가는 포탈이 생성될것 같다.");
+		updateLog("왜군을 잡아야 다음 스테이지로 넘어가는 포탈이 생성될것 같다.");
 		break;
 	}
 }
@@ -475,7 +465,7 @@ void StorageLog()
 		Sleep(100);
 		clearScreen();
 		setCursorPosition(35, 11);
-		printf("나를 위한 마지막 선물이라니...고맙소.");
+		printf("빨리 아들을 찾아야해.");
 		potalP[player.currentmap].SpawnPotal_P = true;
 		backToMap_prologue();
 		break;
@@ -503,12 +493,12 @@ void backToMap_prologue()
 
 //프롤로그 맵 선택
 void selectPrologueMap() {
-	if (player.currentmap == 0) 
+	if (player.currentmap == 0)
 	{
 		p_map0();
 	}
 
-	else if (player.currentmap == 1) 
+	else if (player.currentmap == 1)
 	{
 		p_map1();
 	}
@@ -540,55 +530,55 @@ void drawPotal_prologue()
 //포탈 encounting 함수
 int encountPotal_prologue()
 {
-    if (player.pos.y == potalP[player.currentmap].pos.y && player.pos.x == potalP[player.currentmap].pos.x && potalP[player.currentmap].SpawnPotal_P == true)
-    {
-        Situation = 9;
-        return 1;
+	if (player.pos.y == potalP[player.currentmap].pos.y && player.pos.x == potalP[player.currentmap].pos.x && potalP[player.currentmap].SpawnPotal_P == true)
+	{
+		Situation = 9;
+		return 1;
 
-    }
-    else
-    {
-        Situation = 0;
-        return 0;
-    }
+	}
+	else
+	{
+		Situation = 0;
+		return 0;
+	}
 }
 void encountPotal_prologueChoice()
 {
-    char action = _getch();
+	char action = _getch();
 
-    switch (action)
-    {
-    default:
-        updateLog("잘못된 키를 입력하였습니다.");
+	switch (action)
+	{
+	default:
+		updateLog("잘못된 키를 입력하였습니다.");
 		Sleep(200);
 		displayLog();
-        updateLog("[A]키를 눌러 다음 마을로 갈지 [R]키를 눌러 머무를지 선택하십시오.");
+		updateLog("[A]키를 눌러 다음 마을로 갈지 [R]키를 눌러 머무를지 선택하십시오.");
 		Sleep(200);
 		displayLog();
-        break;
-    case 'A':
-    case 'a':
-        Sleep(100);
-        updateLog("다음 마을로 떠납니다!");
+		break;
+	case 'A':
+	case 'a':
+		Sleep(100);
+		updateLog("다음 마을로 떠납니다!");
 		Sleep(200);
 		displayLog();
-  
+
 		gotoNextMapPrologue();
-  
-		initializeMap();
-        Situation = 0;
-        break;
 
-    case 'R':
-    case 'r':
-        updateLog("현재 마을에 머무릅니다");
+		initializeMap();
+		Situation = 0;
+		break;
+
+	case 'R':
+	case 'r':
+		updateLog("현재 마을에 머무릅니다");
 		Sleep(200);
 		displayLog();
 		Situation = 0;
-        player.pos = previousPos;
-        break;
-    }
-    displayLog();
+		player.pos = previousPos;
+		break;
+	}
+
 }
 //다음 튜토리얼 맵 이동 함수
 void gotoNextMapPrologue() {
@@ -630,7 +620,7 @@ void displayMap_Prologue()
 			updateLog("마을이 불타고 있다...");
 			Sleep(200);
 			displayLog();
-			updateLog("내 자식들이 살아있는지 찾아보자");
+			updateLog("아들이 살아있는지 찾아보자");
 			Sleep(200);
 			displayLog();
 		}
@@ -674,7 +664,7 @@ void showTutorial()
 		setCursorPosition(40, 17);
 		printf("상점 NPC도 마찬가지로 넘패드로 진행됩니다.");
 		break;
-	case 2:	
+	case 2:
 		setCursorPosition(45, 7);
 		printf("전투 방식");
 		setCursorPosition(45, 8);
