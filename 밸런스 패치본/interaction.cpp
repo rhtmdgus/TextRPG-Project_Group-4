@@ -2243,6 +2243,7 @@ void JapArmyLog_5()
 						player.questmax++;
 						acceptQuest(18);
 						backToDialogue();
+						spawnBoss2();
 						break;
 					}
 					else
@@ -2933,9 +2934,9 @@ void NobodyLog_5()
 			updateLog("퀘스트를 수락하셨습니다!");
 			quest[19].take = 1;
 			player.questmax++;
-			spawnBoss3();
 			acceptQuest(19);
 			backToDialogue();
+			spawnBoss3();
 		}
 		else
 		{
