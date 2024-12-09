@@ -146,7 +146,7 @@ void QuestComplete1() {
 		setCursorPosition(40, 14);
 		printf("2. 좀 더 생각해보자\n");
 		int num = _getch();
-		if (num == 'a')
+		if (num == '1')
 		{
 			quest[0].clear = 1;
 			player.money--;
@@ -202,7 +202,7 @@ void QuestComplete2() {
 		setCursorPosition(40, 14);
 		printf("2. 좀 더 생각해보자\n");
 		int num = _getch();
-		if (num == 'a')
+		if (num == '1')
 		{
 			quest[1].clear = 1;
 			player.questitem1 = 0;
@@ -262,7 +262,7 @@ void QuestComplete3() {
 		setCursorPosition(40, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
-		if (num == 'a')
+		if (num == '1')
 		{
 			quest[2].clear = 1;
 			player.killcount = 0;
@@ -324,7 +324,7 @@ void QuestComplete4() {
 		setCursorPosition(40, 14);
 		printf("2. 좀 더 생각해보자\n");
 		int num = _getch();
-		if (num == 'a')
+		if (num == '1')
 		{
 			quest[3].clear = 1;
 			player.questitem2 = 0;
@@ -387,7 +387,7 @@ void QuestComplete5() {
 		setCursorPosition(40, 14);
 		printf("2. 나중에 완료하자.\n");
 		int num = _getch();
-		if (num == 'a')
+		if (num == '1')
 		{
 			quest[4].clear = 1;
 			player.questitem3 = 0;
@@ -442,7 +442,7 @@ void QuestComplete6() {
 		setCursorPosition(40, 14);
 		printf("2. 나중에 완료하자.\n");
 		int num = _getch();
-		if (num == 'a')
+		if (num == '1')
 		{
 			quest[6].clear = 1;
 			player.questitem1 = 0;
@@ -508,7 +508,7 @@ void QuestComplete7() {
 		setCursorPosition(40, 14);
 		printf("2. 나중에 완료하자.\n");
 		int num = _getch();
-		if (num == 'a')
+		if (num == '1')
 		{
 			quest[7].clear = 1;
 			player.WRelationship += 30;
@@ -571,7 +571,7 @@ void QuestComplete8() {
 		setCursorPosition(40, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
-		if (num == 'a')
+		if (num == '1')
 		{
 			quest[8].clear = 1;
 			player.MPpotion--;
@@ -627,7 +627,7 @@ void QuestComplete9() {
 		setCursorPosition(40, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
-		if (num == 'a')
+		if (num == '1')
 		{
 			quest[9].clear = 1;
 			player.questitem1 = 0;
@@ -682,7 +682,7 @@ void QuestComplete10() {
 		setCursorPosition(40, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
-		if (num == 'a')
+		if (num == '1')
 		{
 			quest[10].clear = 1;
 			player.killcount = 0;
@@ -740,7 +740,7 @@ void QuestComplete11() {
 		setCursorPosition(40, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
-		if (num == 'a')
+		if (num == '1')
 		{
 			quest[11].clear = 1;
 			player.questitem2 = 0;
@@ -798,13 +798,16 @@ void QuestComplete12() {
 		setCursorPosition(40, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
-		if (num == 'a')
+		if (num == '1')
 		{
 			quest[12].clear = 1;
+			checkboss1 = 0;
 			checkboss2 = 0;
+			checkboss3 = 0;
 			player.RRelationship += 50;
 			player.money += 30;
 			player.questmax--;
+			potal[player.currentmap].spawnPotal = true;
 			Sleep(100);
 			clearScreen();
 			setCursorPosition(40, 11);
@@ -858,7 +861,7 @@ void QuestComplete13() {
 		setCursorPosition(40, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
-		if (num == 'a')
+		if (num == '1')
 		{
 			quest[13].clear = 1;
 			player.killcount = 0;
@@ -917,7 +920,7 @@ void QuestComplete14() {
 		setCursorPosition(40, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
-		if (num == 'a')
+		if (num == '1')
 		{
 			quest[14].clear = 1;
 			player.questitem2 = 0;
@@ -976,13 +979,16 @@ void QuestComplete15() {
 		setCursorPosition(40, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
-		if (num == 'a')
+		if (num == '1')
 		{
 			quest[15].clear = 1;
+			checkboss1 = 0;
 			checkboss2 = 0;
+			checkboss3 = 0;
 			player.JRelationship += 50;
 			player.money += 30;
 			player.questmax--;
+			potal[player.currentmap].spawnPotal = true;
 			Sleep(100);
 			clearScreen();
 			setCursorPosition(40, 11);
@@ -1036,7 +1042,7 @@ void QuestComplete16() {
 		setCursorPosition(40, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
-		if (num == 'a')
+		if (num == '1')
 		{
 			quest[16].clear = 1;
 			player.MPpotion--;
@@ -1098,7 +1104,7 @@ void QuestComplete17() {
 		setCursorPosition(40, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
-		if (num == 'a')
+		if (num == '1')
 		{
 			quest[17].clear = 1;
 			player.questitem2 = 0;
@@ -1160,7 +1166,7 @@ void QuestComplete18() {
 		setCursorPosition(40, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
-		if (num == 'a')
+		if (num == '1')
 		{
 			quest[18].clear = 1;
 			checkboss2 = 0;
@@ -1172,6 +1178,7 @@ void QuestComplete18() {
 			checkboss1 = 0;
 			checkboss2 = 0;
 			checkboss3 = 0;
+			potal[player.currentmap].spawnPotal = true;
 			Sleep(100);
 			clearScreen();
 			setCursorPosition(40, 11);
@@ -1225,7 +1232,7 @@ void QuestComplete19() {
 		setCursorPosition(40, 14);
 		printf("2. 나중에 하자\n");
 		int num = _getch();
-		if (num == 'a')
+		if (num == '1')
 		{
 			quest[19].clear = 1;
 			checkboss2 = 0;

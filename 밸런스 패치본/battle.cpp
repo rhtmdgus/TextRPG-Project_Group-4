@@ -617,20 +617,21 @@ void battle(Enemy* enemy)
 // 보스 전투 함수
 void bossbattle(Enemy* boss)
 {
-	updateBattleLog("전투 시작!!");
+	updateBattleLog("전투시작!!");
 	int damageToBoss;   // 공격할 때 사용할 변수
 	int damageToPlayer;  // 반격할 때 사용할 변수
 	displayBossBattleScreen();
 	displayPlayerStat();
 	displayBossStat(boss);
 	displayBattleLog();
+	SkillAppear();
 
 	while (boss->hp > 0 && player.hp > 0 && Situation == 7)
 	{
 		char action = _getch();
 
 		if (boss == nullptr) {
-			updateBattleLog("오류: 전투에 보스가 없습니다.");
+			updateBattleLog("오류: 전투에 보스가 없습니다");
 			displayBattleLog();
 			return;
 		}
@@ -654,7 +655,7 @@ void bossbattle(Enemy* boss)
 		case 'a':
 		case 'A':
 			// 공격 로직
-			
+
 			damageToBoss = player.attack - boss->defense; // 이전에 선언한 변수를 사용
 			if (damageToBoss > 0) {
 				if (Crit() == 1)
@@ -670,6 +671,13 @@ void bossbattle(Enemy* boss)
 					BossDamaged(boss);
 				}
 				boss->hp -= damageToBoss;
+				if (player.job == 2 && player.buffcount1 > 0) {    // 궁수 스킬 3 도트딜 구현
+					Sleep(100);
+					BossDamaged(boss);
+					boss->hp -= 3;
+					updateBattleLog("불화살의 지속데미지가 들어갔습니다!");
+					displayBattleLog();
+				}
 				if (boss->hp <= 0)
 					boss->hp = 0;
 				updateBattleLog("적 장수를 공격하였습니다!");
@@ -691,6 +699,14 @@ void bossbattle(Enemy* boss)
 				BossAttack(boss);
 				playerAttackedAnimation();
 				damageToPlayer = boss->attack - player.defense; // 이전에 선언한 변수를 사용
+				if (player.buff_reflect == 1) {  // 가시갑옷 반사 로직
+					int reflectedDamage = boss->attack; // 반사 데미지 계산
+					boss->hp -= reflectedDamage;
+					if (boss->hp < 0) boss->hp = 0;
+					updateBattleLog("가시갑옷으로 적에게 데미지를 반사했습니다!");
+					displayBattleLog();
+					displayEnemyStat(boss);
+				}
 				if (damageToPlayer > 0) {
 					player.hp -= damageToPlayer;
 					if (player.hp <= 0)
@@ -703,6 +719,341 @@ void bossbattle(Enemy* boss)
 				}
 			}
 			break;
+
+
+		case 'z':  //스킬 1
+		case 'Z':
+			// 공격 로직
+			if (player.level < 5) {
+				updateBattleLog("레벨이 부족합니다!!");
+				displayBattleLog();
+				break;
+			}
+			if (player.mp < 5) {
+				updateBattleLog("마나가 부족합니다!!");
+				displayBattleLog();
+				break;
+			}
+
+			damageToBoss = skill1(player.attack) - boss->defense; // 이전에 선언한 변수를 사용
+			player.mp -= 5;
+			updateBattleLog("스킬 1이 발동되었습니다!");
+			if (player.job == 1) {
+				updateBattleLog("강타 발동!");
+				displayBattleLog();
+				playerSkillAnimation(1);
+			}
+			else if (player.job == 2) {
+				updateBattleLog("연사 발동!");
+				displayBattleLog();
+				playerSkillAnimation(1);
+			}
+			else if (player.job == 3) {
+				updateBattleLog("투창 발동!");
+				displayBattleLog();
+				playerSkillAnimation(1);
+			}
+			else if (player.job == 4) {
+				updateBattleLog("방패밀치기 발동!");
+				displayBattleLog();
+				playerSkillAnimation(1);
+			}
+			displayBattleLog();
+			if (damageToBoss > 0) {
+				if (Crit() == 1)
+				{
+					enemyAttackedAnimation(boss);
+					updateBattleLog("치명타 공격!");
+					damageToBoss *= 2;
+				}
+				else
+				{
+					enemyAttackedAnimation(boss);
+				}
+				boss->hp -= damageToBoss;
+				if (boss->hp <= 0)
+					boss->hp = 0;
+				updateBattleLog("적 장수를 공격하였습니다!");
+				displayPlayerStat();
+				displayEnemyStat(boss);
+				Sleep(100);
+				displayBattleLog();
+			}
+			else {
+				updateBattleLog("당신의 공격이 너무 약합니다!");
+				displayPlayerStat();
+				displayEnemyStat(boss);
+				Sleep(100);
+				displayBattleLog();
+			}
+
+			// 적 반격
+			if (boss->hp > 0) {
+				enemyAttackAnimation(boss);
+				playerAttackedAnimation();
+				damageToPlayer = boss->attack - player.defense; // 이전에 선언한 변수를 사용
+				if (player.buff_reflect == 1) {  // 가시갑옷 반사 로직
+					int reflectedDamage = boss->attack; // 반사 데미지 계산
+					boss->hp -= reflectedDamage;
+					if (boss->hp < 0) boss->hp = 0;
+					updateBattleLog("가시갑옷으로 적에게 데미지를 반사했습니다!");
+					displayBattleLog();
+					displayEnemyStat(boss);
+				}
+				if (damageToPlayer > 0) {
+					player.hp -= damageToPlayer;
+					if (player.hp <= 0)
+						player.hp = 0;
+					updateBattleLog("적 장수에게 공격 당하였습니다!");
+					displayPlayerStat();
+					displayEnemyStat(boss);
+					Sleep(100);
+					displayBattleLog();
+				}
+			}
+			break;
+
+		case 'x':  // 스킬 2
+		case 'X':
+			if (player.level < 10) {
+				updateBattleLog("레벨이 부족합니다!!");
+				displayBattleLog();
+				break;
+			}
+			if (player.mp < 10) {
+				updateBattleLog("마나가 부족합니다!!");
+				displayBattleLog();
+				break;
+			}
+
+			updateBattleLog("스킬 2이 발동되었습니다!");
+			displayLog();
+			// 공격 로직
+			if (player.job == 4) { // 방패병 스킬 2 
+				player.mp -= 10;
+				player.buff_defense = 5;  // 방어력 5 증가
+				player.defense += player.buff_defense;
+				player.buffcount2 = 3;     // 3턴 지속, buffcount2 에 방패병 스킬2를 할당
+				updateBattleLog("방어태세 발동!");
+				displayBattleLog();
+				displayPlayerStat();
+				playerSkillAnimation(2);
+			}
+			else {
+				damageToBoss = skill2(player.attack) - boss->defense; // 이전에 선언한 변수를 사용
+				player.mp -= 10;
+				if (player.job == 1) {
+					updateBattleLog("난도질 발동!");
+					displayBattleLog();
+					playerSkillAnimation(2);
+				}
+				else if (player.job == 2) {
+					updateBattleLog("집중사격 발동!");
+					displayBattleLog();
+					playerSkillAnimation(2);
+				}
+				else if (player.job == 3) {
+					updateBattleLog("삼조격 발동!");
+					displayBattleLog();
+					playerSkillAnimation(2);
+				}
+				if (damageToBoss > 0) {
+					if (Crit() == 1)
+					{
+						enemyAttackedAnimation(boss);
+						updateBattleLog("치명적 공격!");
+						damageToBoss *= 2;
+					}
+					else
+					{
+						enemyAttackedAnimation(boss);
+					}
+					boss->hp -= damageToBoss;
+					if (boss->hp <= 0)
+						boss->hp = 0;
+					updateBattleLog("적 장수를 공격하였습니다!");
+					displayPlayerStat();
+					displayEnemyStat(boss);
+					Sleep(100);
+					displayBattleLog();
+				}
+				else {
+					updateBattleLog("당신의 공격이 너무 약합니다!");
+					displayPlayerStat();
+					displayEnemyStat(boss);
+					Sleep(100);
+					displayBattleLog();
+				}
+			}
+
+			// 적 반격
+			if (boss->hp > 0) {
+				enemyAttackAnimation(boss);
+				playerAttackedAnimation();
+				damageToPlayer = boss->attack - player.defense; // 이전에 선언한 변수를 사용
+				if (player.buff_reflect == 1) {  // 가시갑옷 반사 로직
+					int reflectedDamage = boss->attack; // 반사 데미지 계산
+					boss->hp -= reflectedDamage;
+					if (boss->hp < 0) boss->hp = 0;
+					updateBattleLog("가시갑옷으로 적에게 데미지를 반사했습니다!");
+					displayBattleLog();
+					displayEnemyStat(boss);
+				}
+				if (damageToPlayer > 0) {
+					player.hp -= damageToPlayer;
+					if (player.hp <= 0)
+						player.hp = 0;
+					updateBattleLog("적 장수에게 공격 당하였습니다!");
+					displayPlayerStat();
+					displayEnemyStat(boss);
+					Sleep(100);
+					displayBattleLog();
+				}
+			}
+			break;
+
+
+		case 'c':  //스킬 3
+		case 'C':
+			if (player.level < 15) {
+				updateBattleLog("레벨이 부족합니다!!");
+				displayBattleLog();
+				break;
+			}
+			if (player.mp < 20) {
+				updateBattleLog("마나가 부족합니다!!");
+				displayBattleLog();
+				break;
+			}
+
+			updateBattleLog("스킬 3이 발동되었습니다!");
+			displayBattleLog();
+
+			if (player.job == 1) { // 전사 스킬 3 광폭화
+				player.mp -= 20;
+				player.buff_attack = 10;  // 공격력 10 증가
+				player.attack += player.buff_attack;
+				player.buffcount1 = 3;     // 3턴 지속
+				updateBattleLog("광폭화 발동!");
+				displayBattleLog();
+				displayPlayerStat();
+				playerSkillAnimation(3);
+			}
+			else if (player.job == 4) { // 방패병 스킬 3: 가시방패
+				player.mp -= 20;
+				player.buff_reflect = 1;    // 가시방패 활성화
+				player.buffcount3 = 5;      // 5턴 지속, 방패병 스킬 3을 buffcount3에 할당
+				updateBattleLog("가시방패 발동!");
+				displayBattleLog();
+				displayPlayerStat();
+				playerSkillAnimation(3);
+			}
+			else if (player.job == 2) { // 궁수 스킬 3 불화살
+				damageToBoss = player.attack - boss->defense; // 이전에 선언한 변수를 사용
+				player.mp -= 20;
+				player.buffcount1 = 5;
+				updateBattleLog("불화살 발동!");
+				displayBattleLog();
+				playerSkillAnimation(3);
+
+				if (damageToBoss > 0) {
+					if (Crit() == 1)
+					{
+						enemyAttackedAnimation(boss);
+						updateBattleLog("치명타 공격!");
+						damageToBoss *= 2;
+					}
+					else
+					{
+						enemyAttackedAnimation(boss);
+					}
+					boss->hp -= damageToBoss;
+					if (player.buffcount1 > 0) {
+						Sleep(100);
+						boss->hp -= 3;
+						enemyAttackedAnimation(boss);
+						updateBattleLog("불화살 지속딜이 들어갔습니다!");
+					}
+					if (boss->hp <= 0)
+						boss->hp = 0;
+					updateBattleLog("적 장수를 공격하였습니다!");
+					displayPlayerStat();
+					displayEnemyStat(boss);
+					Sleep(100);
+					displayBattleLog();
+				}
+				else {
+					updateBattleLog("당신의 공격이 너무 약합니다!");
+					displayPlayerStat();
+					displayEnemyStat(boss);
+					Sleep(100);
+					displayBattleLog();
+				}
+			}
+			else if (player.job == 3) {
+				damageToBoss = skill3(player.attack) - boss->defense; // 이전에 선언한 변수를 사용
+				player.mp -= 20;
+				updateBattleLog("무쌍돌격 발동!");
+				displayBattleLog();
+				playerSkillAnimation(3);
+
+				if (damageToBoss > 0) {
+					if (Crit() == 1)
+					{
+						enemyAttackedAnimation(boss);
+						updateBattleLog("치명타 공격!");
+						damageToBoss *= 2;
+					}
+					else
+					{
+						enemyAttackedAnimation(boss);
+					}
+					boss->hp -= damageToBoss;
+					if (boss->hp <= 0)
+						boss->hp = 0;
+					updateBattleLog("적 장수를 공격하였습니다!");
+					displayPlayerStat();
+					displayEnemyStat(boss);
+					Sleep(100);
+					displayBattleLog();
+				}
+				else {
+					updateBattleLog("당신의 공격이 너무 약합니다!");
+					displayPlayerStat();
+					displayEnemyStat(boss);
+					Sleep(100);
+					displayBattleLog();
+				}
+
+			}
+			// 적 반격
+			if (boss->hp > 0) {
+				enemyAttackAnimation(boss);
+				playerAttackedAnimation();
+				damageToPlayer = boss->attack - player.defense; // 이전에 선언한 변수를 사용
+				if (player.buff_reflect == 1) {  // 가시갑옷 반사 로직
+					int reflectedDamage = boss->attack; // 반사 데미지 계산
+					boss->hp -= reflectedDamage; // 트루데미지
+					if (boss->hp < 0) boss->hp = 0;
+					updateBattleLog("가시갑옷으로 적에게 데미지를 반사했습니다!");
+					displayBattleLog();
+					displayEnemyStat(boss);
+				}
+				if (damageToPlayer > 0) {
+					player.hp -= damageToPlayer;
+					if (player.hp <= 0)
+						player.hp = 0;
+					updateBattleLog("적 장수에게 공격 당하였습니다!");
+					displayPlayerStat();
+					displayEnemyStat(boss);
+					Sleep(100);
+					displayBattleLog();
+				}
+			}
+			break;
+
+
+
 
 			//적과 전투에서 도주
 		case 'r':
@@ -724,6 +1075,41 @@ void bossbattle(Enemy* boss)
 			break;
 		}
 
+		if (player.buffcount1 > 0)
+		{
+			player.buffcount1--;
+			if (player.buffcount1 == 0)
+			{
+				player.attack -= player.buff_attack;  // 공격력 버프 제거
+				player.buff_attack = 0;
+				updateBattleLog("버프의 지속시간이 끝났습니다!");
+			}
+		}
+
+		if (player.buffcount2 > 0)
+		{
+			player.buffcount2--;
+			if (player.buffcount2 == 0)
+			{
+				player.defense -= player.buff_defense; // 방어력 버프 제거
+				player.buff_defense = 0;
+				updateBattleLog("방어태세의 지속시간이 끝났습니다!");
+			}
+		}
+		if (player.buffcount3 > 0)
+		{
+			player.buffcount3--;
+			if (player.buffcount3 == 0)
+			{
+				player.buff_reflect = 0;  // 가시갑옷 비활성화
+				updateBattleLog("가시갑옷의 지속 시간이 끝났습니다!");
+			}
+		}
+
+
+
+
+
 		// 상태 체크
 		if (boss->hp <= 0) {
 			BossDying(boss);
@@ -734,6 +1120,20 @@ void bossbattle(Enemy* boss)
 			player.questitem1 = 1;
 			checkboss1 = 1;
 			checkboss2 = 1;
+			if (player.buffcount1 != 0) {
+				player.buffcount1 = 0;
+				player.attack -= player.buff_attack;  // 공격력 버프 제거
+				player.buff_attack = 0;
+			}
+			if (player.buffcount2 != 0) {
+				player.buffcount2 = 0;
+				player.defense -= player.buff_defense; // 방어력 버프 제거
+				player.buff_defense = 0;
+			}
+			if (player.buffcount3 != 0) {
+				player.buffcount3 = 0;
+				player.buff_reflect = 0;  // 가시갑옷 비활성화
+			}
 			displayPlayerStat();
 			displayBossStat(boss);
 			Sleep(100);
@@ -750,6 +1150,10 @@ void bossbattle(Enemy* boss)
 			Situation = 0;
 		}
 	}
+
+
+
+
 
 	OriginalLevel = player.level;
 	// 전투가 끝난 후 대기 및 본래 화면으로 복귀
