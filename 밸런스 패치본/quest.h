@@ -70,7 +70,7 @@ void QuestComplete18();
 void QuestComplete19();
 
 void initializeQuestItem();
-void drawQuestItem(QuestItemData *QuestItemList);
+void drawQuestItem(QuestItemData* QuestItemList);
 
 #endif // QUEST_H
 

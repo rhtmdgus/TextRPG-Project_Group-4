@@ -49,7 +49,7 @@ int main()
 	system("cls");
 	tutorial_screen();
 	system("cls");
-	updateLog("Game started.");
+	updateLog("게임 시작!");
 
 	initializeMap();
 	displayMap_Prologue();
@@ -66,10 +66,10 @@ int main()
 
 		if (encountPotal_prologue())		//프롤로그 포탈
 		{
-			updateLog("You encountered a potal!");
+			updateLog("포탈을 발견하였습니다.");
 			Sleep(200);
 			displayLog();
-			updateLog("Press [A] to go next map or [R] to stay");
+			updateLog("[A]키를 눌러 마을을 떠날지 [R]키를 눌러 머물지 선택하십시오.");
 			Sleep(200);
 			displayLog();
 
@@ -86,8 +86,8 @@ int main()
 
 		if (encountNpc_prologue())		//프롤로그 NPC조우
 		{
-			updateLog("You encountered NPC!");
-			updateLog("Press [A] to talk NPC or [R] to leave");
+			updateLog("NPC와 만났습니다!");
+			updateLog("[A]키를 눌러 대화할지 [R]키를 눌러 떠날지 선택하십시오.");
 			displayLog();
 
 			while (Situation == 4)
@@ -103,10 +103,10 @@ int main()
 
 		if (encountEnemy_P())			//프롤로그 enemy 조우
 		{
-			updateLog("You encountered an enemy!");
+			updateLog("적을 마주쳤습니다!");
 			Sleep(100);
 			displayLog();
-			updateLog("Press [A] to Attack or [R] to Run");
+			updateLog("[A]키를 눌러 전투할지 [R]키를 눌러 도망칠지 선택하십시오.");
 			Sleep(100);
 			displayLog();
 
@@ -115,7 +115,7 @@ int main()
 				encountChoice_P();
 			}
 			if (currentEnemy->hp <= 0) {
-				updateLog("The enemy was defeated!");
+				updateLog("적을 물리쳤습니다!");
 
 				// 해당 적의 위치를 초기화
 				eraseEnemy_P(currentEnemy);  // 해당 적만 지웁니다
@@ -165,7 +165,7 @@ int main()
 		drawQuestItem(QuestItemList);
 		//displayLog();
 
-		/* 
+		/*
 		if (player.currentmap == 2)
 		{
 			spawnBoss3();
@@ -190,12 +190,13 @@ int main()
 		}
 		*/
 
+
 		if (encountEnemy())
 		{
-			updateLog("You encountered an enemy!");
+			updateLog("적과 마주쳤습니다!");
 			Sleep(100);
 			displayLog();
-			updateLog("Press [A] to Attack or [R] to Run");
+			updateLog("[A]키를 눌러 전투할지 [R]키를 눌러 도망칠지 선택하십시오.");
 			Sleep(100);
 			displayLog();
 
@@ -204,7 +205,7 @@ int main()
 				encountChoice();
 			}
 			if (currentEnemy->hp <= 0) {
-				updateLog("The enemy was defeated!");
+				updateLog("적을 물리쳤습니다!");
 
 				// 해당 적의 위치를 초기화
 				eraseEnemy(currentEnemy);  // 해당 적만 지웁니다
@@ -224,10 +225,10 @@ int main()
 		}
 		if (encountBoss())
 		{
-			updateLog("You encountered an boss!");
+			updateLog("적 장수와 마주쳤습니다!");
 			Sleep(100);
 			displayLog();
-			updateLog("Press [A] to Attack or [R] to Run");
+			updateLog("[A]키를 눌러 전투할지 [R]키를 눌러 도망칠지 선택하십시오.");
 			Sleep(100);
 			displayLog();
 
@@ -236,7 +237,7 @@ int main()
 				encountBossChoice();
 			}
 			if (currentBoss->hp <= 0) {
-				updateLog("The boss was defeated!");
+				updateLog("적 장수를 물리쳤습니다!");
 
 				// 해당 보스의 위치를 초기화
 				eraseBoss(currentBoss);  // 해당 보스만 지웁니다
@@ -256,8 +257,8 @@ int main()
 		}
 		if (encountShop())
 		{
-			updateLog("You encountered a shop!");
-			updateLog("Press [A] to use Shop or [R] to leave");
+			updateLog("상점을 발견했습니다!");
+			updateLog("[A]키를 눌러 상점에 들어갈지 [R]키를 눌러 떠날지 선택하십시오.");
 			displayLog();
 			while (Situation == 2)
 			{
@@ -272,8 +273,8 @@ int main()
 
 		if (encountNpc())
 		{
-			updateLog("You encountered NPC!");
-			updateLog("Press [A] to talk NPC or [R] to leave");
+			updateLog("NPC와 만났습니다!");
+			updateLog("[A]키를 눌러 대화할지[R]키를 눌러 떠날지 선택하십시오.");
 			displayLog();
 
 			while (Situation == 4)
@@ -300,8 +301,8 @@ int main()
 		}
 		if (encountPotal())
 		{
-			updateLog("You encountered a potal!");
-			updateLog("Press [A] to go next map or [R] to stay");
+			updateLog("포탈을 발견하였습니다!");
+			updateLog("[A]키를 눌러 마을을 떠날지 [R]키를 눌러 머물지 선택하십시오.");
 			displayLog();
 			
 			while (Situation == 9)

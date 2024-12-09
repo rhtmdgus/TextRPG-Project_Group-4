@@ -69,7 +69,7 @@ int Crit()	//크리티컬 히트
 // 전투 함수
 void battle(Enemy* enemy)
 {
-	updateBattleLog("Battle start!!");
+	updateBattleLog("전투 시작!!");
 	int damageToEnemy;   // 공격할 때 사용할 변수
 	int damageToPlayer;  // 반격할 때 사용할 변수
 	displayBattleScreen();
@@ -86,7 +86,7 @@ void battle(Enemy* enemy)
 		char action = _getch();
 
 		if (enemy == nullptr) {
-			updateBattleLog("Error: No enemy to battle.");
+			updateBattleLog("오류: 전투에 적이 없습니다.");
 			displayBattleLog();
 			return;
 		}
@@ -117,7 +117,7 @@ void battle(Enemy* enemy)
 				{
 					playerCritAnimation();
 					enemyAttackedAnimation(enemy);
-					updateBattleLog("Critical Attack!");
+					updateBattleLog("치명타 공격!");
 					damageToEnemy *= 2;
 				}
 				else
@@ -135,14 +135,14 @@ void battle(Enemy* enemy)
 				}
 				if (enemy->hp <= 0)
 					enemy->hp = 0;
-				updateBattleLog("You attacked the enemy!");
+				updateBattleLog("적을 공격하였습니다!");
 				displayPlayerStat();
 				displayEnemyStat(enemy);
 				Sleep(100);
 				displayBattleLog();
 			}
 			else {
-				updateBattleLog("Your attack was too weak!");
+				updateBattleLog("당신의 공격이 너무 약합니다!");
 				displayPlayerStat();
 				displayEnemyStat(enemy);
 				Sleep(100);
@@ -166,7 +166,7 @@ void battle(Enemy* enemy)
 					player.hp -= damageToPlayer;
 					if (player.hp <= 0)
 						player.hp = 0;
-					updateBattleLog("The enemy attacked you!");
+					updateBattleLog("적에게 공격당하였습니다.!");
 					displayPlayerStat();
 					displayEnemyStat(enemy);
 					Sleep(100);
@@ -183,7 +183,7 @@ void battle(Enemy* enemy)
 				break;
 			}
 			if (player.mp < 5) {
-				updateBattleLog("마나가 부족합니다!!");
+				updateBattleLog("기력이 부족합니다!!");
 				displayBattleLog();
 				break;
 			}
@@ -216,7 +216,7 @@ void battle(Enemy* enemy)
 				if (Crit() == 1)
 				{
 					enemyAttackedAnimation(enemy);
-					updateBattleLog("Critical Attack!");
+					updateBattleLog("치명타 공격!");
 					damageToEnemy *= 2;
 				}
 				else
@@ -226,14 +226,14 @@ void battle(Enemy* enemy)
 				enemy->hp -= damageToEnemy;
 				if (enemy->hp <= 0)
 					enemy->hp = 0;
-				updateBattleLog("You attacked the enemy!");
+				updateBattleLog("적을 공격하였습니다.!");
 				displayPlayerStat();
 				displayEnemyStat(enemy);
 				Sleep(100);
 				displayBattleLog();
 			}
 			else {
-				updateBattleLog("Your attack was too weak!");
+				updateBattleLog("당신의 공격이 너무 약합니다!");
 				displayPlayerStat();
 				displayEnemyStat(enemy);
 				Sleep(100);
@@ -257,7 +257,7 @@ void battle(Enemy* enemy)
 					player.hp -= damageToPlayer;
 					if (player.hp <= 0)
 						player.hp = 0;
-					updateBattleLog("The enemy attacked you!");
+					updateBattleLog("적에게 공격당하였습니다.!");
 					displayPlayerStat();
 					displayEnemyStat(enemy);
 					Sleep(100);
@@ -274,7 +274,7 @@ void battle(Enemy* enemy)
 				break;
 			}
 			if (player.mp < 10) {
-				updateBattleLog("마나가 부족합니다!!");
+				updateBattleLog("기력이 부족합니다!!");
 				displayBattleLog();
 				break;
 			}
@@ -314,7 +314,7 @@ void battle(Enemy* enemy)
 					if (Crit() == 1)
 					{
 						enemyAttackedAnimation(enemy);
-						updateBattleLog("Critical Attack!");
+						updateBattleLog("치명타 공격!");
 						damageToEnemy *= 2;
 					}
 					else
@@ -324,14 +324,14 @@ void battle(Enemy* enemy)
 					enemy->hp -= damageToEnemy;
 					if (enemy->hp <= 0)
 						enemy->hp = 0;
-					updateBattleLog("You attacked the enemy!");
+					updateBattleLog("적을 공격하였습니다!");
 					displayPlayerStat();
 					displayEnemyStat(enemy);
 					Sleep(100);
 					displayBattleLog();
 				}
 				else {
-					updateBattleLog("Your attack was too weak!");
+					updateBattleLog("당신의 공격이 너무 약합니다!");
 					displayPlayerStat();
 					displayEnemyStat(enemy);
 					Sleep(100);
@@ -356,7 +356,7 @@ void battle(Enemy* enemy)
 					player.hp -= damageToPlayer;
 					if (player.hp <= 0)
 						player.hp = 0;
-					updateBattleLog("The enemy attacked you!");
+					updateBattleLog("적에게 공격당하였습니다.!");
 					displayPlayerStat();
 					displayEnemyStat(enemy);
 					Sleep(100);
@@ -374,7 +374,7 @@ void battle(Enemy* enemy)
 				break;
 			}
 			if (player.mp < 20) {
-				updateBattleLog("마나가 부족합니다!!");
+				updateBattleLog("기력이 부족합니다!!");
 				displayBattleLog();
 				break;
 			}
@@ -413,7 +413,7 @@ void battle(Enemy* enemy)
 					if (Crit() == 1)
 					{
 						enemyAttackedAnimation(enemy);
-						updateBattleLog("Critical Attack!");
+						updateBattleLog("치명타 공격!");
 						damageToEnemy *= 2;
 					}
 					else
@@ -429,14 +429,14 @@ void battle(Enemy* enemy)
 					}
 					if (enemy->hp <= 0)
 						enemy->hp = 0;
-					updateBattleLog("You attacked the enemy!");
+					updateBattleLog("적을 공격하였습니다!");
 					displayPlayerStat();
 					displayEnemyStat(enemy);
 					Sleep(100);
 					displayBattleLog();
 				}
 				else {
-					updateBattleLog("Your attack was too weak!");
+					updateBattleLog("당신의 공격이 너무 약합니다!");
 					displayPlayerStat();
 					displayEnemyStat(enemy);
 					Sleep(100);
@@ -454,7 +454,7 @@ void battle(Enemy* enemy)
 					if (Crit() == 1)
 					{
 						enemyAttackedAnimation(enemy);
-						updateBattleLog("Critical Attack!");
+						updateBattleLog("치명타 공격!");
 						damageToEnemy *= 2;
 					}
 					else
@@ -464,14 +464,14 @@ void battle(Enemy* enemy)
 					enemy->hp -= damageToEnemy;
 					if (enemy->hp <= 0)
 						enemy->hp = 0;
-					updateBattleLog("You attacked the enemy!");
+					updateBattleLog("적을 공격하였습니다!");
 					displayPlayerStat();
 					displayEnemyStat(enemy);
 					Sleep(100);
 					displayBattleLog();
 				}
 				else {
-					updateBattleLog("Your attack was too weak!");
+					updateBattleLog("당신의 공격이 너무 약합니다!");
 					displayPlayerStat();
 					displayEnemyStat(enemy);
 					Sleep(100);
@@ -496,7 +496,7 @@ void battle(Enemy* enemy)
 					player.hp -= damageToPlayer;
 					if (player.hp <= 0)
 						player.hp = 0;
-					updateBattleLog("The enemy attacked you!");
+					updateBattleLog("적에게 공격당하였습니다.!");
 					displayPlayerStat();
 					displayEnemyStat(enemy);
 					Sleep(100);
@@ -510,18 +510,18 @@ void battle(Enemy* enemy)
 			//적과 전투에서 도주
 		case 'r':
 		case 'R':
-			updateBattleLog("You ran away from the enemy!");
+			updateBattleLog("적에게서 도망쳤습니다!");
 			Situation = 0;
 			player.pos = previousPos;
 			displayPlayerStat();
 			displayEnemyStat(enemy);
 			Sleep(100);
 			displayBattleLog();
-			updateLog("You fled from battle!");
+			updateLog("전투에서 벗어났습니다!");
 			break;
 
 		default:
-			updateBattleLog("Invalid action! Choose again.");
+			updateBattleLog("불가능한 행동! 다시 선택해주세요.");
 			Sleep(100);
 			displayBattleLog();
 			break;
@@ -561,7 +561,7 @@ void battle(Enemy* enemy)
 		// 상태 체크
 		if (enemy->hp <= 0) {
 			enemyDyingAnimation(enemy);
-			updateBattleLog("You defeated the enemy!");
+			updateBattleLog("적을 물리쳤습니다!");
 			player.exp += 12;
 			player.money += 4;
 			player.killcount++;
@@ -589,7 +589,7 @@ void battle(Enemy* enemy)
 		}
 		else if (player.hp <= 0) {
 			playerDyingAnimation();
-			updateBattleLog("You have been defeated...");
+			updateBattleLog("당신은 패배하였습니다...");
 			displayPlayerStat();
 			displayEnemyStat(enemy);
 			Sleep(100);
@@ -599,14 +599,14 @@ void battle(Enemy* enemy)
 	}
 	OriginalLevel = player.level;
 	// 전투가 끝난 후 대기 및 본래 화면으로 복귀
-	updateBattleLog("Press any key to return to the main screen...");
+	updateBattleLog("아무 키를 눌러 맵으로 돌아가십시오.");
 	LevelUp();
 	displayPlayerStat();
 	displayBattleLog();
 	_getch();  // 사용자 입력 대기
 
 	if (player.level > OriginalLevel)
-		updateLog("Level up!!");
+		updateLog("레벨 업!!");
 
 	initializeMap(); // 맵 초기화
 	displayMap(); // 이동 맵 출력
@@ -617,7 +617,7 @@ void battle(Enemy* enemy)
 // 보스 전투 함수
 void bossbattle(Enemy* boss)
 {
-	updateBattleLog("Battle start!!");
+	updateBattleLog("전투 시작!!");
 	int damageToBoss;   // 공격할 때 사용할 변수
 	int damageToPlayer;  // 반격할 때 사용할 변수
 	displayBossBattleScreen();
@@ -630,7 +630,7 @@ void bossbattle(Enemy* boss)
 		char action = _getch();
 
 		if (boss == nullptr) {
-			updateBattleLog("Error: No boss to battle.");
+			updateBattleLog("오류: 전투에 보스가 없습니다.");
 			displayBattleLog();
 			return;
 		}
@@ -661,7 +661,7 @@ void bossbattle(Enemy* boss)
 				{
 					playerCritAnimation();
 					BossDamaged(boss);
-					updateBattleLog("Critical Attack!");
+					updateBattleLog("치명타 공격!");
 					damageToBoss *= 2;
 				}
 				else
@@ -672,14 +672,14 @@ void bossbattle(Enemy* boss)
 				boss->hp -= damageToBoss;
 				if (boss->hp <= 0)
 					boss->hp = 0;
-				updateBattleLog("You attacked the enemy!");
+				updateBattleLog("적 장수를 공격하였습니다!");
 				displayPlayerStat();
 				displayBossStat(boss);
 				Sleep(100);
 				displayBattleLog();
 			}
 			else {
-				updateBattleLog("Your attack was too weak!");
+				updateBattleLog("당신의 공격이 너무 약합니다!");
 				displayPlayerStat();
 				displayBossStat(boss);
 				Sleep(100);
@@ -695,7 +695,7 @@ void bossbattle(Enemy* boss)
 					player.hp -= damageToPlayer;
 					if (player.hp <= 0)
 						player.hp = 0;
-					updateBattleLog("The boss attacked you!");
+					updateBattleLog("적 장수에게 공격 당하였습니다!");
 					displayPlayerStat();
 					displayBossStat(boss);
 					Sleep(100);
@@ -707,18 +707,18 @@ void bossbattle(Enemy* boss)
 			//적과 전투에서 도주
 		case 'r':
 		case 'R':
-			updateBattleLog("You ran away from the boss!");
+			updateBattleLog("적 장수에게서 도망쳤습니다!");
 			Situation = 0;
 			player.pos = previousPos;
 			displayPlayerStat();
 			displayBossStat(boss);
 			Sleep(100);
 			displayBattleLog();
-			updateLog("You fled from battle!");
+			updateLog("전투에서 벗어났습니다!");
 			break;
 
 		default:
-			updateBattleLog("Invalid action! Choose again.");
+			updateBattleLog("불가능한 행동! 다시 선택해주세요.");
 			Sleep(100);
 			displayBattleLog();
 			break;
@@ -727,7 +727,7 @@ void bossbattle(Enemy* boss)
 		// 상태 체크
 		if (boss->hp <= 0) {
 			BossDying(boss);
-			updateBattleLog("You defeated the boss!");
+			updateBattleLog("적 장수를 물리쳤습니다!");
 			updateQuestStatusItem(6);
 			player.exp += 30;
 			player.money += 10;
@@ -742,7 +742,7 @@ void bossbattle(Enemy* boss)
 		}
 		else if (player.hp <= 0) {
 			playerDyingAnimation();
-			updateBattleLog("You have been defeated...");
+			updateBattleLog("당신은 패배하였습니다...");
 			displayPlayerStat();
 			displayBossStat(boss);
 			Sleep(100);
@@ -753,14 +753,14 @@ void bossbattle(Enemy* boss)
 
 	OriginalLevel = player.level;
 	// 전투가 끝난 후 대기 및 본래 화면으로 복귀
-	updateBattleLog("Press any key to return to the main screen...");
+	updateBattleLog("아무 키를 눌러 맵으로 돌아가십시오.");
 	LevelUp();
 	displayPlayerStat();
 	displayBattleLog();
 	_getch();  // 사용자 입력 대기
 
 	if (player.level > OriginalLevel)
-		updateLog("Level up!!");
+		updateLog("레벨 업!!");
 
 	initializeMap(); // 맵 초기화
 	displayMap(); // 이동 맵 출력

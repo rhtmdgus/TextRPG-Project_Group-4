@@ -44,7 +44,7 @@ void jobSelect_screen()
     printf("||2. 궁수                                                         ||\n");
     for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
         printf(" ");
-    printf("||-원거리에서 공격하는 직업으로, 치명타 위주로 스탯이 증가합니다  ||\n");
+    printf("||-방어력이 낮은 대신 치명타 확률이 높은 직업입니다.  ||\n");
     for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
         printf(" ");
     printf("|| 3. 창병                                                        ||\n");
@@ -88,25 +88,25 @@ void jobSelect()
             setCursorPosition(23, 23);
             printf("%-70s", "궁수를 선택하셨습니다.");
             setCursorPosition(23, 24);
-            printf("%-70s", "확정이시면 a버튼을 눌러주세요");
+            printf("%-70s", "확정이시면 A버튼을 눌러주세요");
             break;
         case '3':
             selectedJob = 3;
             setCursorPosition(23, 23);
             printf("%-70s", "창병을 선택하셨습니다.");
             setCursorPosition(23, 24);
-            printf("%-70s", "확정이시면 a버튼을 눌러주세요");
+            printf("%-70s", "확정이시면 A버튼을 눌러주세요");
             break;
         case '4':
             selectedJob = 4;
             setCursorPosition(23, 23);
             printf("%-70s", "방패병을 선택하셨습니다.");
             setCursorPosition(23, 24);
-            printf("%-70s", "확정이시면 a버튼을 눌러주세요");
+            printf("%-70s", "확정이시면 A버튼을 눌러주세요");
             break;
         case 'a':
         case 'A':
-            if(selectedJob != 0)
+            if (selectedJob != 0)
             {
                 switch (selectedJob)
                 {

@@ -26,7 +26,6 @@ void initializeNpc()
 	npcList[16] = { "마에다", true, 1, 0, {20, 4}, JapArmy };
 	npcList[17] = { "아사노", true, 1, 0, {78, 18}, JapArmy };
 	npcList[18] = { "마쓰라", true, 1, 0, {64, 26}, JapArmy };
-
 }
 
 void ActiveNpc()
