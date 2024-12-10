@@ -42,6 +42,7 @@ void NobodyLog_1(); // 한푼줍쇼 퀘스트, quest[0]
 void NobodyLog_2(); // 바위치워주기 퀘스트, quest[4]
 void NobodyLog_3(); // 물 주기 퀘스트, quest[8]
 void NobodyLog_4(); // 쌀 수확 퀘스트, quest[9]
+void NobodyLog_5(); // 최종 퀘스트
 
 void interactionQuestItem();
 void dialogueVolunQuestItem(); // 군량, 1

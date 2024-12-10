@@ -24,7 +24,7 @@ int outNpcInteract_prologue = 0;
 int checkingSpawnEnemy_P = 0;
 
 //프롤로그 적
-Enemy enemyTemplates_P[1] = {			
+Enemy enemyTemplates_P[1] = {
 	{"허접한 왜군 잡졸", 5, 3, 1, {0, 0}, warrior}		//hp, attack, deffence
 };
 
@@ -43,7 +43,7 @@ Enemy createEnemy_P(const Enemy* enemyTemplate_P, Position pos) {
 }
 
 void spawnEnemies_P() {
-	if(checkingSpawnEnemy_P == 1)
+	if (checkingSpawnEnemy_P == 1)
 	{
 		Position pos = { 12, 15 };
 		currentEnemies_P[0] = createEnemy_P(&enemyTemplates_P[0], pos);
@@ -196,14 +196,14 @@ void encountNpcChoice_prologue()
 void displayNPCScreen_prologue()
 {
 	outNpcInteract_prologue = 1;
-	
+
 	int npctypeNum;
 
 	if (currentNPCP->type == Deadbody)
 		npctypeNum = 1;
 	else
 		npctypeNum = 2;
-	
+
 	switch (npctypeNum)
 	{
 	case 1:
@@ -493,12 +493,12 @@ void backToMap_prologue()
 
 //프롤로그 맵 선택
 void selectPrologueMap() {
-	if (player.currentmap == 0) 
+	if (player.currentmap == 0)
 	{
 		p_map0();
 	}
 
-	else if (player.currentmap == 1) 
+	else if (player.currentmap == 1)
 	{
 		p_map1();
 	}
@@ -530,55 +530,55 @@ void drawPotal_prologue()
 //포탈 encounting 함수
 int encountPotal_prologue()
 {
-    if (player.pos.y == potalP[player.currentmap].pos.y && player.pos.x == potalP[player.currentmap].pos.x && potalP[player.currentmap].SpawnPotal_P == true)
-    {
-        Situation = 9;
-        return 1;
+	if (player.pos.y == potalP[player.currentmap].pos.y && player.pos.x == potalP[player.currentmap].pos.x && potalP[player.currentmap].SpawnPotal_P == true)
+	{
+		Situation = 9;
+		return 1;
 
-    }
-    else
-    {
-        Situation = 0;
-        return 0;
-    }
+	}
+	else
+	{
+		Situation = 0;
+		return 0;
+	}
 }
 void encountPotal_prologueChoice()
 {
-    char action = _getch();
+	char action = _getch();
 
-    switch (action)
-    {
-    default:
-        updateLog("잘못된 키를 입력하였습니다.");
+	switch (action)
+	{
+	default:
+		updateLog("잘못된 키를 입력하였습니다.");
 		Sleep(200);
 		displayLog();
-        updateLog("[A]키를 눌러 다음 마을로 갈지 [R]키를 눌러 머무를지 선택하십시오.");
+		updateLog("[A]키를 눌러 다음 마을로 갈지 [R]키를 눌러 머무를지 선택하십시오.");
 		Sleep(200);
 		displayLog();
-        break;
-    case 'A':
-    case 'a':
-        Sleep(100);
-        updateLog("다음 마을로 떠납니다!");
+		break;
+	case 'A':
+	case 'a':
+		Sleep(100);
+		updateLog("다음 마을로 떠납니다!");
 		Sleep(200);
 		displayLog();
-  
+
 		gotoNextMapPrologue();
-  
-		initializeMap();
-        Situation = 0;
-        break;
 
-    case 'R':
-    case 'r':
-        updateLog("현재 마을에 머무릅니다");
+		initializeMap();
+		Situation = 0;
+		break;
+
+	case 'R':
+	case 'r':
+		updateLog("현재 마을에 머무릅니다");
 		Sleep(200);
 		displayLog();
 		Situation = 0;
-        player.pos = previousPos;
-        break;
-    }
-   
+		player.pos = previousPos;
+		break;
+	}
+
 }
 //다음 튜토리얼 맵 이동 함수
 void gotoNextMapPrologue() {
@@ -650,7 +650,7 @@ void showTutorial()
 		setCursorPosition(40, 9);
 		printf("플레이어를 상호작용할 오브젝트");
 		setCursorPosition(40, 10);
-		printf("(ex.N, S, E)위치로 이동시킵니다.");
+		printf("(ex.N, S, E, Q)위치로 이동시킵니다.");
 		setCursorPosition(40, 11);
 		printf("상호작용을 할 시 키보드의 A버튼");
 		setCursorPosition(40, 12);
@@ -658,13 +658,15 @@ void showTutorial()
 		setCursorPosition(40, 13);
 		printf("누릅니다.");
 		setCursorPosition(40, 15);
-		printf("NPC와의 대화문");
+		printf("NPC설명");
 		setCursorPosition(40, 16);
-		printf("NPC와의 대화/상호작용은 넘패드로 진행됩니다.");
+		printf("파벌에 따라 NPC들의 색이 다릅니다.");
 		setCursorPosition(40, 17);
-		printf("상점 NPC도 마찬가지로 넘패드로 진행됩니다.");
+		printf("각 파벌과의 관계도는 엔딩과 스토리 진행에 영향을 미칩니다.");
+		setCursorPosition(40, 18);
+		printf("NPC와의 대화/상호작용은 넘패드로 진행됩니다.");
 		break;
-	case 2:	
+	case 2:
 		setCursorPosition(45, 7);
 		printf("전투 방식");
 		setCursorPosition(45, 8);
@@ -678,13 +680,15 @@ void showTutorial()
 		setCursorPosition(45, 12);
 		printf("공격 결정은 NPC상호작용과 같습니다.");
 		setCursorPosition(45, 14);
-		printf("전투는 A버튼과 R버튼, 넘패드로 진행됩니다.");
+		printf("전투는 여러 키들과, 넘패드로 진행됩니다.");
 		setCursorPosition(45, 15);
-		printf("A버튼은 공격, 숫자키 1, 2는 각각 HP와 MP 포션입니다.");
+		printf("A버튼은 일반 공격이고,치명타가 발생할 수 있습니다." );
 		setCursorPosition(45, 16);
-		printf("스킬은 숫자 1~4번 버튼으로,");
+		printf("숫자키 1, 2는 각각 체력와 기력 포션입니다.");
 		setCursorPosition(45, 17);
-		printf(" 특정 레벨에 도달 할때마다 스킬 하나를 얻습니다.");
+		printf("스킬은 'Z','X','C'키로 사용할 수 있으며");
+		setCursorPosition(45, 18);
+		printf("특정 레벨에 도달 할때마다 스킬 하나를 얻습니다.");
 	}
 }
 

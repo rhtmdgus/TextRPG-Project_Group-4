@@ -5784,72 +5784,72 @@ void playerSkillAnimation(int skilltype)
     }
     else if (player.job == 3)
     {
-    setCursorPosition(centerX, centerY); // 캐릭터 애니메이션을 전투 화면의 중앙에 출력
-    // 애니메이션 출력
-    if (skilltype == 1)
-    {
-        for (int k = 0; k < 9; k++)
+        setCursorPosition(centerX, centerY); // 캐릭터 애니메이션을 전투 화면의 중앙에 출력
+        // 애니메이션 출력
+        if (skilltype == 1)
         {
-            for (int i = 0; i < 15; i++)
+            for (int k = 0; k < 9; k++)
             {
-                setCursorPosition(centerX, centerY + i);
-                for (int j = 0; j < 15; j++)
+                for (int i = 0; i < 15; i++)
                 {
-                    if (spearSkill_1[k][i][j] == 0)
+                    setCursorPosition(centerX, centerY + i);
+                    for (int j = 0; j < 15; j++)
                     {
-                        printf(" ");
+                        if (spearSkill_1[k][i][j] == 0)
+                        {
+                            printf(" ");
+                        }
+                        printf("%c", spearSkill_1[k][i][j]);
                     }
-                    printf("%c", spearSkill_1[k][i][j]);
+                    printf("\n");
                 }
-                printf("\n");
+                Sleep(50);
             }
-            Sleep(50);
         }
-    }
-    else if (skilltype == 2)
-    {
-        for (int k = 0; k < 14; k++)
+        else if (skilltype == 2)
         {
-            for (int i = 0; i < 15; i++)
+            for (int k = 0; k < 14; k++)
             {
-                setCursorPosition(centerX, centerY + i);
-                for (int j = 0; j < 15; j++)
+                for (int i = 0; i < 15; i++)
                 {
-                    if (spearSkill_2[k][i][j] == 0)
+                    setCursorPosition(centerX, centerY + i);
+                    for (int j = 0; j < 15; j++)
                     {
-                        printf(" ");
+                        if (spearSkill_2[k][i][j] == 0)
+                        {
+                            printf(" ");
+                        }
+                        printf("%c", spearSkill_2[k][i][j]);
                     }
-                    printf("%c", spearSkill_2[k][i][j]);
+                    printf("\n");
                 }
-                printf("\n");
+                Sleep(50);
             }
-            Sleep(50);
         }
-    }
-    else if (skilltype == 3)
-    {
-        for (int k = 0; k < 12; k++)
+        else if (skilltype == 3)
         {
-            for (int i = 0; i < 15; i++)
+            for (int k = 0; k < 12; k++)
             {
-                setCursorPosition(centerX, centerY + i);
-                for (int j = 0; j < 15; j++)
+                for (int i = 0; i < 15; i++)
                 {
-                    if (spearSkill_3[k][i][j] == 0)
+                    setCursorPosition(centerX, centerY + i);
+                    for (int j = 0; j < 15; j++)
                     {
-                        printf(" ");
+                        if (spearSkill_3[k][i][j] == 0)
+                        {
+                            printf(" ");
+                        }
+                        printf("%c", spearSkill_3[k][i][j]);
                     }
-                    printf("%c", spearSkill_3[k][i][j]);
+                    printf("\n");
                 }
-                printf("\n");
+                Sleep(50);
             }
-            Sleep(50);
         }
-    }
 
 
-    // 화면을 지우지 않고 계속 애니메이션 진행
-     // 잠시 대기 (애니메이션 효과를 위해)
+        // 화면을 지우지 않고 계속 애니메이션 진행
+         // 잠시 대기 (애니메이션 효과를 위해)
     }
     else if (player.job == 4)
     {
@@ -6257,7 +6257,7 @@ void BossAttack(Enemy* boss)
     }
     else if (boss->type == archor)
     {
-        for (int k = 0; k < 13; k++)
+        for (int k = 0; k < 8; k++)
         {
             for (int i = 0; i < 15; i++)
             {

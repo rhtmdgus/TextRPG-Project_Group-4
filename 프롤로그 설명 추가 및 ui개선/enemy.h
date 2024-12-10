@@ -4,7 +4,7 @@
 //#include "player.h"
 #include "utility.h"
 #define MAX_ENEMY 10	//적 스폰 수
-#define MAX_BOSS 2      //보스 스폰수
+#define MAX_BOSS 3      //보스 스폰수
 
 typedef enum {
 	warrior,  //왜군잡졸 유형
@@ -22,7 +22,7 @@ typedef struct
 	EnemyType type;
 } Enemy;
 
-extern Enemy enemyTemplates[12];
+extern Enemy enemyTemplates[13];
 extern Enemy currentEnemies[MAX_ENEMY];
 extern Enemy* currentEnemy;
 extern Enemy currentBosses[MAX_BOSS];
@@ -37,6 +37,7 @@ void drawEnemy(Enemy* enemy);
 void eraseEnemy(Enemy* enemy);
 void spawnBoss1();
 void spawnBoss2();
+void spawnBoss3();
 // void spawnBoss();
 void drawBoss(Enemy* boss);
 void eraseBoss(Enemy* boss);
