@@ -3,6 +3,8 @@
 #include <conio.h>
 #include "interaction.h"
 #include "quest.h"
+#include "battle.h"
+#include "enemy.h"
 
 /*
 setCursorPosition(40, 13);
@@ -265,6 +267,7 @@ void VolunArmyLog_1()
 void VolunArmyLog_2()
 {
 	int num = _getch();
+	bool getBattle = false;
 	switch (num)
 	{
 	case '1':
@@ -388,13 +391,16 @@ void VolunArmyLog_2()
 		clearScreen();
 		setCursorPosition(30, 11);
 		printf("지금 나랑 장난하는 건가? 저리 가게");
-		setCursorPosition(30, 12);
+		setCursorPosition(30, 14);
 		printf("대화문\n");
-		setCursorPosition(30, 13);
-		printf("1. 알겠소\n");
-		Sleep(150);
-		updateLog("A키를 눌러 이전 대화로 돌아가기");
-		backToDialogue();
+		setCursorPosition(30, 15);
+		printf("1. 장난 아니다. 죽어라!\n");
+		Sleep(500);
+		updateLog("A키를 눌러 전투를 시작합니다.");
+		displayLog();
+		backToMap();
+		getBattle = true;
+
 		break;
 	case '6':
 		updateLog("NPC을 떠난다");
@@ -405,6 +411,17 @@ void VolunArmyLog_2()
 		printf("잘가게, 왜놈들 조심하고");
 		backToMap();
 		break;
+	}
+	if (getBattle)
+	{
+		Situation = 1;
+		currentEnemy = &enemyTemplates[17];
+		displayBattleScreen();
+		battle(currentEnemy);
+		map[npcList[1].pos.y][npcList[1].pos.x] = ' ';
+		npcList[1].isActive = 0;
+		player.WRelationship += 30;
+		player.RRelationship -= 30;
 	}
 }
 void VolunArmyLog_3()
@@ -1002,6 +1019,7 @@ void GoverArmyLog_1()
 void GoverArmyLog_2()
 {
 	int num = _getch();
+	bool getBattle = false;
 	switch (num)
 	{
 	case '1':
@@ -1124,13 +1142,15 @@ void GoverArmyLog_2()
 		clearScreen();
 		setCursorPosition(30, 11);
 		printf("지금 반란을 할 생각인가?");
-		setCursorPosition(30, 12);
+		setCursorPosition(30, 14);
 		printf("대화문\n");
-		setCursorPosition(30, 13);
-		printf("1. 알겠소\n");
-		Sleep(150);
-		updateLog("A키를 눌러 이전 대화로 돌아가기");
-		backToDialogue();
+		setCursorPosition(30, 15);
+		printf("1. 그래 반란이다 이 대머리야!\n");
+		Sleep(500);
+		updateLog("A키를 눌러 전투를 시작합니다.");
+		displayLog();
+		backToMap();
+		getBattle = true;
 		break;
 	case '6':
 		updateLog("NPC을 떠난다");
@@ -1142,6 +1162,19 @@ void GoverArmyLog_2()
 		backToMap();
 		break;
 	}
+
+	if (getBattle)
+	{
+		Situation = 1;
+		currentEnemy = &enemyTemplates[18];
+		displayBattleScreen();
+		battle(currentEnemy);
+		map[npcList[2].pos.y][npcList[2].pos.x] = ' ';
+		npcList[2].isActive = 0;
+		player.WRelationship += 30;
+		player.JRelationship -= 30;
+	}
+
 }
 void GoverArmyLog_3()
 {
@@ -1744,6 +1777,7 @@ void JapArmyLog_1()
 void JapArmyLog_2()
 {
 	int num = _getch();
+	bool getBattle = false;
 	switch (num)
 	{
 	case '1':
@@ -1862,17 +1896,19 @@ void JapArmyLog_2()
 	case '4':
 		updateLog("싸우자");
 		displayLog();
-		Sleep(100);
+		Sleep(500);
 		clearScreen();
 		setCursorPosition(30, 11);
 		printf("바카야로!");
-		setCursorPosition(30, 12);
+		setCursorPosition(30, 14);
 		printf("대화문\n");
-		setCursorPosition(30, 13);
-		printf("1. 알겠소\n");
-		Sleep(150);
-		updateLog("A키를 눌러 이전 대화로 돌아가기");
-		backToDialogue();
+		setCursorPosition(30, 15);
+		printf("1. 개자식!!\n");
+		Sleep(500);
+		updateLog("A키를 눌러 전투를 시작합니다.");
+		displayLog();
+		backToMap();
+		getBattle = true;
 		break;
 	case '6':
 		updateLog("NPC을 떠난다");
@@ -1883,6 +1919,19 @@ void JapArmyLog_2()
 		printf("다른 놈들처럼 행동하지 말게");
 		backToMap();
 		break;
+	}
+	
+	if (getBattle)
+	{
+		Situation = 1;
+		currentEnemy = &enemyTemplates[14];
+		displayBattleScreen();
+		battle(currentEnemy);
+		map[npcList[3].pos.y][npcList[3].pos.x] = ' ';
+		npcList[3].isActive = 0;
+		player.WRelationship -= 30;
+		player.JRelationship += 30;
+		player.RRelationship += 30;
 	}
 }
 void JapArmyLog_3()
@@ -2335,6 +2384,7 @@ void dialogueNobody()
 void NobodyLog_1()
 {
 	int num = _getch();
+	bool getBattle = false;
 	switch (num)
 	{
 	case '1':
@@ -2459,13 +2509,15 @@ void NobodyLog_1()
 		clearScreen();
 		setCursorPosition(30, 11);
 		printf("왜군한테 대가리라도 깨지셨소??");
-		setCursorPosition(30, 12);
+		setCursorPosition(30, 14);
 		printf("대화문\n");
-		setCursorPosition(30, 13);
-		printf("1. 알겠소\n");
-		Sleep(150);
-		updateLog("A키를 눌러 이전 대화로 돌아가기");
-		backToDialogue();
+		setCursorPosition(30, 15);
+		printf("1. 깨질 대가리는 네놈 대가리다!\n");
+		Sleep(500);
+		updateLog("A키를 눌러 전투를 시작합니다.");
+		displayLog();
+		backToMap();
+		getBattle = true;
 		break;
 	case '6':
 		updateLog("NPC을 떠난다");
@@ -2477,11 +2529,25 @@ void NobodyLog_1()
 		backToMap();
 		break;
 	}
+	if(getBattle)
+	{
+		Situation = 1;
+		currentEnemy = &enemyTemplates[16];
+		displayBattleScreen();
+		battle(currentEnemy);
+		map[npcList[0].pos.y][npcList[0].pos.x] = ' ';
+		npcList[0].isActive = 0;
+		player.WRelationship += 30;
+		player.JRelationship -= 30;
+		player.RRelationship -= 30;
+	}
+
 }//퀘스트 없는 NPC//
 //퀘스트 있는 무소속 NPC 로그
 void NobodyLog_2()
 {
 	int num = _getch();
+	bool getBattle = false;
 	switch (num)
 	{
 	case '1':
@@ -2604,13 +2670,15 @@ void NobodyLog_2()
 		clearScreen();
 		setCursorPosition(30, 11);
 		printf("힘들어 죽겠는데 그런 장난 하지 마시오.");
-		setCursorPosition(30, 12);
+		setCursorPosition(30, 14);
 		printf("대화문\n");
-		setCursorPosition(30, 13);
-		printf("1. 알겠소\n");
-		Sleep(150);
-		updateLog("A키를 눌러 이전 대화로 돌아가기");
-		backToDialogue();
+		setCursorPosition(30, 15);
+		printf("1. 장난아닌데\n");
+		Sleep(500);
+		updateLog("A키를 눌러 전투를 시작합니다.");
+		displayLog();
+		backToMap();
+		getBattle = true;
 		break;
 	case '6':
 		updateLog("NPC을 떠난다");
@@ -2621,6 +2689,19 @@ void NobodyLog_2()
 		printf("잘가시오, 몸 조심하고");
 		backToMap();
 		break;
+	}
+
+	if (getBattle)
+	{
+		Situation = 1;
+		currentEnemy = &enemyTemplates[15];
+		displayBattleScreen();
+		battle(currentEnemy);
+		map[npcList[4].pos.y][npcList[4].pos.x] = ' ';
+		npcList[4].isActive = 0;
+		player.WRelationship += 30;
+		player.JRelationship -= 30;
+		player.RRelationship -= 30;
 	}
 }
 void NobodyLog_3()

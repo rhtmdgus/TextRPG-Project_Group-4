@@ -650,7 +650,7 @@ void showTutorial()
 		setCursorPosition(40, 9);
 		printf("플레이어를 상호작용할 오브젝트");
 		setCursorPosition(40, 10);
-		printf("(ex.N, S, E)위치로 이동시킵니다.");
+		printf("(ex.N, S, E, Q)위치로 이동시킵니다.");
 		setCursorPosition(40, 11);
 		printf("상호작용을 할 시 키보드의 A버튼");
 		setCursorPosition(40, 12);
@@ -658,11 +658,13 @@ void showTutorial()
 		setCursorPosition(40, 13);
 		printf("누릅니다.");
 		setCursorPosition(40, 15);
-		printf("NPC와의 대화문");
+		printf("NPC설명");
 		setCursorPosition(40, 16);
-		printf("NPC와의 대화/상호작용은 넘패드로 진행됩니다.");
+		printf("파벌에 따라 NPC들의 색이 다릅니다.");
 		setCursorPosition(40, 17);
-		printf("상점 NPC도 마찬가지로 넘패드로 진행됩니다.");
+		printf("각 파벌과의 관계도는 엔딩과 스토리 진행에 영향을 미칩니다.");
+		setCursorPosition(40, 18);
+		printf("NPC와의 대화/상호작용은 넘패드로 진행됩니다.");
 		break;
 	case 2:
 		setCursorPosition(45, 7);
@@ -678,13 +680,15 @@ void showTutorial()
 		setCursorPosition(45, 12);
 		printf("공격 결정은 NPC상호작용과 같습니다.");
 		setCursorPosition(45, 14);
-		printf("전투는 A버튼과 R버튼, 넘패드로 진행됩니다.");
+		printf("전투는 여러 키들과, 넘패드로 진행됩니다.");
 		setCursorPosition(45, 15);
-		printf("A버튼은 공격, 숫자키 1, 2는 각각 HP와 MP 포션입니다.");
+		printf("A버튼은 일반 공격이고,치명타가 발생할 수 있습니다." );
 		setCursorPosition(45, 16);
-		printf("스킬은 숫자 1~4번 버튼으로,");
+		printf("숫자키 1, 2는 각각 체력와 기력 포션입니다.");
 		setCursorPosition(45, 17);
-		printf(" 특정 레벨에 도달 할때마다 스킬 하나를 얻습니다.");
+		printf("스킬은 'Z','X','C'키로 사용할 수 있으며");
+		setCursorPosition(45, 18);
+		printf("특정 레벨에 도달 할때마다 스킬 하나를 얻습니다.");
 	}
 }
 

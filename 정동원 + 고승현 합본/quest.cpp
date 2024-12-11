@@ -345,8 +345,8 @@ void QuestComplete4() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
-			weaponchange(9);
-			equipmentchange(9);
+			weaponchange(3);
+			equipmentchange(3);
 			completeQuest(3);
 			backToDialogue();
 		}

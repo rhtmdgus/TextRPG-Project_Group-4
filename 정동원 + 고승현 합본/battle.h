@@ -21,5 +21,6 @@ int Crit();
 void LevelUp();
 void battle(Enemy* enemy);
 void bossbattle(Enemy* boss);
+void battleRand(Enemy* enemy);
 
 #endif // BATTLE_H

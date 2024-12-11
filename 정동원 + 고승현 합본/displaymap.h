@@ -6,6 +6,7 @@
 #include "log.h"
 #include "player.h"
 #include "enemy.h"
+#include "randevent.h"
 #include "selectmap.h"
 #include "shop.h"
 #include "animation.h"

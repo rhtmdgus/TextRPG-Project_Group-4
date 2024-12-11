@@ -1,7 +1,6 @@
 #include "displaymap.h"
 #include "npc.h"
 #include "player.h"
-#include "cutscene.h"
 #include <stdio.h>
 #include <conio.h>
 
@@ -18,12 +17,21 @@ void displayMap()
 		printf("\n");
 	}
 
+
+	//맵을 그린 후 남은 이벤트 표시
+	for (int i = 0; i < MAX_EVENT; i++) {
+		if (currentEvents[i].check == 1) {
+			drawEvent(&currentEvents[i]);
+		}
+	}
+
 	// 맵을 그린 후 남아 있는 모든 적을 다시 표시합니다.
 	for (int i = 0; i < MAX_ENEMY; i++) {
 		if (currentEnemies[i].hp > 0) {
 			drawEnemy(&currentEnemies[i]);
 		}
 	}
+
 	for (int i = 0; i < MAX_BOSS; i++) {
 		if (currentBosses[i].hp > 0) {
 			drawBoss(&currentBosses[i]);
@@ -153,13 +161,13 @@ void displayEnemyStat(const Enemy* enemy)
 		return;
 	}
 	setCursorPosition(101, 14);
-	printf("%-70s", enemy->name);
+	printf("  %-70s", enemy->name);
 	setCursorPosition(101, 15);
-	printf("체력: %3d", enemy->hp);
+	printf("  체력: %3d", enemy->hp);
 	setCursorPosition(101, 16);
-	printf("공격력: %3d", enemy->attack);
+	printf("  공격력: %3d", enemy->attack);
 	setCursorPosition(101, 17);
-	printf("방어력: %3d", enemy->defense);
+	printf("  방어력: %3d", enemy->defense);
 }
 
 void displayBossStat(const Enemy* boss)
@@ -169,13 +177,13 @@ void displayBossStat(const Enemy* boss)
 		return;
 	}
 	setCursorPosition(101, 14);
-	printf("%-70s", boss->name);
+	printf("  %-70s", boss->name);
 	setCursorPosition(101, 15);
-	printf("체력: %3d", boss->hp);
+	printf("  체력: %3d", boss->hp);
 	setCursorPosition(101, 16);
-	printf("공격력: %3d", boss->attack);
+	printf("  공격력: %3d", boss->attack);
 	setCursorPosition(101, 17);
-	printf("방어력: %3d", boss->defense);
+	printf("  방어력: %3d", boss->defense);
 }
 
 void displayShopScreen()

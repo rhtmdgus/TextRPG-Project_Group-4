@@ -7,6 +7,7 @@
 #include "player.h"
 #include "battle.h"
 #include "npc.h"
+#include "randevent.h"
 #include "quest.h"
 
 int encountEnemy()
@@ -253,6 +254,8 @@ void encountPotalChoice()
         displayMap();
         eraseAllEnemies();
         spawnEnemies();
+        eraseAllEvents();
+        spawnEvents();
         displayMap();
         Situation = 0;
         break;
@@ -267,29 +270,93 @@ void encountPotalChoice()
     displayLog();
 }
 
-/**
 int encountRandom()
 {
-    if (player.pos.y == Random.pos.y && player.pos.x == Random.pos.x)
-    {
-        Situation = 10;
-        return 10;
+    for (int i = 0; i < MAX_EVENT; i++) {
+        if (currentEvents[i].check == 1 && 
+            player.pos.y == currentEvents[i].pos.y 
+            && player.pos.x == currentEvents[i].pos.x)
+        {
+            currentEvent = &currentEvents[i];
+            Situation = 10;
+            return 1;
+        }
     }
-    else
-    {
-        Situation = 0;
-        return 0;
-    }
+    currentEvent = nullptr;
+    Situation = 0;
+    return 0;
 }
-*/
 
-/**
 void encountRandomChoice()
 {
+    char action = _getch();
 
+    switch (action)
+    {
+    default:
+        updateLog("잘못된 키를 눌렀습니다.");
+        displayLog();
+        Sleep(200);
+        updateLog("수상한 기운을 조사하려면 [A]를, 아니면 [R]을 누르세요.");
+        displayLog();
+        Sleep(200);
+        break;
+    case 'A':
+    case 'a':
+        updateLog("수상한 기운을 조사하기로 결정했습니다.");
+        displayLog();
+        Sleep(200);
+
+        if (strcmp(currentEvent->name, "닌자") == 0)
+        {
+            updateLog("닌자에게 기습을 당했다!!");
+            displayLog();
+            Sleep(200);
+            Situation = 1;
+            currentEnemy = &enemyTemplates[13];
+            displayBattleScreen();
+            battleRand(currentEnemy);
+        }
+
+
+        if (strcmp(currentEvent->name, "체력 약초 상자") == 0)
+        {
+            updateLog("약초 상자를 발견했다.");
+            player.HPpotion++;
+
+            displayLog();
+            Sleep(200);
+        }
+
+        if (strcmp(currentEvent->name, "기력 약수 상자") == 0)
+        {
+            updateLog("때깔 좋은 약수 상자를 발견했다.");
+            player.MPpotion++;
+
+            displayLog();
+            Sleep(200);
+        }
+
+        currentEvent->check = 0;
+        // 이전 위치로 돌아가기
+        eraseEvent(currentEvent);
+        player.pos = previousPos;
+        Situation = 0;
+        break;
+    case 'R':
+    case 'r':
+        updateLog("수상한 기운을 조사하지 않기로 결정했습니다.");
+        displayLog();
+        Sleep(200);
+        currentEvent->check = 0;
+        eraseEvent(currentEvent);
+
+        // 이전 위치로 돌아가기
+        player.pos = previousPos;
+        Situation = 0;
+        break;
+    }
 }
-*/
-
 
 int encountQuestItem()
 {
@@ -303,5 +370,21 @@ int encountQuestItem()
     }
     Situation = 0;
     currentQuestItem = nullptr;
+    return 0;
+}
+
+int encountHidden()
+{
+    drawPlayer();
+    if (player.currentmap == 1 && player.WRelationship > player.RRelationship && player.WRelationship > player.JRelationship)
+    {
+        if (player.pos.y >= 12 && player.pos.y <= 19 && player.pos.x == 49)
+        {
+            updateLog("심상치 않은 기운을 느낀다");
+            displayLog();
+            Sleep(500);
+            return 1;
+        }
+    }
     return 0;
 }

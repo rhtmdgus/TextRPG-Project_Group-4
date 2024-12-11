@@ -26,5 +26,6 @@ void encountRandomChoice();
 
 int encountQuestItem();
 
+int encountHidden();
 
 #endif	//ENCOUNT_H
