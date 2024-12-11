@@ -19,6 +19,7 @@ setCursorPosition(40, 13);
 	printf("6. NPC을 떠난다.\n");*/
 
 int outNpcInteract = 0;
+int hiddenShopCount = 0;
 
 void interactionNPC()
 {
@@ -34,9 +35,11 @@ void interactionNPC()
 
 void interactShop() {
 	int num = _getch();
+
 	switch (num)
 	{
 	case '1':
+		hiddenShopCount = 0;
 		if (player.money - hpPotionPrice < 0)
 		{
 			updateLog("가지고 있는 엽전 갯수가 부족합니다.");
@@ -56,6 +59,7 @@ void interactShop() {
 		}
 		break;
 	case '2':
+		hiddenShopCount = 0;
 		if (player.money - manaPotionPrice < 0)
 		{
 			updateLog("가지고 있는 엽전 갯수가 부족합니다.");
@@ -75,6 +79,7 @@ void interactShop() {
 		}
 		break;
 	case '3':
+		hiddenShopCount = 0;
 		if (player.money - strengthPotionPrice < 0)
 		{
 			updateLog("가지고 있는 엽전 갯수가 부족합니다.");
@@ -94,12 +99,13 @@ void interactShop() {
 		}
 		break;
 	case '4':
+		hiddenShopCount = 0;
 		if (player.money - defensePotionPrice < 0)
 		{
 			updateLog("가지고 있는 엽전 갯수가 부족합니다.");
 			break;
 		}
-		else if (Shop1.accuracyPotion <= 0)
+		else if (Shop1.defensePotion <= 0)
 		{
 			updateLog("상품 수량이 부족합니다.");
 			break;
@@ -113,9 +119,15 @@ void interactShop() {
 		}
 		break;
 	case '5':
+		hiddenShopCount = 0;
 		if (player.money - accuracyPotionPrice < 0)
 		{
 			updateLog("가지고 있는 엽전 갯수가 부족합니다.");
+			break;
+		}
+		else if (player.accuracy >= 20)
+		{
+			updateLog("플레이어의 명중률은 20을 넘을수 없습니다!");
 			break;
 		}
 		else if (Shop1.accuracyPotion <= 0)
@@ -133,10 +145,23 @@ void interactShop() {
 		break;
 	case '6':
 		updateLog("상점을 떠나는걸 선택하셨습니다.");
+		hiddenShopCount = 0;
 		Situation = 0;
 		player.pos = previousPos;
 		break;
+	case '7':
+		updateLog("흠...그런 물건은 없다네...");
+		hiddenShopCount += 1;
+		if (hiddenShopCount == 3)
+		{
+			updateLog("자네 이 물건을 어떻게 알고 왔지?");
+			weaponchange(7);
+			equipmentchange(7);
+		}
+		break;
 	}
+
+
 	displayLog();
 }
 
@@ -2375,8 +2400,6 @@ void dialogueNobody()
 		NobodyLog_3();
 	if (strcmp(currentNPC->name, "고돌쇠") == 0 && currentNPC->hasQuest == true)
 		NobodyLog_4();
-	if (strcmp(currentNPC->name, "최종퀘스트") == 0 && currentNPC->hasQuest == true)
-		NobodyLog_5();
 }
 
 
@@ -2411,11 +2434,9 @@ void NobodyLog_1()
 		Sleep(100);
 		clearScreen();
 		setCursorPosition(30, 11);
-		printf("왜군들이 이동네 저동네를 약탈한다고 들었소.");
+		printf("왜군들이 우물에 독을 풀었다더군.");
 		setCursorPosition(30, 12);
-		printf("관군이 빨리 와서 우리 좀 지켜줬으면 하는데,");
-		setCursorPosition(30, 13);
-		printf("아직도 안온거 보면, 소식이 조정까지 전해지지 못했나보오.");
+		printf("물 마실 때 조심하게...");
 		setCursorPosition(30, 14);
 		printf("대화문\n");
 		setCursorPosition(30, 15);
@@ -2574,9 +2595,9 @@ void NobodyLog_2()
 		Sleep(100);
 		clearScreen();
 		setCursorPosition(30, 11);
-		printf("일을 하느라 소문을 들을 틈도 없다네.");
+		printf("상점에서 말도안되는 물건을 판다더군.");
 		setCursorPosition(30, 12);
-		printf("근처 양반들은 전부다 피난을 간듯허이.");
+		printf("나도 가서 찾아봤는데 도통 뭔지 모르겠단말이지....");
 		setCursorPosition(30, 13);
 		printf("대화문\n");
 		setCursorPosition(30, 14);
@@ -2996,7 +3017,7 @@ void NobodyLog_5()
 {
 	Sleep(100);
 	clearScreen();
-	if (currentNPC->hasQuest == true && quest[19].take == 0)
+	if (quest[19].take == 0)
 	{
 		setCursorPosition(30, 11);
 		printf(quest[19].title);
@@ -3016,7 +3037,11 @@ void NobodyLog_5()
 			quest[19].take = 1;
 			player.questmax++;
 			acceptQuest(19);
-			backToDialogue();
+			Sleep(150);
+			backToMap();
+			displayMap();
+			displayPlayerStat();
+			displayLog();
 			spawnBoss3();
 		}
 		else
@@ -3025,15 +3050,10 @@ void NobodyLog_5()
 			setCursorPosition(30, 11);
 			printf("퀘스트를 거절하셨습니다. 다시 수락하세요.");
 			updateLog("퀘스트를 거절하셨습니다!");
-			backToDialogue();
+			Sleep(150);
+			backToMap();
 		}
 	}
-	else
-	{
-		QuestComplete19();
-	}
-	Sleep(150);
-	backToMap();
 }
 
 void interactionQuestItem()

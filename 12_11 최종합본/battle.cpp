@@ -5,7 +5,7 @@
 #include "animation.h"
 #include "quest.h"
 
-
+int hiddenPotionCount = 0;
 int OriginalLevel;
 
 void LevelUp()	//레벨업
@@ -94,7 +94,14 @@ void battle(Enemy* enemy)
 		switch (action)
 		{
 		case '1'://           hp포션 사용
-			hppotion();
+			hppotion(); if (hiddenPotionCount == 19)
+			{
+				player.hp = 0;
+				updateBattleLog("당신은 물약 과다사용으로 중독되어서 죽었습니다...");
+				player.ending = 5;
+				displayLog();
+			}
+			hiddenPotionCount += 1;
 			displayPlayerStat();
 			Sleep(100);
 			displayBattleLog();
@@ -102,6 +109,14 @@ void battle(Enemy* enemy)
 
 		case '2'://           mp포션 사용
 			mppotion();
+			if (hiddenPotionCount == 19)
+			{
+				player.hp = 0;
+				updateBattleLog("당신은 물약 과다사용으로 중독되어서 죽었습니다...");
+				player.ending = 5;
+				displayLog();
+			}
+			hiddenPotionCount += 1;
 			displayPlayerStat();
 			Sleep(100);
 			displayBattleLog();
@@ -109,6 +124,7 @@ void battle(Enemy* enemy)
 
 		case 'a':
 		case 'A':
+			hiddenPotionCount = 0;
 			// 공격 로직
 
 			damageToEnemy = player.attack - enemy->defense; // 이전에 선언한 변수를 사용
@@ -201,6 +217,7 @@ void battle(Enemy* enemy)
 			break;
 		case 'z':  //스킬 1
 		case 'Z':
+			hiddenPotionCount = 0;
 			// 공격 로직
 			if (player.level < 5) {
 				updateBattleLog("레벨이 부족합니다!!");
@@ -323,6 +340,7 @@ void battle(Enemy* enemy)
 
 		case 'x':  // 스킬 2
 		case 'X':
+			hiddenPotionCount = 0;
 			if (player.level < 10) {
 				updateBattleLog("레벨이 부족합니다!!");
 				displayBattleLog();
@@ -476,6 +494,7 @@ void battle(Enemy* enemy)
 
 		case 'c':  //스킬 3
 		case 'C':
+			hiddenPotionCount = 0;
 			if (player.level < 15) {
 				updateBattleLog("레벨이 부족합니다!!");
 				displayBattleLog();
@@ -710,6 +729,7 @@ void battle(Enemy* enemy)
 			//적과 전투에서 도주
 		case 'r':
 		case 'R':
+			hiddenPotionCount = 0;
 			updateBattleLog("적에게서 도망쳤습니다!");
 			Situation = 0;
 			player.pos = previousPos;
@@ -794,6 +814,8 @@ void battle(Enemy* enemy)
 			displayEnemyStat(enemy);
 			Sleep(100);
 			displayBattleLog();
+			player.ending = 4;
+
 			Situation = 0;
 		}
 	}
@@ -840,6 +862,15 @@ void bossbattle(Enemy* boss)
 		{
 		case '1'://           hp포션 사용
 			hppotion();
+			if (hiddenPotionCount == 19)
+			{
+				player.hp = 0;
+				updateBattleLog("당신은 물약 과다사용으로 중독되어서 죽었습니다...");
+				player.ending = 5;
+
+				displayLog();
+			}
+			hiddenPotionCount += 1;
 			displayPlayerStat();
 			Sleep(100);
 			displayBattleLog();
@@ -847,6 +878,15 @@ void bossbattle(Enemy* boss)
 
 		case '2'://           mp포션 사용
 			mppotion();
+			if (hiddenPotionCount == 19)
+			{
+				player.hp = 0;
+				updateBattleLog("당신은 물약 과다사용으로 중독되어서 죽었습니다...");
+				player.ending = 5;
+
+				displayLog();
+			}
+			hiddenPotionCount += 1;
 			displayPlayerStat();
 			Sleep(100);
 			displayBattleLog();
@@ -854,6 +894,7 @@ void bossbattle(Enemy* boss)
 
 		case 'a':
 		case 'A':
+			hiddenPotionCount = 0;
 			// 공격 로직
 
 			damageToBoss = player.attack - boss->defense; // 이전에 선언한 변수를 사용
@@ -970,6 +1011,7 @@ void bossbattle(Enemy* boss)
 
 		case 'z':  //스킬 1
 		case 'Z':
+			hiddenPotionCount = 0;
 			// 공격 로직
 			if (player.level < 5) {
 				updateBattleLog("레벨이 부족합니다!!");
@@ -1116,6 +1158,7 @@ void bossbattle(Enemy* boss)
 
 		case 'x':  // 스킬 2
 		case 'X':
+			hiddenPotionCount = 0;
 			if (player.level < 10) {
 				updateBattleLog("레벨이 부족합니다!!");
 				displayBattleLog();
@@ -1294,6 +1337,7 @@ void bossbattle(Enemy* boss)
 
 		case 'c':  //스킬 3
 		case 'C':
+			hiddenPotionCount = 0;
 			if (player.level < 15) {
 				updateBattleLog("레벨이 부족합니다!!");
 				displayBattleLog();
@@ -1579,6 +1623,7 @@ void bossbattle(Enemy* boss)
 			//적과 전투에서 도주
 		case 'r':
 		case 'R':
+			hiddenPotionCount = 0;
 			updateBattleLog("적 장수에게서 도망쳤습니다!");
 			Situation = 0;
 			player.pos = previousPos;
@@ -1669,6 +1714,8 @@ void bossbattle(Enemy* boss)
 			displayBossStat(boss);
 			Sleep(100);
 			displayBattleLog();
+			player.ending = 4;
+
 			Situation = 0;
 		}
 	}
@@ -1723,13 +1770,32 @@ void battleRand(Enemy* enemy)
 		{
 		case '1'://           hp포션 사용
 			hppotion();
+			if (hiddenPotionCount == 19)
+			{
+				player.hp = 0;
+				updateBattleLog("당신은 물약 과다사용으로 중독되어서 죽었습니다...");
+				player.ending = 5;
+
+				displayLog();
+			}
+			hiddenPotionCount += 1;
 			displayPlayerStat();
 			Sleep(100);
 			displayBattleLog();
 			break;
 
 		case '2'://           mp포션 사용
+
 			mppotion();
+			if (hiddenPotionCount == 19)
+			{
+				player.hp = 0;
+				updateBattleLog("당신은 물약 과다사용으로 중독되어서 죽었습니다...");
+				player.ending = 5;
+
+				displayLog();
+			}
+			hiddenPotionCount += 1;
 			displayPlayerStat();
 			Sleep(100);
 			displayBattleLog();
@@ -1737,6 +1803,7 @@ void battleRand(Enemy* enemy)
 
 		case 'a':
 		case 'A':
+			hiddenPotionCount = 0;
 			// 공격 로직
 
 			damageToEnemy = player.attack - enemy->defense; // 이전에 선언한 변수를 사용
@@ -1829,6 +1896,7 @@ void battleRand(Enemy* enemy)
 			break;
 		case 'z':  //스킬 1
 		case 'Z':
+			hiddenPotionCount = 0;
 			// 공격 로직
 			if (player.level < 5) {
 				updateBattleLog("레벨이 부족합니다!!");
@@ -1951,6 +2019,7 @@ void battleRand(Enemy* enemy)
 
 		case 'x':  // 스킬 2
 		case 'X':
+			hiddenPotionCount = 0;
 			if (player.level < 10) {
 				updateBattleLog("레벨이 부족합니다!!");
 				displayBattleLog();
@@ -2104,6 +2173,7 @@ void battleRand(Enemy* enemy)
 
 		case 'c':  //스킬 3
 		case 'C':
+			hiddenPotionCount = 0;
 			if (player.level < 15) {
 				updateBattleLog("레벨이 부족합니다!!");
 				displayBattleLog();
@@ -2338,6 +2408,7 @@ void battleRand(Enemy* enemy)
 			//적과 전투에서 도주
 		case 'r':
 		case 'R':
+			hiddenPotionCount = 0;
 			updateBattleLog("적에게서 도망쳤습니다!");
 			Situation = 0;
 			player.pos = previousPos;
@@ -2422,6 +2493,8 @@ void battleRand(Enemy* enemy)
 			displayEnemyStat(enemy);
 			Sleep(100);
 			displayBattleLog();
+			player.ending = 4;
+
 			Situation = 0;
 		}
 	}

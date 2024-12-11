@@ -60,6 +60,10 @@ int isPositionOccupied(int x, int y) {
             return 1;  // 위치가 이미 사용 중임
         }
     }
+    if ((x == MAP_WIDTH - 10 && y == 2) || (x == 60 && y == 24) || (x == (MAP_WIDTH - 10) / 2 && y == 3))
+    {
+        return 1;
+    }
     if (player.currentmap == 0 && x >= 1 &&x <= 34 && y >= 1 && y <= 15)
     {
         return 1;

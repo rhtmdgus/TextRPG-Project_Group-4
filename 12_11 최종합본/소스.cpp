@@ -24,6 +24,7 @@
 #include "prologue.h"
 #include "prologuemap.h"
 #include "item.h"
+#include "ending.h"
 //ㅇㅁㅇ
 
 //situation 명 
@@ -39,9 +40,9 @@
 //situation 10 = encounting random stuff
 //54
 
-Player player = { 10, 10, 99, 2, 2, 2, 2, 1, 0, 0, 0, 0, 1, 900, 0, 0, 0, 0, 0, 0,  -1, -1, { "없음" } , {"헌 옷"} , 0, 0, 0, 0, 0, 0, { 20, 13 } };
+Player player = { 10, 10, 99, 2, 2, 2, 2, 1, 0, 0, 0, 0, 1, 900, 0, 0, 0, 0, 0, 0,  -1, -1, { "없음" } , {"헌 옷"} , 0, 0, 0, 0, 0, 0, 0, { 20, 13 } };
 Position previousPos = { 1, 1 };
-Shop Shop1 = { "상인", 99, 99, 99, 99, 99, {3, 3} };
+Shop Shop1 = { "상인", 99, 99, 99, 99, 20, {3, 3} };
 
 int main()
 {
@@ -54,7 +55,9 @@ int main()
 	system("cls");
 	updateLog("게임 시작!");
 
-	/*
+	initializeMap();
+	printWakeUp();
+	system("cls");
 
 	initializeMap();
 	displayMap_Prologue();
@@ -147,10 +150,8 @@ int main()
 			break;
 		}
 	}
-	*/
-	initializeMap();
-	printWakeUp();
-	system("cls");
+	
+	
 	initializeMap();
 	initializeQuest();
 	displayMap();
@@ -173,7 +174,17 @@ int main()
 		drawNpc(npcList);
 		drawQuestItem(QuestItemList);
 		//displayLog();
-
+		if (player.currentmap == 2 && quest[19].take == 0)
+		{
+			initializeMap();
+			displayShopMap();
+			displayPlayerStat();
+			displayLog();
+			NobodyLog_5();
+			displayLog();
+		}
+		if (player.currentmap == 2 && checkboss3 == 1)
+			QuestComplete19();
 		if (encountEnemy())
 		{
 			updateLog("적과 마주쳤습니다!");
@@ -353,6 +364,7 @@ int main()
 			updateLog("관군 C: 용서하지 않겠다!");
 			displayLog();
 			Sleep(500);
+			player.ending = 6;
 
 			player.hp -= 9999;
 		}
@@ -366,33 +378,22 @@ int main()
 	Sleep(500);
 
 	system("cls");
-	for (int i = 0; i < (MAP_HEIGHT - 16) / 2; i++)
-		printf("\n");
 
-	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-		printf(" ");
-	printf("=========================================================\n");
-	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-		printf(" ");
-	printf("                                                     \n");
-	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-		printf(" ");
-	printf("                당신은 사망하였습니다                \n");
-	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-		printf(" ");
-	printf("                                                     \n");
-	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-		printf(" ");
-	printf("=========================================================\n");
-	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-		printf(" ");
-	printf("           아무 키나 눌러 게임을 종료하세요!\n\n");
-	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-		printf(" ");
-	printf("           Press anykey to quit your adventure!\n");
-	for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-		printf(" ");
-	printf("=========================================================\n\n");
+	if (player.ending == 4) {
+		deadEnding();
+	}
+	else if (player.ending == 5) {
+		potionEnding();
+	}
+	else if (player.ending == 6) {
+		exeEnding();
+	}
+	else if (player.ending == 7) {
+		runEnding();
+	}
+
+
+
 
 
 
