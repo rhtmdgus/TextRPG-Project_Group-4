@@ -21,5 +21,6 @@ int isPositionEOccupied(int x, int y);
 void spawnEvents();
 void drawEvent(RandEvent* Event);
 void eraseEvent(RandEvent* Event);
+void eraseAllEvents();
 
 #endif // RANDEVENT_H

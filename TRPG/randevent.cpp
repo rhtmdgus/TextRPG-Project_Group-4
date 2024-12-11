@@ -5,9 +5,9 @@
 #include <time.h>
 
 RandEvent RandomEvent[3] = {
-	{"닌자", {0, 0}, 1},
-	{"체력 약초 상자", {0, 0}, 1},
-	{"기력 약수 상자", {0, 0}, 1}
+    {"닌자", {0, 0}, 1},
+    {"체력 약초 상자", {0, 0}, 1},
+    {"기력 약수 상자", {0, 0}, 1}
 };
 
 RandEvent currentEvents[MAX_EVENT];  // 배열 정의
@@ -15,11 +15,11 @@ RandEvent* currentEvent = NULL;       // 포인터 정의
 
 RandEvent createEvent(const RandEvent* RandomEvent, Position pos)
 {
-	RandEvent event;
-	strcpy_s(event.name, sizeof(event.name), RandomEvent->name);
-	event.pos = pos;
+    RandEvent event;
+    strcpy_s(event.name, sizeof(event.name), RandomEvent->name);
+    event.pos = pos;
     event.check = RandomEvent->check;
-	return event;
+    return event;
 }
 
 int isPositionEOccupied(int x, int y)
@@ -69,6 +69,11 @@ void drawEvent(RandEvent* Event)
 }
 void eraseEvent(RandEvent* Event)
 {
-    setCursorPosition(Event->pos.x, Event->pos.y);
-    printf(" ");
+    map[Event->pos.y][Event->pos.x] = ' ';
+}
+
+void eraseAllEvents() {
+    for (int i = 0; i < MAX_EVENT; i++) {
+        eraseEvent(&currentEvents[i]); // 각 적의 위치를 지웁니다.
+    }
 }

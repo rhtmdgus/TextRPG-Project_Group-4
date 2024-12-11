@@ -1,7 +1,6 @@
 #include "displaymap.h"
 #include "npc.h"
 #include "player.h"
-#include "randevent.h"
 #include <stdio.h>
 #include <conio.h>
 
@@ -29,8 +28,9 @@ void displayMap()
 			drawBoss(&currentBosses[i]);
 		}
 	}
+	//맵을 그린 후 남은 이벤트 표시
 	for (int i = 0; i < MAX_EVENT; i++) {
-		if (currentEvents[i].check > 0) {
+		if (currentEvents[i].check == 1) {
 			drawEvent(&currentEvents[i]);
 		}
 	}
@@ -114,23 +114,23 @@ void displayBossBattleScreen()
 void displayPlayerStat()
 {
 	setCursorPosition(101, 1);
-	printf("  LEVEL: %d", player.level);
+	printf("  레벨: %d", player.level);
 	setCursorPosition(101, 2);
-	printf("  EXP: %3d / %3d 엽전: %3d", player.exp, EXPbar, player.money);
+	printf("  경험치: %3d / %3d 엽전: %3d", player.exp, EXPbar, player.money);
 	setCursorPosition(101, 3);
-	printf("  HP: %3d / %3d", player.hp, maxhp);
+	printf("  체력: %3d / %3d", player.hp, maxhp);
 	setCursorPosition(101, 4);
-	printf("  MP: %3d / %3d", player.mp, maxmp);
+	printf("  기력: %3d / %3d", player.mp, maxmp);
 	setCursorPosition(101, 5);
-	printf("  healing potion: %3d", player.HPpotion);
+	printf("  체력 물약: %3d", player.HPpotion);
 	setCursorPosition(101, 6);
-	printf("  mana potion: %3d", player.MPpotion);
+	printf("  기력 물약: %3d", player.MPpotion);
 	setCursorPosition(101, 7);
-	printf("  attack point: %3d", player.attack);
+	printf("  공격력: %3d", player.attack);
 	setCursorPosition(101, 8);
-	printf("  defense point: %3d", player.defense);
+	printf("  방어력: %3d", player.defense);
 	setCursorPosition(101, 9);
-	printf("  accuracy point: %3d", player.accuracy);
+	printf("  명중률: %3d", player.accuracy);
 	setCursorPosition(101, 10);
 	printf("  관군과의 관계: %3d", player.JRelationship);
 	setCursorPosition(101, 11);
@@ -147,33 +147,33 @@ void displayPlayerStat()
 void displayEnemyStat(const Enemy* enemy)
 {
 	if (enemy == nullptr) {
-		printf("Error: Enemy data not available.\n");
+		printf("오류: 적 데이터가 없습니다.\n");
 		return;
 	}
 	setCursorPosition(101, 14);
-	printf("%-70s", enemy->name);
+	printf("  %-70s", enemy->name);
 	setCursorPosition(101, 15);
-	printf("HP: %3d", enemy->hp);
+	printf("  체력: %3d", enemy->hp);
 	setCursorPosition(101, 16);
-	printf("attack point: %3d", enemy->attack);
+	printf("  공격력: %3d", enemy->attack);
 	setCursorPosition(101, 17);
-	printf("defense point: %3d", enemy->defense);
+	printf("  방어력: %3d", enemy->defense);
 }
 
 void displayBossStat(const Enemy* boss)
 {
 	if (boss == nullptr) {
-		printf("Error: Enemy data not available.\n");
+		printf("오류: 적 데이터가 없습니다.\n");
 		return;
 	}
 	setCursorPosition(101, 14);
-	printf("%-70s", boss->name);
+	printf("  %-70s", boss->name);
 	setCursorPosition(101, 15);
-	printf("HP: %3d", boss->hp);
+	printf("  체력: %3d", boss->hp);
 	setCursorPosition(101, 16);
-	printf("attack point: %3d", boss->attack);
+	printf("  공격력: %3d", boss->attack);
 	setCursorPosition(101, 17);
-	printf("defense point: %3d", boss->defense);
+	printf("  방어력: %3d", boss->defense);
 }
 
 void displayShopScreen()
@@ -181,15 +181,15 @@ void displayShopScreen()
 	setCursorPosition(40, 11);
 	printf("번호를 눌러 상품을 구매하세요.\n");
 	setCursorPosition(40, 12);
-	printf("1. 체력 포션 2원 남은 갯수: %d\n", Shop1.hpPotion);
+	printf("1. 체력 물약 2원 남은 갯수: %d\n", Shop1.hpPotion);
 	setCursorPosition(40, 13);
-	printf("2. 마나 포션 2원 남은 갯수: %d\n", Shop1.manaPotion);
+	printf("2. 기력 물약 2원 남은 갯수: %d\n", Shop1.manaPotion);
 	setCursorPosition(40, 14);
-	printf("3. 힘 포션 10원 남은 갯수: %d\n", Shop1.strengthPotion);
+	printf("3. 공격력 물약 10원 남은 갯수: %d\n", Shop1.strengthPotion);
 	setCursorPosition(40, 15);
-	printf("4. 방어 포션 10원 남은 갯수: %d\n", Shop1.defensePotion);
+	printf("4. 방어력 물약 10원 남은 갯수: %d\n", Shop1.defensePotion);
 	setCursorPosition(40, 16);
-	printf("5. 명중 포션 10원 남은 갯수: %d\n", Shop1.accuracyPotion);
+	printf("5. 명중률 물약 10원 남은 갯수: %d\n", Shop1.accuracyPotion);
 	setCursorPosition(40, 17);
 	printf("6. 상점을 떠난다.\n");
 
@@ -202,7 +202,7 @@ void displayShopScreen()
 
 void displayNPCScreen()
 {
-	if (strcmp(currentNPC->name, "이정재") == 0)
+	if (strcmp(currentNPC->name, "이정재") == 0 || strcmp(currentNPC->name, "최종퀘스트") == 0)
 	{
 		displayPlayerStat();
 		displayLog();
@@ -215,19 +215,19 @@ void displayNPCScreen()
 		outNpcInteract = 1;
 		while (outNpcInteract == 1)
 		{
-			setCursorPosition(40, 11);
+			setCursorPosition(30, 11);
 			printf("내 이름은 %s.\n", currentNPC->name);
-			setCursorPosition(40, 12);
+			setCursorPosition(30, 12);
 			printf("대화문\n");
-			setCursorPosition(40, 13);
+			setCursorPosition(30, 13);
 			printf("1. 당신은 누구요?\n");
-			setCursorPosition(40, 14);
+			setCursorPosition(30, 14);
 			printf("2. 주변의 소문은 없소이까?\n");
-			setCursorPosition(40, 15);
+			setCursorPosition(30, 15);
 			printf("3. 할만한 의뢰는 있소이까?\n");
-			setCursorPosition(40, 16);
+			setCursorPosition(30, 16);
 			printf("4. 싸우자\n");
-			setCursorPosition(40, 17);
+			setCursorPosition(30, 17);
 			printf("6. NPC을 떠난다.\n");
 			displayPlayerStat();
 			displayLog();
@@ -241,8 +241,8 @@ void clearScreen()
 {
 	for (int i = 1; i < MAP_HEIGHT - 1; i++) 
 	{
-		setCursorPosition(35, i);
-		for(int j = 35; j < MAP_WIDTH -1; j++)
+		setCursorPosition(25, i);
+		for(int j = 25; j < MAP_WIDTH -1; j++)
 			printf(" ");
 	}
 }

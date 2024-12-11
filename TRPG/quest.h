@@ -1,7 +1,7 @@
 #ifndef QUEST_H
 #define QUEST_H
 #include "utility.h"
-#define MAX_QUEST 21
+#define MAX_QUEST 22
 #define MAX_QUESTITEM 7
 
 typedef struct {
@@ -45,6 +45,7 @@ extern QuestItemData* currentQuestItem;
 extern Quest quest[MAX_QUEST];
 extern int checkboss1;
 extern int checkboss2;
+extern int checkboss3;
 extern PrologueQuest prologuequest; //프롤로그 퀘스트
 
 void initializeQuest();
@@ -67,10 +68,10 @@ void QuestComplete15();
 void QuestComplete16();
 void QuestComplete17();
 void QuestComplete18();
-
+void QuestComplete19();
 
 void initializeQuestItem();
-void drawQuestItem(QuestItemData *QuestItemList);
+void drawQuestItem(QuestItemData* QuestItemList);
 
 #endif // QUEST_H
 

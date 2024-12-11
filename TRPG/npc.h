@@ -3,7 +3,7 @@
 
 #include "utility.h"
 #include "player.h"
-#define MAX_NPC 19
+#define MAX_NPC 20
 
 typedef enum {
 	VolunArmy,	//ÀÇº´

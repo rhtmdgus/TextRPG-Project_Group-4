@@ -4,7 +4,7 @@
 #include <string.h>
 #include <time.h>
 
-Enemy enemyTemplates[9] = {
+Enemy enemyTemplates[14] = {
     {"왜군 잡졸", 10, 8, 3, {0, 0}, warrior},
     {"왜군 창병", 12, 10, 4, {0, 0}, spear},
     {"왜군 궁병", 8, 6, 2, {0, 0}, archor},
@@ -13,7 +13,12 @@ Enemy enemyTemplates[9] = {
     {"관군 장군", 18, 12, 10, {0, 0}, warrior},
     {"왜군 정예 장수", 40, 25, 15, {0, 0}, warrior},
     {"의병 정예 장군", 30, 30, 12, {0, 0}, warrior},
-    {"관군 정예 장군", 35, 25, 20, {0, 0}, warrior}
+    {"관군 정예 장군", 35, 25, 20, {0, 0}, warrior},
+    {"왜군 정예 장수", 40, 25, 15, {0, 0}, archor},
+    {"의병 정예 장군", 30, 30, 12, {0, 0}, archor},
+    {"관군 정예 장군", 35, 25, 20, {0, 0}, archor},
+    {"도요토미", 80, 40, 25, {0, 0}, warrior},
+    {"닌자", 15, 10, 5, {0, 0}, warrior}
 };
 
 Enemy currentEnemies[MAX_ENEMY];  // 배열 정의
@@ -85,24 +90,11 @@ void spawnBoss1() {
     Position pos;
     pos.x = MAP_WIDTH - 10;
     pos.y = 2;
-    if (player.JRelationship < 0)
-    {
-        currentBosses[0] = createBoss(&enemyTemplates[5], pos);
-        drawBoss(&currentBosses[0]);
-        map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
-    }
-    else if (player.WRelationship < 0)
-    {
-        currentBosses[0] = createBoss(&enemyTemplates[4], pos);
-        drawBoss(&currentBosses[0]);
-        map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
-    }
-    else
-    {
-        currentBosses[0] = createBoss(&enemyTemplates[3], pos);
-        drawBoss(&currentBosses[0]);
-        map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
-    }
+
+    currentBosses[0] = createBoss(&enemyTemplates[3], pos);
+    drawBoss(&currentBosses[0]);
+    map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
+
 }
 
 void spawnBoss2() {
@@ -112,22 +104,32 @@ void spawnBoss2() {
     pos.y = 24;
     if (player.JRelationship < 0)
     {
-        currentBosses[0] = createBoss(&enemyTemplates[8], pos);
+        currentBosses[0] = createBoss(&enemyTemplates[11], pos);
         drawBoss(&currentBosses[0]);
         map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
     }
     else if (player.WRelationship < 0)
     {
-        currentBosses[0] = createBoss(&enemyTemplates[7], pos);
+        currentBosses[0] = createBoss(&enemyTemplates[10], pos);
         drawBoss(&currentBosses[0]);
         map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
     }
     else
     {
-        currentBosses[0] = createBoss(&enemyTemplates[6], pos);
+        currentBosses[0] = createBoss(&enemyTemplates[9], pos);
         drawBoss(&currentBosses[0]);
-        map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
+        map[currentBosses[0].pos.y][currentBosses[10].pos.x] = 'B';
     }
+}
+
+void spawnBoss3() {
+
+    Position pos;
+    pos.x = (MAP_WIDTH - 10) / 2;
+    pos.y = MAP_HEIGHT - 3;
+    currentBosses[0] = createBoss(&enemyTemplates[12], pos);
+    drawBoss(&currentBosses[0]);
+    map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
 }
 
 /*
