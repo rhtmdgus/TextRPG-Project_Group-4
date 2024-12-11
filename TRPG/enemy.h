@@ -22,7 +22,7 @@ typedef struct
 	EnemyType type;
 } Enemy;
 
-extern Enemy enemyTemplates[14];
+extern Enemy enemyTemplates[19];
 extern Enemy currentEnemies[MAX_ENEMY];
 extern Enemy* currentEnemy;
 extern Enemy currentBosses[MAX_BOSS];

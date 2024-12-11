@@ -4,7 +4,7 @@
 #include <string.h>
 #include <time.h>
 
-Enemy enemyTemplates[14] = {
+Enemy enemyTemplates[19] = {
     {"왜군 잡졸", 10, 8, 3, {0, 0}, warrior},
     {"왜군 창병", 12, 10, 4, {0, 0}, spear},
     {"왜군 궁병", 8, 6, 2, {0, 0}, archor},
@@ -18,7 +18,12 @@ Enemy enemyTemplates[14] = {
     {"의병 정예 장군", 30, 30, 12, {0, 0}, archor},
     {"관군 정예 장군", 35, 25, 20, {0, 0}, archor},
     {"도요토미", 80, 40, 25, {0, 0}, warrior},
-    {"닌자", 15, 10, 5, {0, 0}, warrior}
+    {"닌자", 15, 10, 5, {0, 0}, warrior},
+    {"나까무라", 12, 10, 7, {0, 0}, warrior},
+    {"김 아무개", 6, 3, 3, {0, 0}, spear},
+    { "장 돌쇠", 6, 3, 3, {0, 0}, spear },
+    {"김두환", 30, 25, 15, {0, 0}, archor},
+    {"조병옥", 35, 20, 20, {0, 0}, warrior}
 };
 
 Enemy currentEnemies[MAX_ENEMY];  // 배열 정의

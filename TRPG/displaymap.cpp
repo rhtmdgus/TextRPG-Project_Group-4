@@ -17,21 +17,24 @@ void displayMap()
 		printf("\n");
 	}
 
+
+	//맵을 그린 후 남은 이벤트 표시
+	for (int i = 0; i < MAX_EVENT; i++) {
+		if (currentEvents[i].check == 1) {
+			drawEvent(&currentEvents[i]);
+		}
+	}
+
 	// 맵을 그린 후 남아 있는 모든 적을 다시 표시합니다.
 	for (int i = 0; i < MAX_ENEMY; i++) {
 		if (currentEnemies[i].hp > 0) {
 			drawEnemy(&currentEnemies[i]);
 		}
 	}
+
 	for (int i = 0; i < MAX_BOSS; i++) {
 		if (currentBosses[i].hp > 0) {
 			drawBoss(&currentBosses[i]);
-		}
-	}
-	//맵을 그린 후 남은 이벤트 표시
-	for (int i = 0; i < MAX_EVENT; i++) {
-		if (currentEvents[i].check == 1) {
-			drawEvent(&currentEvents[i]);
 		}
 	}
 }

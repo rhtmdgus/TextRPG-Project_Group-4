@@ -37,6 +37,7 @@
 //situation 8 = encount Quest item 3
 //situation 9 = encounting portal
 //situation 10 = encounting random stuff
+//54
 
 Player player = { 10, 10, 99, 2, 2, 2, 2, 1, 0, 0, 0, 0, 1, 900, 0, 0, 0, 0, 0, 0,  -1, -1, { "없음" } , {"헌 옷"} , 0, 0, 0, 0, 0, 0, { 20, 13 } };
 Position previousPos = { 1, 1 };
@@ -316,6 +317,39 @@ int main()
 				displayPlayerStat();
 				displayLog();
 			}
+		}
+
+		if (encountHidden())
+		{
+			setColor(2);
+			setCursorPosition(45, 14);
+			printf("N");
+			setCursorPosition(43, 17);
+			printf("N");
+			setCursorPosition(48, 16);
+			printf("N");
+			setCursorPosition(51, 13);
+			printf("N");
+			setCursorPosition(55, 18);
+			printf("N");
+			setCursorPosition(50, 19);
+			printf("N");
+			setColor(7);
+			Sleep(500);
+			updateLog("조선군에게 둘러쌓여졌다.");
+			displayLog();
+			Sleep(500);
+			updateLog("관군 A: 민족의 반역자다!");
+			displayLog();
+			Sleep(500);
+			updateLog("관군 B: 죽어라! 배신자!!");
+			displayLog();
+			Sleep(500);
+			updateLog("관군 C: 용서하지 않겠다!");
+			displayLog();
+			Sleep(500);
+
+			player.hp -= 9999;
 		}
 
 		if (player.hp <= 0)

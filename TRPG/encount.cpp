@@ -360,7 +360,6 @@ void encountRandomChoice()
     }
 }
 
-
 int encountQuestItem()
 {
     for (int i = 0; i < MAX_QUESTITEM; i++) {
@@ -373,5 +372,21 @@ int encountQuestItem()
     }
     Situation = 0;
     currentQuestItem = nullptr;
+    return 0;
+}
+
+int encountHidden()
+{
+    drawPlayer();
+    if (player.currentmap == 1 && player.WRelationship > player.RRelationship && player.WRelationship > player.JRelationship)
+    {
+        if (player.pos.y >= 12 && player.pos.y <= 19 && player.pos.x == 49)
+        {
+            updateLog("심상치 않은 기운을 느낀다");
+            displayLog();
+            Sleep(500);
+            return 1;
+        }
+    }
     return 0;
 }
