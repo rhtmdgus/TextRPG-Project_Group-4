@@ -3,6 +3,7 @@
 
 
 void badEnding() {
+    system("cls");
     Sleep(100);
     setCursorPosition(10, 10);
     printf("당신은 민생과 국가를 배신하면서까지 복수를 하길 원하였습니다.");
@@ -16,9 +17,11 @@ void badEnding() {
     setCursorPosition(10, 16);
     printf("끝이 좋지 않았지만 임진투쟁기의 끝마침을 축하드립니다!!");
 
+    exit(0);
 }
 
 void GoodEnding() {
+    system("cls");
     Sleep(100);
     setCursorPosition(10, 10);
     printf("당신은 동료들과 함께 복수를 성공하였습니다!");
@@ -35,6 +38,8 @@ void GoodEnding() {
     setCursorPosition(10, 18);
     printf("가족의 시신을 수습하고 무덤 주변을 지키며 살아갔습니다");
     Sleep(200);
-    setCursorPosition(10, 18);
+    setCursorPosition(10, 20);
     printf("임진투쟁기의 끝마침을 축하드립니다!!");
+
+    exit(0);
 }

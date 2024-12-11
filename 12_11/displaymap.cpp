@@ -196,7 +196,7 @@ void displayShopScreen()
 
 void displayNPCScreen()
 {
-	if (strcmp(currentNPC->name, "이정재") == 0)
+	if (strcmp(currentNPC->name, "이정재") == 0 || strcmp(currentNPC->name, "최종퀘스트") == 0)
 	{
 		displayPlayerStat();
 		displayLog();
@@ -235,8 +235,8 @@ void clearScreen()
 {
 	for (int i = 1; i < MAP_HEIGHT - 1; i++) 
 	{
-		setCursorPosition(35, i);
-		for(int j = 35; j < MAP_WIDTH -1; j++)
+		setCursorPosition(25, i);
+		for(int j = 25; j < MAP_WIDTH -1; j++)
 			printf(" ");
 	}
 }

@@ -133,6 +133,31 @@ void battle(Enemy* enemy)
 					updateBattleLog("불화살의 지속데미지가 들어갔습니다!");
 					displayBattleLog();
 				}
+
+				if (player.RRelationship >= 50) {    
+					if (player.RRelationship >= 150) {// 의병 관계도 150이상일때 3딜 추가
+						Sleep(100);
+						enemyAttackedAnimation(enemy);
+						enemy->hp -= 3;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else if (player.RRelationship >= 100) {// 의병 관계도 100이상일때 2딜 추가
+						Sleep(100);
+						enemyAttackedAnimation(enemy);
+						enemy->hp -= 2;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else {                                 // 의병 관계도 50이상일때 1딜 추가
+						Sleep(100);
+						enemyAttackedAnimation(enemy);
+						enemy->hp -= 1;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+				}
+				
 				if (enemy->hp <= 0)
 					enemy->hp = 0;
 				updateBattleLog("적을 공격하였습니다!");
@@ -224,6 +249,36 @@ void battle(Enemy* enemy)
 					enemyAttackedAnimation(enemy);
 				}
 				enemy->hp -= damageToEnemy;
+				if (player.job == 2 && player.buffcount1 > 0) {    // 궁수 스킬 3 도트딜 구현
+					Sleep(100);
+					enemyAttackedAnimation(enemy);
+					enemy->hp -= 3;
+					updateBattleLog("불화살의 지속데미지가 들어갔습니다!");
+					displayBattleLog();
+				}
+				if (player.RRelationship >= 50) {
+					if (player.RRelationship >= 150) {// 의병 관계도 150이상일때 3딜 추가
+						Sleep(100);
+						enemyAttackedAnimation(enemy);
+						enemy->hp -= 3;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else if (player.RRelationship >= 100) {// 의병 관계도 100이상일때 2딜 추가
+						Sleep(100);
+						enemyAttackedAnimation(enemy);
+						enemy->hp -= 2;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else {                                 // 의병 관계도 50이상일때 1딜 추가
+						Sleep(100);
+						enemyAttackedAnimation(enemy);
+						enemy->hp -= 1;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+				}
 				if (enemy->hp <= 0)
 					enemy->hp = 0;
 				updateBattleLog("적을 공격하였습니다.!");
@@ -291,6 +346,29 @@ void battle(Enemy* enemy)
 				displayBattleLog();
 				displayPlayerStat();
 				playerSkillAnimation(2);
+				if (player.RRelationship >= 50) {
+					if (player.RRelationship >= 150) {// 의병 관계도 150이상일때 3딜 추가
+						Sleep(100);
+						enemyAttackedAnimation(enemy);
+						enemy->hp -= 3;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else if (player.RRelationship >= 100) {// 의병 관계도 100이상일때 2딜 추가
+						Sleep(100);
+						enemyAttackedAnimation(enemy);
+						enemy->hp -= 2;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else {                                 // 의병 관계도 50이상일때 1딜 추가
+						Sleep(100);
+						enemyAttackedAnimation(enemy);
+						enemy->hp -= 1;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+				}
 			}
 			else {
 				damageToEnemy = skill2(player.attack) - enemy->defense; // 이전에 선언한 변수를 사용
@@ -322,6 +400,36 @@ void battle(Enemy* enemy)
 						enemyAttackedAnimation(enemy);
 					}
 					enemy->hp -= damageToEnemy;
+					if (player.job == 2 && player.buffcount1 > 0) {    // 궁수 스킬 3 도트딜 구현
+						Sleep(100);
+						enemyAttackedAnimation(enemy);
+						enemy->hp -= 3;
+						updateBattleLog("불화살의 지속데미지가 들어갔습니다!");
+						displayBattleLog();
+					}
+					if (player.RRelationship >= 50) {
+						if (player.RRelationship >= 150) {// 의병 관계도 150이상일때 3딜 추가
+							Sleep(100);
+							enemyAttackedAnimation(enemy);
+							enemy->hp -= 3;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+						else if (player.RRelationship >= 100) {// 의병 관계도 100이상일때 2딜 추가
+							Sleep(100);
+							enemyAttackedAnimation(enemy);
+							enemy->hp -= 2;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+						else {                                 // 의병 관계도 50이상일때 1딜 추가
+							Sleep(100);
+							enemyAttackedAnimation(enemy);
+							enemy->hp -= 1;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+					}
 					if (enemy->hp <= 0)
 						enemy->hp = 0;
 					updateBattleLog("적을 공격하였습니다!");
@@ -391,6 +499,29 @@ void battle(Enemy* enemy)
 				displayBattleLog();
 				displayPlayerStat();
 				playerSkillAnimation(3);
+				if (player.RRelationship >= 50) {
+					if (player.RRelationship >= 150) {// 의병 관계도 150이상일때 3딜 추가
+						Sleep(100);
+						enemyAttackedAnimation(enemy);
+						enemy->hp -= 3;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else if (player.RRelationship >= 100) {// 의병 관계도 100이상일때 2딜 추가
+						Sleep(100);
+						enemyAttackedAnimation(enemy);
+						enemy->hp -= 2;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else {                                 // 의병 관계도 50이상일때 1딜 추가
+						Sleep(100);
+						enemyAttackedAnimation(enemy);
+						enemy->hp -= 1;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+				}
 			}
 			else if (player.job == 4) { // 방패병 스킬 3: 가시방패
 				player.mp -= 20;
@@ -400,6 +531,29 @@ void battle(Enemy* enemy)
 				displayBattleLog();
 				displayPlayerStat();
 				playerSkillAnimation(3);
+				if (player.RRelationship >= 50) {
+					if (player.RRelationship >= 150) {// 의병 관계도 150이상일때 3딜 추가
+						Sleep(100);
+						enemyAttackedAnimation(enemy);
+						enemy->hp -= 3;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else if (player.RRelationship >= 100) {// 의병 관계도 100이상일때 2딜 추가
+						Sleep(100);
+						enemyAttackedAnimation(enemy);
+						enemy->hp -= 2;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else {                                 // 의병 관계도 50이상일때 1딜 추가
+						Sleep(100);
+						enemyAttackedAnimation(enemy);
+						enemy->hp -= 1;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+				}
 			}
 			else if (player.job == 2) { // 궁수 스킬 3 불화살
 				damageToEnemy = player.attack - enemy->defense; // 이전에 선언한 변수를 사용
@@ -426,6 +580,29 @@ void battle(Enemy* enemy)
 						enemy->hp -= 3;
 						enemyAttackedAnimation(enemy);
 						updateBattleLog("불화살 지속딜이 들어갔습니다!");
+					}
+					if (player.RRelationship >= 50) {
+						if (player.RRelationship >= 150) {// 의병 관계도 150이상일때 3딜 추가
+							Sleep(100);
+							enemyAttackedAnimation(enemy);
+							enemy->hp -= 3;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+						else if (player.RRelationship >= 100) {// 의병 관계도 100이상일때 2딜 추가
+							Sleep(100);
+							enemyAttackedAnimation(enemy);
+							enemy->hp -= 2;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+						else {                                 // 의병 관계도 50이상일때 1딜 추가
+							Sleep(100);
+							enemyAttackedAnimation(enemy);
+							enemy->hp -= 1;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
 					}
 					if (enemy->hp <= 0)
 						enemy->hp = 0;
@@ -462,6 +639,29 @@ void battle(Enemy* enemy)
 						enemyAttackedAnimation(enemy);
 					}
 					enemy->hp -= damageToEnemy;
+					if (player.RRelationship >= 50) {
+						if (player.RRelationship >= 150) {// 의병 관계도 150이상일때 3딜 추가
+							Sleep(100);
+							enemyAttackedAnimation(enemy);
+							enemy->hp -= 3;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+						else if (player.RRelationship >= 100) {// 의병 관계도 100이상일때 2딜 추가
+							Sleep(100);
+							enemyAttackedAnimation(enemy);
+							enemy->hp -= 2;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+						else {                                 // 의병 관계도 50이상일때 1딜 추가
+							Sleep(100);
+							enemyAttackedAnimation(enemy);
+							enemy->hp -= 1;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+					}
 					if (enemy->hp <= 0)
 						enemy->hp = 0;
 					updateBattleLog("적을 공격하였습니다!");
@@ -678,6 +878,29 @@ void bossbattle(Enemy* boss)
 					updateBattleLog("불화살의 지속데미지가 들어갔습니다!");
 					displayBattleLog();
 				}
+				if (player.RRelationship >= 50) {
+					if (player.RRelationship >= 150) {// 의병 관계도 150이상일때 3딜 추가
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 3;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else if (player.RRelationship >= 100) {// 의병 관계도 100이상일때 2딜 추가
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 2;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else {                                 // 의병 관계도 50이상일때 1딜 추가
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 1;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+				}
 				if (boss->hp <= 0)
 					boss->hp = 0;
 				updateBattleLog("적 장수를 공격하였습니다!");
@@ -692,6 +915,30 @@ void bossbattle(Enemy* boss)
 				displayBossStat(boss);
 				Sleep(100);
 				displayBattleLog();
+
+				if (player.RRelationship >= 50) {
+					if (player.RRelationship >= 150) {// 의병 관계도 150이상일때 3딜 추가
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 3;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else if (player.RRelationship >= 100) {// 의병 관계도 100이상일때 2딜 추가
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 2;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else {                                 // 의병 관계도 50이상일때 1딜 추가
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 1;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+				}
 			}
 
 			// 적 반격
@@ -705,7 +952,7 @@ void bossbattle(Enemy* boss)
 					if (boss->hp < 0) boss->hp = 0;
 					updateBattleLog("가시갑옷으로 적에게 데미지를 반사했습니다!");
 					displayBattleLog();
-					displayEnemyStat(boss);
+					displayBossStat(boss);
 				}
 				if (damageToPlayer > 0) {
 					player.hp -= damageToPlayer;
@@ -762,15 +1009,45 @@ void bossbattle(Enemy* boss)
 			if (damageToBoss > 0) {
 				if (Crit() == 1)
 				{
-					enemyAttackedAnimation(boss);
+					BossDamaged(boss);
 					updateBattleLog("치명타 공격!");
 					damageToBoss *= 2;
 				}
 				else
 				{
-					enemyAttackedAnimation(boss);
+					BossDamaged(boss);
 				}
 				boss->hp -= damageToBoss;
+				if (player.job == 2 && player.buffcount1 > 0) {    // 궁수 스킬 3 도트딜 구현
+					Sleep(100);
+					BossDamaged(boss);
+					boss->hp -= 3;
+					updateBattleLog("불화살의 지속데미지가 들어갔습니다!");
+					displayBattleLog();
+				}
+				if (player.RRelationship >= 50) {
+					if (player.RRelationship >= 150) {// 의병 관계도 150이상일때 3딜 추가
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 3;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else if (player.RRelationship >= 100) {// 의병 관계도 100이상일때 2딜 추가
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 2;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else {                                 // 의병 관계도 50이상일때 1딜 추가
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 1;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+				}
 				if (boss->hp <= 0)
 					boss->hp = 0;
 				updateBattleLog("적 장수를 공격하였습니다!");
@@ -785,6 +1062,30 @@ void bossbattle(Enemy* boss)
 				displayEnemyStat(boss);
 				Sleep(100);
 				displayBattleLog();
+
+				if (player.RRelationship >= 50) {
+					if (player.RRelationship >= 150) {// 의병 관계도 150이상일때 3딜 추가
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 3;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else if (player.RRelationship >= 100) {// 의병 관계도 100이상일때 2딜 추가
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 2;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else {                                 // 의병 관계도 50이상일때 1딜 추가
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 1;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+				}
 			}
 
 			// 적 반격
@@ -798,7 +1099,7 @@ void bossbattle(Enemy* boss)
 					if (boss->hp < 0) boss->hp = 0;
 					updateBattleLog("가시갑옷으로 적에게 데미지를 반사했습니다!");
 					displayBattleLog();
-					displayEnemyStat(boss);
+					displayBossStat(boss);
 				}
 				if (damageToPlayer > 0) {
 					player.hp -= damageToPlayer;
@@ -838,6 +1139,30 @@ void bossbattle(Enemy* boss)
 				displayBattleLog();
 				displayPlayerStat();
 				playerSkillAnimation(2);
+
+				if (player.RRelationship >= 50) {
+					if (player.RRelationship >= 150) {// 의병 관계도 150이상일때 3딜 추가
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 3;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else if (player.RRelationship >= 100) {// 의병 관계도 100이상일때 2딜 추가
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 2;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else {                                 // 의병 관계도 50이상일때 1딜 추가
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 1;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+				}
 			}
 			else {
 				damageToBoss = skill2(player.attack) - boss->defense; // 이전에 선언한 변수를 사용
@@ -860,15 +1185,45 @@ void bossbattle(Enemy* boss)
 				if (damageToBoss > 0) {
 					if (Crit() == 1)
 					{
-						enemyAttackedAnimation(boss);
+						BossDamaged(boss);
 						updateBattleLog("치명적 공격!");
 						damageToBoss *= 2;
 					}
 					else
 					{
-						enemyAttackedAnimation(boss);
+						BossDamaged(boss);
 					}
 					boss->hp -= damageToBoss;
+					if (player.job == 2 && player.buffcount1 > 0) {    // 궁수 스킬 3 도트딜 구현
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 3;
+						updateBattleLog("불화살의 지속데미지가 들어갔습니다!");
+						displayBattleLog();
+					}
+					if (player.RRelationship >= 50) {
+						if (player.RRelationship >= 150) {// 의병 관계도 150이상일때 3딜 추가
+							Sleep(100);
+							BossDamaged(boss);
+							boss->hp -= 3;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+						else if (player.RRelationship >= 100) {// 의병 관계도 100이상일때 2딜 추가
+							Sleep(100);
+							BossDamaged(boss);
+							boss->hp -= 2;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+						else {                                 // 의병 관계도 50이상일때 1딜 추가
+							Sleep(100);
+							BossDamaged(boss);
+							boss->hp -= 1;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+					}
 					if (boss->hp <= 0)
 						boss->hp = 0;
 					updateBattleLog("적 장수를 공격하였습니다!");
@@ -883,6 +1238,30 @@ void bossbattle(Enemy* boss)
 					displayEnemyStat(boss);
 					Sleep(100);
 					displayBattleLog();
+
+					if (player.RRelationship >= 50) {
+						if (player.RRelationship >= 150) {// 의병 관계도 150이상일때 3딜 추가
+							Sleep(100);
+							BossDamaged(boss);
+							boss->hp -= 3;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+						else if (player.RRelationship >= 100) {// 의병 관계도 100이상일때 2딜 추가
+							Sleep(100);
+							BossDamaged(boss);
+							boss->hp -= 2;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+						else {                                 // 의병 관계도 50이상일때 1딜 추가
+							Sleep(100);
+							BossDamaged(boss);
+							boss->hp -= 1;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+					}
 				}
 			}
 
@@ -897,7 +1276,7 @@ void bossbattle(Enemy* boss)
 					if (boss->hp < 0) boss->hp = 0;
 					updateBattleLog("가시갑옷으로 적에게 데미지를 반사했습니다!");
 					displayBattleLog();
-					displayEnemyStat(boss);
+					displayBossStat(boss);
 				}
 				if (damageToPlayer > 0) {
 					player.hp -= damageToPlayer;
@@ -938,6 +1317,30 @@ void bossbattle(Enemy* boss)
 				displayBattleLog();
 				displayPlayerStat();
 				playerSkillAnimation(3);
+
+				if (player.RRelationship >= 50) {
+					if (player.RRelationship >= 150) {// 의병 관계도 150이상일때 3딜 추가
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 3;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else if (player.RRelationship >= 100) {// 의병 관계도 100이상일때 2딜 추가
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 2;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else {                                 // 의병 관계도 50이상일때 1딜 추가
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 1;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+				}
 			}
 			else if (player.job == 4) { // 방패병 스킬 3: 가시방패
 				player.mp -= 20;
@@ -947,6 +1350,30 @@ void bossbattle(Enemy* boss)
 				displayBattleLog();
 				displayPlayerStat();
 				playerSkillAnimation(3);
+
+				if (player.RRelationship >= 50) {
+					if (player.RRelationship >= 150) {// 의병 관계도 150이상일때 3딜 추가
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 3;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else if (player.RRelationship >= 100) {// 의병 관계도 100이상일때 2딜 추가
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 2;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+					else {                                 // 의병 관계도 50이상일때 1딜 추가
+						Sleep(100);
+						BossDamaged(boss);
+						boss->hp -= 1;
+						updateBattleLog("의병 동료의 추가 공격!");
+						displayBattleLog();
+					}
+				}
 			}
 			else if (player.job == 2) { // 궁수 스킬 3 불화살
 				damageToBoss = player.attack - boss->defense; // 이전에 선언한 변수를 사용
@@ -959,20 +1386,43 @@ void bossbattle(Enemy* boss)
 				if (damageToBoss > 0) {
 					if (Crit() == 1)
 					{
-						enemyAttackedAnimation(boss);
+						BossDamaged(boss);
 						updateBattleLog("치명타 공격!");
 						damageToBoss *= 2;
 					}
 					else
 					{
-						enemyAttackedAnimation(boss);
+						BossDamaged(boss);
 					}
 					boss->hp -= damageToBoss;
 					if (player.buffcount1 > 0) {
 						Sleep(100);
 						boss->hp -= 3;
-						enemyAttackedAnimation(boss);
+						BossDamaged(boss);
 						updateBattleLog("불화살 지속딜이 들어갔습니다!");
+					}
+					if (player.RRelationship >= 50) {
+						if (player.RRelationship >= 150) {// 의병 관계도 150이상일때 3딜 추가
+							Sleep(100);
+							BossDamaged(boss);
+							boss->hp -= 3;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+						else if (player.RRelationship >= 100) {// 의병 관계도 100이상일때 2딜 추가
+							Sleep(100);
+							BossDamaged(boss);
+							boss->hp -= 2;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+						else {                                 // 의병 관계도 50이상일때 1딜 추가
+							Sleep(100);
+							BossDamaged(boss);
+							boss->hp -= 1;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
 					}
 					if (boss->hp <= 0)
 						boss->hp = 0;
@@ -988,6 +1438,30 @@ void bossbattle(Enemy* boss)
 					displayEnemyStat(boss);
 					Sleep(100);
 					displayBattleLog();
+
+					if (player.RRelationship >= 50) {
+						if (player.RRelationship >= 150) {// 의병 관계도 150이상일때 3딜 추가
+							Sleep(100);
+							BossDamaged(boss);
+							boss->hp -= 3;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+						else if (player.RRelationship >= 100) {// 의병 관계도 100이상일때 2딜 추가
+							Sleep(100);
+							BossDamaged(boss);
+							boss->hp -= 2;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+						else {                                 // 의병 관계도 50이상일때 1딜 추가
+							Sleep(100);
+							BossDamaged(boss);
+							boss->hp -= 1;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+					}
 				}
 			}
 			else if (player.job == 3) {
@@ -1009,6 +1483,29 @@ void bossbattle(Enemy* boss)
 						enemyAttackedAnimation(boss);
 					}
 					boss->hp -= damageToBoss;
+					if (player.RRelationship >= 50) {
+						if (player.RRelationship >= 150) {// 의병 관계도 150이상일때 3딜 추가
+							Sleep(100);
+							BossDamaged(boss);
+							boss->hp -= 3;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+						else if (player.RRelationship >= 100) {// 의병 관계도 100이상일때 2딜 추가
+							Sleep(100);
+							BossDamaged(boss);
+							boss->hp -= 2;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+						else {                                 // 의병 관계도 50이상일때 1딜 추가
+							Sleep(100);
+							BossDamaged(boss);
+							boss->hp -= 1;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+					}
 					if (boss->hp <= 0)
 						boss->hp = 0;
 					updateBattleLog("적 장수를 공격하였습니다!");
@@ -1023,6 +1520,30 @@ void bossbattle(Enemy* boss)
 					displayEnemyStat(boss);
 					Sleep(100);
 					displayBattleLog();
+
+					if (player.RRelationship >= 50) {
+						if (player.RRelationship >= 150) {// 의병 관계도 150이상일때 3딜 추가
+							Sleep(100);
+							BossDamaged(boss);
+							boss->hp -= 3;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+						else if (player.RRelationship >= 100) {// 의병 관계도 100이상일때 2딜 추가
+							Sleep(100);
+							BossDamaged(boss);
+							boss->hp -= 2;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+						else {                                 // 의병 관계도 50이상일때 1딜 추가
+							Sleep(100);
+							BossDamaged(boss);
+							boss->hp -= 1;
+							updateBattleLog("의병 동료의 추가 공격!");
+							displayBattleLog();
+						}
+					}
 				}
 
 			}
@@ -1037,7 +1558,7 @@ void bossbattle(Enemy* boss)
 					if (boss->hp < 0) boss->hp = 0;
 					updateBattleLog("가시갑옷으로 적에게 데미지를 반사했습니다!");
 					displayBattleLog();
-					displayEnemyStat(boss);
+					displayBossStat(boss);
 				}
 				if (damageToPlayer > 0) {
 					player.hp -= damageToPlayer;
@@ -1120,6 +1641,7 @@ void bossbattle(Enemy* boss)
 			player.questitem1 = 1;
 			checkboss1 = 1;
 			checkboss2 = 1;
+			checkboss3 = 1;
 			if (player.buffcount1 != 0) {
 				player.buffcount1 = 0;
 				player.attack -= player.buff_attack;  // 공격력 버프 제거

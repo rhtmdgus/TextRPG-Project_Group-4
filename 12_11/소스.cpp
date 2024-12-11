@@ -38,7 +38,7 @@
 //situation 9 = encounting portal
 //situation 10 = encounting random stuff
 
-Player player = { 10, 10, 2, 2, 2, 2, 2, 1, 0, 0, 0, 0, 1, 900, 0, 0, 0, 0, 0, 0,  -1, -1, {"¾øÀ½"} , {"Çå ¿Ê"} , 0, 0, 0, 0, 0, 0, {20, 13} };
+Player player = { 10, 10, 2, 2, 2, 2, 2, 1, 0, 0, 0, 0, 1, 900, 0, 0, 0, 0, 0, 0,  -1, -1, { "¾øÀ½" } , {"Çå ¿Ê"} , 0, 0, 0, 0, 0, 0, { 20, 13 } };
 Position previousPos = { 1, 1 };
 Shop Shop1 = { "»óÀÎ", 99, 99, 99, 99, 99, {3, 3} };
 
@@ -164,12 +164,6 @@ int main()
 		drawNpc(npcList);
 		drawQuestItem(QuestItemList);
 		//displayLog();
-
-		if (player.currentmap == 2)
-		{
-			spawnBoss3();
-		}
-
 
 		if (encountEnemy())
 		{

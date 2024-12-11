@@ -2243,6 +2243,7 @@ void JapArmyLog_5()
 						player.questmax++;
 						acceptQuest(18);
 						backToDialogue();
+						spawnBoss2();
 						break;
 					}
 					else
@@ -2325,6 +2326,8 @@ void dialogueNobody()
 		NobodyLog_3();
 	if (strcmp(currentNPC->name, "고돌쇠") == 0 && currentNPC->hasQuest == true)
 		NobodyLog_4();
+	if (strcmp(currentNPC->name, "최종퀘스트") == 0 && currentNPC->hasQuest == true)
+		NobodyLog_5();
 }
 
 
@@ -2906,6 +2909,52 @@ void NobodyLog_4()
 		break;
 	}
 }
+
+
+void NobodyLog_5()
+{
+	Sleep(100);
+	clearScreen();
+	if (currentNPC->hasQuest == true && quest[19].take == 0)
+	{
+		setCursorPosition(30, 11);
+		printf(quest[19].title);
+		setCursorPosition(30, 12);
+		printf(quest[19].description1);
+		setCursorPosition(30, 13);
+		printf("대화문\n");
+		setCursorPosition(30, 14);
+		printf("1. 퀘스트를 수락한다.\n");
+		int choice = _getch();
+		if (choice == '1')
+		{
+			clearScreen();
+			setCursorPosition(30, 11);
+			printf("퀘스트를 수락하셨습니다!");
+			updateLog("퀘스트를 수락하셨습니다!");
+			quest[19].take = 1;
+			player.questmax++;
+			acceptQuest(19);
+			backToDialogue();
+			spawnBoss3();
+		}
+		else
+		{
+			clearScreen();
+			setCursorPosition(30, 11);
+			printf("퀘스트를 거절하셨습니다. 다시 수락하세요.");
+			updateLog("퀘스트를 거절하셨습니다!");
+			backToDialogue();
+		}
+	}
+	else
+	{
+		QuestComplete19();
+	}
+	Sleep(150);
+	backToMap();
+}
+
 void interactionQuestItem()
 {
 	if (currentQuestItem->type == VolunArmyQ && currentQuestItem->isActive == 1)

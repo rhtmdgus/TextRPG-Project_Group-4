@@ -71,14 +71,14 @@ void initializeQuest()
 	"식수좀 가지고 있나? 주면 돈을 주지",
 	0, 0, "싫음 말게", "아직 가져오지 못했나?", "시원하군, 여기 약속한 돈이다." , 0, 1 };// 왜군
 	quest[17] = { "수탈한 물품 수송",
-	"조선 백성들 수탈해서 벌어온 물품이 너무 많아서 못 들고왔네, 좀 들고와줘",
+	"조선 백성들 수탈해서 벌어온 물품을 못 들고왔네, 좀 들고와줘",
 	0, 0, "너무 나쁘게만 생각하지 말게, 좀 때주지", "아직 안 들고왔나?", "짭잘하구먼, 여기 좀 주겠네" , 0, 1 };// 왜군
 	quest[18] = { "장군 처리",
 	"우릴 도왔던 조선인이구만? 저놈 처리좀 도와주게",
 	0, 0, "도와주면 우리쪽 자리 알아봐주지", "아직 처리하지 못했나?", "자네는 이제 왜군장군이 될거야" , 0, 1 };// 왜군
 	quest[19] = { "원수와의 만남",
 	"드디어 그놈이 내 눈앞에 있다. 빠르게 처리하자.",
-	0, 0, " ", " ", "놈을 죽였다." , 0, 1 };// 최종 퀘스트(조정중)
+	0, 0, " ", " ", "드디어 원수를 갚았다." , 0, 1 };// 최종 퀘스트(조정중)
 }
 /*
 
@@ -1236,7 +1236,9 @@ void QuestComplete19() {
 		if (num == '1')
 		{
 			quest[19].clear = 1;
+			checkboss1 = 0;
 			checkboss2 = 0;
+			checkboss3 = 0;
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
@@ -1247,8 +1249,7 @@ void QuestComplete19() {
 			setCursorPosition(30, 13);
 			printf("1. 엔딩으로\n");
 			completeQuest(19);
-			backToDialogue();
-			if (player.WRelationship <= player.JRelationship && player.RRelationship <= player.JRelationship) {
+			if (player.WRelationship >= player.JRelationship && player.WRelationship >= player.RRelationship) {
 				clearScreen();
 				badEnding();
 			}
@@ -1256,6 +1257,7 @@ void QuestComplete19() {
 				clearScreen();
 				GoodEnding();
 			}
+			backToMap();
 		}
 		else
 		{
