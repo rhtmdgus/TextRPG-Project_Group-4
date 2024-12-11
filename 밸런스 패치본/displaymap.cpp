@@ -196,7 +196,7 @@ void displayShopScreen()
 
 void displayNPCScreen()
 {
-	if (strcmp(currentNPC->name, "이정재") == 0 || strcmp(currentNPC->name, "최종퀘스트") == 0)
+	if (strcmp(currentNPC->name, "이정재") == 0)
 	{
 		displayPlayerStat();
 		displayLog();

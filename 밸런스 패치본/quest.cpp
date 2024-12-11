@@ -1224,54 +1224,29 @@ void QuestComplete18() {
 void QuestComplete19() {
 	if (checkboss3 == 1)
 	{
-		setCursorPosition(30, 11);
-		printf("퀘스트를 완료할까?");
-		setCursorPosition(30, 12);
-		printf("대화문\n");
-		setCursorPosition(30, 13);
-		printf("1. 완료한다\n");
-		setCursorPosition(30, 14);
-		printf("2. 나중에 하자\n");
-		int num = _getch();
-		if (num == '1')
-		{
-			quest[19].clear = 1;
-			checkboss1 = 0;
-			checkboss2 = 0;
-			checkboss3 = 0;
-			player.questmax--;
-			Sleep(100);
-			clearScreen();
-			setCursorPosition(30, 11);
-			printf(quest[19].description4);
-			setCursorPosition(30, 12);
-			printf("대화문\n");
-			setCursorPosition(30, 13);
-			printf("1. 엔딩으로\n");
-			completeQuest(19);
-			if (player.WRelationship >= player.JRelationship && player.WRelationship >= player.RRelationship) {
-				clearScreen();
-				badEnding();
-			}
-			else {
-				clearScreen();
-				GoodEnding();
-			}
-			backToMap();
-		}
-		else
-		{
-			backToDialogue();
-		}
-	}
-	else
-	{
+		initializeMap();
+		displayShopMap();
+		quest[19].clear = 1;
+		checkboss1 = 0;
+		checkboss2 = 0;
+		checkboss3 = 0;
+		player.questmax--;
 		Sleep(100);
 		clearScreen();
 		setCursorPosition(30, 11);
-		printf("아직 놈을 처치하지 못했다.");
-		setCursorPosition(30, 12);
-		printf("놈을 처치하고 오자.");
+		completeQuest(19);
+		if (player.WRelationship >= player.JRelationship && player.WRelationship >= player.RRelationship) {
+			clearScreen();
+			badEnding();
+		}
+		else {
+			clearScreen();
+			GoodEnding();
+		}
+		backToMap();
+	}
+	else
+	{
 		backToDialogue();
 	}
 }

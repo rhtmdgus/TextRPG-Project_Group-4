@@ -164,7 +164,17 @@ int main()
 		drawNpc(npcList);
 		drawQuestItem(QuestItemList);
 		//displayLog();
-
+		if (player.currentmap == 2 && quest[19].take == 0)
+		{
+			initializeMap();
+			displayShopMap();
+			displayPlayerStat();
+			displayLog();
+			NobodyLog_5();
+			displayLog();
+		}
+		if (player.currentmap == 2 && checkboss3 == 1)
+			QuestComplete19();
 		if (encountEnemy())
 		{
 			updateLog("적과 마주쳤습니다!");

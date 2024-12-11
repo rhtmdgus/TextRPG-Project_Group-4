@@ -2326,8 +2326,7 @@ void dialogueNobody()
 		NobodyLog_3();
 	if (strcmp(currentNPC->name, "고돌쇠") == 0 && currentNPC->hasQuest == true)
 		NobodyLog_4();
-	if (strcmp(currentNPC->name, "최종퀘스트") == 0 && currentNPC->hasQuest == true)
-		NobodyLog_5();
+
 }
 
 
@@ -2915,7 +2914,7 @@ void NobodyLog_5()
 {
 	Sleep(100);
 	clearScreen();
-	if (currentNPC->hasQuest == true && quest[19].take == 0)
+	if (quest[19].take == 0)
 	{
 		setCursorPosition(30, 11);
 		printf(quest[19].title);
@@ -2935,7 +2934,9 @@ void NobodyLog_5()
 			quest[19].take = 1;
 			player.questmax++;
 			acceptQuest(19);
-			backToDialogue();
+			displayMap();
+			displayPlayerStat();
+			displayLog();
 			spawnBoss3();
 		}
 		else
@@ -2944,12 +2945,7 @@ void NobodyLog_5()
 			setCursorPosition(30, 11);
 			printf("퀘스트를 거절하셨습니다. 다시 수락하세요.");
 			updateLog("퀘스트를 거절하셨습니다!");
-			backToDialogue();
 		}
-	}
-	else
-	{
-		QuestComplete19();
 	}
 	Sleep(150);
 	backToMap();
