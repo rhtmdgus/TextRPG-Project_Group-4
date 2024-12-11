@@ -15,7 +15,7 @@
 #include "displaymap.h"		//일반 맵과 전투맵의 출력 및 갱신 함수 정의
 #include "player.h"			//플레이어 관련 기능 및 구조체 정의
 #include "encount.h"		//적(enemy), 아이템, NPC와의 조우 및 상호작용 정의
-//#include "randomencount.h"	//랜덤인카운트 전용 헤더
+#include "randevent.h"	//랜덤인카운트 전용 헤더
 #include "selectmap.h"
 #include "shop.h"
 #include "animation.h"
@@ -37,8 +37,9 @@
 //situation 8 = encount Quest item 3
 //situation 9 = encounting portal
 //situation 10 = encounting random stuff
+//54
 
-Player player = { 10, 10, 2, 2, 2, 2, 2, 1, 0, 0, 0, 0, 1, 900, 0, 0, 0, 0, 0, 0,  -1, -1, { "없음" } , {"헌 옷"} , 0, 0, 0, 0, 0, 0, { 20, 13 } };
+Player player = { 10, 10, 99, 2, 2, 2, 2, 1, 0, 0, 0, 0, 1, 900, 0, 0, 0, 0, 0, 0,  -1, -1, { "없음" } , {"헌 옷"} , 0, 0, 0, 0, 0, 0, { 20, 13 } };
 Position previousPos = { 1, 1 };
 Shop Shop1 = { "상인", 99, 99, 99, 99, 20, {3, 3} };
 
@@ -49,7 +50,13 @@ int main()
 	system("cls");
 	tutorial_screen();
 	system("cls");
+	startscene(); // 추가
+	system("cls");
 	updateLog("게임 시작!");
+
+	initializeMap();
+	printWakeUp();
+	system("cls");
 
 	initializeMap();
 	displayMap_Prologue();
@@ -135,7 +142,6 @@ int main()
 		}
 
 
-
 		if (player.currentmap == 3)
 		{
 			player.currentmap = 0;
@@ -143,15 +149,18 @@ int main()
 			break;
 		}
 	}
-
+	
+	
 	initializeMap();
 	initializeQuest();
 	displayMap();
 	displayPlayerStat();
 	displayLog();
+	spawnEnemies();
+	spawnEvents();
 	initializeNpc();
 	initializeQuestItem();
-	spawnEnemies();
+
 
 	while (1)	//본편
 	{
@@ -299,11 +308,12 @@ int main()
 				displayLog();
 			}
 		}
-		/**
+
+		//랜덤인카운트
 		if (encountRandom())
 		{
-			updateLog("You encountered something!");
-			updateLog("Press [A] to check or [R] to stay");
+			updateLog("주위에서 수상한 기운을 느낍니다!");
+			updateLog("확인하려면 [A]키를, 아니면 [R]키를 누르세요.");
 			displayLog();
 
 			while (Situation == 10)
@@ -311,19 +321,59 @@ int main()
 				encountRandomChoice();
 			}
 			if (Situation == 0) {
+
+				// 랜덤 인카운터 재 구성
+				for (int i = 0; i < MAX_EVENT; i++) {
+					if (currentEvents[i].check != 0) {
+						drawEvent(&currentEvents[i]);
+					}
+				}
 				displayMap();
 				displayPlayerStat();
 				displayLog();
 			}
 		}
-		*/
+
+		if (encountHidden())
+		{
+			setColor(2);
+			setCursorPosition(45, 14);
+			printf("N");
+			setCursorPosition(43, 17);
+			printf("N");
+			setCursorPosition(48, 16);
+			printf("N");
+			setCursorPosition(51, 13);
+			printf("N");
+			setCursorPosition(55, 18);
+			printf("N");
+			setCursorPosition(50, 19);
+			printf("N");
+			setColor(7);
+			Sleep(500);
+			updateLog("조선군에게 둘러쌓여졌다.");
+			displayLog();
+			Sleep(500);
+			updateLog("관군 A: 민족의 반역자다!");
+			displayLog();
+			Sleep(500);
+			updateLog("관군 B: 죽어라! 배신자!!");
+			displayLog();
+			Sleep(500);
+			updateLog("관군 C: 용서하지 않겠다!");
+			displayLog();
+			Sleep(500);
+
+			player.hp -= 9999;
+		}
+
 		if (player.hp <= 0)
 		{
 			break;
 		}
 
 	}
-
+	Sleep(500);
 
 	system("cls");
 	for (int i = 0; i < (MAP_HEIGHT - 16) / 2; i++)

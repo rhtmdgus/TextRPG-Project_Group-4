@@ -4,7 +4,7 @@
 #include <string.h>
 #include <time.h>
 
-Enemy enemyTemplates[13] = {
+Enemy enemyTemplates[19] = {
     {"왜군 잡졸", 10, 8, 3, {0, 0}, warrior},
     {"왜군 창병", 12, 10, 4, {0, 0}, spear},
     {"왜군 궁병", 8, 6, 2, {0, 0}, archor},
@@ -17,7 +17,13 @@ Enemy enemyTemplates[13] = {
     {"왜군 정예 장수", 40, 25, 15, {0, 0}, archor},
     {"의병 정예 장군", 30, 30, 12, {0, 0}, archor},
     {"관군 정예 장군", 35, 25, 20, {0, 0}, archor},
-    {"도요토미", 80, 40, 25, {0, 0}, warrior}
+    {"도요토미", 80, 40, 25, {0, 0}, warrior},
+    {"닌자", 15, 10, 5, {0, 0}, warrior},
+    {"나까무라", 12, 10, 7, {0, 0}, warrior},
+    {"김 아무개", 6, 3, 3, {0, 0}, spear},
+    { "장 돌쇠", 6, 3, 3, {0, 0}, spear },
+    {"김두환", 30, 25, 15, {0, 0}, archor},
+    {"조병옥", 35, 20, 20, {0, 0}, warrior}
 };
 
 Enemy currentEnemies[MAX_ENEMY];  // 배열 정의
@@ -54,15 +60,15 @@ int isPositionOccupied(int x, int y) {
             return 1;  // 위치가 이미 사용 중임
         }
     }
+    if ((x == MAP_WIDTH - 10 && y == 2) || (x == 60 && y == 24) || (x == (MAP_WIDTH - 10) / 2 && y == 3))
+    {
+        return 1;
+    }
     if (player.currentmap == 0 && x >= 1 &&x <= 34 && y >= 1 && y <= 15)
     {
         return 1;
     }
-    if ((x == MAP_WIDTH - 10 && y == 2) || (x == 60 && y == 24) || (x == (MAP_WIDTH - 10) / 2 && y == 3))
-    {
-
-    }
-    if (map[y][x] == '#' || map[y][x] == 1 || map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'T' || map[y][x] == 'F' || map[y][x] == 'O' || map[y][x] == 'R' || map[y][x] == 'B' || map[y][x] == '?')     //스폰 위치가 벽/npc일 경우 위치 사용 중으로
+    if (map[y][x] == '#' || map[y][x] == 1 || map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'T' || map[y][x] == 'F' || map[y][x] == 'O' || map[y][x] == 'R' || map[y][x] == 'B' || map[y][x] == '?' || map[y][x] == '/')     //스폰 위치가 벽/npc일 경우 위치 사용 중으로
     {
         return 1;
     }
@@ -129,7 +135,7 @@ void spawnBoss3() {
 
     Position pos;
     pos.x = (MAP_WIDTH - 10) / 2;
-    pos.y = 3;
+    pos.y = MAP_HEIGHT - 3;
     currentBosses[0] = createBoss(&enemyTemplates[12], pos);
     drawBoss(&currentBosses[0]);
     map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
