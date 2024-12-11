@@ -97,7 +97,7 @@ void interactShop() {
 			updateLog("가지고 있는 엽전 갯수가 부족합니다.");
 			break;
 		}
-		else if (Shop1.accuracyPotion <= 0)
+		else if (Shop1.defensePotion <= 0)
 		{
 			updateLog("상품 수량이 부족합니다.");
 			break;
@@ -114,6 +114,11 @@ void interactShop() {
 		if (player.money - accuracyPotionPrice < 0)
 		{
 			updateLog("가지고 있는 엽전 갯수가 부족합니다.");
+			break;
+		}
+		else if (player.accuracy >= 20)
+		{
+			updateLog("플레이어의 명중률은 20을 넘을수 없습니다!");
 			break;
 		}
 		else if (Shop1.accuracyPotion <= 0)
@@ -2934,6 +2939,8 @@ void NobodyLog_5()
 			quest[19].take = 1;
 			player.questmax++;
 			acceptQuest(19);
+			Sleep(150);
+			backToMap();
 			displayMap();
 			displayPlayerStat();
 			displayLog();
@@ -2947,8 +2954,6 @@ void NobodyLog_5()
 			updateLog("퀘스트를 거절하셨습니다!");
 		}
 	}
-	Sleep(150);
-	backToMap();
 }
 
 void interactionQuestItem()

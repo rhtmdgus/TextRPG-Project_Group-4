@@ -254,7 +254,8 @@ void encountPotalChoice()
         initializeMap();
         displayMap();
         eraseAllEnemies();
-        spawnEnemies();
+        if(player.currentmap != 2)
+            spawnEnemies();
         displayMap();
         Situation = 0;
         break;

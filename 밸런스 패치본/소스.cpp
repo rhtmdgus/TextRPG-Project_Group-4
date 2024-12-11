@@ -40,7 +40,7 @@
 
 Player player = { 10, 10, 2, 2, 2, 2, 2, 1, 0, 0, 0, 0, 1, 900, 0, 0, 0, 0, 0, 0,  -1, -1, { "없음" } , {"헌 옷"} , 0, 0, 0, 0, 0, 0, { 20, 13 } };
 Position previousPos = { 1, 1 };
-Shop Shop1 = { "상인", 99, 99, 99, 99, 99, {3, 3} };
+Shop Shop1 = { "상인", 99, 99, 99, 99, 20, {3, 3} };
 
 int main()
 {
@@ -149,9 +149,9 @@ int main()
 	displayMap();
 	displayPlayerStat();
 	displayLog();
-	spawnEnemies();
 	initializeNpc();
 	initializeQuestItem();
+	spawnEnemies();
 
 	while (1)	//본편
 	{

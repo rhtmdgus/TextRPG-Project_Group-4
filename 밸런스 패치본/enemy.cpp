@@ -58,6 +58,10 @@ int isPositionOccupied(int x, int y) {
     {
         return 1;
     }
+    if ((x == MAP_WIDTH - 10 && y == 2) || (x == 60 && y == 24) || (x == (MAP_WIDTH - 10) / 2 && y == 3))
+    {
+
+    }
     if (map[y][x] == '#' || map[y][x] == 1 || map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'T' || map[y][x] == 'F' || map[y][x] == 'O' || map[y][x] == 'R' || map[y][x] == 'B' || map[y][x] == '?')     //스폰 위치가 벽/npc일 경우 위치 사용 중으로
     {
         return 1;
@@ -125,7 +129,7 @@ void spawnBoss3() {
 
     Position pos;
     pos.x = (MAP_WIDTH - 10) / 2;
-    pos.y = MAP_HEIGHT - 3;
+    pos.y = 3;
     currentBosses[0] = createBoss(&enemyTemplates[12], pos);
     drawBoss(&currentBosses[0]);
     map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
