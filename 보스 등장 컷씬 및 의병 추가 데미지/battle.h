@@ -9,6 +9,7 @@
 #include "animation.h"
 #include "questmanager.h"
 #include "skill.h"
+#include "cutscene.h"
 
 extern int OriginalLevel;
 

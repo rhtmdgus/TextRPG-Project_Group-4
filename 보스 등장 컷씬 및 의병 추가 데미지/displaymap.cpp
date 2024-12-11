@@ -1,6 +1,7 @@
 #include "displaymap.h"
 #include "npc.h"
 #include "player.h"
+#include "cutscene.h"
 #include <stdio.h>
 #include <conio.h>
 
@@ -100,8 +101,15 @@ void displayBossBattleScreen()
 	setColor(7);
 	printPlayer();
 
-
-	printBoss(currentBoss);
+	if (currentBoss->type == warrior) {
+		printBossAppear_1();
+	}
+	else if (currentBoss->type == archor) {
+		printBossAppear_2();
+	}
+	else if (currentBoss->type == spear) {
+		printBossAppear_3();
+	}
 
 }
 

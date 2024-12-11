@@ -24,6 +24,7 @@
 #include "prologue.h"
 #include "prologuemap.h"
 #include "item.h"
+#include "cutscene.h"
 //ㅇㅁㅇ
 
 //situation 명 
@@ -49,7 +50,15 @@ int main()
 	system("cls");
 	tutorial_screen();
 	system("cls");
+
+	startscene(); // 추가
+	system("cls");
+
 	updateLog("게임 시작!");
+
+	initializeMap(); // 추가
+	printWakeUp();
+	system("cls");
 
 	initializeMap();
 	displayMap_Prologue();

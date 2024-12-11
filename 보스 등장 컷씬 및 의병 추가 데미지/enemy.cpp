@@ -17,7 +17,7 @@ Enemy enemyTemplates[13] = {
     {"왜군 정예 장수", 40, 25, 15, {0, 0}, archor},
     {"의병 정예 장군", 30, 30, 12, {0, 0}, archor},
     {"관군 정예 장군", 35, 25, 20, {0, 0}, archor},
-    {"도요토미", 80, 40, 25, {0, 0}, warrior}
+    {"도요토미", 80, 40, 25, {0, 0}, spear}
 };
 
 Enemy currentEnemies[MAX_ENEMY];  // 배열 정의
