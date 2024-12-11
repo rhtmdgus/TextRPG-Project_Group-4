@@ -9,6 +9,7 @@
 #include "animation.h"
 #include "questmanager.h"
 #include "skill.h"
+#include "cutscene.h"
 
 extern int OriginalLevel;
 
@@ -20,5 +21,6 @@ int Crit();
 void LevelUp();
 void battle(Enemy* enemy);
 void bossbattle(Enemy* boss);
+void battleRand(Enemy* enemy);
 
 #endif // BATTLE_H
