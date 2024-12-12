@@ -106,7 +106,6 @@ void encountChoice_P()
 		updateLog("적과의 전투가 시작됩니다!");
 		Sleep(200);
 		displayLog();
-		displayBattleScreen();
 		battle_P(currentEnemy);  // currentEnemy 전달
 		break;
 	case 'R':
@@ -876,8 +875,8 @@ void battle_P(Enemy* enemy)
 	displayBattleLog();
 	_getch();  // 사용자 입력 대기
 
-	if (player.level > OriginalLevel)
-		updateLog("레벨업!!");
+	//if (player.level > OriginalLevel)
+	//	updateLog("레벨업!!");
 
 	initializeMap(); // 맵 초기화
 	displayMap_Prologue(); // 이동 맵 출력
