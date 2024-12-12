@@ -378,7 +378,7 @@ int encountHidden()
     drawPlayer();
     if (player.currentmap == 1 && player.WRelationship > player.RRelationship && player.WRelationship > player.JRelationship)
     {
-        if (player.pos.y >= 12 && player.pos.y <= 19 && player.pos.x == 49)
+        if (player.pos.y >= 15 && player.pos.y <= 17 && player.pos.x == 49)
         {
             updateLog("심상치 않은 기운을 느낀다");
             displayLog();
