@@ -692,6 +692,48 @@ void showTutorial()
 	}
 }
 
+int encountRun()
+{
+	if (player.pos.x == 11 && player.pos.y == 12) {
+		Situation = 11;
+		return 1;
+	}
+	Situation = 0;
+	return 0;
+}
+
+void encountRunChoice()
+{
+	char action = _getch();
+
+	switch (action)
+	{
+	default:
+		updateLog("잘못된 키를 입력하였습니다.");
+		updateLog("[A]키를 눌러 도망칠지 [R]키를 눌러 가족들을 찾을지 선택하십시오.");
+		break;
+	case 'A':
+	case 'a':
+		Sleep(100);
+		updateLog("나라도 살아야지...");
+		//Situation = 3;
+		//initializeMap();
+		//displayShopMap();
+		player.ending = 7;
+		player.hp = 0;
+		Situation = 0;
+		player.pos = previousPos;
+		break;
+	case 'R':
+	case 'r':
+		updateLog("여기서 도망칠 수는 없어.. 가족을 찾으러 가야해!");
+		Situation = 0;
+		player.pos = previousPos;
+		break;
+	}
+	displayLog();
+}
+
 
 void battle_P(Enemy* enemy)
 {

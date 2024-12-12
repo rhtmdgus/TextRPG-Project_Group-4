@@ -866,7 +866,8 @@ void QuestComplete13() {
 		{
 			quest[13].clear = 1;
 			player.killcount = 0;
-			player.JRelationship += 30;
+			player.JRelationship += 20;
+			player.money += 20;
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
@@ -925,7 +926,8 @@ void QuestComplete14() {
 		{
 			quest[14].clear = 1;
 			player.questitem2 = 0;
-			player.JRelationship += 30;
+			player.JRelationship += 20;
+			player.money += 10;
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
@@ -987,7 +989,7 @@ void QuestComplete15() {
 			checkboss2 = 0;
 			checkboss3 = 0;
 			player.JRelationship += 50;
-			player.money += 30;
+			player.money += 50;
 			player.questmax--;
 			potal[player.currentmap].spawnPotal = true;
 			Sleep(100);
@@ -1237,11 +1239,17 @@ void QuestComplete19() {
 		completeQuest(19);
 		if (player.WRelationship >= player.JRelationship && player.WRelationship >= player.RRelationship) {
 			clearScreen();
-			badEnding();
+			japEnding();
 		}
-		else {
+		else if (player.JRelationship >= player.WRelationship && player.JRelationship >= player.RRelationship)
+		{
 			clearScreen();
-			GoodEnding();
+			solEnding();
+		}
+		else if (player.RRelationship >= player.WRelationship && player.RRelationship >= player.JRelationship)
+		{
+			clearScreen();
+			volEnding();
 		}
 		backToMap();
 	}

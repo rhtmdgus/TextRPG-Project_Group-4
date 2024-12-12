@@ -3,7 +3,12 @@
 
 #include "utility.h"
 
-void badEnding();
-void GoodEnding();
+void japEnding();
+void solEnding();
+void volEnding();
+void deadEnding();
+void potionEnding();
+void exeEnding();
+void runEnding();
 
 #endif // ENDING_H

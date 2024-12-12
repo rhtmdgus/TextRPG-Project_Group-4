@@ -135,7 +135,7 @@ void spawnBoss3() {
 
     Position pos;
     pos.x = (MAP_WIDTH - 10) / 2;
-    pos.y = MAP_HEIGHT - 3;
+    pos.y = 3;
     currentBosses[0] = createBoss(&enemyTemplates[12], pos);
     drawBoss(&currentBosses[0]);
     map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';

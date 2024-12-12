@@ -96,8 +96,8 @@ void battle(Enemy* enemy)
 		case '1'://           hp포션 사용
 			hppotion(); if (hiddenPotionCount == 19)
 			{
-				player.hp = 0;
 				updateBattleLog("당신은 물약 과다사용으로 중독되어서 죽었습니다...");
+				player.ending = 5;
 				displayLog();
 			}
 			hiddenPotionCount += 1;
@@ -110,8 +110,8 @@ void battle(Enemy* enemy)
 			mppotion();
 			if (hiddenPotionCount == 19)
 			{
-				player.hp = 0;
 				updateBattleLog("당신은 물약 과다사용으로 중독되어서 죽었습니다...");
+				player.ending = 5;
 				displayLog();
 			}
 			hiddenPotionCount += 1;
@@ -812,7 +812,15 @@ void battle(Enemy* enemy)
 			displayEnemyStat(enemy);
 			Sleep(100);
 			displayBattleLog();
+			player.ending = 4;
+
 			Situation = 0;
+		}
+		else if (player.ending != 0) {
+			playerDyingAnimation();
+			Situation = 0;
+			player.pos = previousPos;
+			break;
 		}
 	}
 	OriginalLevel = player.level;
@@ -860,8 +868,9 @@ void bossbattle(Enemy* boss)
 			hppotion();
 			if (hiddenPotionCount == 19)
 			{
-				player.hp = 0;
 				updateBattleLog("당신은 물약 과다사용으로 중독되어서 죽었습니다...");
+				player.ending = 5;
+
 				displayLog();
 			}
 			hiddenPotionCount += 1;
@@ -874,8 +883,9 @@ void bossbattle(Enemy* boss)
 			mppotion();
 			if (hiddenPotionCount == 19)
 			{
-				player.hp = 0;
 				updateBattleLog("당신은 물약 과다사용으로 중독되어서 죽었습니다...");
+				player.ending = 5;
+
 				displayLog();
 			}
 			hiddenPotionCount += 1;
@@ -1706,6 +1716,8 @@ void bossbattle(Enemy* boss)
 			displayBossStat(boss);
 			Sleep(100);
 			displayBattleLog();
+			player.ending = 4;
+
 			Situation = 0;
 		}
 	}
@@ -1762,8 +1774,10 @@ void battleRand(Enemy* enemy)
 			hppotion();
 			if (hiddenPotionCount == 19)
 			{
-				player.hp = 0;
+				
 				updateBattleLog("당신은 물약 과다사용으로 중독되어서 죽었습니다...");
+				player.ending = 5;
+
 				displayLog();
 			}
 			hiddenPotionCount += 1;
@@ -1777,8 +1791,10 @@ void battleRand(Enemy* enemy)
 			mppotion();
 			if (hiddenPotionCount == 19)
 			{
-				player.hp = 0;
+				
 				updateBattleLog("당신은 물약 과다사용으로 중독되어서 죽었습니다...");
+				player.ending = 5;
+
 				displayLog();
 			}
 			hiddenPotionCount += 1;
@@ -2479,6 +2495,8 @@ void battleRand(Enemy* enemy)
 			displayEnemyStat(enemy);
 			Sleep(100);
 			displayBattleLog();
+			player.ending = 4;
+
 			Situation = 0;
 		}
 	}

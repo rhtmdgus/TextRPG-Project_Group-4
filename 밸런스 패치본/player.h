@@ -41,6 +41,7 @@ typedef struct
 	int buff_attack;
 	int buff_defense;
 	int buff_reflect;
+	int ending;
 	Position pos;
 } Player;
 
