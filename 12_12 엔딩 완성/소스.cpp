@@ -39,6 +39,8 @@
 //situation 9 = encounting portal
 //situation 10 = encounting random stuff
 //54
+//situation 11 = prologue run ending
+//situation 12 = prologue run ending choice
 
 Player player = { 10, 10, 99, 2, 2, 2, 2, 1, 0, 0, 0, 0, 1, 900, 0, 0, 0, 0, 0, 0,  -1, -1, { "없음" } , {"헌 옷"} , 0, 0, 0, 0, 0, 0, 0, { 20, 13 } };
 Position previousPos = { 1, 1 };
@@ -108,6 +110,23 @@ int main()
 				displayLog();
 			}
 		}
+		if (encountRun())
+		{
+			updateLog("개구멍을 발견했습니다!");
+			displayLog();
+			Sleep(100);
+			updateLog("[A]키를 눌러 도망칠지 [R]키를 눌러 가족들을 찾을지 선택하십시오.");
+			displayLog();
+			while (Situation == 11)
+			{
+				encountRunChoice();
+			}
+			if (Situation == 0) {
+				displayMap_Prologue();
+				displayPlayerStat();
+				displayLog();
+			}
+		}
 
 		if (encountEnemy_P())			//프롤로그 enemy 조우
 		{
@@ -140,6 +159,7 @@ int main()
 				displayPlayerStat();
 				displayLog();
 			}
+			
 		}
 
 
@@ -149,6 +169,12 @@ int main()
 			system("cls");
 			break;
 		}
+		if (player.ending == 7)
+			break;
+	}
+
+	if (player.ending == 7 && player.hp == 0) {
+		runEnding();
 	}
 	
 	
@@ -373,6 +399,16 @@ int main()
 		{
 			break;
 		}
+		if (player.ending == 5) {
+			potionEnding();
+		}
+		else if (player.ending == 6) {
+			exeEnding();
+		}
+		else if (player.ending == 7) {
+			runEnding();
+		}
+
 
 	}
 	Sleep(500);
@@ -391,7 +427,6 @@ int main()
 	else if (player.ending == 7) {
 		runEnding();
 	}
-
 
 
 

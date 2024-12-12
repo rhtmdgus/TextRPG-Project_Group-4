@@ -62,6 +62,9 @@ void eraseEnemy_P(Enemy* enemy_P);
 
 int encountEnemy_P();
 void encountChoice_P();
+void encountRunChoice();
+
+int encountRun();
 
 int encountNpc_prologue();
 void encountNpcChoice_prologue();
