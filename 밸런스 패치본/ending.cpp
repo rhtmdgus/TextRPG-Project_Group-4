@@ -124,7 +124,7 @@ void potionEnding() {
     printf("물약을 너무 많이 먹어 중독당해 사망하였습니다");
     Sleep(100);
     setCursorPosition(10, 14);
-    printf("물약 20개 이상을 한번에 마시면 중독당해 죽어버리니 주의해주세요");
+    printf("물약 10개 이상을 한번에 마시면 중독당해 죽어버리니 주의해주세요");
     Sleep(100);
     setCursorPosition(10, 16);
     printf("엔딩 번호 5: 물약중독");
