@@ -117,7 +117,7 @@ void spawnBoss2() {
         drawBoss(&currentBosses[0]);
         map[currentBosses[0].pos.y][currentBosses[0].pos.x] = 'B';
     }
-    else if (player.WRelationship < 0)
+    else if (player.RRelationship < 0)
     {
         currentBosses[0] = createBoss(&enemyTemplates[10], pos);
         drawBoss(&currentBosses[0]);
