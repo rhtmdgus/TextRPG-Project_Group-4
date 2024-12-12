@@ -109,8 +109,15 @@ void displayBossBattleScreen()
 	setColor(7);
 	printPlayer();
 
-
-	printBoss(currentBoss);
+	if (currentBoss->type == warrior) {
+		printBossAppear_1();
+	}
+	else if (currentBoss->type == archor) {
+		printBossAppear_2();
+	}
+	else if (currentBoss->type == spear) {
+		printBossAppear_3();
+	}
 
 }
 
@@ -205,7 +212,7 @@ void displayShopScreen()
 
 void displayNPCScreen()
 {
-	if (strcmp(currentNPC->name, "이정재") == 0 || strcmp(currentNPC->name, "최종퀘스트") == 0)
+	if (strcmp(currentNPC->name, "이정재") == 0)
 	{
 		displayPlayerStat();
 		displayLog();

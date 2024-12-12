@@ -866,7 +866,8 @@ void QuestComplete13() {
 		{
 			quest[13].clear = 1;
 			player.killcount = 0;
-			player.JRelationship += 30;
+			player.JRelationship += 20;
+			player.money += 20;
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
@@ -925,7 +926,8 @@ void QuestComplete14() {
 		{
 			quest[14].clear = 1;
 			player.questitem2 = 0;
-			player.JRelationship += 30;
+			player.JRelationship += 20;
+			player.money += 10;
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
@@ -987,7 +989,7 @@ void QuestComplete15() {
 			checkboss2 = 0;
 			checkboss3 = 0;
 			player.JRelationship += 50;
-			player.money += 30;
+			player.money += 50;
 			player.questmax--;
 			potal[player.currentmap].spawnPotal = true;
 			Sleep(100);
@@ -1224,54 +1226,35 @@ void QuestComplete18() {
 void QuestComplete19() {
 	if (checkboss3 == 1)
 	{
-		setCursorPosition(30, 11);
-		printf("퀘스트를 완료할까?");
-		setCursorPosition(30, 12);
-		printf("대화문\n");
-		setCursorPosition(30, 13);
-		printf("1. 완료한다\n");
-		setCursorPosition(30, 14);
-		printf("2. 나중에 하자\n");
-		int num = _getch();
-		if (num == '1')
-		{
-			quest[19].clear = 1;
-			checkboss1 = 0;
-			checkboss2 = 0;
-			checkboss3 = 0;
-			player.questmax--;
-			Sleep(100);
-			clearScreen();
-			setCursorPosition(30, 11);
-			printf(quest[19].description4);
-			setCursorPosition(30, 12);
-			printf("대화문\n");
-			setCursorPosition(30, 13);
-			printf("1. 엔딩으로\n");
-			completeQuest(19);
-			if (player.WRelationship >= player.JRelationship && player.WRelationship >= player.RRelationship) {
-				clearScreen();
-				badEnding();
-			}
-			else {
-				clearScreen();
-				GoodEnding();
-			}
-			backToMap();
-		}
-		else
-		{
-			backToDialogue();
-		}
-	}
-	else
-	{
+		initializeMap();
+		displayShopMap();
+		quest[19].clear = 1;
+		checkboss1 = 0;
+		checkboss2 = 0;
+		checkboss3 = 0;
+		player.questmax--;
 		Sleep(100);
 		clearScreen();
 		setCursorPosition(30, 11);
-		printf("아직 놈을 처치하지 못했다.");
-		setCursorPosition(30, 12);
-		printf("놈을 처치하고 오자.");
+		completeQuest(19);
+		if (player.WRelationship >= player.JRelationship && player.WRelationship >= player.RRelationship) {
+			clearScreen();
+			japEnding();
+		}
+		else if (player.JRelationship >= player.WRelationship && player.JRelationship >= player.RRelationship)
+		{
+			clearScreen();
+			solEnding();
+		}
+		else if (player.RRelationship >= player.WRelationship && player.RRelationship >= player.JRelationship)
+		{
+			clearScreen();
+			volEnding();
+		}
+		backToMap();
+	}
+	else
+	{
 		backToDialogue();
 	}
 }

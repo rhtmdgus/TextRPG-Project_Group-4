@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <conio.h>
 
+int check_weapon = 0;
+
 Potal_prologue potalP[4] = {
 
 	{"P-0 -> P-1", 0, 1, {20, 28}, {20, 13}, true},
@@ -402,62 +404,83 @@ void StorageLog()
 	int num = _getch();
 	switch (num)
 	{
+		
 	case '1':
-		updateLog("무기를 선택한다.");
-		system("cls");
-		jobSelect_screen();
-		initializeMap();
-		displayShopMap();
-		switch (player.job)
+		if (check_weapon == 0)
 		{
-		case 1:
+			updateLog("무기를 선택한다.");
+			system("cls");
+			jobSelect_screen();
+			initializeMap();
+			displayShopMap();
+			switch (player.job)
+			{
+			case 1:
+				setCursorPosition(35, 11);
+				printf("검사를 선택하셨습니다");
+				setCursorPosition(35, 14);
+				printf("대화문\n");
+				setCursorPosition(35, 15);
+				printf("1. 확인\n");
+				Sleep(150);
+				updateLog("A키를 눌러 이전 대화로 돌아가기");
+				weaponchange(0);
+				break;
+			case 2:
+				setCursorPosition(35, 11);
+				printf("궁수를 선택하셨습니다");
+				setCursorPosition(35, 14);
+				printf("대화문\n");
+				setCursorPosition(35, 15);
+				printf("1. 확인\n");
+				Sleep(150);
+				updateLog("A키를 눌러 이전 대화로 돌아가기");
+				weaponchange(0);
+				break;
+			case 3:
+				setCursorPosition(35, 11);
+				printf("창병을 선택하셨습니다");
+				setCursorPosition(35, 14);
+				printf("대화문\n");
+				setCursorPosition(35, 15);
+				printf("1. 확인\n");
+				Sleep(150);
+				updateLog("A키를 눌러 이전 대화로 돌아가기");
+				weaponchange(0);
+				break;
+			case 4:
+				setCursorPosition(35, 11);
+				printf("방패병을 선택하셨습니다");
+				setCursorPosition(35, 14);
+				printf("대화문\n");
+				setCursorPosition(35, 15);
+				printf("1. 확인\n");
+				Sleep(150);
+				updateLog("A키를 눌러 이전 대화로 돌아가기");
+				weaponchange(0);
+				break;
+			}
+			check_weapon = 1;
+		}
+		else
+		{
 			setCursorPosition(35, 11);
-			printf("검사를 선택하셨습니다");
+			printf("무기를 이미 선택하셨습니다.");
+			setCursorPosition(35, 12);
+			printf("                                              ");
+			setCursorPosition(35, 13);
+			printf("                                              ");
 			setCursorPosition(35, 14);
 			printf("대화문\n");
 			setCursorPosition(35, 15);
 			printf("1. 확인\n");
 			Sleep(150);
 			updateLog("A키를 눌러 이전 대화로 돌아가기");
-			weaponchange(0);
-			break;
-		case 2:
-			setCursorPosition(35, 11);
-			printf("궁수를 선택하셨습니다");
-			setCursorPosition(35, 14);
-			printf("대화문\n");
-			setCursorPosition(35, 15);
-			printf("1. 확인\n");
-			Sleep(150);
-			updateLog("A키를 눌러 이전 대화로 돌아가기");
-			weaponchange(0);
-			break;
-		case 3:
-			setCursorPosition(35, 11);
-			printf("창병을 선택하셨습니다");
-			setCursorPosition(35, 14);
-			printf("대화문\n");
-			setCursorPosition(35, 15);
-			printf("1. 확인\n");
-			Sleep(150);
-			updateLog("A키를 눌러 이전 대화로 돌아가기");
-			weaponchange(0);
-			break;
-		case 4:
-			setCursorPosition(35, 11);
-			printf("방패병을 선택하셨습니다");
-			setCursorPosition(35, 14);
-			printf("대화문\n");
-			setCursorPosition(35, 15);
-			printf("1. 확인\n");
-			Sleep(150);
-			updateLog("A키를 눌러 이전 대화로 돌아가기");
-			weaponchange(0);
-			break;
 		}
 		displayPlayerStat();
 		displayLog();
 		backToDialogue();
+		check_weapon = 1;
 		break;
 	case '2':
 		updateLog("NPC을 떠난다");
@@ -690,6 +713,48 @@ void showTutorial()
 		setCursorPosition(45, 18);
 		printf("특정 레벨에 도달 할때마다 스킬 하나를 얻습니다.");
 	}
+}
+
+int encountRun()
+{
+	if (player.pos.x == 11 && player.pos.y == 12) {
+		Situation = 11;
+		return 1;
+	}
+	Situation = 0;
+	return 0;
+}
+
+void encountRunChoice()
+{
+	char action = _getch();
+
+	switch (action)
+	{
+	default:
+		updateLog("잘못된 키를 입력하였습니다.");
+		updateLog("[A]키를 눌러 도망칠지 [R]키를 눌러 가족들을 찾을지 선택하십시오.");
+		break;
+	case 'A':
+	case 'a':
+		Sleep(100);
+		updateLog("나라도 살아야지...");
+		//Situation = 3;
+		//initializeMap();
+		//displayShopMap();
+		player.ending = 7;
+		player.hp = 0;
+		Situation = 0;
+		player.pos = previousPos;
+		break;
+	case 'R':
+	case 'r':
+		updateLog("여기서 도망칠 수는 없어.. 가족을 찾으러 가야해!");
+		Situation = 0;
+		player.pos = previousPos;
+		break;
+	}
+	displayLog();
 }
 
 

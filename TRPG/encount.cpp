@@ -63,7 +63,6 @@ void encountChoice()
         updateLog("적과의 전투가 시작됩니다!");
         Sleep(200);
         displayLog();
-        displayBattleScreen();
         battle(currentEnemy);  // currentEnemy 전달
         break;
     case 'R':
@@ -101,7 +100,6 @@ void encountBossChoice()
         updateLog("적 장수와의 전투가 시작됩니다!");
         Sleep(200);
         displayLog();
-        displayBossBattleScreen();
         bossbattle(currentBoss);  // currentBoss 전달
         break;
     case 'R':
