@@ -988,7 +988,7 @@ void QuestComplete15() {
 			checkboss1 = 0;
 			checkboss2 = 0;
 			checkboss3 = 0;
-			player.JRelationship += 50;
+			player.JRelationship += 30;
 			player.money += 50;
 			player.questmax--;
 			potal[player.currentmap].spawnPotal = true;
