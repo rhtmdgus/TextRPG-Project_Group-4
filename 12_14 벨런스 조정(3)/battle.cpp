@@ -26,14 +26,62 @@ void LevelUp()	//레벨업
 		}
 		else if (player.job == 2)
 		{
-			player.accuracy++;
+			player.attack++;
+		}
+		else if (player.job == 3) {
+			player.attack++;
 		}
 		else if (player.job == 4)
 		{
-			player.defense++;
+			player.attack++;
 		}
 
+		if (player.level == 5) {
+			if (player.level == 1) {
+				player.attack += 2;
+			}
+			else if (player.level == 2) {
+				player.accuracy += 4;
+			}
+			else if (player.level == 3) {
+				player.attack += 2;
+			}
+			else if (player.level == 4) {
+				player.defense += 3;
+			}
+		}
+		if (player.level == 10) {
+			if (player.level == 1) {
+				player.attack += 2;
+			}
+			else if (player.level == 2) {
+				player.accuracy += 4;
+			}
+			else if (player.level == 3) {
+				player.attack += 2;
+			}
+			else if (player.level == 4) {
+				player.defense += 3;
+			}
+		}
+		if (player.level == 15) {
+			if (player.level == 1) {
+				player.attack += 2;
+			}
+			else if (player.level == 2) {
+				player.accuracy += 4;
+			}
+			else if (player.level == 3) {
+				player.attack += 2;
+			}
+			else if (player.level == 4) {
+				player.defense += 3;
+			}
+		}
 	}
+
+
+
 	if (player.level >= 15)
 		EXPbar = 40;
 	else if (player.level >= 10)
@@ -2418,6 +2466,7 @@ void battleRand(Enemy* enemy)
 			displayEnemyStat(enemy);
 			Sleep(100);
 			displayBattleLog();
+			currentEnemy->hp = 15;
 			updateLog("전투에서 벗어났습니다!");
 			break;
 
@@ -2519,6 +2568,7 @@ void battleRand(Enemy* enemy)
 	Sleep(200);
 	player.money += 10;
 	updateLog("닌자의 시체에서 엽전을 발견했습니다!");
+	currentEnemy->hp = 15;
 	displayLog();
 	Sleep(200);
 }
