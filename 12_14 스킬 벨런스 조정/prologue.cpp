@@ -23,6 +23,8 @@ NpcDataP* currentNPCP = nullptr;
 int outNpcInteract_prologue = 0;
 int checkingSpawnEnemy_P = 0;
 
+int check_weapon = 0;
+
 //프롤로그 적
 Enemy enemyTemplates_P[1] = {
 	{"허접한 왜군 잡졸", 5, 3, 1, {0, 0}, warrior}		//hp, attack, deffence
@@ -402,57 +404,76 @@ void StorageLog()
 	switch (num)
 	{
 	case '1':
+		if (check_weapon == 0)
+		{
 		updateLog("무기를 선택한다.");
 		system("cls");
 		jobSelect_screen();
 		initializeMap();
 		displayShopMap();
-		switch (player.job)
+			switch (player.job)
+			{
+			case 1:
+				setCursorPosition(35, 11);
+				printf("검사를 선택하셨습니다");
+				setCursorPosition(35, 14);
+				printf("대화문\n");
+				setCursorPosition(35, 15);
+				printf("1. 확인\n");
+				Sleep(150);
+				updateLog("A키를 눌러 이전 대화로 돌아가기");
+				weaponchange(0);
+				break;
+			case 2:
+				setCursorPosition(35, 11);
+				printf("궁수를 선택하셨습니다");
+				setCursorPosition(35, 14);
+				printf("대화문\n");
+				setCursorPosition(35, 15);
+				printf("1. 확인\n");
+				Sleep(150);
+				updateLog("A키를 눌러 이전 대화로 돌아가기");
+				weaponchange(0);
+				break;
+			case 3:
+				setCursorPosition(35, 11);
+				printf("창병을 선택하셨습니다");
+				setCursorPosition(35, 14);
+				printf("대화문\n");
+				setCursorPosition(35, 15);
+				printf("1. 확인\n");
+				Sleep(150);
+				updateLog("A키를 눌러 이전 대화로 돌아가기");
+				weaponchange(0);
+				break;
+			case 4:
+				setCursorPosition(35, 11);
+				printf("방패병을 선택하셨습니다");
+				setCursorPosition(35, 14);
+				printf("대화문\n");
+				setCursorPosition(35, 15);
+				printf("1. 확인\n");
+				Sleep(150);
+				updateLog("A키를 눌러 이전 대화로 돌아가기");
+				weaponchange(0);
+				break;
+			}
+			check_weapon = 1;
+		}
+		else
 		{
-		case 1:
 			setCursorPosition(35, 11);
-			printf("검사를 선택하셨습니다");
+			printf("무기를 이미 선택하셨습니다.");
+			setCursorPosition(35, 12);
+			printf("                                              ");
+			setCursorPosition(35, 13);
+			printf("                                              ");
 			setCursorPosition(35, 14);
 			printf("대화문\n");
 			setCursorPosition(35, 15);
 			printf("1. 확인\n");
 			Sleep(150);
 			updateLog("A키를 눌러 이전 대화로 돌아가기");
-			weaponchange(0);
-			break;
-		case 2:
-			setCursorPosition(35, 11);
-			printf("궁수를 선택하셨습니다");
-			setCursorPosition(35, 14);
-			printf("대화문\n");
-			setCursorPosition(35, 15);
-			printf("1. 확인\n");
-			Sleep(150);
-			updateLog("A키를 눌러 이전 대화로 돌아가기");
-			weaponchange(0);
-			break;
-		case 3:
-			setCursorPosition(35, 11);
-			printf("창병을 선택하셨습니다");
-			setCursorPosition(35, 14);
-			printf("대화문\n");
-			setCursorPosition(35, 15);
-			printf("1. 확인\n");
-			Sleep(150);
-			updateLog("A키를 눌러 이전 대화로 돌아가기");
-			weaponchange(0);
-			break;
-		case 4:
-			setCursorPosition(35, 11);
-			printf("방패병을 선택하셨습니다");
-			setCursorPosition(35, 14);
-			printf("대화문\n");
-			setCursorPosition(35, 15);
-			printf("1. 확인\n");
-			Sleep(150);
-			updateLog("A키를 눌러 이전 대화로 돌아가기");
-			weaponchange(0);
-			break;
 		}
 		displayPlayerStat();
 		displayLog();
@@ -693,7 +714,7 @@ void showTutorial()
 
 int encountRun()
 {
-	if (player.pos.x == 11 && player.pos.y == 12) {
+	if (player.pos.x == 11 && player.pos.y == 12 && player.currentmap == 0) {
 		Situation = 11;
 		return 1;
 	}
@@ -867,16 +888,11 @@ void battle_P(Enemy* enemy)
 		}
 	}
 
-	//OriginalLevel = player.level;
 	// 전투가 끝난 후 대기 및 본래 화면으로 복귀
 	updateBattleLog("아무 키를 눌러 맵으로 돌아가십시오...");
-	//LevelUp();
 	displayPlayerStat();
 	displayBattleLog();
 	_getch();  // 사용자 입력 대기
-
-	//if (player.level > OriginalLevel)
-	//	updateLog("레벨업!!");
 
 	initializeMap(); // 맵 초기화
 	displayMap_Prologue(); // 이동 맵 출력

@@ -42,7 +42,7 @@
 //situation 11 = prologue run ending
 //situation 12 = prologue run ending choice
 
-Player player = { 10, 10, 99, 2, 2, 2, 2, 1, 0, 0, 0, 0, 1, 900, 0, 0, 0, 0, 0, 0,  -1, -1, { "¾øÀ½" } , {"Çå ¿Ê"} , 0, 0, 0, 0, 0, 0, 0, { 20, 13 } };
+Player player = { 10, 10, 99, 2, 2, 2, 2, 1, 0, 0, 0, 0, 1, 300, 0, 0, 0, 0, 0, 0,  -1, -1, { "¾øÀ½" } , {"Çå ¿Ê"} , 0, 0, 0, 0, 0, 0, 0, { 20, 13 } };
 Position previousPos = { 1, 1 };
 Shop Shop1 = { "»óÀÎ", 99, 99, 99, 99, 20, {3, 3} };
 

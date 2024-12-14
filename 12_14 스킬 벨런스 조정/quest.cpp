@@ -866,6 +866,7 @@ void QuestComplete13() {
 		{
 			quest[13].clear = 1;
 			player.killcount = 0;
+			player.money += 20;
 			player.JRelationship += 30;
 			player.questmax--;
 			Sleep(100);
@@ -925,6 +926,7 @@ void QuestComplete14() {
 		{
 			quest[14].clear = 1;
 			player.questitem2 = 0;
+			player.money += 10;
 			player.JRelationship += 30;
 			player.questmax--;
 			Sleep(100);
@@ -987,7 +989,7 @@ void QuestComplete15() {
 			checkboss2 = 0;
 			checkboss3 = 0;
 			player.JRelationship += 50;
-			player.money += 30;
+			player.money += 50;
 			player.questmax--;
 			potal[player.currentmap].spawnPotal = true;
 			Sleep(100);
