@@ -866,6 +866,7 @@ void QuestComplete13() {
 		{
 			quest[13].clear = 1;
 			player.killcount = 0;
+			player.money += 20;
 			player.JRelationship += 30;
 			player.questmax--;
 			Sleep(100);
@@ -925,6 +926,7 @@ void QuestComplete14() {
 		{
 			quest[14].clear = 1;
 			player.questitem2 = 0;
+			player.money += 10;
 			player.JRelationship += 30;
 			player.questmax--;
 			Sleep(100);
