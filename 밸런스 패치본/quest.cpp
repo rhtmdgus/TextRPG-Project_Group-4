@@ -590,6 +590,7 @@ void QuestComplete8() {
 			updateLog("퀘스트를 클리어 했습니다!");
 			updateLog("무기를 획득하였습니다!");
 			updateLog("장비를 획득하였습니다!");
+			completeQuest(8);
 			backToDialogue();
 		}
 		else
@@ -866,8 +867,8 @@ void QuestComplete13() {
 		{
 			quest[13].clear = 1;
 			player.killcount = 0;
-			player.JRelationship += 20;
 			player.money += 20;
+			player.JRelationship += 30;
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
@@ -926,8 +927,8 @@ void QuestComplete14() {
 		{
 			quest[14].clear = 1;
 			player.questitem2 = 0;
-			player.JRelationship += 20;
 			player.money += 10;
+			player.JRelationship += 30;
 			player.questmax--;
 			Sleep(100);
 			clearScreen();
@@ -988,7 +989,7 @@ void QuestComplete15() {
 			checkboss1 = 0;
 			checkboss2 = 0;
 			checkboss3 = 0;
-			player.JRelationship += 30;
+			player.JRelationship += 50;
 			player.money += 50;
 			player.questmax--;
 			potal[player.currentmap].spawnPotal = true;

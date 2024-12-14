@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <conio.h>
 
-int check_weapon = 0;
-
 Potal_prologue potalP[4] = {
 
 	{"P-0 -> P-1", 0, 1, {20, 28}, {20, 13}, true},
@@ -24,6 +22,8 @@ NpcDataP* currentNPCP = nullptr;
 
 int outNpcInteract_prologue = 0;
 int checkingSpawnEnemy_P = 0;
+
+int check_weapon = 0;
 
 //프롤로그 적
 Enemy enemyTemplates_P[1] = {
@@ -108,7 +108,6 @@ void encountChoice_P()
 		updateLog("적과의 전투가 시작됩니다!");
 		Sleep(200);
 		displayLog();
-		displayBattleScreen();
 		battle_P(currentEnemy);  // currentEnemy 전달
 		break;
 	case 'R':
@@ -404,15 +403,14 @@ void StorageLog()
 	int num = _getch();
 	switch (num)
 	{
-		
 	case '1':
 		if (check_weapon == 0)
 		{
-			updateLog("무기를 선택한다.");
-			system("cls");
-			jobSelect_screen();
-			initializeMap();
-			displayShopMap();
+		updateLog("무기를 선택한다.");
+		system("cls");
+		jobSelect_screen();
+		initializeMap();
+		displayShopMap();
 			switch (player.job)
 			{
 			case 1:
@@ -480,7 +478,6 @@ void StorageLog()
 		displayPlayerStat();
 		displayLog();
 		backToDialogue();
-		check_weapon = 1;
 		break;
 	case '2':
 		updateLog("NPC을 떠난다");
@@ -717,7 +714,7 @@ void showTutorial()
 
 int encountRun()
 {
-	if (player.pos.x == 11 && player.pos.y == 12) {
+	if (player.pos.x == 11 && player.pos.y == 12 && player.currentmap == 0) {
 		Situation = 11;
 		return 1;
 	}
@@ -866,8 +863,6 @@ void battle_P(Enemy* enemy)
 			enemyDyingAnimation(enemy);
 			updateBattleLog("적을 물리쳤습니다!");
 			//player.exp += 12;
-			player.money += 4;
-			player.killcount++;
 			Enemy_PNum--;
 
 			if (Enemy_PNum <= 0) {
@@ -891,16 +886,11 @@ void battle_P(Enemy* enemy)
 		}
 	}
 
-	//OriginalLevel = player.level;
 	// 전투가 끝난 후 대기 및 본래 화면으로 복귀
 	updateBattleLog("아무 키를 눌러 맵으로 돌아가십시오...");
-	//LevelUp();
 	displayPlayerStat();
 	displayBattleLog();
 	_getch();  // 사용자 입력 대기
-
-	if (player.level > OriginalLevel)
-		updateLog("레벨업!!");
 
 	initializeMap(); // 맵 초기화
 	displayMap_Prologue(); // 이동 맵 출력

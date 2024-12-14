@@ -79,7 +79,7 @@ void jobSelect()
             setCursorPosition(23, 23);
             printf("%-70s", "검사를 선택하셨습니다.");
             setCursorPosition(23, 24);
-            printf("%-70s", "확정이시면 a버튼을 눌러주세요");
+            printf("%-70s", "확정이시면 A버튼을 눌러주세요");
             
             break;
 
