@@ -1134,7 +1134,7 @@ void bossbattle(Enemy* boss)
 
 			// 적 반격
 			if (boss->hp > 0) {
-				enemyAttackAnimation(boss);
+				BossAttack(boss);
 				playerAttackedAnimation();
 				damageToPlayer = boss->attack - player.defense; // 이전에 선언한 변수를 사용
 				if (player.buff_reflect == 1) {  // 가시갑옷 반사 로직
@@ -1312,7 +1312,7 @@ void bossbattle(Enemy* boss)
 
 			// 적 반격
 			if (boss->hp > 0) {
-				enemyAttackAnimation(boss);
+				BossAttack(boss);
 				playerAttackedAnimation();
 				damageToPlayer = boss->attack - player.defense; // 이전에 선언한 변수를 사용
 				if (player.buff_reflect == 1) {  // 가시갑옷 반사 로직
@@ -1595,7 +1595,7 @@ void bossbattle(Enemy* boss)
 			}
 			// 적 반격
 			if (boss->hp > 0) {
-				enemyAttackAnimation(boss);
+				BossAttack(boss);
 				playerAttackedAnimation();
 				damageToPlayer = boss->attack - player.defense; // 이전에 선언한 변수를 사용
 				if (player.buff_reflect == 1) {  // 가시갑옷 반사 로직
