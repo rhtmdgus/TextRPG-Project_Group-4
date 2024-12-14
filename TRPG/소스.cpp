@@ -42,7 +42,7 @@
 //situation 11 = prologue run ending
 //situation 12 = prologue run ending choice
 
-Player player = { 10, 10, 99, 2, 2, 2, 2, 1, 0, 0, 0, 0, 1, 300, 0, 0, 0, 0, 0, 0,  -1, -1, { "æ¯¿Ω" } , {"«Â ø "} , 0, 0, 0, 0, 0, 0, 0, { 20, 13 } };
+Player player = { 10, 10, 99, 2, 2, 2, 2, 20, 0, 0, 0, 0, 1, 30, 0, 0, 0, 0, 0, 0,  -1, -1, { "æ¯¿Ω" } , {"«Â ø "} , 0, 0, 0, 0, 0, 0, 0, { 20, 13 } };
 Position previousPos = { 1, 1 };
 Shop Shop1 = { "ªÛ¿Œ", 99, 99, 99, 99, 20, {3, 3} };
 
@@ -56,7 +56,7 @@ int main()
 	startscene(); // √ﬂ∞°
 	system("cls");
 	updateLog("∞‘¿” Ω√¿€!");
-
+	/*
 	initializeMap();
 	printWakeUp();
 	system("cls");
@@ -176,7 +176,7 @@ int main()
 	if (player.ending == 7 && player.hp == 0) {
 		runEnding();
 	}
-	
+	*/
 	
 	initializeMap();
 	initializeQuest();

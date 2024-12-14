@@ -143,7 +143,7 @@ void battle(Enemy* enemy)
 				if (player.job == 2 && player.buffcount1 > 0) {    // 궁수 스킬 3 도트딜 구현
 					Sleep(100);
 					enemyAttackedAnimation(enemy);
-					enemy->hp -= 3;
+					enemy->hp -= 5;
 					updateBattleLog("불화살의 지속데미지가 들어갔습니다!");
 					displayBattleLog();
 				}
@@ -267,7 +267,7 @@ void battle(Enemy* enemy)
 				if (player.job == 2 && player.buffcount1 > 0) {    // 궁수 스킬 3 도트딜 구현
 					Sleep(100);
 					enemyAttackedAnimation(enemy);
-					enemy->hp -= 3;
+					enemy->hp -= 5;
 					updateBattleLog("불화살의 지속데미지가 들어갔습니다!");
 					displayBattleLog();
 				}
@@ -419,7 +419,7 @@ void battle(Enemy* enemy)
 					if (player.job == 2 && player.buffcount1 > 0) {    // 궁수 스킬 3 도트딜 구현
 						Sleep(100);
 						enemyAttackedAnimation(enemy);
-						enemy->hp -= 3;
+						enemy->hp -= 5;
 						updateBattleLog("불화살의 지속데미지가 들어갔습니다!");
 						displayBattleLog();
 					}
@@ -594,7 +594,7 @@ void battle(Enemy* enemy)
 					enemy->hp -= damageToEnemy;
 					if (player.buffcount1 > 0) {
 						Sleep(100);
-						enemy->hp -= 3;
+						enemy->hp -= 5;
 						enemyAttackedAnimation(enemy);
 						updateBattleLog("불화살 지속딜이 들어갔습니다!");
 					}
@@ -917,7 +917,7 @@ void bossbattle(Enemy* boss)
 				if (player.job == 2 && player.buffcount1 > 0) {    // 궁수 스킬 3 도트딜 구현
 					Sleep(100);
 					BossDamaged(boss);
-					boss->hp -= 3;
+					boss->hp -= 5;
 					updateBattleLog("불화살의 지속데미지가 들어갔습니다!");
 					displayBattleLog();
 				}
@@ -1065,7 +1065,7 @@ void bossbattle(Enemy* boss)
 				if (player.job == 2 && player.buffcount1 > 0) {    // 궁수 스킬 3 도트딜 구현
 					Sleep(100);
 					BossDamaged(boss);
-					boss->hp -= 3;
+					boss->hp -= 5;
 					updateBattleLog("불화살의 지속데미지가 들어갔습니다!");
 					displayBattleLog();
 				}
@@ -1134,7 +1134,7 @@ void bossbattle(Enemy* boss)
 
 			// 적 반격
 			if (boss->hp > 0) {
-				enemyAttackAnimation(boss);
+				BossAttack(boss);
 				playerAttackedAnimation();
 				damageToPlayer = boss->attack - player.defense; // 이전에 선언한 변수를 사용
 				if (player.buff_reflect == 1) {  // 가시갑옷 반사 로직
@@ -1242,7 +1242,7 @@ void bossbattle(Enemy* boss)
 					if (player.job == 2 && player.buffcount1 > 0) {    // 궁수 스킬 3 도트딜 구현
 						Sleep(100);
 						BossDamaged(boss);
-						boss->hp -= 3;
+						boss->hp -= 5;
 						updateBattleLog("불화살의 지속데미지가 들어갔습니다!");
 						displayBattleLog();
 					}
@@ -1312,7 +1312,7 @@ void bossbattle(Enemy* boss)
 
 			// 적 반격
 			if (boss->hp > 0) {
-				enemyAttackAnimation(boss);
+				BossAttack(boss);
 				playerAttackedAnimation();
 				damageToPlayer = boss->attack - player.defense; // 이전에 선언한 변수를 사용
 				if (player.buff_reflect == 1) {  // 가시갑옷 반사 로직
@@ -1443,7 +1443,7 @@ void bossbattle(Enemy* boss)
 					boss->hp -= damageToBoss;
 					if (player.buffcount1 > 0) {
 						Sleep(100);
-						boss->hp -= 3;
+						boss->hp -= 5;
 						BossDamaged(boss);
 						updateBattleLog("불화살 지속딜이 들어갔습니다!");
 					}
@@ -1595,7 +1595,7 @@ void bossbattle(Enemy* boss)
 			}
 			// 적 반격
 			if (boss->hp > 0) {
-				enemyAttackAnimation(boss);
+				BossAttack(boss);
 				playerAttackedAnimation();
 				damageToPlayer = boss->attack - player.defense; // 이전에 선언한 변수를 사용
 				if (player.buff_reflect == 1) {  // 가시갑옷 반사 로직
@@ -1826,7 +1826,7 @@ void battleRand(Enemy* enemy)
 				if (player.job == 2 && player.buffcount1 > 0) {    // 궁수 스킬 3 도트딜 구현
 					Sleep(100);
 					enemyAttackedAnimation(enemy);
-					enemy->hp -= 3;
+					enemy->hp -= 5;
 					updateBattleLog("불화살의 지속데미지가 들어갔습니다!");
 					displayBattleLog();
 				}
@@ -2102,7 +2102,7 @@ void battleRand(Enemy* enemy)
 					if (player.job == 2 && player.buffcount1 > 0) {    // 궁수 스킬 3 도트딜 구현
 						Sleep(100);
 						enemyAttackedAnimation(enemy);
-						enemy->hp -= 3;
+						enemy->hp -= 5;
 						updateBattleLog("불화살의 지속데미지가 들어갔습니다!");
 						displayBattleLog();
 					}
@@ -2277,7 +2277,7 @@ void battleRand(Enemy* enemy)
 					enemy->hp -= damageToEnemy;
 					if (player.buffcount1 > 0) {
 						Sleep(100);
-						enemy->hp -= 3;
+						enemy->hp -= 5;
 						enemyAttackedAnimation(enemy);
 						updateBattleLog("불화살 지속딜이 들어갔습니다!");
 					}
@@ -2419,6 +2419,7 @@ void battleRand(Enemy* enemy)
 			Sleep(100);
 			displayBattleLog();
 			updateLog("전투에서 벗어났습니다!");
+			currentEnemy->hp = 15;
 			break;
 
 		default:
@@ -2519,6 +2520,7 @@ void battleRand(Enemy* enemy)
 	Sleep(200);
 	player.money += 10;
 	updateLog("닌자의 시체에서 엽전을 발견했습니다!");
+	currentEnemy->hp = 15;
 	displayLog();
 	Sleep(200);
 }

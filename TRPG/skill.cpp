@@ -7,7 +7,7 @@ int skill1(int playerAttackPoint) {
 
 		int Damage;
 
-		Damage = player.attack * 3;
+		Damage = player.attack + 5;
 
 		return Damage;
 
@@ -16,7 +16,7 @@ int skill1(int playerAttackPoint) {
 
 		int Damage;
 
-		Damage = player.attack * 3;
+		Damage = player.attack + 5;
 
 		return Damage;
 
@@ -25,14 +25,14 @@ int skill1(int playerAttackPoint) {
 
 		int Damage;
 
-		Damage = player.attack * 3;
+		Damage = player.attack  + 5;
 
 		return Damage;
 	}
 	else if (player.job == 4) {
 		int Damage;
 
-		Damage = player.attack * 3;
+		Damage = player.attack  + 5;
 
 		return Damage;
 	}
@@ -45,7 +45,7 @@ int skill2(int playerAttackPoint) {
 
 		int Damage;
 
-		Damage = player.attack * 4;
+		Damage = player.attack + 8;
 
 		return Damage;
 
@@ -54,7 +54,7 @@ int skill2(int playerAttackPoint) {
 
 		int Damage;
 
-		Damage = player.attack * 5;
+		Damage = player.attack + 8;
 
 		return Damage;
 
@@ -63,7 +63,7 @@ int skill2(int playerAttackPoint) {
 
 		int Damage;
 
-		Damage = player.attack * 4;
+		Damage = player.attack + 8;
 
 		return Damage;
 	}
@@ -77,7 +77,7 @@ int skill3(int playerAttackPoint) {
 	if (player.job == 3) {
 		int Damage;
 
-		Damage = player.attack * 6;
+		Damage = player.attack + 15;
 
 		return Damage;
 	}

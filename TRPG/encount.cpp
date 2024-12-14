@@ -247,6 +247,7 @@ void encountPotalChoice()
         initializeMap();
         player.pos.x = 1;
         player.pos.y = 1;
+        player.killcount = 0;
         ActiveNpc();
         ActiveQuestItem();
         gotoNextMap();

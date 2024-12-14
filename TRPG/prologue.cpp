@@ -863,8 +863,6 @@ void battle_P(Enemy* enemy)
 			enemyDyingAnimation(enemy);
 			updateBattleLog("적을 물리쳤습니다!");
 			//player.exp += 12;
-			player.money += 4;
-			player.killcount++;
 			Enemy_PNum--;
 
 			if (Enemy_PNum <= 0) {
