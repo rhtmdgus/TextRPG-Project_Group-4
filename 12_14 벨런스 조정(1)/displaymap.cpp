@@ -195,11 +195,11 @@ void displayShopScreen()
 	setCursorPosition(40, 13);
 	printf("2. 기력 물약 2원 남은 갯수: %d\n", Shop1.manaPotion);
 	setCursorPosition(40, 14);
-	printf("3. 공격력 물약 10원 남은 갯수: %d\n", Shop1.strengthPotion);
+	printf("3. 공격력 물약 15원 남은 갯수: %d\n", Shop1.strengthPotion);
 	setCursorPosition(40, 15);
-	printf("4. 방어력 물약 10원 남은 갯수: %d\n", Shop1.defensePotion);
+	printf("4. 방어력 물약 15원 남은 갯수: %d\n", Shop1.defensePotion);
 	setCursorPosition(40, 16);
-	printf("5. 명중률 물약 10원 남은 갯수: %d\n", Shop1.accuracyPotion);
+	printf("5. 명중률 물약 15원 남은 갯수: %d\n", Shop1.accuracyPotion);
 	setCursorPosition(40, 17);
 	printf("6. 상점을 떠난다.\n");
 
