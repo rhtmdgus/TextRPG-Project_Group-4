@@ -37,44 +37,53 @@ void LevelUp()	//·¹º§¾÷
 		}
 
 		if (player.level == 5) {
-			if (player.level == 1) {
+			if (player.job == 1) {
 				player.attack += 2;
 			}
-			else if (player.level == 2) {
+			else if (player.job == 2) {
 				player.accuracy += 4;
 			}
-			else if (player.level == 3) {
-				player.attack += 2;
+			else if (player.job == 3) {
+				player.attack += 1;
+				player.accuracy += 1;
+				player.defense += 1;
+
 			}
-			else if (player.level == 4) {
+			else if (player.job == 4) {
 				player.defense += 3;
 			}
 		}
 		if (player.level == 10) {
-			if (player.level == 1) {
+			if (player.job == 1) {
 				player.attack += 2;
 			}
-			else if (player.level == 2) {
+			else if (player.job == 2) {
 				player.accuracy += 4;
 			}
-			else if (player.level == 3) {
-				player.attack += 2;
+			else if (player.job == 3) {
+				player.attack += 1;
+				player.accuracy += 1;
+				player.defense += 1;
+
 			}
-			else if (player.level == 4) {
+			else if (player.job == 4) {
 				player.defense += 3;
 			}
 		}
 		if (player.level == 15) {
-			if (player.level == 1) {
+			if (player.job == 1) {
 				player.attack += 2;
 			}
-			else if (player.level == 2) {
+			else if (player.job == 2) {
 				player.accuracy += 4;
 			}
-			else if (player.level == 3) {
-				player.attack += 2;
+			else if (player.job == 3) {
+				player.attack += 1;
+				player.accuracy += 1;
+				player.defense += 1;
+
 			}
-			else if (player.level == 4) {
+			else if (player.job == 4) {
 				player.defense += 3;
 			}
 		}
