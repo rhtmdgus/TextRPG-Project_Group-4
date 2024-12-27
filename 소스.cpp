@@ -1,260 +1,441 @@
-#include <stdio.h>
 #pragma warning(disable:4996)
+#include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <conio.h>
 #include <windows.h>
+#include "enemy.h"			//Àû(enemy)°ü·Ã ±â´É ¹× ±¸Á¶Ã¼ Á¤ÀÇ
+#include "utility.h"		//°øÅëÀ¸·Î »ç¿ëµÇ´Â À¯Æ¿¼º ÇÔ¼ö ¹× º¯¼ö (ex. position, situation, Ä¿¼­À§Ä¡ µî)
+#include "startscreen.h"	//°ÔÀÓ ½ÃÀÛ È­¸é Ãâ·Â ÇÔ¼ö Á¤ÀÇ
+#include "tutorialscreen.h"
+#include "jobselect.h"
+#include "initmap.h"		//¸Ê ÃÊ±âÈ­ ¹× ¸Ê ±¸¼º¿¡ ÇÊ¿äÇÑ »ó¼ö Á¤ÀÇ
+#include "battle.h"			//ÀüÅõ °ü·Ã ±â´É Á¤ÀÇ
+#include "log.h"			//ÀüÅõ ¹× ÀÏ¹İ ·Î±× ±â·Ï ¹× Ãâ·Â °ü¸®
+#include "displaymap.h"		//ÀÏ¹İ ¸Ê°ú ÀüÅõ¸ÊÀÇ Ãâ·Â ¹× °»½Å ÇÔ¼ö Á¤ÀÇ
+#include "player.h"			//ÇÃ·¹ÀÌ¾î °ü·Ã ±â´É ¹× ±¸Á¶Ã¼ Á¤ÀÇ
+#include "encount.h"		//Àû(enemy), ¾ÆÀÌÅÛ, NPC¿ÍÀÇ Á¶¿ì ¹× »óÈ£ÀÛ¿ë Á¤ÀÇ
+#include "randevent.h"	//·£´ıÀÎÄ«¿îÆ® Àü¿ë Çì´õ
+#include "selectmap.h"
+#include "shop.h"
+#include "animation.h"
+#include "npc.h"
+#include "quest.h"
+#include "prologue.h"
+#include "prologuemap.h"
+#include "item.h"
+#include "ending.h"
+//¤·¤±¤·
 
-#define MAP_WIDTH 100
-#define MAP_HEIGHT 30
-#define PANEL_WIDTH 30
+//situation ¸í 
+//situation 1 = encounting enemy
+//situation 2 = encounting shop
+//situation 3 = displaying shop screen
+//situation 4 = encounting NPC
+//situation 5 = displaying NPC screen
+//situation 6 = encount Quest item 1
+//situation 7 = encount Quest item 2
+//situation 8 = encount Quest item 3
+//situation 9 = encounting portal
+//situation 10 = encounting random stuff
+//54
+//situation 11 = prologue run ending
+//situation 12 = prologue run ending choice
 
-typedef struct
-{
-    int x;
-    int y;
-} Position;
-
-typedef struct
-{
-    int hp;
-    int strength;
-    int endurance;
-    int intelligence;
-    Position pos;
-} Player;
-
-Player player = { 10, 15, 8, 5, {1, 1} };
-char map[MAP_HEIGHT][MAP_WIDTH + PANEL_WIDTH];
-char logMessage[3][40] = { "", "", "" };
-
-void start_screen() {
-    for (int i = 0; i < (MAP_HEIGHT - 16) / 2; i++)
-        printf("\n");
-
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("=========================================================\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("||                                                   ||\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("||                ì„  ì§„  íˆ¬  ìŸ  ê¸°                 ||\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("||                                                   ||\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("=========================================================\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("         Text-based RPG Game Set in the Joseon Dynasty\n\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("           Press [Enter] to start your adventure!\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("=========================================================\n\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("                        |         |  |\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("                      ã…¡ã…¡ã…¡ \\/  ã…¡ã…¡ã…¡\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("                        O    /\\    O\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("                       /|\\  /  \\  /|\\\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("                      / | \\/    \\/ | \\\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("                       / \\        / \\\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("                      /   \\      /   \\\n\n");
-    for (int j = 0; j < (MAP_WIDTH - 57) / 2; j++)
-        printf(" ");
-    printf("=========================================================\n");
-
-    getchar();  // ì‚¬ìš©ìë¡œë¶€í„° Enter ì…ë ¥ ëŒ€ê¸°
-
-}
-
-// ì»¤ì„œë¥¼ íŠ¹ì • ìœ„ì¹˜ë¡œ ì´ë™ì‹œí‚¤ëŠ” í•¨ìˆ˜
-void setCursorPosition(int x, int y)
-{
-    COORD pos = { x, y };
-    HANDLE hConsoleOut = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleCursorPosition(hConsoleOut, pos);
-}
-
-//ì»¤ì„œë¥¼ ì§€ìš°ëŠ” í•¨ìˆ˜
-void eraseCursor()
-{
-    HANDLE hConsoleOut = GetStdHandle(STD_OUTPUT_HANDLE);
-    CONSOLE_CURSOR_INFO  curCursorInfo;
-    GetConsoleCursorInfo(hConsoleOut, &curCursorInfo);
-    curCursorInfo.bVisible = 0;
-    SetConsoleCursorInfo(hConsoleOut, &curCursorInfo);
-}
-
-void initializeMap()
-{
-    for (int i = 0; i < MAP_HEIGHT; i++)
-    {
-        for (int j = 0; j < MAP_WIDTH; j++)
-        {
-            if (i == 0 || i == MAP_HEIGHT - 1 || j == 0 || j == MAP_WIDTH - 1)
-            {
-                map[i][j] = '#';
-            }
-            else
-            {
-                map[i][j] = ' ';
-            }
-        }
-        for (int j = MAP_WIDTH; j < MAP_WIDTH + PANEL_WIDTH; j++)
-        {
-            if (i == 0 || i == MAP_HEIGHT - 1)
-            {
-                map[i][j] = '#';
-            }
-        }
-    }
-    map[10][10] = 'E';
-}
-
-void displayMap()
-{
-    system("cls");
-    for (int i = 0; i < MAP_HEIGHT; i++)
-    {
-        for (int j = 0; j < MAP_WIDTH + PANEL_WIDTH; j++)
-        {
-            printf("%c", map[i][j]);
-        }
-
-        if (i == 1) printf("  HP: %d", player.hp);
-        if (i == 2) printf("  Strength: %d", player.strength);
-        if (i == 3) printf("  Endurance: %d", player.endurance);
-        if (i == 4) printf("  Intelligence: %d", player.intelligence);
-
-        printf("\n");
-    }
-
-    printf("=========== Log ===========\n");
-    for (int i = 0; i < 3; i++)
-    {
-        printf("%s\n", logMessage[i]);
-    }
-}
-
-void drawPlayer()
-{
-    setCursorPosition(player.pos.x, player.pos.y);
-    printf("P");
-}
-void erasePlayer()
-{
-    setCursorPosition(player.pos.x, player.pos.y);
-    printf(" ");
-}
-
-void updateLog(const char* message)
-{
-    for (int i = 2; i > 0; i--)
-    {
-        snprintf(logMessage[i], sizeof(logMessage[i]), "%s", logMessage[i - 1]);
-    }
-    snprintf(logMessage[0], sizeof(logMessage[0]), "%s", message);
-}
-
-void battleScreen() {
-    system("cls");
-    printf("=========== Battle Screen ===========\n");
-    printf("You encountered an enemy!\n");
-    printf("Press [A] to Attack or [R] to Run.\n");
-
-    char action = getch();
-    if (action == 'a' || action == 'A') {
-        updateLog("You attacked the enemy!");
-        printf("You defeated the enemy!\n");
-    }
-    else if (action == 'r' || action == 'R') {
-        updateLog("You ran away from the enemy!");
-        printf("You fled from battle!\n");
-    }
-
-    printf("Press any key to return to the game.\n");
-    getch();
-
-    displayMap();
-    drawPlayer();
-}
-
-void movePlayer()
-{
-    char input = getch();
-    if (input == 'w' && player.pos.y > 1)
-    {
-        erasePlayer();
-        player.pos.y--;
-    }
-    else if (input == 's' && player.pos.y < MAP_HEIGHT - 2)
-    {
-        erasePlayer();
-        player.pos.y++;
-    }
-    else if (input == 'a' && player.pos.x > 1)
-    {
-        erasePlayer();
-        player.pos.x--;
-    }
-    else if (input == 'd' && player.pos.x < MAP_WIDTH - 2)
-    {
-        erasePlayer();
-        player.pos.x++;
-    }
-
-    if (map[player.pos.y][player.pos.x] == 'E') {
-        updateLog("You encountered an enemy!");
-        battleScreen();
-    }
-
-    /*if (map[player.pos.y][player.pos.x] == 'E')
-    {
-       updateLog("You encountered an enemy!");
-    }
-    else if (map[player.pos.y][player.pos.x] == 'I')
-    {
-       player.hp += 5;
-       updateLog("You found a potion! HP +5");
-    }
-    */
-    //map[player.pos.y][player.pos.x] = 'P';
-}
+Player player = { 10, 10, 2, 2, 2, 2, 2, 1, 0, 0, 0, 0, 1, 30, 0, 0, 0, 0, 0, 0,  -1, -1, { "¾øÀ½" } , {"Çå ¿Ê"} , 0, 0, 0, 0, 0, 0, 0, { 20, 13 } };
+Position previousPos = { 1, 1 };
+Shop Shop1 = { "»óÀÎ", 99, 99, 99, 99, 20, {3, 3} };
 
 int main()
 {
-    start_screen();
-    initializeMap();
-    updateLog("Game started.");
-    displayMap();
+	eraseCursor();
+	start_screen();
+	system("cls");
+	tutorial_screen();
+	system("cls");
+	startscene(); // Ãß°¡
+	system("cls");
+	updateLog("°ÔÀÓ ½ÃÀÛ!");
 
-    map[player.pos.y][player.pos.x] = 'P';
+	initializeMap();
+	printWakeUp();
+	system("cls");
 
-    while (1)
-    {
-        eraseCursor();
-        drawPlayer();
-        movePlayer();
-    }
+	initializeMap();
+	displayMap_Prologue();
+	displayLog();
+
+	while (1)	//ÇÁ·Ñ·Î±×
+	{
+		drawPotal_prologue();
+		drawPlayer();
+		spawnEnemies_P();
+		drawNpc_prologue(npcListP);
+		displayPlayerStat();
+		movePlayer();
+
+		if (encountPotal_prologue())		//ÇÁ·Ñ·Î±× Æ÷Å»
+		{
+			updateLog("Æ÷Å»À» ¹ß°ßÇÏ¿´½À´Ï´Ù.");
+			Sleep(200);
+			displayLog();
+			updateLog("[A]Å°¸¦ ´­·¯ ¸¶À»À» ¶°³¯Áö [R]Å°¸¦ ´­·¯ ¸Ó¹°Áö ¼±ÅÃÇÏ½Ê½Ã¿À.");
+			Sleep(200);
+			displayLog();
+
+			while (Situation == 9)
+			{
+				encountPotal_prologueChoice();
+			}
+			if (Situation == 0) {
+				displayMap_Prologue();
+				displayPlayerStat();
+				displayLog();
+			}
+		}
+
+		if (encountNpc_prologue())		//ÇÁ·Ñ·Î±× NPCÁ¶¿ì
+		{
+			updateLog("NPC¿Í ¸¸³µ½À´Ï´Ù!");
+			updateLog("[A]Å°¸¦ ´­·¯ ´ëÈ­ÇÒÁö [R]Å°¸¦ ´­·¯ ¶°³¯Áö ¼±ÅÃÇÏ½Ê½Ã¿À.");
+			displayLog();
+
+			while (Situation == 4)
+			{
+				encountNpcChoice_prologue();
+			}
+			if (Situation == 0) {
+				displayMap_Prologue();
+				displayPlayerStat();
+				displayLog();
+			}
+		}
+		if (encountRun())
+		{
+			updateLog("°³±¸¸ÛÀ» ¹ß°ßÇß½À´Ï´Ù!");
+			displayLog();
+			Sleep(100);
+			updateLog("[A]Å°¸¦ ´­·¯ µµ¸ÁÄ¥Áö [R]Å°¸¦ ´­·¯ °¡Á·µéÀ» Ã£À»Áö ¼±ÅÃÇÏ½Ê½Ã¿À.");
+			displayLog();
+			while (Situation == 11)
+			{
+				encountRunChoice();
+			}
+			if (Situation == 0) {
+				displayMap_Prologue();
+				displayPlayerStat();
+				displayLog();
+			}
+		}
+
+		if (encountEnemy_P())			//ÇÁ·Ñ·Î±× enemy Á¶¿ì
+		{
+			updateLog("ÀûÀ» ¸¶ÁÖÃÆ½À´Ï´Ù!");
+			Sleep(100);
+			displayLog();
+			updateLog("[A]Å°¸¦ ´­·¯ ÀüÅõÇÒÁö [R]Å°¸¦ ´­·¯ µµ¸ÁÄ¥Áö ¼±ÅÃÇÏ½Ê½Ã¿À.");
+			Sleep(100);
+			displayLog();
+
+			while (Situation == 1)
+			{
+				encountChoice_P();
+			}
+			if (currentEnemy->hp <= 0) {
+				updateLog("ÀûÀ» ¹°¸®ÃÆ½À´Ï´Ù!");
+
+				// ÇØ´ç ÀûÀÇ À§Ä¡¸¦ ÃÊ±âÈ­
+				eraseEnemy_P(currentEnemy);  // ÇØ´ç Àû¸¸ Áö¿ó´Ï´Ù
+				map[currentEnemy->pos.y][currentEnemy->pos.x] = ' ';
+
+				// ÀûÀÌ Á¦°ÅµÈ ÈÄ ³²¾Æ ÀÖ´Â Àûµé¸¸ ´Ù½Ã ±×¸³´Ï´Ù.
+				for (int i = 0; i < 3; i++) {
+					if (currentEnemies_P[i].hp > 0) {
+						drawEnemy_P(&currentEnemies_P[i]);
+					}
+				}
+
+				// ÇÃ·¹ÀÌ¾î¿Í ·Î±×¸¦ °³º° ¾÷µ¥ÀÌÆ®ÇÏ¿© ±ôºıÀÓ ÃÖ¼ÒÈ­
+				displayPlayerStat();
+				displayLog();
+			}
+			
+		}
 
 
-    return 0;
+		if (player.currentmap == 3)
+		{
+			player.currentmap = 0;
+			system("cls");
+			break;
+		}
+		if (player.ending == 7)
+			break;
+	}
+
+	if (player.ending == 7 && player.hp == 0) {
+		runEnding();
+	}
+	
+	
+	initializeMap();
+	initializeQuest();
+	displayMap();
+	displayPlayerStat();
+	displayLog();
+	spawnEnemies();
+	spawnEvents();
+	initializeNpc();
+	initializeQuestItem();
+
+
+	while (1)	//º»Æí
+	{
+		eraseCursor();
+		displayPlayerStat();
+		drawPlayer();
+		drawShop();
+		movePlayer();
+		drawPotal();
+		drawNpc(npcList);
+		drawQuestItem(QuestItemList);
+		//displayLog();
+		if (player.currentmap == 2 && quest[19].take == 0)
+		{
+			initializeMap();
+			displayShopMap();
+			displayPlayerStat();
+			displayLog();
+			NobodyLog_5();
+			displayLog();
+		}
+		if (player.currentmap == 2 && checkboss3 == 1)
+			QuestComplete19();
+		if (encountEnemy())
+		{
+			updateLog("Àû°ú ¸¶ÁÖÃÆ½À´Ï´Ù!");
+			Sleep(100);
+			displayLog();
+			updateLog("[A]Å°¸¦ ´­·¯ ÀüÅõÇÒÁö [R]Å°¸¦ ´­·¯ µµ¸ÁÄ¥Áö ¼±ÅÃÇÏ½Ê½Ã¿À.");
+			Sleep(100);
+			displayLog();
+
+			while (Situation == 1)
+			{
+				encountChoice();
+			}
+			if (currentEnemy->hp <= 0) {
+				updateLog("ÀûÀ» ¹°¸®ÃÆ½À´Ï´Ù!");
+
+				// ÇØ´ç ÀûÀÇ À§Ä¡¸¦ ÃÊ±âÈ­
+				eraseEnemy(currentEnemy);  // ÇØ´ç Àû¸¸ Áö¿ó´Ï´Ù
+				map[currentEnemy->pos.y][currentEnemy->pos.x] = ' ';
+
+				// ÀûÀÌ Á¦°ÅµÈ ÈÄ ³²¾Æ ÀÖ´Â Àûµé¸¸ ´Ù½Ã ±×¸³´Ï´Ù.
+				for (int i = 0; i < MAX_ENEMY; i++) {
+					if (currentEnemies[i].hp > 0) {
+						drawEnemy(&currentEnemies[i]);
+					}
+				}
+
+				// ÇÃ·¹ÀÌ¾î¿Í ·Î±×¸¦ °³º° ¾÷µ¥ÀÌÆ®ÇÏ¿© ±ôºıÀÓ ÃÖ¼ÒÈ­
+				displayPlayerStat();
+				displayLog();
+			}
+		}
+		if (encountBoss())
+		{
+			updateLog("Àû Àå¼ö¿Í ¸¶ÁÖÃÆ½À´Ï´Ù!");
+			Sleep(100);
+			displayLog();
+			updateLog("[A]Å°¸¦ ´­·¯ ÀüÅõÇÒÁö [R]Å°¸¦ ´­·¯ µµ¸ÁÄ¥Áö ¼±ÅÃÇÏ½Ê½Ã¿À.");
+			Sleep(100);
+			displayLog();
+
+			while (Situation == 7)
+			{
+				encountBossChoice();
+			}
+			if (currentBoss->hp <= 0) {
+				updateLog("Àû Àå¼ö¸¦ ¹°¸®ÃÆ½À´Ï´Ù!");
+
+				// ÇØ´ç º¸½ºÀÇ À§Ä¡¸¦ ÃÊ±âÈ­
+				eraseBoss(currentBoss);  // ÇØ´ç º¸½º¸¸ Áö¿ó´Ï´Ù
+				map[currentBoss->pos.y][currentBoss->pos.x] = ' ';
+
+				// ÀûÀÌ Á¦°ÅµÈ ÈÄ ³²¾Æ ÀÖ´Â Àûµé¸¸ ´Ù½Ã ±×¸³´Ï´Ù.
+				for (int i = 0; i < MAX_BOSS; i++) {
+					if (currentBosses[i].hp > 0) {
+						drawBoss(&currentBosses[i]);
+					}
+				}
+
+				// ÇÃ·¹ÀÌ¾î¿Í ·Î±×¸¦ °³º° ¾÷µ¥ÀÌÆ®ÇÏ¿© ±ôºıÀÓ ÃÖ¼ÒÈ­
+				displayPlayerStat();
+				displayLog();
+			}
+		}
+		if (encountShop())
+		{
+			updateLog("»óÁ¡À» ¹ß°ßÇß½À´Ï´Ù!");
+			updateLog("[A]Å°¸¦ ´­·¯ »óÁ¡¿¡ µé¾î°¥Áö [R]Å°¸¦ ´­·¯ ¶°³¯Áö ¼±ÅÃÇÏ½Ê½Ã¿À.");
+			displayLog();
+			while (Situation == 2)
+			{
+				encountShopChoice();
+			}
+			if (Situation == 0) {
+				displayMap();
+				displayPlayerStat();
+				displayLog();
+			}
+		}
+
+		if (encountNpc())
+		{
+			updateLog("NPC¿Í ¸¸³µ½À´Ï´Ù!");
+			updateLog("[A]Å°¸¦ ´­·¯ ´ëÈ­ÇÒÁö[R]Å°¸¦ ´­·¯ ¶°³¯Áö ¼±ÅÃÇÏ½Ê½Ã¿À.");
+			displayLog();
+
+			while (Situation == 4)
+			{
+				encountNpcChoice();
+			}
+			if (Situation == 0) {
+				displayMap();
+				displayPlayerStat();
+				displayLog();
+			}
+		}
+		if (encountQuestItem())
+		{
+			while (Situation == 6)
+			{
+				interactionQuestItem();
+			}
+			if (Situation == 0) {
+				displayMap();
+				displayPlayerStat();
+				displayLog();
+			}
+		}
+		if (encountPotal())
+		{
+			updateLog("Æ÷Å»À» ¹ß°ßÇÏ¿´½À´Ï´Ù!");
+			updateLog("[A]Å°¸¦ ´­·¯ ¸¶À»À» ¶°³¯Áö [R]Å°¸¦ ´­·¯ ¸Ó¹°Áö ¼±ÅÃÇÏ½Ê½Ã¿À.");
+			displayLog();
+			
+			while (Situation == 9)
+			{
+				encountPotalChoice();
+			}
+			if (Situation == 0) {
+				displayMap();
+				displayPlayerStat();
+				displayLog();
+			}
+		}
+
+		//·£´ıÀÎÄ«¿îÆ®
+		if (encountRandom())
+		{
+			updateLog("ÁÖÀ§¿¡¼­ ¼ö»óÇÑ ±â¿îÀ» ´À³§´Ï´Ù!");
+			updateLog("È®ÀÎÇÏ·Á¸é [A]Å°¸¦, ¾Æ´Ï¸é [R]Å°¸¦ ´©¸£¼¼¿ä.");
+			displayLog();
+
+			while (Situation == 10)
+			{
+				encountRandomChoice();
+			}
+			if (Situation == 0) {
+
+				// ·£´ı ÀÎÄ«¿îÅÍ Àç ±¸¼º
+				for (int i = 0; i < MAX_EVENT; i++) {
+					if (currentEvents[i].check != 0) {
+						drawEvent(&currentEvents[i]);
+					}
+				}
+				displayMap();
+				displayPlayerStat();
+				displayLog();
+			}
+		}
+
+		if (encountHidden())
+		{
+			setColor(2);
+			setCursorPosition(45, 14);
+			printf("N");
+			setCursorPosition(43, 17);
+			printf("N");
+			setCursorPosition(48, 16);
+			printf("N");
+			setCursorPosition(51, 13);
+			printf("N");
+			setCursorPosition(55, 18);
+			printf("N");
+			setCursorPosition(50, 19);
+			printf("N");
+			setColor(7);
+			Sleep(500);
+			updateLog("Á¶¼±±º¿¡°Ô µÑ·¯½×¿©Á³´Ù.");
+			displayLog();
+			Sleep(500);
+			updateLog("°ü±º A: ¹ÎÁ·ÀÇ ¹İ¿ªÀÚ´Ù!");
+			displayLog();
+			Sleep(500);
+			updateLog("°ü±º B: Á×¾î¶ó! ¹è½ÅÀÚ!!");
+			displayLog();
+			Sleep(500);
+			updateLog("°ü±º C: ¿ë¼­ÇÏÁö ¾Ê°Ú´Ù!");
+			displayLog();
+			Sleep(500);
+			player.ending = 6;
+
+			player.hp -= 9999;
+		}
+
+		if (player.hp <= 0)
+		{
+			break;
+		}
+		if (player.ending == 5) {
+			potionEnding();
+		}
+		else if (player.ending == 6) {
+			exeEnding();
+		}
+		else if (player.ending == 7) {
+			runEnding();
+		}
+
+
+	}
+	Sleep(500);
+
+	system("cls");
+
+	if (player.ending == 4) {
+		deadEnding();
+	}
+	else if (player.ending == 5) {
+		potionEnding();
+	}
+	else if (player.ending == 6) {
+		exeEnding();
+	}
+	else if (player.ending == 7) {
+		runEnding();
+	}
+
+
+
+
+
+	eraseCursor();
+
+
+
+
+	return 0;
 }
